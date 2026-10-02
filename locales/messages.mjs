@@ -1,0 +1,16 @@
+import growth from './growth.mjs';
+import editorial from './editorial-ui.mjs';
+import improvements from './improvements.mjs';
+import group0 from './app.mjs';
+import group1 from './common.mjs';
+import group2 from './catalog.mjs';
+import group3 from './character.mjs';
+import group4 from './community.mjs';
+import group5 from './item.mjs';
+import group6 from './paralogue.mjs';
+import group7 from './presentation.mjs';
+import shell from './shell.mjs';
+import map from './map.mjs';
+import mount from './mount.mjs';
+export const messageGroups=[growth,mount,map,improvements,editorial,shell,group0,group1,group2,group3,group4,group5,group6,group7];
+export const messages=Object.assign({},...messageGroups);
