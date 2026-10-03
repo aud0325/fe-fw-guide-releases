@@ -62,7 +62,7 @@ const acquisitionLabel=l=>/gather|found|acqui|obtain|purchase|buy|drop|fish|harv
 const tradeReports={
  'sandworm-meat':{key:'game8-report-817080',rows:[
   ['kira-village',{ko:'구매',en:'Purchase'},{ko:'시장: 240G, 재고 5.',en:'Market: 240G, stock 5.'}],
-  ['alecto-city',{ko:'교환',en:'Trade'},{ko:'상회: 「リガネット」 10개와 교환, 재고 5. 교환품 번역 대응은 미확인입니다.',en:'Trader: exchange 10 「リガネット」, stock 5. Ingredient name correspondence remains unconfirmed.'}]
+  ['alecto-city',{ko:'교환',en:'Trade'},{ko:'상회: 「リガネット」 10개와 교환, 재고 5.',en:'Trader: exchange 10 「リガネット」, stock 5.'}]
  ]},
  'giants-meat':{key:'game8-report-817081',rows:[
   ['alecto-city',{ko:'교환',en:'Trade'},{ko:'「煉獄草」 10개와 교환, 재고 2.',en:'Exchange 10 「煉獄草」, stock 2.'}]

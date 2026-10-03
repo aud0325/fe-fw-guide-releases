@@ -71,7 +71,7 @@ export const content={
  },
  "namu.match-hanja": {
   "ko": "미트라스 수도회 구성원의 한국어 표기는 한자음 독음으로 보이며(예: 豹子→표자) 영문 병음과 대조한 편집자 추정입니다.",
-  "en": "Order of Mithras names appear to be Sino-Korean readings (e.g. 豹子 → 표자) matched against the pinyin-style English names; editorial inference."
+  "en": "Order of Mithras names were matched by comparing Sino-Korean readings with the pinyin-style English names; this is an editorial inference."
  },
  "namu.match-guillermo": {
   "ko": "음역 대응입니다. 나무위키는 본편 5년 전 인물로 서술하지만 영어 위키 목록은 1449년 보스로 분류해 시점이 어긋납니다.",

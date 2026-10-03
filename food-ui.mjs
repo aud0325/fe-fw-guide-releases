@@ -34,7 +34,7 @@ export function mountFoodRow(e,{t,sources={},tx=x=>x}){
   return r.reports.map(s=>sources[s.sourceId]).filter(s=>{
    if(!s||seen.has(s.url))return false;
    seen.add(s.url);return true;
-  }).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(typeof s.title==='string'?s.title:tx(s.title))}</a>`).join(' / ');
+  }).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))}</a>`).join(' / ');
  };
  if(conflict)value+=`<div class="recruitment-comparison"><strong>${t('character.conflict')}</strong><ul>${reports.map(r=>`<li>${esc(t(flavors[r.flavor].ko,flavors[r.flavor].en))} · ${reportLinks(r)}</li>`).join('')}</ul></div>`;
  return `<tr><th>${t('item.preferred-food')}</th><td>${value}</td></tr>`;

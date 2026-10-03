@@ -5,8 +5,9 @@ import {pagePath,stateQuery,defaultState} from './routing.mjs';
 import {isPublicSource} from './source-visibility.mjs';
 import {informationHint} from './presentation.mjs';
 import {acquisitionPlaces} from './acquisition-map.mjs';
-export const mapName=(n,t)=>n.ko==='???'?t('map.unknown-name'):t.locale==='en'&&n.en?n.en:n.ko;
-export const provinceName=(id,t)=>{const p=mapProvinces.find(p=>p.id===id);return p?t.locale==='en'&&p.en?p.en:p.ko:t('map.unknown-province');};
+import {renderEntityText} from './entity-text.mjs';
+export const mapName=(n,t)=>n.ko==='???'?t('map.unknown-name'):t(n.ko,n.en||n.ko);
+export const provinceName=(id,t)=>{const p=mapProvinces.find(p=>p.id===id);return p?t(p.ko,p.en||p.ko):t('map.unknown-province');};
 export function mapHref(point,item,lang,base='/'){
  const state={...defaultState(),type:'map',mapPlace:point,mapItem:item||''};
  return pagePath(state,lang,base)+stateQuery(state);
@@ -27,21 +28,23 @@ function recordLine(r,ctx,item,{compact=false}={}){
  const {t,sources,lang,base}=ctx,source=sources[r.sourceId];
  const publicSource=isPublicSource(r.sourceId,source);
  const method=r.label?ctx.tx(r.label):r.method==='gathering'?t('map.gathering-method'):r.method==='dungeon'?t('map.dungeon-record'):typeof r.method==='object'?ctx.tx(r.method):r.method&&r.method!=='acquisition'?ctx.text(r.method):t('map.acquisition');
- const sourceName=publicSource?typeof source.title==='string'?source.title:t(source.title.ko,source.title.en):t('map.administrator');
+ const sourceName=publicSource?ctx.tx(source.title):t('map.administrator');
  const shortName=publicSource&&source.url?.includes('game8.jp')?t('map.game8-source'):sourceName;
- if(compact)return `<small>${esc([method,recordConditions(r,ctx)].filter(Boolean).join(' · '))}</small>`;
- return `<small>${esc([method,recordConditions(r,ctx)].filter(Boolean).join(' · '))} · ${publicSource?`<a href="${pagePath({id:item.id},lang,base)}#source-${esc(r.sourceId)}" title="${esc(sourceName)}">${esc(shortName)}</a>`:esc(sourceName)}</small>`;
+ const description=renderEntityText([method,recordConditions(r,ctx)].filter(Boolean).join(' · '),item,{entries:ctx.entries,lang,href:ctx.href,format:ctx.text});
+ if(compact)return `<small>${description}</small>`;
+ return `<small>${description} · ${publicSource?`<a href="${pagePath({id:item.id},lang,base)}#source-${esc(r.sourceId)}" title="${esc(sourceName)}">${esc(shortName)}</a>`:esc(sourceName)}</small>`;
 }
 export function placeDetails(node,ctx,{description=true,heading=4}={}){
  const {t,tx,href,name,entries}=ctx,d=node.details||{};
  const list=(rows,key)=>rows?.length?`<h${heading} class="place-content-heading">${t(key)}</h${heading}><ul class="place-content-list">${rows.map(row=>{
   const item=entries.find(e=>e.id===row.itemId);
-  return `<li>${item?`<a href="${href(item.id)}">${esc(t.locale==='en'?name(item):row.ko)}</a>`:`<span${t.locale==='en'?' lang="ko"':''}>${esc(row.ko)}</span>`}</li>`;
+  const label=item?(t.locale==='en'?name(item):row.ko):tx({ko:row.ko,en:row.en||row.ko});
+  return `<li>${item?`<a href="${href(item.id)}">${esc(label)}</a>`:`<span${t.locale==='en'&&/[가-힣]/.test(label)?' lang="ko"':''}>${esc(label)}</span>`}</li>`;
  }).join('')}</ul>`:'';
  const facilities=d.facilities?.length?`<h${heading} class="place-content-heading">${t('map.facilities')}</h${heading}><ul class="place-content-list">${d.facilities.map(row=>`<li>${t('map.facility-'+row.kind)}${row.count>1?' · '+t('map.facility-count',{count:row.count}):''}</li>`).join('')}</ul>`:'';
  const destinations=d.destinations?.length?`<h${heading} class="place-content-heading">${t('map.destinations')}</h${heading}><ul class="place-content-list">${d.destinations.map(id=>{
   const target=mapNodes.find(n=>n.id===id);
-  return `<li><a href="${href(target.entryId)}"${t.locale==='en'&&!target.en?' lang="ko"':''}>${esc(mapName(target,t))}</a></li>`;
+  return `<li><a href="${href(target.entryId)}"${t.locale==='en'&&/[가-힣]/.test(mapName(target,t))?' lang="ko"':''}>${esc(mapName(target,t))}</a></li>`;
  }).join('')}${d.unknownDestinations?`<li>${t('map.hidden-destinations',{count:d.unknownDestinations})}</li>`:''}</ul>`:'';
  return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${destinations}`;
 }
@@ -68,7 +71,7 @@ export function part1Map(state,ctx){
  <div class="part1-points">${rows.map(n=>`<a class="part1-point ${n.kind}${n.id===selected?.id?' selected':''}${n.ko==='???'?' unidentified':''}" href="${esc(placeHref(n))}" data-map-place="${n.id}" style="left:${n.u*100}%;top:${n.v*100}%" aria-label="${esc(t('map.point',{name:mapName(n,t)}))}"${selected?.id===n.id?' aria-current="location"':''}><span class="part1-mark" aria-hidden="true"></span><span class="part1-point-label">${esc(mapName(n,t))}</span></a>`).join('')}</div>
  </div></div><p class="part1-legend">${t('map.legend')}</p><p class="part1-pan">${t('map.pan')}</p>
  </div><div class="part1-sidebar"><section class="part1-selection" id="map-selection" tabindex="-1" aria-live="polite">${selectedDetails(selected,ctx,state)}</section>
- <h3 class="part1-list-heading">${t('map.results')}</h3><div class="part1-results">${rows.length?rows.map(n=>`<div class="part1-result${n.id===selected?.id?' selected':''}"><a class="part1-row-place" href="${esc(placeHref(n))}" data-map-place="${n.id}"${n.id===selected?.id?' aria-current="location"':''}><span${t.locale==='en'&&!n.en?' lang="ko"':''}>${esc(mapName(n,t))}</span><small>${esc(provinceName(n.province,t))} · ${t('map.'+n.kind)}</small></a>${n.entryId?`<a class="part1-row-entry" href="${ctx.href(n.entryId)}" aria-label="${esc(t('map.entry')+' · '+mapName(n,t))}">${t('map.row-entry')}</a>`:''}</div>`).join(''):`<p class="empty">${t('map.empty')}</p>`}</div></div></div>
+ <h3 class="part1-list-heading">${t('map.results')}</h3><div class="part1-results">${rows.length?rows.map(n=>`<div class="part1-result${n.id===selected?.id?' selected':''}"><a class="part1-row-place" href="${esc(placeHref(n))}" data-map-place="${n.id}"${n.id===selected?.id?' aria-current="location"':''}><span${t.locale==='en'&&/[가-힣]/.test(mapName(n,t))?' lang="ko"':''}>${esc(mapName(n,t))}</span><small>${esc(provinceName(n.province,t))} · ${t('map.'+n.kind)}</small></a>${n.entryId?`<a class="part1-row-entry" href="${ctx.href(n.entryId)}" aria-label="${esc(t('map.entry')+' · '+mapName(n,t))}">${t('map.row-entry')}</a>`:''}</div>`).join(''):`<p class="empty">${t('map.empty')}</p>`}</div></div></div>
  <footer class="part1-credit" id="map-source"><span>${t('map.credit')}</span> <a href="./evidence/part1-map.html">${t('map.evidence')}</a></footer>
  </section>`;
 }

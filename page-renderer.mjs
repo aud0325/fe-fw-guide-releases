@@ -1,4 +1,5 @@
 import {growthComparison} from './growth-ui.mjs';
+import {renderEntityText} from './entity-text.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {tipGuide} from './tip-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
@@ -104,15 +105,16 @@ function detail(e){
  const relation=l=>{const target=entries.find(x=>x.id===l.to);return `<a class="relation" href="${href(l.to)}"><small>${esc(l.labels?l.labels.map(tx).join(' / '):tx(l.label))}</small><strong>${esc(name(target))}</strong>${icon('arrow')}</a>`};
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
  const titleImage=entryIcon(e,'entity-detail-icon')||(e.type==='item'?itemIcon(e,{t},'item-detail-icon'):'');
- let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${titleMedia.credit||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${esc(metadata.summary)}</p></div>`;
+ const prose=value=>renderEntityText(localized(value,lang),e,{entries,lang,href,format:tx});
+ let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${titleMedia.credit||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`;
  let portraitHtml='';
  if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span><figcaption><a href="${esc(m.src)}" target="_blank" rel="noopener">${t('app.view-full-size-image')} ${icon('external')}</a></figcaption></figure>`;}
- if(lang==='ko'&&e.translation==='provisional')body+=`<p class="original-name" lang="en">${esc(e.name.en)}</p>`;
+ if(lang==='ko'&&e.translation==='provisional'&&e.type!=='item')body+=`<p class="original-name" lang="en">${esc(e.name.en)}</p>`;
  if(lang==='ko'&&e.translation==='provisional')body+=`<p class="result-label">${t('app.korean-provisional')}</p>`;
  if(e.type==='quest')body+=`<p class="notice">${t('editorial.the-quest-listing-has-been-retired-this-address-retains-reward-and-location-notes')} <a href="#category/paralogue">${t('editorial.view-paralogue-schedules')}</a></p>`;
- if(e.body&&e.type!=='mount')body+=`<p class="body">${esc(tx(e.body))}</p>`;
- if(e.note&&e.type!=='mount')body+=`<p class="notice">${esc(tx(e.note))}</p>`;
- body+=tipGuide(e,{t,tx,sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,sourceTitle:id=>`${tx(sources[id].title)}${sources[id].checked?' · '+t('common.checked')+' '+sources[id].checked:''}`});
+ if(e.body&&e.type!=='mount')body+=`<p class="body">${prose(e.body)}</p>`;
+ if(e.note&&e.type!=='mount')body+=`<p class="notice">${prose(e.note)}</p>`;
+ body+=tipGuide(e,{t,tx,prose,sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,sourceTitle:id=>`${tx(sources[id].title)}${sources[id].checked?' · '+t('common.checked')+' '+sources[id].checked:''}`});
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
  body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill});

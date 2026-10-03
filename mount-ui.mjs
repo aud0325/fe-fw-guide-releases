@@ -30,7 +30,7 @@ export function mountBonusDetails(e,{t,tx}){
  return `<section class="mount-bonuses"><h2>${t('mount.bonuses')}</h2>${details?.modifiers?`<p class="result-label">${t('mount.maximum-bonuses')}</p>`:''}${details?.growth?.condition?`<p class="result-label">${esc(tx(details.growth.condition))}</p>`:''}${grid}${fallbackText&&!modifiers?`<p>${esc(fallbackText)}</p>`:''}${details?.growth?`<p><a class="entry-map-link" href="#category/growth/mount">${t('mount.compare')}</a></p>`:''}</section>`;
 }
 export function mountSkillDetails(e,{t,tx}){
- const text=value=>typeof value==='object'?tx(value):value;
+ const text=value=>typeof value==='object'||t.locale==='en'?tx(value):value;
  const full=(e.facts||[]).filter(f=>/^namu-skill-/.test(f.key));
  const observed=e.facts?.find(f=>f.key==='mount-skills-ko');
  if(!full.length&&!observed)return '';

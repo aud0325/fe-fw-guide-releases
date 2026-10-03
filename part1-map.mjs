@@ -1,5 +1,6 @@
 import {mapNodes,mapProvinces,mapMeta} from './part1-map.generated.mjs';
 import {normalize} from './core.mjs';
+import {englishText} from './locales/english-text.mjs';
 import {acquisitionRecords} from './acquisition-map.mjs';
 export {mapNodes,mapProvinces,mapMeta};
 export const mapKinds=['hub','town','temple','dungeon','station','gate','gathering'];
@@ -7,7 +8,7 @@ export function filterMapNodes({mapQuery='',mapProvince='',mapKind=''}={}){
  const tokens=mapQuery.trim().split(/\s+/).map(normalize).filter(Boolean);
  return mapNodes.filter(n=>{
   const p=mapProvinces.find(p=>p.id===n.province);
-  const text=normalize([n.ko,n.en,...n.aliases,p?.ko,p?.en].filter(Boolean).join(' '));
+  const text=normalize([n.ko,n.en,englishText(n.en||n.ko),...n.aliases,p?.ko,p?.en].filter(Boolean).join(' '));
   return (!mapProvince||n.province===mapProvince)&&(!mapKind||n.kind===mapKind)&&tokens.every(q=>text.includes(q));
  });
 }

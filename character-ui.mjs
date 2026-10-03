@@ -45,6 +45,6 @@ export function characterGuide(e,{t,tx,name,href,entries,sources}){
  const guide=e.trainingGuide;if(!guide)return '';
  const source=sources[guide.sourceId];
  const classes=guide.classIds.map(id=>entries.find(e=>e.id===id));
- const hint=sourceHint({href:source.url,tooltip:`${t('character.guide-source')} · ${typeof source.title==='string'?source.title:tx(source.title)}${source.checked?' · '+t('common.checked')+' '+source.checked:''}`,label:t('presentation.references'),external:true});
+ const hint=sourceHint({href:source.url,tooltip:`${t('character.guide-source')} · ${tx(source.title)}${source.checked?' · '+t('common.checked')+' '+source.checked:''}`,label:t('presentation.references'),external:true});
  return `<section id="section-guide" class="training-guide" tabindex="-1"><h2>${t('character.guide')} ${hint}</h2><ol class="training-path">${classes.map(c=>`<li><a href="${href(c.id)}">${esc(name(c))}</a></li>`).join('')}</ol><div class="guide-explanation"><h3>${esc(t('character.guide-reason'))}</h3><p>${esc(tx(guide.reason))}</p><h3>${esc(t('character.guide-cautions'))}</h3><p>${esc(tx(guide.tactics))}</p><h3>${esc(t('character.preparation'))}</h3><p>${esc(tx(guide.note))}</p></div><p class="result-label">${t('character.guide-note')}</p></section>`;
 }

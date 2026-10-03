@@ -7,6 +7,7 @@ import {escapeHtml as esc} from './core.mjs';
 
 import {localized} from './locales/index.mjs';
 import {editorialText} from './locales/editorial-text.mjs';
+import {englishText} from './locales/english-text.mjs';
 export {localized} from './locales/index.mjs';
 export function collectReferences(value) {
  const ids=new Set();
@@ -95,7 +96,7 @@ export function displayText(value,t,entries=[],literal=false,key='') {
   const terms=skillTerms;
   if(/^[가-힣\sA-Z+·,()—-]+$/.test(result))for(const [ko,en]of Object.entries(terms))result=result.replaceAll(ko,en);
  }
- return t.locale==='ko'?editorialText(result,editorialDictionary(entries)):result;
+ return t.locale==='ko'?editorialText(result,editorialDictionary(entries)):englishText(result,entries);
 }
 export function characterFaction(e,t,entries=[]){
  const faction=e.facts?.find(f=>f.key==='faction');

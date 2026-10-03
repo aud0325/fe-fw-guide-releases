@@ -1,4 +1,5 @@
 import {guideTopics,guideTopic} from './browse-topics.mjs';
+import {renderEntityText} from './entity-text.mjs';
 import {itemUsageDetails} from './item-usage.mjs';
 import {isPublicSource} from './source-visibility.mjs';
 import {consolidateFacts,isDiscoverable} from './editorial-view.mjs';
@@ -43,9 +44,10 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
    const untranslated=t.locale==='en'&&/[가-힣]/.test(value);
    const ids=[...new Set([f.sourceId,...(f.sourceIds||[])])].filter(id=>isPublicSource(id,sources[id]));
    const pendingId=ids.find(id=>sources[id].kind==='unverified');
-   const tooltip=pendingId?[...ids.map(id=>{const s=sources[id];return `${typeof s.title==='string'?s.title:tx(s.title)}${s.checked?' · '+t('common.checked')+' '+s.checked:''}`;}),t('catalog.field-reference-only')].join('\n'):'';
+   const tooltip=pendingId?[...ids.map(id=>{const s=sources[id];return `${tx(s.title)}${s.checked?' · '+t('common.checked')+' '+s.checked:''}`;}),t('catalog.field-reference-only')].join('\n'):'';
    const hint=pendingId?sourceHint({href:'#source-'+pendingId,tooltip,label:t('editorial.field-source'),symbol:'†',className:'field-reference'}):'';
-   return `<tr><th${head?'':' scope="row"'}>${esc(tx(f.label).replace(/\s*\((?:Game8|나무위키|namu\.wiki)\)/g,''))}</th><td>${untranslated?`<span lang="ko">${esc(value)}</span> <small class="original-language">${t('editorial.korean-source-text')}</small>`:esc(value)}${hint}</td></tr>`;
+   const linked=e.type==='character'?esc(value):renderEntityText(t(f.valueKo||f.value,f.value),e,{entries,lang:t.locale,href,format:x=>text(x,f.literal,f.key)});
+   return `<tr><th${head?'':' scope="row"'}>${esc(tx(f.label).replace(/\s*\((?:Game8|나무위키|namu\.wiki)\)/g,''))}</th><td>${untranslated?`<span lang="ko">${linked}</span> <small class="original-language">${t('editorial.korean-source-text')}</small>`:linked}${hint}</td></tr>`;
   }).join('');
   return `<div class="table-wrap facts-table"><table>${head?`<thead><tr><th>${t('catalog.field')}</th><th>${t('catalog.value')}</th></tr></thead>`:''}<tbody>${rows}${extraRows}</tbody></table></div>`;
  };
