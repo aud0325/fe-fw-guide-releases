@@ -2,9 +2,10 @@ import {characterGrowthContext,characterGrowthSummary} from './growth-rates.mjs'
 import {growthCellStyle} from './growth-comparison.mjs';
 import {pagePath,stateQuery} from './routing.mjs';
 import {statLabels} from './locales/labels.mjs';
-import {displayText,sourceHint} from './presentation.mjs';
+import {displayText} from './presentation.mjs';
 import {escapeHtml as esc} from './core.mjs';
-export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=false}){
+import {beginnerGuide,importedCharacterGuide} from './beginner-guide-ui.mjs';
+export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=false,part='all'}){
  if(e.type!=='character')return '';
  if(!e.roles?.includes('playable')&&!e.recruitment&&!e.growthRates&&!e.gifts?.length&&!e.supports?.length)return ''; 
  const text=x=>displayText(x,t,entries);
@@ -37,14 +38,12 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
  if(e.supports?.length){out+=`<p class="notice">${t('character.ranks-from-the-game8-export-separate-from-recruitment-support')}</p><div class="table-wrap"><table><thead><tr><th>${t('character.partner')}</th><th>${t('character.reported-rank')}</th></tr></thead><tbody>`;
   out+=e.supports.map(s=>{const partner=entries.find(x=>x.id===s.partnerId);return `<tr><th><a href="${href(partner.id)}">${esc(name(partner))}</a></th><td>${esc([...new Set(s.reports.map(r=>r.rank))].join(' / '))}${s.conflict?' ⚠':''}</td></tr>`}).join('')+'</tbody></table></div>';
  }else out+=`<p>${t('character.support-data-is-undocumented-this-does-not-mean-supports')}</p>`;
- return `<section id="section-training" tabindex="-1">${growth}</section><section id="section-gifts" tabindex="-1">${gifts}</section>`+out+'</details>';
+ const growthHtml=`<section id="section-training" tabindex="-1">${growth}</section>`,otherHtml=`<section id="section-gifts" tabindex="-1">${gifts}</section>`+out+'</details>';
+ return part==='growth'?growthHtml:part==='other'?otherHtml:growthHtml+otherHtml;
 }
 
 
 export function characterGuide(e,{t,tx,name,href,entries,sources}){
- const guide=e.trainingGuide;if(!guide)return '';
- const source=sources[guide.sourceId];
- const classes=guide.classIds.map(id=>entries.find(e=>e.id===id));
- const hint=sourceHint({href:source.url,tooltip:`${t('character.guide-source')} · ${tx(source.title)}${source.checked?' · '+t('common.checked')+' '+source.checked:''}`,label:t('presentation.references'),external:true});
- return `<section id="section-guide" class="training-guide" tabindex="-1"><h2>${t('character.guide')} ${hint}</h2><ol class="training-path">${classes.map(c=>`<li><a href="${href(c.id)}">${esc(name(c))}</a></li>`).join('')}</ol><div class="guide-explanation"><h3>${esc(t('character.guide-reason'))}</h3><p>${esc(tx(guide.reason))}</p><h3>${esc(t('character.guide-cautions'))}</h3><p>${esc(tx(guide.tactics))}</p><h3>${esc(t('character.preparation'))}</h3><p>${esc(tx(guide.note))}</p></div><p class="result-label">${t('character.guide-note')}</p></section>`;
+ if(e.beginnerGuide)return beginnerGuide(e,{t,tx,name,href,entries});
+ return importedCharacterGuide(e,{t,tx,name,href,entries,sources});
 }

@@ -14,6 +14,7 @@ import {entries,routes,coverage,sources} from './data.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {recruitmentDetails} from './recruitment-ui.mjs';
 import {characterDetails,characterGuide} from './character-ui.mjs';
+import {beginnerGuideBrief} from './beginner-guide-ui.mjs';
 import {ingredientFoodRow,mountFoodRow} from './food-ui.mjs';
 import {foodFactKeys} from './food.mjs';
 import {mountCategory,mountBonusDetails,mountSkillDetails} from './mount-ui.mjs';
@@ -64,7 +65,8 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
  const foodRow=mountFoodRow(e,{t,sources,tx})+ingredientFoodRow(e,{t});
  const basicHtml=(basic.length||foodRow)?`<h2>${t('catalog.reference-facts')}</h2>${table(basic,foodRow,false)}`:'';
  if(e.type==='character'){
-  const extra=characterDetails(e,{t,tx,name,href,entries,base,growthSkill});
+  const growth=characterDetails(e,{t,tx,name,href,entries,base,growthSkill,part:'growth'});
+  const extra=characterDetails(e,{t,tx,name,href,entries,base,growthSkill,part:'other'});
   const identityKeys=['class','namu-class','faction'];
   const capabilityKeys=['pref_skills','nonideal_skills','ability','personal-ko','namu-personal-skill'];
   const value=f=>f?text(t(f.valueKo||f.value,f.value),f.literal,f.key).trim():'';
@@ -75,10 +77,12 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   const core=basic.filter(f=>!(f.key==='namu-class'&&value(f)===initialClass)&&!(f.key==='namu-personal-skill'&&(value(f)===personal.split(/[:：]/)[0].trim()||(t.locale==='en'&&basic.some(x=>x.key==='ability')&&f.value.trim()===personalKo))));
   const profileFacts=[...core.filter(f=>identityKeys.includes(f.key)),...core.filter(f=>capabilityKeys.includes(f.key))];
   const biography=basic.filter(f=>!identityKeys.includes(f.key)&&!capabilityKeys.includes(f.key));
-  const sections=['profile',...(e.recruitment?['recruitment']:[]),...(e.trainingGuide?['guide']:[]),...(extra?['training','gifts']:[]),...(biography.length?['biography']:[])];
+  const sections=['profile',...(e.recruitment?['recruitment']:[]),...(growth?['training']:[]),...(e.trainingGuide?['guide']:[]),...(extra?['gifts']:[]),...(biography.length?['biography']:[])];
   out+=`<nav class="character-sections" aria-label="${t('character.sections')}">${sections.map(id=>`<a href="#section-${id}">${t('character.'+id)}</a>`).join('')}</nav>`;
+  out+=beginnerGuideBrief(e,{t,tx,name,href,entries});
   out+=`<section id="section-profile" tabindex="-1"><h2>${t('character.core-profile')}</h2><div class="character-overview${portraitHtml?' has-portrait':''}">${portraitHtml}${profileFacts.length?table(profileFacts,'',false):''}</div></section>`;
   out+=recruitmentDetails(e,{t,tx,name,href,entries,routes,sources,route,text});
+  out+=growth;
   out+=characterGuide(e,{t,tx,name,href,entries,sources});
   out+=extra;
   if(biography.length)out+=`<section id="section-biography" tabindex="-1"><h2>${t('character.biography')}</h2>${table(biography,'',false)}</section>`;

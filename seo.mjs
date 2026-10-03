@@ -10,7 +10,7 @@ export function entryMetadata(e,{t,tx,name,entries,sources}){
  const category=types[e.type][en?1:0];
  const topics={character:e.recruitment?pick('영입 조건·프로필','recruitment & profile'):pick('캐릭터 프로필','character profile'),class:pick('병종·전직 정보','class & promotion'),item:pick('아이템 정보','item details'),mount:pick('탈것·포획 정보','mount & capture'),paralogue:pick('외전·수주 일정','paralogue & schedule')};
  const title=`${tx(e.name)} ${topics[e.type]||category} · ${t('app.fortune-s-weave-encyclopedia')}`;
- let original=e.type==='item'?itemDescription(e,{t,tx,entries,sources}):e.trainingGuide?tx(e.trainingGuide.summary):tx(e.summary);
+  let original=e.type==='item'?itemDescription(e,{t,tx,entries,sources}):e.beginnerGuide?tx(e.beginnerGuide.role):e.trainingGuide?tx(e.trainingGuide.summary):tx(e.summary);
  if(e.type==='mount')original=!en&&e.facts?.some(f=>f.key==='namu-desc')?e.facts.find(f=>f.key==='namu-desc').value:t('mount.summary',{category:mountCategory(e,t)||pick('다양한 종류의','varied')});
  if(e.type==='quest')original=pick('기존 자료에 기록된 의뢰 보상·장소 참고 정보입니다. 진행 방법은 확인되지 않았습니다.','Reward and location notes retained from source material. A walkthrough has not been verified.');
  if(e.type==='location'){

@@ -32,8 +32,8 @@ export function sourceHint({href,tooltip,label='',symbol='i',className='source-h
  const description=String(tooltip||'').trim();
  return `<a class="${esc(className)}" href="${esc(href)}" data-source-tip="${esc(description)}" aria-label="${esc(label?label+' · '+description:description)}"${external?' target="_blank" rel="noopener noreferrer"':''}>${esc(symbol)}</a>`;
 }
-export function informationHint(tooltip,label){
- return `<button type="button" class="information-hint" data-source-tip="${esc(tooltip)}" aria-label="${esc(label)}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">i</button>`;
+export function informationHint(tooltip,label,symbol='i'){
+ return `<button type="button" class="information-hint" data-source-tip="${esc(tooltip)}" aria-label="${esc(label)}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${esc(symbol)}</button>`;
 }
 export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  const records=new Map();
