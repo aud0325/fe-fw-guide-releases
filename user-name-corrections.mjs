@@ -40,4 +40,12 @@ export function applyUserWeaponCorrections(db,sources){
  e.links=[...(e.links||[]),{to:'seteth',label:bi('기본 소지 캐릭터','Default carrier'),sourceId}];
  e.missing=(e.missing||[]).filter(v=>v!=='Acquisition location');
  e.note=bi('한국어 이름·전투 기술명·무기 설명과 세테스의 기본 소지는 관리자 제보에 근거합니다. 성능·요구 기능은 기존 일본어 Game8 값을 유지합니다.','The Korean label, combat art name, weapon description and Seteth’s default possession are administrator-reported. Stats and required skills retain the Japanese Game8 values.');
+
+ const bow=db.get('horsekiller-bow'),bowSource='user-horsekiller-bow-20261005';
+ if(!bow)throw Error('Missing Horsekiller Bow');
+ sources[bowSource]={title:bi('관리자 · 말 킬러의 활 게임 내 명칭 확인','Administrator · Horsekiller Bow in-game Korean label'),url:'./evidence/horsekiller-bow-20261005.html',kind:'reference',checked:'2026-10-05',note:bi('관리자가 공식 인게임 표기를 확인하여 한국어 이름을 말 킬러의 활로 정정했습니다.','The administrator corrected Horsekiller Bow’s Korean name after checking its official in-game label.')};
+ bow.aliases=[...new Set([...bow.aliases,bow.name.ko,bow.name.ko.replace(/\([^()]*\)$/,''),'말잡이활','말잡이 활','말 킬러의 활'])];
+ bow.name={...bow.name,ko:'말 킬러의 활'};bow.translation='user-reported';bow.translationSourceId=bowSource;
+ bow.koreanNameEvidence={sourceId:bowSource,method:'user-reported-game-label',checked:'2026-10-05'};
+ bow.sourceIds=[...new Set([...bow.sourceIds,bowSource])];
 }

@@ -10,7 +10,7 @@ export function searchSuggestions(entries,query,limit=8){
  return {results:matches.slice(0,limit),total:matches.length};
 }
 export function setupSearch({input,panel,clear,entries,context,navigate}){
- let composing=false,committing=false,active=-1,links=[],timer,pointerSelection=false;
+ let composing=false,committing=false,active=-1,links=[],totalMatches=0,timer,pointerSelection=false;
  const cancel=()=>{clearTimeout(timer);timer=undefined;};
  const close=()=>{cancel();pointerSelection=false;committing=false;panel.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');active=-1;};
  const refresh=()=>{
@@ -19,6 +19,7 @@ export function setupSearch({input,panel,clear,entries,context,navigate}){
   if(pointerSelection)return;
   const {lang,base}=context(),t=createTranslator(lang),{results,total}=searchSuggestions(entries,input.value);
   if(!input.value.trim()){close();return;}
+  totalMatches=total;
   links=results.map(e=>({href:pagePath({id:e.id},lang,base),name:entryDisplayName(e,lang),type:types[e.type][lang==='ko'?0:1]}));
   if(total)links.push({href:pagePath(globalSearchState(input.value),lang,base)+stateQuery(globalSearchState(input.value)),name:t('search.all-results',{count:total})});
   panel.innerHTML=`<p class="sr-only" role="status">${esc(total?t('search.result-count',{count:total}):t('search.empty'))}</p><ul role="listbox" id="search-options" aria-label="${t('search.suggestions')}">${links.map((l,i)=>`<li role="option" id="search-option-${i}" aria-selected="false"><a tabindex="-1" href="${esc(l.href)}"><strong>${esc(l.name)}</strong>${l.type?`<small>${esc(l.type)}</small>`:''}</a></li>`).join('')}</ul>${total?'':`<p class="search-empty">${t('search.empty')}</p>`}`;
@@ -32,23 +33,30 @@ export function setupSearch({input,panel,clear,entries,context,navigate}){
   const option=panel.querySelector(`#search-option-${active}`);
   if(option){input.setAttribute('aria-activedescendant',option.id);option.scrollIntoView({block:'nearest'});}
  };
+ // Resolve an IME commit before keyboard selection so its delayed refresh cannot reset it.
+ const prepare=()=>{if(panel.hidden||timer!==undefined)refresh();committing=false;};
+ const submit=()=>{
+  if(composing||!input.value.trim())return;
+  prepare();
+  const {lang,base}=context(),href=active>=0?links[active]?.href:totalMatches===1?links[0]?.href:pagePath(globalSearchState(input.value),lang,base)+stateQuery(globalSearchState(input.value));
+  close();if(href)navigate(href);
+ };
  input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-controls','search-options');input.setAttribute('aria-expanded','false');
  input.addEventListener('compositionstart',()=>{composing=true;cancel();});
  input.addEventListener('compositionupdate',schedule);
  input.addEventListener('compositionend',()=>{composing=false;committing=true;schedule();});
  input.addEventListener('input',schedule);input.addEventListener('focus',refresh);
+ input.addEventListener('search',submit);
  input.addEventListener('keydown',event=>{
   if(composing||event.isComposing||event.keyCode===229)return;
   if(event.key==='Escape'){event.preventDefault();close();return;}
   if(event.key==='Tab')return;
   if(['ArrowDown','ArrowUp'].includes(event.key)){
-   event.preventDefault();if(panel.hidden)refresh();if(!links.length||panel.hidden)return;
+   event.preventDefault();prepare();if(!links.length||panel.hidden)return;
    select((active+(event.key==='ArrowDown'?1:active<0?0:-1)+links.length)%links.length);return;
   }
   if(event.key==='Enter'&&input.value.trim()){
-   event.preventDefault();if(panel.hidden)refresh();
-   const {lang,base}=context();const href=active>=0?links[active]?.href:pagePath(globalSearchState(input.value),lang,base)+stateQuery(globalSearchState(input.value));
-   close();if(href)navigate(href);
+   event.preventDefault();submit();
   }
  });
  // Focus transfer may commit IME text between pointerdown and click. Keep the

@@ -19,7 +19,8 @@ export function mapViewTabs(state,{t,lang,base}){
 function recordConditions(r,{t,routes}){
  const route=r.observedRoute||r.route;
  const routeName=routes.find(row=>row[0]===route);
- const values=[r.part?t('map.part-record',{part:r.part}):'',routeName?t(routeName[1],routeName[2]):route||'',r.gameDate?t('map.record-date',{date:r.gameDate}):'',r.chapter!=null?t('map.chapter',{chapter:r.chapter}):''];
+ const routeText=routeName?t(routeName[1],routeName[2]):route&&typeof route==='object'?t(route.ko,route.en):route||'';
+ const values=[r.part?t('map.part-record',{part:r.part}):'',routeText,r.gameDate?t('map.record-date',{date:r.gameDate}):'',r.chapter!=null?t('map.chapter',{chapter:r.chapter}):''];
  
  if(r.condition)values.push(typeof r.condition==='object'?t(r.condition.ko,r.condition.en):r.condition);
  return values.filter(Boolean).join(' · ');
