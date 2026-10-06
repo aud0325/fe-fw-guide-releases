@@ -120,7 +120,6 @@ https://fire-emblem-fortunes-weave.turam.dev/ko/entry/save-replay-guide/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/carryover-guide/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/scouting-basics/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/support-s-report/
-https://fire-emblem-fortunes-weave.turam.dev/ko/entry/dagda/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/video-jade-steel/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/video-yunamei/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/japanese-voice-tip/
@@ -262,7 +261,6 @@ https://fire-emblem-fortunes-weave.turam.dev/en/entry/save-replay-guide/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/carryover-guide/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/scouting-basics/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/support-s-report/
-https://fire-emblem-fortunes-weave.turam.dev/en/entry/dagda/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/video-jade-steel/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/video-yunamei/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/japanese-voice-tip/

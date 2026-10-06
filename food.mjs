@@ -1,14 +1,14 @@
 export const flavors={sweet:{ko:'단맛',en:'Sweet'},spicy:{ko:'매운맛',en:'Spicy'},bitter:{ko:'쓴맛',en:'Bitter'},delicacy:{ko:'진미',en:'Delicacy'},salty:{ko:'짠맛',en:'Salty'},unknown:{ko:'맛 미확인',en:'Flavor undocumented'}};
 export const foodKinds={plant:{ko:'채소·식물',en:'Vegetables & plants'},fish:{ko:'물고기',en:'Fish'},meat:{ko:'고기',en:'Meat'}};
-export const foodFactKeys=['food','food-guide','namu-bait','game8-bait'];
+export const foodFactKeys=['food','food-guide','namu-bait','game8-bait','food-correction'];
 export const normalizeItemFlavor=value=>Object.hasOwn(flavors,value)?value:'';
 export const ingredientFlavorId=e=>e.ingredientFlavor?.flavor||'unknown';
 export function preferredMountFood(e){
  const reports=mountFoodReports(e);
- return reports.find(r=>r.reports.some(source=>source.key==='food-guide'))||reports[0]||null;
+ return reports.find(r=>r.reports.some(source=>source.sourceId===e.preferredFoodSourceId))||reports.find(r=>r.reports.some(source=>source.key==='food-guide'))||reports[0]||null;
 }
 export function mountFoodReports(e){
- const ordered=['food-guide','game8-bait','namu-bait','food'].flatMap(key=>(e.facts||[]).filter(f=>f.key===key));
+ const ordered=['food-correction','food-guide','game8-bait','namu-bait','food'].flatMap(key=>(e.facts||[]).filter(f=>f.key===key));
  const rows=[];
  for(const f of ordered){
   const value=f.valueKo||f.value;

@@ -4,7 +4,7 @@ import {revealAnchor} from './anchors.mjs';
 import {isArchivedState} from './editorial-view.mjs';
 import {trackPage} from './analytics.mjs';
 import {setupUpdateCheck} from './update-check.mjs';
-import {pageStructuredData,serializeStructuredData} from './seo.mjs';
+import {pageStructuredData,serializeStructuredData,siteNames} from './seo.mjs';
 import {setupSearch} from './search-ui.mjs';
 import {setupSourceTooltips} from './source-tooltips.mjs';
 import {renderPage} from './page-renderer.mjs';
@@ -134,10 +134,9 @@ function render(){
  $('show-more')?.addEventListener('click',()=>{visibleLimit+=36;render()});
  $('content').querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{img.hidden=true;const note=document.createElement('p');note.className='result-label';note.textContent=t('app.image-unavailable-please-visit-the-source-link');img.after(note);},{once:true}));
 }
-document.addEventListener('click',event=>{const button=event.target.closest('[data-map-zoom]');if(!button)return;const img=$('world-map-image');if(!img)return;const current=Number(img.dataset.zoom||1);const action=button.dataset.mapZoom;const zoom=action==='reset'?1:Math.max(1,Math.min(4,current+(action==='in'?.5:-.5)));img.dataset.zoom=zoom;img.style.width=(zoom*100)+'%';$('map-scale').textContent=Math.round(zoom*100)+'%';if(action==='reset'){const viewport=img.parentElement;viewport.scrollTop=0;viewport.scrollLeft=0;}});
 function updateMetadata(page){
  document.title=page.title;
- for(const [selector,value]of [['meta[name="description"]',page.description],['meta[property="og:title"]',page.title],['meta[property="og:description"]',page.description]])document.querySelector(selector)?.setAttribute('content',value);
+ for(const [selector,value]of [['meta[name="description"]',page.description],['meta[property="og:title"]',page.title],['meta[property="og:description"]',page.description],['meta[property="og:site_name"]',siteNames[lang]]])document.querySelector(selector)?.setAttribute('content',value);
  const origin=document.querySelector('meta[name="site-url"]')?.content;
  const structured=document.querySelector('#page-structured-data');
  if(structured)structured.textContent=serializeStructuredData(pageStructuredData(page,state,lang,origin));

@@ -32,7 +32,7 @@ Handsome men, throwing her trident, maintaining fishing gear|잘생긴 남자, �
 Fishing, carving wooden dolls|낚시, 나무 인형 깎기
 Brawn|완력
 Moving her body, looking after others|몸 움직이기, 다른 사람 돌보기
-Cooking, baking, brewing coffee|요리, 제빵, 커피 내리기
+Cooking, baking, brewing coffee|요리, 제빵, 테프 내리기
 Veteran's Mettle|노장의 기개
 Fighting, seeing the people of Saramis thrive|싸움, 사라미스 백성의 번영
 Hunting, combat training|사냥, 전투 훈련
@@ -92,7 +92,7 @@ Coin flip (pick Tails)|동전 던지기에서 뒷면 선택
 Writing stories, appreciating art, talking about love and romance|이야기 쓰기, 예술 감상, 사랑과 로맨스 이야기
 Reading adventure stories, going shopping|모험담 읽기, 쇼핑
 Falcon|매
-Books of poetry, spicy foods, coffee, trustworthy people|시집, 매운 음식, 커피, 믿을 만한 사람
+Books of poetry, spicy foods, coffee, trustworthy people|시집, 매운 음식, 테프, 믿을 만한 사람
 Praying, going to the theater|기도, 극장 가기
 Graceful Light|우아한 빛
 Animals, listening to music, cleaning, doing laundry, cooking|동물, 음악 듣기, 청소, 빨래, 요리
@@ -250,7 +250,7 @@ Chapter 3|3장
 Chapter 2|2장
 High Priest of Credna|크레드나의 대사제
 Arrowhead Gem|화살촉 보석
-Crimson Ghosh|진홍 고슈
+Crimson Ghosh|진홍 홍소
 Blue-Rose Bouquet|푸른 장미 꽃다발
 Outdoor Cooking Set|야외 요리 세트
 Joint-Relief Gloves|관절 보호 장갑
@@ -267,7 +267,7 @@ Dual Fish Knives|생선 손질 쌍칼
 Niiza Garum|니자 가룸
 Pickled Vegetables|절인 채소
 Special “Medicine”|특별한 ‘약’
-Energizing Ghosh|활력 고슈
+Energizing Ghosh|활력 홍소
 Exquisite Ring|정교한 반지
 Jade Panther Figure|옥 표범 조각상
 Wyvern Rider|비룡 기수

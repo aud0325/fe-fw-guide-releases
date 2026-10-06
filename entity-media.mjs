@@ -314,6 +314,7 @@ const mountIconGroups = {
  "pegasus": "pegasus",
  "dark-pegasus": "pegasus",
  "falicorn": "pegasus",
+ "red-falicorn": "pegasus",
  "bucephalus": "pegasus",
  "wild-bau": "bau",
  "red-bau": "bau",

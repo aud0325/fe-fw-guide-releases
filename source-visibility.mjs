@@ -13,3 +13,18 @@ export function publicCatalogValue(value){
  }
  return result;
 }
+
+// Keep source records locally; publish only references used by the resolved entries.
+export function referencedSources(entries,sources){
+ const used=new Set();
+ function visit(value){
+  if(!value||typeof value!=='object')return;
+  for(const [key,item]of Object.entries(value)){
+   if(key==='sourceIds'&&Array.isArray(item))item.forEach(id=>used.add(id));
+   else if(/sourceId$/i.test(key)&&typeof item==='string')used.add(item);
+   else visit(item);
+  }
+ }
+ visit(entries);
+ return Object.fromEntries(Object.entries(sources).filter(([id])=>used.has(id)));
+}

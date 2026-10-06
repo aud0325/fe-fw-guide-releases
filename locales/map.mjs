@@ -39,8 +39,6 @@ export default {
  'map.recruited-mount-help':{ko:'필드 포획 대신 아래 캐릭터의 영입 조건을 확인하세요. 동반 획득은 커뮤니티 보고입니다.',en:'Check the character’s recruitment conditions below. Acquisition with recruitment is a community report.'},
  'map.capture-guide':{ko:'포획 해금·먹이 사용법',en:'Capture unlock and bait guide'},
  'map.part1':{ko:'1부 장소 지도',en:'Part I place map'},
- 'map.continent':{ko:'대륙도',en:'Continent map'},
- 'map.views':{ko:'지도 보기 전환',en:'Map views'},
  'map.scope':{ko:'게임 내 1449년 3월 2일·6일 촬영 기준',en:'Captured March 2 and 6, 1449 in game'},
  'map.limits':{ko:'확인된 장소 지점입니다. 정확한 채집·포획 좌표와 시기별 이동 가능 여부는 별도 확인이 필요합니다.',en:'Observed place markers. Exact gathering/capture coordinates and travel availability by date require separate confirmation.'},
  'map.search':{ko:'장소·소속 주 검색',en:'Search places and provinces'},

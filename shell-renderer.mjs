@@ -1,6 +1,6 @@
 import {navigationGroups,navigationContext,filterContext} from './navigation.mjs';
 import {isDiscoverable} from './editorial-view.mjs';
-import {isPublicSource} from './source-visibility.mjs';
+import {isPublicSource,referencedSources} from './source-visibility.mjs';
 import {types} from './locales/labels.mjs';
 import {createTranslator,localized} from './locales/index.mjs';
 import {icon} from './icons.mjs';
@@ -10,7 +10,7 @@ import {defaultState,pagePath} from './routing.mjs';
 export const renderKey=(state,lang,limit=36,base='/')=>JSON.stringify([lang,base,limit,Object.entries(state).sort(([a],[b])=>a.localeCompare(b))]);
 export function navigationHtml(state,lang,base,entries,sources,expanded=new Map()){
  const current=navigationContext(state,entries);
- const link=key=>`<a href="${esc(pagePath({...defaultState(),type:key},lang,base))}" class="${current.type===key?'active':''}" ${current.type===key?`aria-current="${state.id?'location':'page'}"`:''}>${icon(key==='growth'?'class':key)}<span>${esc(types[key][lang==='ko'?0:1])}</span>${key==='growth'?'':`<span class="count">${key==='sources'?Object.keys(sources).filter(id=>isPublicSource(id,sources[id])).length:key==='all'?entries.filter(isDiscoverable).length:entries.filter(e=>e.type===key).length}</span>`}</a>`;
+ const link=key=>`<a href="${esc(pagePath({...defaultState(),type:key},lang,base))}" class="${current.type===key?'active':''}" ${current.type===key?`aria-current="${state.id?'location':'page'}"`:''}>${icon(key==='growth'?'class':key)}<span>${esc(types[key][lang==='ko'?0:1])}</span>${['growth','map'].includes(key)?'':`<span class="count">${key==='sources'?Object.keys(referencedSources(entries,sources)).filter(id=>isPublicSource(id,sources[id])).length:key==='all'?entries.filter(isDiscoverable).length:entries.filter(e=>e.type===key).length}</span>`}</a>`;
  return link('all')+navigationGroups.map(group=>`<details class="nav-group ${current.group===group.id?'current-group':''}" data-nav-group="${group.id}" ${current.group===group.id||(expanded.get(group.id)??true)?'open':''}><summary>${esc(localized(group.label,lang))}${icon('expand')}</summary><div class="nav-children">${group.types.map(link).join('')}</div></details>`).join('')+link('sources');
 }
 export function shellFilters(state,entries){

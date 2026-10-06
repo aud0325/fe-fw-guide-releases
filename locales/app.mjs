@@ -14,38 +14,6 @@ export default {
  'app.paralogue-index-description': {ko:'전체 외전의 일정·조건·보상 보기',en:'Browse all paralogue schedules, conditions and rewards'},
  "app.all-documents": {"ko":"전체 문서 목록","en":"All documents"},
  'app.faction-undocumented': {ko:'세력 미확인',en:'Faction undocumented'},
- "app.map-of-dagda": {
-  "ko": "다그다 대륙도",
-  "en": "Map of Dagda"
- },
- "app.zoom-out": {
-  "ko": "지도 축소",
-  "en": "Zoom out"
- },
- "app.zoom-in": {
-  "ko": "지도 확대",
-  "en": "Zoom in"
- },
- "app.fit": {
-  "ko": "맞춤",
-  "en": "Fit"
- },
- "app.open-image": {
-  "ko": "원본 열기",
-  "en": "Open image"
- },
- "app.continent-map-scroll-to-pan-after-zooming": {
-  "ko": "대륙 지도. 확대한 후 스크롤하여 이동하세요.",
-  "en": "Continent map. Scroll to pan after zooming."
- },
- "app.map-showing-dagda-s-kingdoms-regions-seas-and-place": {
-  "ko": "다그다 대륙의 왕국, 지역, 바다와 지명이 표시된 지도",
-  "en": "Map showing Dagda’s kingdoms, regions, seas and place names"
- },
- "app.zoom-then-scroll-or-swipe-to-pan-this-map": {
-  "ko": "확대 후 손가락이나 스크롤로 이동할 수 있습니다. 게임 내 이동 노드·채집 지점은 표시되지 않습니다.",
-  "en": "Zoom, then scroll or swipe to pan. This map does not show in-game travel nodes or gathering spots."
- },
  "app.official": {
   "ko": "공식 자료",
   "en": "Official"
@@ -158,10 +126,6 @@ export default {
   "ko": "지역 확인 대기",
   "en": "Region unverified"
  },
- "app.related-location-index-below-the-continent-map-does-not": {
-  "ko": "아래는 관련 장소 색인입니다. 대륙도에 게임 내 채집 좌표나 이동 경로를 표시한 것은 아닙니다.",
-  "en": "Related location index below. The continent map does not mark in-game gathering coordinates or travel paths."
- },
  "app.archive": {
   "ko": "전체 기록",
   "en": "Archive"
@@ -169,10 +133,6 @@ export default {
  "app.encyclopedia": {
   "ko": "만자천홍 도감",
   "en": "Encyclopedia"
- },
- "app.view-full-size-image": {
-  "ko": "이미지 크게 보기",
-  "en": "View image"
  },
  "app.korean-provisional": {
   "ko": "한국어: 임시 표기",

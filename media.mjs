@@ -11,18 +11,6 @@ export const media = {
     "checkedAt": "2026-10-02",
     "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Source crops only; no independent reuse permission verified."
   },
-  "dagda": {
-    "credit": "Fortunes Weave Guide / Fire Emblem Wiki · Nintendo / INTELLIGENT SYSTEMS",
-    "rights": "Source labels this personal, non-commercial fair-use reference, not CC BY-SA; no independent permission verified.",
-    "sourceUrl": "https://fortunesweave.co.uk/map",
-    "src": "./assets/dagda.webp",
-    "checkedAt": "2026-09-25",
-    "originalUrl": "https://fortunesweave.co.uk/images/world-map/dagda.webp",
-    "originalWidth": 3458,
-    "originalHeight": 2442,
-    "width": 500,
-    "height": 353
-  },
   "eshmel": {
     "src": "./assets/portraits/eshmel.png",
     "originalUrl": "https://cdn.fireemblemwiki.org/f/f0/FEFW_Eshmel.png",

@@ -5,6 +5,9 @@ import {displayText,localizedFacts} from './presentation.mjs';
 import {flavors} from './food.mjs';
 import {pagePath} from './routing.mjs';
 
+export const siteNames=Object.freeze({ko:'만자천홍 도감',en:"Fortune's Weave Encyclopedia"});
+export const siteIdentity=Object.freeze({name:siteNames.ko,alternateName:Object.freeze(['파이어엠블렘 만자천홍 도감',siteNames.en])});
+
 export function entryMetadata(e,{t,tx,name,entries,sources}){
  const en=t.locale==='en',pick=(ko,enText)=>en?enText:ko;
  const category=types[e.type][en?1:0];
@@ -52,7 +55,7 @@ export function entryMetadata(e,{t,tx,name,entries,sources}){
 export function pageStructuredData(page,state,lang,siteUrl){
  if(!siteUrl||page.missing)return [];
  const root=new URL(siteUrl),base=root.pathname;
- const website={'@context':'https://schema.org','@type':'WebSite','@id':new URL('#website',root).href,url:root.href,name:'만자천홍 도감',alternateName:['파이어엠블렘 만자천홍 도감','Fortune’s Weave Encyclopedia'],inLanguage:['ko','en']};
+ const website={'@context':'https://schema.org','@type':'WebSite','@id':new URL('#website',root).href,url:root.href,...siteIdentity,inLanguage:['ko','en']};
  if(!state.id&&state.type==='all')return [website];
  const crumbs=[{name:lang==='en'?'Fortune’s Weave Encyclopedia':'만자천홍 도감',path:`${base}${lang}/`}];
  if(page.entryType)crumbs.push({name:types[page.entryType][lang==='en'?1:0],path:pagePath({type:page.entryType},lang,base)});

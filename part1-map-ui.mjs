@@ -13,9 +13,6 @@ export function mapHref(point,item,lang,base='/'){
  return pagePath(state,lang,base)+stateQuery(state);
 }
 function mapRoute(state,lang,base,changes){const next={...state,id:null,type:'map',...changes};return pagePath(next,lang,base)+stateQuery(next);}
-export function mapViewTabs(state,{t,lang,base}){
- return `<nav class="part1-tabs" aria-label="${t('map.views')}">${[['part1','map.part1'],['continent','map.continent']].map(([view,key])=>`<a href="${esc(mapRoute(state,lang,base,{mapView:view}))}"${(state.mapView||'part1')===view?' aria-current="page"':''}>${t(key)}</a>`).join('')}</nav>`;
-}
 function recordConditions(r,{t,routes}){
  const route=r.observedRoute||r.route;
  const routeName=routes.find(row=>row[0]===route);

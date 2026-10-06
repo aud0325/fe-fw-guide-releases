@@ -21,7 +21,7 @@ export const displayTerms={
     "en": "Sweets and items described as suitable for people who appreciate beauty"
   },
   "커피": {
-    "ko": "커피",
+    "ko": "테프",
     "en": "Coffee"
   },
   "낚시 관련(낚시바늘, 낚싯대, 생선 눈알, 생선 내장 절임)": {
@@ -33,11 +33,11 @@ export const displayTerms={
     "en": "Fishing items (fishhooks, fishing rods, fish eyes, pickled fish entrails), decorative tools"
   },
   "커피, 숙성홍소, 과자책": {
-    "ko": "커피, 숙성홍소, 과자책",
+    "ko": "테프, 숙성홍소, 과자책",
     "en": "Coffee, aged red vinegar, books about sweets"
   },
   "유파스 초상화, 커피, 훈련도구(훈련기둥, 훈련무게추), 패션 아이템, 튼튼한 베낭, 요리 관련": {
-    "ko": "유파스 초상화, 커피, 훈련도구(훈련기둥, 훈련무게추), 패션 아이템, 튼튼한 베낭, 요리 관련",
+    "ko": "유파스 초상화, 테프, 훈련도구(훈련기둥, 훈련무게추), 패션 아이템, 튼튼한 베낭, 요리 관련",
     "en": "Yufas portraits, coffee, training equipment (training posts and weights), fashion items, sturdy backpacks, cooking items"
   },
   "책": {
@@ -73,7 +73,7 @@ export const displayTerms={
     "en": "Fermented drinks, paintings (especially Yufas portraits), books"
   },
   "모든 세르비 음료, 페이스트리, 커피": {
-    "ko": "모든 세르비 음료, 페이스트리, 커피",
+    "ko": "모든 세르비 음료, 페이스트리, 테프",
     "en": "All cervi drinks, pastries, coffee"
   },
   "꽃, 그림, 미술을 사랑하는 사람(lovers of beauty, appreciate beauty랑 뭐가 다른지 몰름) 설명이 붙은 물건.": {
@@ -93,11 +93,11 @@ export const displayTerms={
     "en": "Weapons, tea, horse-related items (beard grass, mane ornaments, horse grooming kit), teff"
   },
   "커피, 보드게임": {
-    "ko": "커피, 보드게임",
+    "ko": "테프, 보드게임",
     "en": "Coffee, board games"
   },
   "커피(그럭저럭),낚시(고마움), 보드게임": {
-    "ko": "커피(그럭저럭),낚시(고마움), 보드게임",
+    "ko": "테프(그럭저럭),낚시(고마움), 보드게임",
     "en": "Coffee (moderate response), fishing items (grateful response), board games"
   },
   "수공예 나이프, 패션아이템, 페이스트리, 살라미 과자": {
@@ -105,19 +105,19 @@ export const displayTerms={
     "en": "Craft knives, fashion items, pastries, salami snacks"
   },
   "커피, 책": {
-    "ko": "커피, 책",
+    "ko": "테프, 책",
     "en": "Coffee, books"
   },
   "커피, 책, 마술도구": {
-    "ko": "커피, 책, 마술도구",
+    "ko": "테프, 책, 마술도구",
     "en": "Coffee, books, magic tools"
   },
   "발효된 음료, 커피, 희귀한 책, 보드게임, 그림": {
-    "ko": "발효된 음료, 커피, 희귀한 책, 보드게임, 그림",
+    "ko": "발효된 음료, 테프, 희귀한 책, 보드게임, 그림",
     "en": "Fermented drinks, coffee, rare books, board games, paintings"
   },
   "커피, 보드게임, 책, 그림, 꽃": {
-    "ko": "커피, 보드게임, 책, 그림, 꽃",
+    "ko": "테프, 보드게임, 책, 그림, 꽃",
     "en": "Coffee, board games, books, paintings, flowers"
   },
   "채소": {
@@ -129,11 +129,11 @@ export const displayTerms={
     "en": "Vegetables, sashimi knives (loved); the report speculates about cooking preferences"
   },
   "커피, 책, 그림": {
-    "ko": "커피, 책, 그림",
+    "ko": "테프, 책, 그림",
     "en": "Coffee, books, paintings"
   },
   "책, 커피, 차, 향신료": {
-    "ko": "책, 커피, 차, 향신료",
+    "ko": "책, 테프, 차, 향신료",
     "en": "Books, coffee, tea, spices"
   },
   "궁술 관련 (화살 장식, 관절 장갑, 활 관리 키트), 책과 보드게임": {
@@ -217,7 +217,7 @@ export const displayTerms={
     "en": "Horse-related items (beard grass, mane ornaments, horse grooming kit)"
   },
   "커피(테프?). 그림, 레어 아이템 전반": {
-    "ko": "커피(테프?). 그림, 레어 아이템 전반",
+    "ko": "테프. 그림, 레어 아이템 전반",
     "en": "Coffee (possibly teff; uncertain), paintings, rare items in general"
   },
   "훈련도구(훈련기둥, 훈련무게추)": {

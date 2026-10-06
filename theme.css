@@ -551,28 +551,12 @@ main .information-hint:focus-visible{outline:2px solid var(--accent);outline-off
  .class-listing .class-card h3{font-size:13px}
 }
 
-/* Atlas overview: bounded raster map beside a browsable regional index. */
+/* Map overview. */
 .atlas-listing{container-type:inline-size}
 .atlas-listing .section-head{margin:6px 0 12px;min-height:32px;gap:12px}
 .atlas-listing .section-head h1{font-size:24px;line-height:1.35;margin:0}
 .atlas-listing .section-head small{font-size:12px;background:transparent;padding:0;white-space:normal;text-align:right}
 .atlas-listing>.notice{font-size:13px;line-height:1.7;margin:0 0 20px}
-.atlas-layout{display:grid;grid-template-columns:minmax(0,500px) minmax(0,1fr);gap:28px;align-items:start}
-.atlas-listing .map-figure{margin:0;min-width:0}
-.atlas-listing .map-controls{gap:6px;margin-bottom:10px}
-.atlas-listing .map-controls strong{flex-basis:100%;font-size:16px;margin-bottom:2px}
-.atlas-listing .map-controls button{min-width:44px;min-height:44px;padding:6px 10px}
-.atlas-listing .map-controls a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;gap:4px}
-.atlas-listing .map-viewport{max-width:500px;max-height:500px}
-.atlas-listing .map-figure .result-label{font-size:12px;margin:8px 0;line-height:1.7}
-.atlas-index>h2{font-size:17px;margin:0 0 12px}
-.atlas-index .region-grid{display:block;border-top:1px solid var(--line)}
-.atlas-index .region{padding:0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
-.atlas-index .region summary{min-height:48px;padding:12px 4px;font-size:14px;font-weight:600;cursor:pointer;line-height:1.5}
-.atlas-index .region summary small{font-size:12px;font-weight:400;color:var(--muted);margin-left:8px}
-.atlas-index .region-links{padding:0 4px 10px}
-.atlas-index .region a{padding:10px 8px;min-height:44px;font-size:13px;margin:0;line-height:1.7;overflow-wrap:anywhere}
-@container(max-width:850px){.atlas-layout{grid-template-columns:1fr;gap:20px}.atlas-listing .map-figure{max-width:500px}}
 @container(max-width:480px){.atlas-listing .section-head h1{font-size:20px}.atlas-listing>.notice{font-size:12px;margin-bottom:14px}}
 
 /* Locations prioritize regional context and readable related item names. */

@@ -4,7 +4,7 @@ import {routes} from './data.mjs';
 import {normalizeItemFilters} from './item-types.mjs';
 import {normalizeItemFlavor} from './food.mjs';
 import {mapNodes,mapProvinces} from './part1-map.generated.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapView:'part1',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -27,7 +27,7 @@ export function stateQuery(state){
  if(state.type==='character'&&!state.id&&routes.some(([id])=>id===state.scout))p.set('scout',state.scout);
  if(state.type==='item'&&normalizeItemFlavor(state.itemFlavor))p.set('flavor',state.itemFlavor);
  if(state.type==='map'&&!state.id){
-  for(const [key,value]of Object.entries({view:state.mapView==='continent'?'continent':'',place:state.mapPlace,item:state.mapItem,province:state.mapProvince,'map-kind':state.mapKind,mq:state.mapQuery}))if(value)p.set(key,value);
+  for(const [key,value]of Object.entries({place:state.mapPlace,item:state.mapItem,province:state.mapProvince,'map-kind':state.mapKind,mq:state.mapQuery}))if(value)p.set(key,value);
  }
  for(const [key,value]of Object.entries({q:state.query,route:state.route==='all'?'':state.route,tips:state.includeTips?'':'0',group:state.group,sort:state.order==='start'?'':state.order,main:state.itemMajor,sub:state.itemMinor,kind:state.itemKind}))if(value)p.set(key,value);
  return p.size?'?'+p:'';
@@ -56,7 +56,6 @@ export function readRoute(url,base='/',fallback='ko'){
  Object.assign(state,normalizeItemFilters({itemMajor:params.get('main')||'',itemMinor:params.get('sub')||'',itemKind:params.get('kind')||''}));
  state.itemFlavor=state.type==='item'?normalizeItemFlavor(params.get('flavor')):'';
  if(state.type==='map'&&!state.id){
-  state.mapView=params.get('view')==='continent'?'continent':'part1';
   state.mapPlace=mapNodes.some(n=>n.id===params.get('place'))?params.get('place'):'';
   state.mapItem=/^[a-z0-9-]+$/.test(params.get('item')||'')?params.get('item'):'';
   state.mapProvince=[...mapProvinces.map(p=>p.id),'undocumented'].includes(params.get('province'))?params.get('province'):'';

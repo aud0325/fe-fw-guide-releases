@@ -245,14 +245,6 @@ export const content={
   "ko": "정확한 포획 지점과 전체 음식 선호표는 확인 대기입니다.",
   "en": "Exact capture sites and a complete food-preference table await verification."
  },
- "data.a-regional-index-linking-the-capital-gathering-and-capture": {
-  "ko": "수도와 채집·포획 장소를 연결하는 지역 색인.",
-  "en": "A regional index linking the capital, gathering and capture locations."
- },
- "data.a-continent-map-and-regional-index-in-game-travel": {
-  "ko": "대륙 지도 이미지와 지역 색인을 함께 제공합니다. 게임 내 이동 노드·채집 좌표는 표시하지 않습니다.",
-  "en": "A continent map and regional index. In-game travel nodes and gathering coordinates are not marked."
- },
  "data.the-imperial-capital-hosting-the-heroic-games": {
   "ko": "영웅 경기가 열리는 제국 수도.",
   "en": "The imperial capital hosting the Heroic Games."

@@ -3,9 +3,9 @@ import {renderEntityText} from './entity-text.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {tipGuide} from './tip-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
-import {isPublicSource} from './source-visibility.mjs';
+import {isPublicSource,referencedSources} from './source-visibility.mjs';
 import {itemUses} from './item-usage.mjs';
-import {part1Map,mapViewTabs,entryMapLinks} from './part1-map-ui.mjs';
+import {part1Map,entryMapLinks} from './part1-map-ui.mjs';
 import {groupedBrowse} from './browse-groups.mjs';
 import {isDiscoverable,entryDisplayName,groupedRelations} from './editorial-view.mjs';
 import {entryMetadata} from './seo.mjs';
@@ -38,7 +38,6 @@ export function renderPage(state,lang='ko',visibleLimit=36,base='/'){
 function portrait(e,full=false){const m=media[e.id]||e.portrait;return e.type==='character'&&m?`<img class="portrait" src="${esc(full?m.src:(m.thumbnailSrc||m.src))}" alt="${esc(name(e))}" loading="${full?'eager':'lazy'}" decoding="async" width="${m.width||240}" height="${m.height||240}">`:'';}
 function mediaHint(m){return m?.sourceUrl?sourceHint({href:m.sourceUrl,tooltip:`${t('presentation.image-credit')} · ${m.credit||referenceSite(m.sourceUrl)}`,className:'source-hint image-source-hint',external:true}):'';}
 function entryIcon(e,extraClass=''){const m=entryIconMedia(e);return m?`<img class="entity-icon${extraClass?' '+extraClass:''}" src="${esc(m.src)}" alt="" width="50" height="50" loading="lazy" decoding="async">`:'';}
-function mapFigure(menu=false){const m=media.dagda;return `<figure class="map-figure"><div class="map-controls"><strong>${t('app.map-of-dagda')}</strong><button type="button" data-map-zoom="out" aria-label="${t('app.zoom-out')}">${icon('remove')}</button><output id="map-scale" aria-live="polite">100%</output><button type="button" data-map-zoom="in" aria-label="${t('app.zoom-in')}">${icon('add')}</button><button type="button" data-map-zoom="reset">${t('app.fit')}</button><a href="${esc(m.originalUrl||m.src)}" target="_blank" rel="noopener noreferrer">${t('app.open-image')} ${icon('external')}</a></div><div class="image-credit-frame map-credit-frame"><div class="map-viewport" tabindex="0" role="region" aria-label="${t('app.continent-map-scroll-to-pan-after-zooming')}"><img id="world-map-image" src="${esc(m.src)}" alt="${t('app.map-showing-dagda-s-kingdoms-regions-seas-and-place')}" width="${m.width||500}" height="${m.height||353}" decoding="async"></div>${mediaHint(m)}</div><p class="result-label">${t(menu?'browse.map-pan-help':'app.zoom-then-scroll-or-swipe-to-pan-this-map')}</p></figure>`;}
 function sourceList(ids){
  const groups=new Map();
  for(const id of ids){const source=sources[id],site=referenceSite(source.url);if(!groups.has(site))groups.set(site,[]);groups.get(site).push(source);}
@@ -77,7 +76,7 @@ function guideGroups(list){
  return `<div class="guide-topics">${guideTopics.map(g=>{const rows=list.filter(e=>guideTopic(e).id===g.id);if(!rows.length)return '';const title=t(g.key),url='#category/tip?group='+g.id+(state.route!=='all'?'&route='+encodeURIComponent(state.route):'');return `<section class="guide-topic"><div class="browse-group-heading"><h2>${esc(title)}</h2><small>${rows.length}${t('common.entries')}</small>${rows.length>3?`<a class="group-more" href="${url}" aria-label="${esc(t('browse.view-group',{name:title,count:rows.length}))}">${t('browse.view-all')}</a>`:''}</div><div class="cards guide-list">${rows.slice(0,3).map(card).join('')}</div></section>`;}).join('')}</div>`;
 }
 function homeDirectory(list){
- return `<nav class="home-directory" aria-label="${t('browse.home-directory')}">${navigationGroups.flatMap(g=>g.types).map(type=>{const rows=list.filter(e=>e.type===type);if(type==='growth')return `<a href="#category/growth">${icon('class')}<div><div class="home-category-heading"><strong>${t('growth.title')}</strong></div><p>${t('growth.homeDescription')}</p></div>${icon('arrow')}</a>`;if(!rows.length)return '';const purpose={character:'editorial.recruit-allies',item:'editorial.find-items',paralogue:'editorial.paralogue-deadlines',class:'editorial.compare-classes'};const url='#category/'+type+(state.route!=='all'&&type!=='character'?'?route='+encodeURIComponent(state.route):'');return `<a href="${url}">${icon(type)}<div><div class="home-category-heading"><strong>${esc(purpose[type]?t(purpose[type]):label(type))}</strong><small>${t(rows.length===1?'browse.entry-one':'browse.entry-count',{count:rows.length})}</small></div><p>${t('browse.home-'+type)}</p></div>${icon('arrow')}</a>`;}).join('')}</nav><h2 class="home-records-heading">${t('browse.home-records')}</h2>`;
+ return `<nav class="home-directory" aria-label="${t('browse.home-directory')}">${navigationGroups.flatMap(g=>g.types).map(type=>{const rows=list.filter(e=>e.type===type);if(type==='growth')return `<a href="#category/growth">${icon('class')}<div><div class="home-category-heading"><strong>${t('growth.title')}</strong></div><p>${t('growth.homeDescription')}</p></div>${icon('arrow')}</a>`;if(!rows.length&&type!=='map')return '';const purpose={character:'editorial.recruit-allies',item:'editorial.find-items',paralogue:'editorial.paralogue-deadlines',class:'editorial.compare-classes'};const url='#category/'+type+(state.route!=='all'&&type!=='character'?'?route='+encodeURIComponent(state.route):'');return `<a href="${url}">${icon(type)}<div><div class="home-category-heading"><strong>${esc(purpose[type]?t(purpose[type]):label(type))}</strong>${type==='map'?'':`<small>${t(rows.length===1?'browse.entry-one':'browse.entry-count',{count:rows.length})}</small>`}</div><p>${t('browse.home-'+type)}</p></div>${icon('arrow')}</a>`;}).join('')}</nav><h2 class="home-records-heading">${t('browse.home-records')}</h2>`;
 }
 function classComparison(list){
  return `<div class="cards class-cards icon-cards">${list.map(e=>{const image=entryIcon(e)||icon('class');return `<a class="card class-card" href="${href(e.id)}"><span class="card-media">${image}</span><div class="card-copy"><h3>${esc(name(e))}</h3><p class="class-tier">${esc(text(e.category||''))}</p></div></a>`;}).join('')}</div>`;
@@ -89,11 +88,6 @@ function card(e){
  const cardHref=href(e.id)+(r?'?route='+scoutRoute(state):'');
  const image=portrait(e)||entryIcon(e)||(e.type==='item'?itemIcon(e,{t}):'');
  return `<a class="card compact-card listing-card${image?' has-media':''}${image&&e.type!=='character'?' icon-card':''}" href="${cardHref}">${image?`<span class="card-media">${image}</span>`:''}<div class="card-copy"><h3>${esc(name(e))}${e.type==='tip'&&isSpoilerEntry(e)&&!/스포일러|spoiler/i.test(name(e))?`<span class="listing-spoiler">${t('tip.spoiler')}</span>`:''}</h3><p class="card-meta">${esc(r?scoutConditions(e,scoutRoute(state),t):text(meta))}</p></div></a>`;
-}
-function atlas(compact=false){
- const places=browseEntries.filter(e=>e.type==='location');
- const regions=locationRegions(places,t).map(({id,title,entries:rows})=>{const links=rows.map(e=>`<a href="${href(e.id)}">${esc(name(e))}</a>`).join('');return compact?`<details class="region"${id==='Capital'?' open':''}><summary>${esc(title)} <small>${rows.length}${t('common.entries')}</small></summary><div class="region-links">${links}</div></details>`:`<section class="region"><h3>${esc(title)}</h3>${links}</section>`;}).join('');
- return compact?`<section class="atlas-index"><h2>${t('browse.region-index')}</h2><div class="region-grid">${regions}</div></section>`:`<p class="notice">${t('app.related-location-index-below-the-continent-map-does-not')}</p><div class="region-grid">${regions}</div>`;
 }
 
 function detail(e){
@@ -108,7 +102,7 @@ function detail(e){
  const prose=value=>renderEntityText(localized(value,lang),e,{entries,lang,href,format:tx});
  let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${titleMedia.credit||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`;
  let portraitHtml='';
- if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span><figcaption><a href="${esc(m.src)}" target="_blank" rel="noopener">${t('app.view-full-size-image')} ${icon('external')}</a></figcaption></figure>`;}
+ if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span></figure>`;}
  if(lang==='ko'&&e.translation==='provisional'&&e.type!=='item')body+=`<p class="original-name" lang="en">${esc(e.name.en)}</p>`;
  if(lang==='ko'&&e.translation==='provisional')body+=`<p class="result-label">${t('app.korean-provisional')}</p>`;
  if(e.type==='quest')body+=`<p class="notice">${t('editorial.the-quest-listing-has-been-retired-this-address-retains-reward-and-location-notes')} <a href="#category/paralogue">${t('editorial.view-paralogue-schedules')}</a></p>`;
@@ -119,10 +113,9 @@ function detail(e){
  if(!acquisitionBelowFacts)body+=mapHtml;
  body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill});
  if(e.type==='mount'&&state.route!=='all'&&e.routeIds&&!e.routeIds.includes(state.route))body+=`<p class="notice">${t('app.this-capture-method-is-documented-for-cai-s-route')}</p>`;
- if(e.type==='map')body+=mapFigure()+atlas();
  if(outgoing.length)body+=`<h2>${t('app.follow-the-trail')}</h2><div class="relations">${outgoing.map(relation).join('')}</div>`;
  if(incoming.length)body+=`<details class="backlinks"><summary>${t('app.linked-from')} (${incoming.length})</summary><div class="relations">${incoming.map(x=>relation({to:x.id,label:{ko:label(x.type),en:label(x.type)}})).join('')}</div></details>`;
- body+=references([e,{sourceIds:itemUses(e,entries).sourceIds}],e.type==='map'?[media.dagda]:e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait])+'</article>';
+ body+=references([e,{sourceIds:itemUses(e,entries).sourceIds}],e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait])+'</article>';
  return body;
 }
 const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,images});
@@ -131,7 +124,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  else if(state.type==='growth'){html=growthComparison(state,{entries,sources,t,lang,base});}
  else if(state.type==='quest'){html=`<h1>${t('editorial.quest-notes')}</h1><p>${t('editorial.the-standalone-quest-listing-has-been-retired-find-schedules-and-rewards-under-paralogues-and-acquisition-notes-under-items')}</p><div class="archive-links"><a href="#category/paralogue">${label('paralogue')}</a><a href="#category/item">${label('item')}</a></div>`;}
  else if(state.type==='sources'){
-  const ids=Object.keys(sources).filter(id=>isPublicSource(id,sources[id])),sites=new Set(ids.map(id=>referenceSite(sources[id].url)));
+  const ids=Object.keys(referencedSources(entries,sources)).filter(id=>isPublicSource(id,sources[id])),sites=new Set(ids.map(id=>referenceSite(sources[id].url)));
   html=`<div class="section-head"><h2>${t('app.source-register')}</h2><small>${t('browse.source-count',{sites:sites.size,count:ids.length})}</small></div><p class="notice">${t('app.unavailable-or-stale-pages-are-not-treated-as-verified')}</p><div class="sources-layout"><section class="sources-index"><h2>${t('browse.source-originals')}</h2><p class="result-label">${t('editorial.dates-by-source')}</p>${sourceList(ids)}</section><div class="source-coverage">${coveragePanel(t)}</div></div>`;
  }
  else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href});}
@@ -144,7 +137,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   if(state.type==='character')html+=scoutToolbar(state,t);
   if(state.type==='location')html+=`<p class="location-atlas-link"><a href="#category/map">${t('browse.open-atlas')}</a></p>`;
   if(state.type==='item'&&state.itemFlavor&&!list.length)html+="<p class=\"notice\">"+t('item.flavor-empty')+'</p>';
-  if(state.type==='map'&&!state.query)html+=mapViewTabs(state,mapContext)+(state.mapView==='continent'?`<p class="notice">${t('app.related-location-index-below-the-continent-map-does-not')}</p><div class="atlas-layout">${mapFigure(true)}${atlas(true)}</div>`:part1Map(state,mapContext));
+  if(state.type==='map'&&!state.query)html+=part1Map(state,mapContext);
   if(state.type==='item')html+=itemFilters(searchEntries(entries,{...listingState(state,entries),group:'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''}),state,{t});
   const options=groupOptions(state.type);if(state.type!=='item'&&options.length>1)html+=`<label class="catalog-filter">${t(state.type==='character'?'browse.character-role':state.type==='mount'?'browse.mount-type':state.type==='class'?'browse.class-tier':state.type==='location'?'browse.location-region':state.type==='tip'?'browse.guide-topic':'app.filter-category')} <select id="catalog-group"><option value="">${t('common.all')}</option>${options.map(([id,n])=>`<option value="${esc(id)}" ${state.group===id?'selected':''}>${esc(t(...n))}</option>`).join('')}</select></label>`;
   const grouped=!state.query&&((state.type==='tip'&&!state.group)||(state.type==='location'&&!state.group)||(state.type==='character'&&scoutRoute(state)==='all'&&!state.faction&&!state.group)||(state.type==='item'&&!state.itemMinor&&!state.itemKind&&!state.itemFlavor)||(state.type==='class'&&!state.group));
@@ -152,7 +145,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   const routeGrouped=state.type==='character'&&scoutRoute(state)!=='all'&&list.length>0;
   if(state.type==='tip'&&!state.query&&!state.group)html+=guideGroups(list);
   else if(state.type==='location'&&!state.query&&!state.group)html+=locationGroups(list);
-  else if(state.type==='map'&&!state.query){/* The map and regional index are the complete overview. */}
+  else if(state.type==='map'&&!state.query){/* The interactive place map is the complete overview. */}
   else if(state.type==='mount'&&!state.query&&!state.group)html+=mountGroups(list);
   else if(routeGrouped)html+=scoutGroupedList(list,scoutRoute(state),{t,card});
   else if(grouped)html+=groupedBrowse(list,state,{t,lang,base,card,classCards:classComparison,entries});
