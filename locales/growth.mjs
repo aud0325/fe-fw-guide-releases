@@ -119,14 +119,13 @@ export default {
   "ko": "표를 좌우로 넘기세요. 이름 열은 고정됩니다.",
   "en": "Scroll the table sideways. Names stay fixed."
  },
- "growth.sourceCoverage": {
-  "ko": "해당 대상",
-  "en": "Entries covered"
- },
  "growth.methodTitle": {
   "ko": "히트맵 기준과 표 읽는 법",
   "en": "How to read the table and heatmap"
  },
+ "growth.referenceCharacter": {"ko":"개인 성장률 표","en":"Personal growth rates"},
+ "growth.referenceClass": {"ko":"병종 성장률 표","en":"Class growth rates"},
+ "growth.referenceMount": {"ko":"탈것 성장률 자료","en":"Mount growth rates"},
  "growth.sourcesTitle": {
   "ko": "출처",
   "en": "Sources"
@@ -167,10 +166,6 @@ export default {
   "ko": "개인 기본",
   "en": "Personal base"
  },
- "growth.alternative": {
-  "ko": "상충 보고 있음",
-  "en": "Conflicting reports"
- },
  "growth.tabLabel": {
   "ko": "성장률 종류",
   "en": "Growth context"
@@ -180,8 +175,8 @@ export default {
   "en": "Growth comparison table · Scroll sideways"
  },
  "growth.sourceNote": {
-  "ko": "성장률 원문과 해당 대상을 아래에 모았습니다. ≠는 상충 보고가 있는 대상입니다.",
-  "en": "Original growth references and the entries they cover are collected below. ≠ marks conflicting reports."
+  "ko": "성장률 자료의 원문 링크입니다.",
+  "en": "Original growth-rate references."
  },
  "growth.count": {
   "ko": "{count}개",

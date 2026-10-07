@@ -6,6 +6,219 @@ import {englishSourceTitles} from './english-source-titles.mjs';
 // Display-only translations and romanizations. These do not establish official names,
 // new relationships, or in-game verification. Original fields and aliases stay intact.
 export const englishTerms=Object.fromEntries(`
+액시온 골짜기|Exion Valley
+베라트리의 계곡|Beratri Valley
+베르나르 고개|Bernard Pass
+메라크 고개|Merak Pass
+엘 산지|El Mountains
+두베 고개|Dubhe Pass
+민타카의 바위 문|Mintaka Rock Gate
+백아의 석대|Pale Raven’s Stone
+오리온 골짜기|Orion Valley
+짐승 우는 골짜기|Howling Beast Valley
+흐르는 모랫길|Shifting Sand Road
+사막 입구|Desert Entrance
+타르보스 평원|Tarvos Plains
+타르보스 북도|North Tarvos Road
+타르보스 남도|South Tarvos Road
+모래 벌레 소굴|Sandworm Den
+시체의 대유사|Quicksand Graveyard
+미개척 오아시스|Unexplored Oasis
+호메로스 기암 지대|Homer Rock Formations
+자갈 산|Gravel Mountain
+린드레이크 바위 지대|Lindrake Rocks
+무즈라의 시체 동굴|Muzra’s Corpse Cave
+죽음의 계곡|Valley of Death
+아트라 산 정상|Mount Atra Summit
+게 철탑 묘석군|Iron Tower Graveyard
+바타하 암초|Bataha Reef
+별 산호 바다|Star Coral Sea
+해저 동굴|Undersea Cave
+아다 요새 옛터|Ada Fort Ruins
+니아사 촌락 옛터|Niasa Village Ruins
+이카로스의 탑|Tower of Icarus
+라 만차 요새 옛터|La Mancha Fort Ruins
+코엔의 묘|Coen’s Tomb
+무인 창고|Unmanned Storehouse
+세도 요새|Sedo Fort
+고르베아 관문 옛터|Gorbea Gate Ruins
+이스 촌락 옛터|Is Village Ruins
+메놀호|Lake Menol
+마들의 제단|Madel Altar
+야시로 요새|Yashiro Fort
+끝없는 바람의 해변|Endless Wind Beach
+용의 눈의 탑|Dragon’s Eye Tower
+동쪽 통로|Eastern Passage
+코러스 광산|Corus Mine
+남쪽 통로|Southern Passage
+작열하는 길의 동굴|Scorching Road Cave
+어두운 동굴|Dark Cave
+백혈 바위 굴|White-Hole Rock Cave
+아누섬|Anu Island
+네메아 대동굴|Nemea Cavern
+쿠거 대삼림 지대|Cougar Great Forest
+하인 요새|Hain Fort
+모래 그림자 요새|Sand Shadow Fort
+코로이오스 요새|Coroios Fort
+마수가 지나간 흔적|Beast Trail
+아디티의 동굴|Aditi Cave
+이아페토스 대동굴|Iapetos Cavern
+카이론역|Chiron Station
+아라고나역|Aragona Station
+카르토드역|Cartod Station
+후고 관문|Hugo Gate
+리베르타스 관문|Libertas Gate
+프리기아 관문|Phrygia Gate
+아그리스 관문|Agris Gate
+레이리아 관문|Leiria Gate
+그라니 관문|Grani Gate
+무스터 다리 관문|Muster Bridge Gate
+카발라 관문|Cavala Gate
+우르쿨 관문|Urkul Gate
+베냐라 관문|Benara Gate
+솔트 북부 관문|North Salt Gate
+솔트 남부 관문|South Salt Gate
+카이엔 관문|Cayenne Gate
+리스 북부 관문|North Lis Gate
+리스 남부 관문|South Lis Gate
+잔타 관문|Zanta Gate
+루 몬테 관문|Lu Monte Gate
+카르멘타 관문|Carmenta Gate
+파라스대교 관문|Paras Bridge Gate
+실바스의 작은 문|Small Sylvas Gate
+리자의 작은 문|Small Riza Gate
+페잔 관문|Phezan Gate
+아레우스 관문|Areus Gate
+베레타 산 관문|Beretta Mountain Gate
+루드리아 관문|Ludria Gate
+가르고 요새|Gargo Fort
+헤카톤케이르 요새|Hecatoncheir Fort
+왕도 그랑 아라곤|Gran Aragon
+영도 카시트|Kashit
+곤륜 마을|Gonryun Village
+메실리나 대농원|Messilina Estate
+오시리스 마을|Osiris Village
+데모닉 마을|Demonic Village
+트발린 마을|Tvalin Village
+자스타 촌락|Jasta Village
+바이너의 오아시스|Viner’s Oasis
+바스크 여관 거리|Basque Inn District
+지마 항구|Zima Port
+윌리 마을|Willy Village
+니자 항구|Niza Port
+봄바에 외딴 마을|Bomba’s Remote Village
+흑연의 계곡 다 미나|Da Mina, Graphite Valley
+왕도 브레스턴|Bresten
+마온 성곽|Maon Castle
+성채 도시 몽스|Mons, Fortress City
+칼라 신전 본전|Kala’s Temple
+크레르 신전 본전|Crere’s Temple
+스미르노스 신전 본전|Smirnos’s Temple
+마스 신전 본전|Mars’s Temple
+주라 신전 본전|Jura’s Temple
+여신의 문|Goddess’s Gate
+영령의 비|Heroes’ Memorial
+트로이아의 사당|Troia’s Shrine
+죽음의 자색 화원|Garden of Purple Death
+위령의 화원|Memorial Flower Garden
+가라만테스 소금 호수|Garamantes Salt Lake
+빛의 언덕|Hill of Light
+지평의 교차점|Horizon Crossroads
+아이소보스 평원|Aisobos Plains
+크노르 소동굴|Knor Grotto
+오시리스의 제단|Osiris Altar
+알마 대평원|Alma Plains
+바람 없는 사막|Windless Desert
+솔트호|Salt Lake
+나이미호|Lake Naimi
+발 데르호|Lake Val Der
+조토호|Lake Joto
+소시에만|Sosie Bay
+펠루사 앞바다|Pelusa Offshore Waters
+마의 해역|Perilous Waters
+고요의 바다|Quiet Sea
+어군 암초|Fish Shoal Reef
+엔데의 작은 소용돌이|Ende’s Small Whirlpool
+판자만|Panja Bay
+판자 해류|Panja Current
+디오네 해류|Dione Current
+니자의 문|Niza’s Gate
+길 잃은 거대 소용돌이|Wandering Great Whirlpool
+대상어 소굴|Great Shark Den
+아이프 해협|Aife Strait
+판도라의 어장|Pandor Fishing Grounds
+호루스 해협|Horus Strait
+암야 고개|Darknight Pass
+타시트 평원|Tacit Plains
+미소 바위|Smiling Rock
+그을린 초목의 사구|Charred Dunes
+조레 고개|Jore Pass
+다이모스 고원|Daimos Plateau
+오거스 산길|Ogers Mountain Road
+뒤쪽 산길|Back Mountain Road
+전사의 길|Warrior’s Road
+시뎀의 계곡|Sidem Valley
+거인의 언덕|Giant’s Hill
+위레 숲|Wire Forest
+쿠거의 지붕|Cougar’s Roof
+루미나리아 고개|Luminaria Pass
+눈속임 숲|Deceptive Forest
+이름 없는 묘비|Nameless Graves
+램버스주|Lambus
+브락시테아주|Braxithea
+바시테아주|Basithea
+솔리두스주|Solidus
+니시아데스주|Nysiades
+솔로몬의 땅|Land of Solomon
+루실해|Lucil Sea
+코샬루호|Kothar Lake
+코샬루 가아|Kothar Gar
+블랑 평원|Blang Plains
+올렌스 도시|Orles City
+볕받이 고개|Sunlit Pass
+갈라 멀린|Gala Marlin
+검은 잉어|Black Carp
+고급 고기 상자|Fine Meat Crate
+고급 야채 상자|Fine Vegetable Crate
+고기 상자|Meat Crate
+광석 상자|Ore Crate
+금매|Geummae
+금파초|Golden Basho
+네메아드|Nemead
+노어 열매|Noa Fruit
+다 미나의 무구 상자|Da Mina Weapon Crate
+다크 메탈|Dark Metal
+다크 피시|Dark Fish
+떠내려온 나무 상자|Driftwood Crate
+라자니바르타|Rajanivarta
+매직 어레이|Magic Array
+바스캐치|Bascatch
+반짝 별|Twinkling Star
+빈하사|Binhassa
+빨간 금매|Red Kimbai
+생선 상자|Fish Crate
+샤르미르|Sharmir
+샥투|Shaktu
+솔기|Solgi
+솔다넬라|Soldanella
+솔롬|Solom
+수수한 무구 상자|Simple Weapon Crate
+시나모스|Sinamos
+아가르타니움|Agarthanium
+아다만트|Adamant
+알마메트|Almamet
+알비네 청어|Albine Herring
+야채 상자|Vegetable Crate
+엔리예트|Enrietto
+여왕 잉어|Queen Carp
+연옥초|Purgatory Grass
+열소 광석|Thermal Ore
+용설란|Agave
+질 좋은 무구 상자|Fine Weapon Crate
+크레스토|Crestor
+파야|Paya
+피레스 국화|Pyrethrum
+하트 가다랑어|Heart Bonito
 구세주, 백아의 사자|Savior, Emissary of the Pale Raven
 남의 것을 가로채는 자, 뜻이 없는 자, 추악한 자|People who steal from others, people without ambition, ugly people
 파사선격|Evil-Breaking Flash

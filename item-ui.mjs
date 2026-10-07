@@ -4,7 +4,8 @@ import {escapeHtml as esc} from './core.mjs';
 import {flavors,foodKinds} from './food.mjs';
 export function itemIcon(entry,{t},className=''){
  const kind=classifyItem(entry),image=itemMedia[kind.icon];
- return `<img class="item-type-icon ${className}" src="${esc(image.src)}" alt="${esc(t(itemKinds[kind.kind].ko,itemKinds[kind.kind].en)+' '+t('item.type-icon'))}" width="36" height="36" loading="lazy" decoding="async">`;
+ const label=t(itemKinds[kind.kind].ko,itemKinds[kind.kind].en);
+ return `<img class="item-type-icon ${kind.cursed?'is-cursed ':''}${className}" src="${esc(image.src)}" alt="${esc(kind.cursed?t('item.cursed-type-icon',{kind:label}):label+' '+t('item.type-icon'))}" width="36" height="36" loading="lazy" decoding="async">`;
 }
 export function itemTypeLabel(entry,{t}){const c=classifyItem(entry);return [itemMajors[c.major],itemMinors[c.minor],itemKinds[c.kind]].map(v=>t(v.ko,v.en)).filter((v,i,a)=>!i||v!==a[i-1]).join(' · ');}
 export function itemScopeLabel(state,{t}){
@@ -25,4 +26,3 @@ export function itemFilters(list,state,{t}){
  const help=showFlavor?`<details class="item-filter-help"><summary>${t('item.flavor-help-title')}</summary><p class="result-label">${t('item.flavor-filter-help')}</p></details>`:'';
  return out+((state.itemMinor||state.itemKind||state.itemFlavor)?`<button type="button" class="item-filter-reset" data-item-reset>${t('item.reset-categories')}</button>`:'')+'</div>'+help+'</section>';
 }
-

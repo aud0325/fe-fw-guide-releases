@@ -690,6 +690,18 @@ main .information-hint:focus-visible{outline:2px solid var(--accent);outline-off
 /* Mount details keep food, riding bonuses and capture locations distinct. */
 .mount-bonuses{margin:20px 0 28px}
 .mount-bonuses>.result-label{margin-top:-6px}
+.character-stats.mount-stats .stats-wide th:first-child{width:220px;white-space:nowrap;overflow-wrap:normal}
+.mount-skills{margin:24px 0 28px}
+.mount-skills>.result-label{margin-top:-6px}
+.mount-skill-table table{width:100%;min-width:0;table-layout:fixed}
+.mount-skill-name{width:24%}
+.mount-skill-table th,.mount-skill-table td{white-space:normal;overflow-wrap:break-word;word-break:keep-all;vertical-align:top;padding:12px 14px;line-height:1.65;text-align:left}
+.mount-skill-table tbody th{color:var(--text)}
+.mount-skill-unknown{color:var(--muted);font-weight:400}
+@media(max-width:700px){
+ .mount-skill-name{width:26%}
+ .mount-skill-table th,.mount-skill-table td{padding:10px 7px;font-size:12px}
+}
 
 /* Training routes occupy the same width as the surrounding character sections. */
 .beginner-guide-brief{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 16px;margin:16px 0 20px;border-left:3px solid var(--accent);background:var(--panel);font-size:14px}
@@ -729,3 +741,7 @@ main .information-hint:focus-visible{outline:2px solid var(--accent);outline-off
  .guide-analysis{grid-template-columns:1fr;gap:16px}
  .detail .beginner-guide .guide-role{font-size:18px}
 }
+
+/* Curse styling also distinguishes gauntlets without a captured curse glyph. */
+.item-type-icon.is-cursed{outline:1px solid #80569a;outline-offset:1px}
+@media(max-width:700px){.weapon-stats-table th{width:96px;word-break:keep-all;overflow-wrap:normal}}

@@ -30,11 +30,11 @@ export function mountBonusDetails(e,{t,tx}){
  return `<section class="mount-bonuses"><h2>${t('mount.bonuses')}</h2>${details?.modifiers?`<p class="result-label">${details.modifiers.condition?esc(tx(details.modifiers.condition)):t('mount.maximum-bonuses')}</p>`:''}${details?.growth?.condition?`<p class="result-label">${esc(tx(details.growth.condition))}</p>`:''}${grid}${fallbackText&&!modifiers?`<p>${esc(fallbackText)}</p>`:''}${details?.growth?`<p><a class="entry-map-link" href="#category/growth/mount">${t('mount.compare')}</a></p>`:''}</section>`;
 }
 export function mountSkillDetails(e,{t,tx}){
- const text=value=>typeof value==='object'||t.locale==='en'?tx(value):value;
- const full=(e.facts||[]).filter(f=>/^namu-skill-/.test(f.key));
- const observed=e.facts?.find(f=>f.key==='mount-skills-ko');
- if(!full.length&&!observed)return '';
- const skills=full.length?full.map(f=>text(f.value)):[text(observed.value).replace(/\s*\+\s*사진은[\s\S]*$/,'').trim()];
- const help=full.length?t('mount.skill-levels'):t('mount.observed-skills');
- return `<section class="mount-skills"><h2>${t('mount.skills')} ${informationHint(help,t('mount.skills')+' · '+t('presentation.information'))}</h2><ul>${skills.map(value=>`<li${t.locale==='en'&&/[가-힣]/.test(value)?' lang="ko"':''}>${esc(value)}</li>`).join('')}</ul></section>`;
+ const skills=e.mountSkills||[];
+ const help=t('mount.skill-levels');
+ const unknown=`<span class="mount-skill-unknown">${t('mount.skill-unknown')}</span>`;
+ const effect=value=>value?esc(tx(value)):unknown;
+ const rows=skills.length?skills.map(skill=>`<tr><th scope="row">${esc(tx(skill.name))}</th><td>${effect(skill.effects[3])}</td><td>${effect(skill.effects[5])}</td></tr>`).join(''):`<tr><td colspan="3" class="mount-skill-unknown">${t('mount.skills-unrecorded')}</td></tr>`;
+ const scope=skills[0]?.appliesTo;
+ return `<section class="mount-skills"><h2>${t('mount.skills')} ${informationHint(help,t('mount.skills')+' · '+t('presentation.information'))}</h2>${scope?`<p class="result-label">${t('mount.skill-'+scope)}</p>`:''}<div class="table-wrap mount-skill-table"><table><caption class="sr-only">${t('mount.skills')}</caption><colgroup><col class="mount-skill-name"><col><col></colgroup><thead><tr><th scope="col">${t('mount.skill-name')}</th><th scope="col">${t('mount.skill-level-3')}</th><th scope="col">${t('mount.skill-level-5')}</th></tr></thead><tbody>${rows}</tbody></table></div></section>`;
 }

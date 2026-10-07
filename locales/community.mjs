@@ -24,14 +24,6 @@ export default {
   "ko": "출처 간 차이 비교",
   "en": "Compare conflicting sources"
  },
- "community.community-growth-rate-comparisons": {
-  "ko": "커뮤니티 성장률 비교 자료",
-  "en": "Community growth-rate comparisons"
- },
- "community.these-differ-from-the-primary-table-modifier-assumptions-may": {
-  "ko": "기본 표와 다른 보고입니다. 보정 포함 여부가 다를 수 있으며, 특히 무의 HP 50은 보정 후 수치와 같습니다.",
-  "en": "These differ from the primary table; modifier assumptions may differ. In particular, Mu’s HP 50 matches the modified rate."
- },
  "community.gift-category-reports": {
   "ko": "선물 추천 분류",
   "en": "Gift category reports"

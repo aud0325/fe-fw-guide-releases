@@ -1,15 +1,149 @@
 // Source-discovered images. See docs/IMAGES.md.
 export const media = {
+  "part1-map-icon-hub": {
+    "src": "./assets/part1-map/icons/hub.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-town": {
+    "src": "./assets/part1-map/icons/town.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-temple": {
+    "src": "./assets/part1-map/icons/temple.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-dungeon": {
+    "src": "./assets/part1-map/icons/dungeon.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-station": {
+    "src": "./assets/part1-map/icons/station.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gate": {
+    "src": "./assets/part1-map/icons/gate.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-banquet": {
+    "src": "./assets/part1-map/icons/banquet.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gathering": {
+    "src": "./assets/part1-map/icons/gathering.png",
+    "width": 192,
+    "height": 192,
+    "originalWidth": 34,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gathering-fish": {
+    "src": "./assets/part1-map/icons/gathering-fish.png",
+    "width": 30,
+    "height": 32,
+    "originalWidth": 32,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gathering-plant": {
+    "src": "./assets/part1-map/icons/gathering-plant.png",
+    "width": 30,
+    "height": 32,
+    "originalWidth": 32,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gathering-ore": {
+    "src": "./assets/part1-map/icons/gathering-ore.png",
+    "width": 30,
+    "height": 32,
+    "originalWidth": 32,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
+  },
+  "part1-map-icon-gathering-loot": {
+    "src": "./assets/part1-map/icons/gathering-loot.png",
+    "width": 30,
+    "height": 32,
+    "originalWidth": 32,
+    "originalHeight": 36,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-07",
+    "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
+  },
   "part1-map": {
     "src": "./assets/part1-map/overview.webp",
     "width": 500,
-    "height": 469,
-    "originalWidth": 810,
+    "height": 378,
+    "originalWidth": 1006,
     "originalHeight": 760,
+    "textureWidth": 1443,
+    "textureHeight": 1090,
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
-    "checkedAt": "2026-10-02",
-    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Source crops only; no independent reuse permission verified."
+    "checkedAt": "2026-10-07",
+    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Administrator-requested HUD/quest-pin cleanup and generated texture enhancement; original source and coordinates retained. No independent reuse permission verified."
   },
   "eshmel": {
     "src": "./assets/portraits/eshmel.png",

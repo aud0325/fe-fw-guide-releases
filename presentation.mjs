@@ -32,8 +32,8 @@ export function sourceHint({href,tooltip,label='',symbol='i',className='source-h
  const description=String(tooltip||'').trim();
  return `<a class="${esc(className)}" href="${esc(href)}" data-source-tip="${esc(description)}" aria-label="${esc(label?label+' · '+description:description)}"${external?' target="_blank" rel="noopener noreferrer"':''}>${esc(symbol)}</a>`;
 }
-export function informationHint(tooltip,label,symbol='i'){
- return `<button type="button" class="information-hint" data-source-tip="${esc(tooltip)}" aria-label="${esc(label)}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${esc(symbol)}</button>`;
+export function informationHint(tooltip,label,symbol='i',className=''){
+ return `<button type="button" class="information-hint${className?' '+esc(className):''}" data-source-tip="${esc(tooltip)}" aria-label="${esc(label)}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${esc(symbol)}</button>`;
 }
 export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  const records=new Map();
@@ -49,7 +49,7 @@ export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
   for(const g of e.externalGuides||[])if(!records.has(g.url))extra.set(g.url,{title:g.title,note:g.status==='unavailable'?t('presentation.unavailable'):g.status==='image-only'?t('presentation.image-based'):t('presentation.body-accessed')});
  }
  for(const m of images)if(m?.sourceUrl){
-  extra.set(m.sourceUrl,{title:t('presentation.image-credit')+' · '+m.credit,imageNote:m.sourceNote});
+  extra.set(m.sourceUrl,{title:t('presentation.image-credit')+' · '+tx(m.credit),imageNote:m.sourceNote});
   if(records.has(m.sourceUrl)&&m.sourceNote)records.get(m.sourceUrl).imageNote=m.sourceNote;
  }
  for(const [url,s]of extra)if(!records.has(url))records.set(url,{...s,url});

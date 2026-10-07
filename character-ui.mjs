@@ -20,13 +20,12 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
  const grid=rows=>{
   const headings=()=>statLabels.map(([,ko,en])=>`<th scope="col">${t(ko,en)}</th>`).join('');
   const label=r=>esc(r.label);
-  const values=r=>{const colorContext=r.alternative?characterGrowthContext(entries):context;return statLabels.map(([k])=>{const value=r.values[k],style=growthCellStyle(value,k,colorContext.stats,colorContext.state);return `<td class="growth-value" data-growth-stat="${k}"${style?` style="${style}"`:''}>${Number.isFinite(value)?esc(value)+'%':'—'}</td>`;}).join('');};
+  const values=r=>{const colorContext=context;return statLabels.map(([k])=>{const value=r.values[k],style=growthCellStyle(value,k,colorContext.stats,colorContext.state);return `<td class="growth-value" data-growth-stat="${k}"${style?` style="${style}"`:''}>${Number.isFinite(value)?esc(value)+'%':'—'}</td>`;}).join('');};
   return `<div class="character-stats character-growth"><div class="table-wrap stats-wide"><table><thead><tr><th scope="col">${t('character.context')}</th>${headings()}</tr></thead><tbody>${rows.map(r=>`<tr><th scope="row">${label(r)}</th>${values(r)}</tr>`).join('')}</tbody></table></div><div class="stats-narrow">${rows.map(r=>`<table><caption>${label(r)}</caption><thead><tr>${headings()}</tr></thead><tbody><tr>${values(r)}</tr></tbody></table>`).join('')}</div></div>`;
  };
  let out='';
  out+=`<div class="character-growth-heading"><h2>${t('character.personal-growth-rates')}</h2>${e.growthRates?summary(context):''}</div>`;
  if(e.growthRates){out+=`<div class="character-growth-options"><p class="result-label">${t('growth.unitCharacter')}</p>${e.modifiedGrowthRates?`<label title="${esc(tx(e.modifiedGrowthRates.condition))}"><input id="character-growth-skill" type="checkbox" data-character-growth-skill disabled${skillApplied?' checked':''}><span>${t(e.id==='mu'?'character.signs-of-growth-toggle':'growth.compactSkill')}</span></label>`:''}</div>`;const row=skillApplied?{...e.modifiedGrowthRates,label:t('growth.corrected')}:{...e.growthRates,label:t('character.personal-base')};out+=grid([row])+`<p class="character-growth-legend" title="${esc(t('character.growth-help'))}"><span>${t('growth.low')}</span><span class="legend-scale" aria-hidden="true"></span><span>${t('growth.high')}</span></p>`;
-  if(e.growthAlternative){out+=`<p class="notice">${t('character.sources-disagree-the-table-above-follows-serenes-forest-the')}</p>${grid([{...e.growthAlternative,alternative:true,label:t('character.conflicting-report')}])}`;}
  }else out+=`<p class="result-label">${t('character.personal-growth-rates-not-documented')}</p>`;
  const growth=out;out='';
  out+=`<h2>${t('character.preferred-gifts')}</h2>`;

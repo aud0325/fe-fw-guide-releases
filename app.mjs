@@ -112,11 +112,13 @@ function render(){
   const restored=$('content').querySelector('.growth-scroll');if(restored&&position&&!tabChanged){restored.scrollLeft=position.x;restored.scrollTop=position.y;}
   $('content').querySelector(focus)?.focus({preventScroll:true});
  }});
- mapControls=bindPart1Map($('content'),{state,view:history.state?.mapViewport,change:(next,{focus,caret,center}={})=>{
+ mapControls=bindPart1Map($('content'),{state,view:history.state?.mapViewport,t,change:(next,{focus,caret,center}={})=>{
   const mapViewport=mapControls?.snapshot();remember();Object.assign(state,next);
   history.pushState({scroll:scrollY,limit:visibleLimit,mapViewport},'',pagePath(state,lang,basePath)+stateQuery(state));
   render();if(center)mapControls?.center();
   const target=focus&&$('content').querySelector(focus);target?.focus({preventScroll:true});
+  mapControls?.closeSearch();
+  if(center)history.replaceState({...history.state,mapViewport:mapControls?.snapshot()},'',location.href);
   if(target?.id==='map-search'&&caret!=null)target.setSelectionRange(caret,caret);
   if(center&&innerWidth<900)target?.scrollIntoView({block:'nearest'});
  }});

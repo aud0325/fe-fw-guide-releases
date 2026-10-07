@@ -18,7 +18,7 @@ export function growthRows(entries){
  const ko=createTranslator('ko'),en=createTranslator('en');
  const rows=entries.filter(e=>e.type==='class'||e.type==='character'&&e.roles?.includes('playable')&&e.growthRates).map(e=>{
   const growth=e.type==='class'?e.classStats?.growth:e.growthRates,m=e.type==='character'?media[e.id]:entryIconMedia(e);
-  return {id:e.id,type:e.type,name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:e.type==='class'?{ko:e.category,en:e.category}:{ko:characterFaction(e,ko,entries),en:characterFaction(e,en,entries)},values:growth?.values||{},modified:e.modifiedGrowthRates?.values,sourceId:growth?.sourceId,status:growth?.status,image:m?.thumbnailSrc||m?.src||'',imageSource:m?.sourceUrl||'',imageCredit:m?.credit||'',hasDetail:true,alternative:!!(e.growthAlternative||e.communityGrowthReports?.length||e.classStatAlternatives?.some(r=>r.field==='growth'))};
+  return {id:e.id,type:e.type,name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:e.type==='class'?{ko:e.category,en:e.category}:{ko:characterFaction(e,ko,entries),en:characterFaction(e,en,entries)},values:growth?.values||{},modified:e.modifiedGrowthRates?.values,sourceId:growth?.sourceId,status:growth?.status,image:m?.thumbnailSrc||m?.src||'',imageSource:m?.sourceUrl||'',imageCredit:m?.credit||'',hasDetail:true};
  });
  for(const report of mountGrowthReports){
   const e=entries.find(e=>e.id===report.id);

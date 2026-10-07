@@ -21,6 +21,10 @@ export default {
  'item.food-uncertain':{ko:'작성자도 확실하지 않음',en:'Author uncertain'},
  'item.food-conflict':{ko:'출처별 보고가 다릅니다. 조건별 재료를 각각 확인할 수 있습니다.',en:'Sources disagree. You can browse ingredients for each reported preference.'},
  'item.flavor-empty':{ko:'이 조건으로 맛이 확인된 식재료가 없습니다. 해당 재료가 게임에 없다는 뜻은 아닙니다. 맛 필터를 해제하거나 미확인 재료를 확인하세요.',en:'No ingredients have a documented flavor matching these conditions. This does not mean none exist in the game. Clear the flavor filter or browse undocumented ingredients.'},
+ "item.cursed-type-icon": {
+  ko:"저주 {kind} 유형 아이콘",
+  en:"Cursed {kind} type icon"
+ },
  "item.type-icon": {
   "ko": "유형 아이콘",
   "en": "type icon"

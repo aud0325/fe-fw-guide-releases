@@ -95,9 +95,10 @@ export function acquisitionRecords(entry,entries){
  for(const row of entry.acquisition||[])records.push({...row,method:row.method||'acquisition'});
  for(const place of entries.filter(e=>e.type==='location'&&e.mapDetails)){
   for(const [key,method] of [['materials','gathering'],['loot',{ko:'출현물',en:'Loot'}]]){
-   if(place.mapDetails[key]?.some(row=>row.itemId===entry.id))records.push({locationId:place.id,method,part:1,sourceId:place.mapDetails.sourceId});
+   if(place.mapDetails[key]?.some(row=>row.itemId===entry.id))records.push({locationId:place.id,method,part:1,observedRoute:place.mapDetails.observedRoute,gameDate:place.mapDetails.gameDate,sourceId:place.mapDetails.sourceId});
   }
  }
+ for(const place of entries.filter(e=>e.type==='location'&&e.mapDetails))for(const report of place.mapDetails.previousReports||[])if(report.rows.some(r=>r.itemId===entry.id))records.push({locationId:place.id,method:'gathering',part:1,observedRoute:report.observedRoute,gameDate:report.gameDate,sourceId:place.mapDetails.sourceId});
  const trade=tradeReports[entry.id],tradeFact=trade&&(entry.facts||[]).find(f=>f.key===trade.key);
  if(tradeFact)for(const [locationId,method,condition] of trade.rows)records.push({locationId,method,condition,sourceId:tradeFact.sourceId,factKey:tradeFact.key});
  const links=[...(entry.links||[]).filter(l=>acquisitionLabel(l.label)&&entries.some(e=>e.id===l.to&&e.type==='location')),

@@ -104,14 +104,6 @@ export default {
   "ko": "개인 기본",
   "en": "Personal base"
  },
- "character.sources-disagree-the-table-above-follows-serenes-forest-the": {
-  "ko": "출처 간 수치가 다릅니다. 위 표는 Serenes Forest를 기준으로 하며, 아래 비교 수치는 Game8 추출본입니다.",
-  "en": "Sources disagree. The table above follows Serenes Forest; the alternative below is from the Game8 export."
- },
- "character.conflicting-report": {
-  "ko": "상충 자료",
-  "en": "Conflicting report"
- },
  "character.personal-growth-rates-not-documented": {
   "ko": "개인 성장률 확인 대기",
   "en": "Personal growth rates not documented"

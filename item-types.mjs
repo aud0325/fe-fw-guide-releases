@@ -9,7 +9,10 @@ export function classifyItem(entry){
  if(kind==='plant'&&/\bmeat\b/i.test(entry.name?.en||''))kind='meat';
  if(kind==='consumable'&&/\bmanual\b/i.test(entry.name?.en||''))kind='manual';
  const minor=itemKinds[kind].minor,major=itemMinors[minor].major;
- return {major,minor,kind,icon:itemKinds[kind].icon};
+ const positive=value=>Number(value)>0;
+ const cursed=minor==='weapons'&&((entry.facts||[]).some(f=>f.key==='curse'&&positive(f.value))||(entry.equipmentObservations||[]).some(o=>positive(o.stats?.curse)));
+ const icon=cursed&&['sword','spear','axe','bow'].includes(kind)?'cursed-'+kind:itemKinds[kind].icon;
+ return {major,minor,kind,icon,cursed};
 }
 export function normalizeItemFilters({itemMajor='',itemMinor='',itemKind='',group=''}={}){
  if(!itemMajors[itemMajor])itemMajor='';

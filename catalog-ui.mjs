@@ -1,6 +1,7 @@
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {itemUsageDetails} from './item-usage.mjs';
+import {classifyItem} from './item-types.mjs';
 import {isPublicSource} from './source-visibility.mjs';
 import {consolidateFacts,isDiscoverable} from './editorial-view.mjs';
 import {createTranslator} from './locales/index.mjs';
@@ -50,7 +51,7 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
    const linked=e.type==='character'?esc(value):renderEntityText(t(f.valueKo||f.value,f.value),e,{entries,lang:t.locale,href,format:x=>text(x,f.literal,f.key)});
    return `<tr><th${head?'':' scope="row"'}>${esc(tx(f.label).replace(/\s*\((?:Game8|나무위키|namu\.wiki)\)/g,''))}</th><td>${untranslated?`<span lang="ko">${linked}</span> <small class="original-language">${t('editorial.korean-source-text')}</small>`:linked}${hint}</td></tr>`;
   }).join('');
-  return `<div class="table-wrap facts-table"><table>${head?`<thead><tr><th>${t('catalog.field')}</th><th>${t('catalog.value')}</th></tr></thead>`:''}<tbody>${rows}${extraRows}</tbody></table></div>`;
+  return `<div class="table-wrap facts-table${e.type==='item'&&classifyItem(e).minor==='weapons'?' weapon-stats-table':''}"><table>${head?`<thead><tr><th>${t('catalog.field')}</th><th>${t('catalog.value')}</th></tr></thead>`:''}<tbody>${rows}${extraRows}</tbody></table></div>`;
  };
  let out=paralogueDetails(e,{t,tx,name,href,route});
  if(e.roles?.length)out+=`<p class="role-tags">${e.roles.map(r=>esc(t(...roleNames[r]))).join(' · ')}</p>`;
@@ -62,6 +63,11 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   if(category)facts.unshift({key:'mount-category',label:{ko:'분류',en:'Category'},value:category,literal:true});
  }
  const basic=facts.filter(f=>!['joins','first-appearance'].includes(f.key)),story=facts.filter(f=>['joins','first-appearance'].includes(f.key));
+ if(e.type==='item'&&classifyItem(e).minor==='weapons'){
+  const order=['category','rank','might','hit','crit','weight','avoid','range','uses','curse','effect'];
+  const position=f=>order.includes(f.key)?order.indexOf(f.key):order.length;
+  basic.sort((a,b)=>position(a)-position(b));
+ }
  const foodRow=mountFoodRow(e,{t,sources,tx})+ingredientFoodRow(e,{t});
  const basicHtml=(basic.length||foodRow)?`<h2>${t('catalog.reference-facts')}</h2>${table(basic,foodRow,false)}`:'';
  if(e.type==='character'){
