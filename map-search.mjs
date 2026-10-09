@@ -1,23 +1,26 @@
-import {mapNodes,mapProvinces,mapCollectibles} from './part1-map.mjs';
+import {mapProvinces,variantCollectibles,mapMarkerKind} from './part1-map.mjs';
 import {normalize,escapeHtml as esc} from './core.mjs';
 import {englishText} from './locales/english-text.mjs';
 import {localized} from './locales/index.mjs';
+import {mapVariantNodes,caiChangedPlace} from './map-variants.mjs';
+import {placeAliases} from './place-correspondences.mjs';
 
-export function mapSearchSuggestions(query,t,limit=8){
+export function mapSearchSuggestions(query,t,limit=8,variant='all'){
  const tokens=query.trim().split(/\s+/).map(normalize).filter(Boolean),whole=normalize(query);
  if(!tokens.length)return [];
  const score=names=>{
   const values=names.filter(Boolean).map(normalize),text=values.join(' ');
   return tokens.every(token=>text.includes(token))?values.includes(whole)?3:values.some(value=>value.startsWith(whole))?2:1:0;
  };
- const provinces=mapProvinces.filter(p=>mapNodes.some(n=>n.province===p.id)).map(p=>({
+ const nodes=mapVariantNodes(variant),collectibleRows=variantCollectibles(variant);
+ const provinces=mapProvinces.filter(p=>nodes.some(n=>n.province===p.id)).map(p=>({
   type:'province',id:p.id,label:t(p.ko,p.en||p.ko),meta:t('map.province'),score:score([p.ko,p.en,localized({ko:p.ko,en:p.en||p.ko},'en'),englishText(p.en||p.ko)])
  }));
- const places=mapNodes.filter(n=>n.ko!=='???').map(n=>{
+ const places=nodes.filter(n=>n.ko!=='???').map(n=>{
   const p=mapProvinces.find(p=>p.id===n.province);
-  return {type:'place',id:n.id,label:t(n.ko,n.en||n.ko),meta:[p?t(p.ko,p.en||p.ko):t('map.unknown-province'),t('map.'+n.kind),n.gatheringType?t('map.gathering-'+n.gatheringType):''].filter(Boolean).join(' · '),score:score([n.ko,n.en,localized({ko:n.ko,en:n.en||n.ko},'en'),englishText(n.en||n.ko),...n.aliases])};
+  return {type:'place',id:n.id,label:t(n.ko,n.en||n.ko),meta:[p?t(p.ko,p.en||p.ko):t('map.unknown-province'),t('map.'+(variant==='cai'&&caiChangedPlace(n.id)?mapMarkerKind(n,variant):n.kind)),n.gatheringType&&!(variant==='cai'&&caiChangedPlace(n.id))?t('map.gathering-'+n.gatheringType):''].filter(Boolean).join(' · '),score:score([n.ko,n.en,localized({ko:n.ko,en:n.en||n.ko},'en'),englishText(n.en||n.ko),...n.aliases,...placeAliases(n.entryId)])};
  });
- const collectibles=mapCollectibles.map(c=>({type:'collectible',id:c.id,label:t(c.ko,c.en||c.ko),meta:t('map.collectible-places',{count:c.placeIds.length}),score:score([c.ko,c.en,...c.aliases,localized({ko:c.ko,en:c.en||c.ko},'en'),englishText(c.en||c.ko)])}));
+ const collectibles=collectibleRows.map(c=>({type:'collectible',id:c.id,label:t(c.ko,c.en||c.ko),meta:t('map.collectible-places',{count:c.placeIds.length}),score:score([c.ko,c.en,...c.aliases,localized({ko:c.ko,en:c.en||c.ko},'en'),englishText(c.en||c.ko)])}));
  return [...provinces,...places,...collectibles].filter(row=>row.score).sort((a,b)=>b.score-a.score).slice(0,limit);
 }
 
@@ -27,7 +30,7 @@ export function mapSearchSelection(row){
 
 // Suggestions are local previews. Only explicit selection/submission changes
 // the route and map, keeping IME input and the map camera stable while typing.
-export function bindMapSearch({input,panel,form,t,change}){
+export function bindMapSearch({input,panel,form,t,change,variant='all'}){
  const doc=input.ownerDocument,listeners=[];
  let composing=false,pointerSelection=false,active=-1,rows=[],timer;
  const on=(target,event,fn)=>{target.addEventListener(event,fn);listeners.push(()=>target.removeEventListener(event,fn));};
@@ -35,7 +38,7 @@ export function bindMapSearch({input,panel,form,t,change}){
  const close=()=>{cancel();active=-1;panel.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');};
  const refresh=()=>{
   cancel();if(pointerSelection)return;
-  rows=mapSearchSuggestions(input.value,t);active=-1;
+  rows=mapSearchSuggestions(input.value,t,8,variant);active=-1;
   input.removeAttribute('aria-activedescendant');
   if(!input.value.trim()){close();return;}
   panel.innerHTML=`<ul role="listbox" id="map-search-options" aria-label="${esc(t('map.suggestions'))}">${rows.map((row,i)=>`<li role="option" id="map-search-option-${i}" aria-selected="false"><button type="button" tabindex="-1" data-map-suggestion="${i}"><strong${t.locale==='en'&&/[가-힣]/.test(row.label)?' lang="ko"':''}>${esc(row.label)}</strong><small>${esc(row.meta)}</small></button></li>`).join('')}</ul><p${rows.length?' class="sr-only"':' class="map-search-empty"'} role="status">${esc(rows.length?t('map.suggestion-count',{count:rows.length}):t('map.suggestion-empty'))}</p>`;

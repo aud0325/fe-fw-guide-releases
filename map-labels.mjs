@@ -7,11 +7,11 @@ export function mapLabelIds(points,zoom,{enabled=true}={}){
  return points.filter(p=>level&&!p.hidden&&p.named&&(level===2||p.kind==='hub'||p.kind==='town')).map(p=>p.id);
 }
 
-export function bindMapLabels(host,{camera,showNames=true}){
+export function bindMapLabels(host,{camera,showNames=null,compact=false}){
  const control=host.querySelector('[data-map-toggle-names]');
  const points=[...host.querySelectorAll('.part1-point')].map(el=>({el,id:el.dataset.mapPlace,kind:el.dataset.mapKind,named:!el.classList.contains('unidentified')}));
- let disposed=false,previous=new Set(),lastLevel;
- control.checked=showNames;control.disabled=false;
+ let disposed=false,previous=new Set(),lastLevel,preference=showNames;
+ control.checked=preference??!compact;control.disabled=false;
  function update(zoom=camera().zoom){
   if(disposed)return;
   lastLevel=nameLevel(zoom);
@@ -19,13 +19,18 @@ export function bindMapLabels(host,{camera,showNames=true}){
   for(const point of points)if(previous.has(point.id)!==shown.has(point.id))point.el.classList.toggle('has-auto-name',shown.has(point.id));
   previous=shown;
  }
- const change=event=>{if(event.target.matches('[data-map-toggle-names],[data-map-toggle-kind]'))update();};
+ const change=event=>{
+  if(event.target.matches('[data-map-toggle-names]'))preference=control.checked;
+  if(event.target.matches('[data-map-toggle-names],[data-map-toggle-kind]'))update();
+ };
  host.addEventListener('change',change);
  update();
  return {
   schedule(view){if(nameLevel(view.zoom)!==lastLevel)update(view.zoom);},
   refresh:update,
-  snapshot:()=>control.checked,
+  // Remember explicit choices, while automatic defaults follow screen size.
+  responsive(value){if(compact===value)return;compact=value;if(preference===null){control.checked=!compact;update();}},
+  snapshot:()=>preference,
   destroy(){disposed=true;host.removeEventListener('change',change);}
  };
 }

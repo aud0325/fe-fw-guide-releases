@@ -1,5 +1,104 @@
 // Source-discovered images. See docs/IMAGES.md.
 export const media = {
+  "part1-map-icon-clearing": {
+    "src": "./assets/part1-map/icons/clearing.png",
+    "width": 30,
+    "height": 32,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
+  },
+  "part1-map-icon-animal-horse": {
+    "src": "./assets/part1-map/icons/animal-horse.png",
+    "width": 30,
+    "height": 32,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
+  },
+  "part1-map-icon-animal-ornius": {
+    "src": "./assets/part1-map/icons/animal-ornius.png",
+    "width": 30,
+    "height": 32,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
+  },
+  "part1-map-icon-animal-pegasus": {
+    "src": "./assets/part1-map/icons/animal-pegasus.png",
+    "width": 30,
+    "height": 32,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
+  },
+  "part1-map-icon-animal-bau": {
+    "src": "./assets/part1-map/icons/animal-bau.png",
+    "width": 26,
+    "height": 29,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
+  },
+  "part1-map-cai-0-0": {
+    "src": "./assets/part1-map/cai/tile-0-0.webp",
+    "width": 401,
+    "height": 401,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
+  "part1-map-cai-400-0": {
+    "src": "./assets/part1-map/cai/tile-400-0.webp",
+    "width": 402,
+    "height": 401,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
+  "part1-map-cai-800-0": {
+    "src": "./assets/part1-map/cai/tile-800-0.webp",
+    "width": 207,
+    "height": 401,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
+  "part1-map-cai-0-400": {
+    "src": "./assets/part1-map/cai/tile-0-400.webp",
+    "width": 401,
+    "height": 361,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
+  "part1-map-cai-400-400": {
+    "src": "./assets/part1-map/cai/tile-400-400.webp",
+    "width": 402,
+    "height": 361,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
+  "part1-map-cai-800-400": {
+    "src": "./assets/part1-map/cai/tile-800-400.webp",
+    "width": 207,
+    "height": 361,
+    "sourceUrl": "./evidence/part1-map.html",
+    "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-10-09",
+    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+  },
   "part1-map-icon-hub": {
     "src": "./assets/part1-map/icons/hub.png",
     "width": 192,
@@ -138,12 +237,10 @@ export const media = {
     "height": 378,
     "originalWidth": 1006,
     "originalHeight": 760,
-    "textureWidth": 1443,
-    "textureHeight": 1090,
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
-    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Administrator-requested HUD/quest-pin cleanup and generated texture enhancement; original source and coordinates retained. No independent reuse permission verified."
+    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Original capture colors and coordinates retained; bounded HUD/quest-pin cleanup only. No independent reuse permission verified."
   },
   "eshmel": {
     "src": "./assets/portraits/eshmel.png",

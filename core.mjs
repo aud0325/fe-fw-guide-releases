@@ -6,7 +6,7 @@ import {flavors} from './food.mjs';
 // Expand only public prose; folded story fields and spoiler reports stay out.
 const prose=value=>typeof value==='string'?[value]:[value?.ko||'',value?.en||''];
 export function isSpoilerEntry(e){return e.spoiler===true||/스포일러|spoiler/i.test([e.name?.ko,e.name?.en].join(' '));}
-export function publicSearchProse(e){return isSpoilerEntry(e)?[]:[...prose(e.body),...prose(e.note),...(e.checklist||[]).flatMap(r=>prose(r.label)),...(e.communityNotes||[]).filter(n=>!n.spoiler).flatMap(n=>prose(n.text)),...(e.guideSections||[]).filter(s=>!s.spoiler).flatMap(s=>[s.title,...(s.paragraphs||[]),...(s.steps||[]),...(s.bullets||[]),...(s.table?.headers||[]),...(s.table?.rows||[]).flat()].flatMap(prose))];}
+export function publicSearchProse(e){return isSpoilerEntry(e)?[]:[...prose(e.body),...prose(e.note),...prose(e.materialDescription),...(e.checklist||[]).flatMap(r=>prose(r.label)),...(e.communityNotes||[]).filter(n=>!n.spoiler).flatMap(n=>prose(n.text)),...(e.guideSections||[]).filter(s=>!s.spoiler).flatMap(s=>[s.title,...(s.paragraphs||[]),...(s.steps||[]),...(s.bullets||[]),...(s.table?.headers||[]),...(s.table?.rows||[]).flat()].flatMap(prose))];}
 export function normalize(value){return String(value).normalize('NFKC').toLocaleLowerCase().replace(/[\s’'“”"·:.,!?()\-_/]/g,'');}
 export const matchesLocationGroup=(e,group)=>e.mapProvince?.ko===group||(!e.mapProvince&&(e.region||'Unverified')===group)||(group!=='Unverified'&&e.region===group);
 export function searchEntries(entries,{query='',type='all',route='all',includeTips=true,group='',faction='',itemMajor='',itemMinor='',itemKind='',itemFlavor=''}={}){

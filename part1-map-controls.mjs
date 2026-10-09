@@ -1,4 +1,5 @@
 import {mapNodes,filterMapNodes,mapMeta,mapMarkerKind} from './part1-map.mjs';
+import {switchMapVariant} from './map-variants.mjs';
 import {bindMapGestures,clampMapZoom} from './map-gestures.mjs';
 import {createMapCamera,mapFrameRenderer} from './map-camera.mjs';
 import {bindMapLegend} from './map-visibility.mjs';
@@ -64,16 +65,16 @@ export function bindPart1Map(root,{state,view,t,change}){
   labels?.schedule(camera.snapshot());
  }
  const frames=mapFrameRenderer(render,win);
- const snapshot=()=>{const {zoom,x,y}=camera.snapshot();return {zoom,x,y,legendOpen:legend?.open,gatheringOpen:gatheringLegend?.open,hiddenKinds:visibility.snapshot(),showNames:labels.snapshot()};};
+ const snapshot=()=>{const {zoom,x,y}=camera.snapshot();return {zoom,x,y,legendOpen:legend?.open,gatheringOpen:gatheringLegend?.open,hiddenKinds:visibility.snapshot(),namesPreference:labels.snapshot()};};
  function center(){
   const point=mapNodes.find(n=>n.id===host.dataset.place);
   if(point){
-   visibility.show(mapMarkerKind(point));
+   visibility.show(mapMarkerKind(point,state.mapVariant));
    if(camera.snapshot().zoom<1.5)camera.zoomAt(1.5,{x:0,y:0});
    camera.center(point.u,point.v);
   }else{
    const points=filterMapNodes(state);
-   if(state.mapQuery)for(const kind of new Set(points.map(mapMarkerKind)))visibility.show(kind);
+   if(state.mapQuery)for(const kind of new Set(points.map(n=>mapMarkerKind(n,state.mapVariant))))visibility.show(kind);
    camera.fitPoints(points);
   }
   labels?.refresh();
@@ -84,9 +85,9 @@ export function bindPart1Map(root,{state,view,t,change}){
   camera.zoomAt(value,{x:anchor.x-left,y:anchor.y-top},{x:from.x-left,y:from.y-top});frames.request();
  }
  if(!view&&host.dataset.place){camera.zoomAt(1.5,{x:0,y:0});center();}
- labels=bindMapLabels(host,{camera:camera.snapshot,showNames:view?.showNames??true});
+ labels=bindMapLabels(host,{camera:camera.snapshot,showNames:view?.namesPreference??(view?.showNames===false?false:null),compact:win.matchMedia('(max-width:600px)').matches});
  render();
- const observer=new ResizeObserver(()=>{camera.resize(viewport.clientWidth,viewport.clientHeight);win.clearTimeout(zoomTimer);commitWidth=true;frames.request();});
+ const observer=new ResizeObserver(()=>{camera.resize(viewport.clientWidth,viewport.clientHeight);labels.responsive(win.matchMedia('(max-width:600px)').matches);win.clearTimeout(zoomTimer);commitWidth=true;frames.request();});
  observer.observe(viewport);
  const gestures=bindMapGestures(viewport,{getZoom:()=>camera.snapshot().zoom,zoomAt,panBy:(x,y)=>{camera.panBy(x,y);frames.request();}});
  host.querySelectorAll('[data-part1-zoom]').forEach(button=>button.addEventListener('click',()=>{
@@ -111,10 +112,12 @@ export function bindPart1Map(root,{state,view,t,change}){
  };
  viewport.addEventListener('keydown',moveKey);
  host.addEventListener('click',event=>{
+  const variant=event.target.closest('[data-map-variant]');
+  if(variant&&event.button===0&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey){event.preventDefault();change(switchMapVariant(state,variant.dataset.mapVariant),{focus:'[data-map-variant="'+variant.dataset.mapVariant+'"]',center:true});return;}
   const place=mapClickPlace(event,host);
   if(!place||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();change({mapPlace:place.dataset.mapPlace},{focus:'#map-selection',center:true});
  });
- const search=bindMapSearch({input:host.querySelector('#map-search'),panel:host.querySelector('#map-search-panel'),form:host.querySelector('form'),t,change});
+ const search=bindMapSearch({input:host.querySelector('#map-search'),panel:host.querySelector('#map-search-panel'),form:host.querySelector('form'),t,change,variant:state.mapVariant});
  return {snapshot,center,closeSearch:search.close,destroy(){labels.destroy();search.destroy();win.clearTimeout(zoomTimer);observer.disconnect();visibility.destroy();gestures.destroy();frames.destroy();viewport.removeEventListener('focusin',focusPoint);viewport.removeEventListener('keydown',moveKey);}};
 }

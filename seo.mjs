@@ -35,7 +35,7 @@ export function entryMetadata(e,{t,tx,name,entries,sources}){
  for(const f of localizedFacts(e.facts||[],t).filter(f=>(keys[e.type]||[]).includes(f.key))){
   const value=displayText(en?f.value:f.valueKo||f.value,t,entries,f.literal,f.key);
   // Never cut off a field's qualifier, route or conflicting report to fit a snippet.
-  if(!value||value.length>100)continue;
+  if(!value||value.length>100||(en&&/[가-힣ぁ-ゖァ-ヺ一-龯]/u.test(value)))continue;
   const uncertain=sources[f.sourceId]?.kind==='unverified';
   details.push(`${uncertain?pick('미검증 보고 · ','Unverified report · '):''}${tx(f.label)}: ${value}`);
  }

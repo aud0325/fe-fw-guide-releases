@@ -9099,7 +9099,7 @@ export const mapNodes=[
     },
     {
      "ko": "오드 몽주",
-     "itemId": "video-odd-monju"
+     "itemId": "oda-monja"
     }
    ],
    "observedRoute": "theodora",
@@ -9286,7 +9286,7 @@ export const mapNodes=[
     },
     {
      "ko": "금파초",
-     "itemId": "observed-golden-basho"
+     "itemId": "jin-ba-jiao"
     }
    ],
    "observedRoute": "theodora",
@@ -9354,7 +9354,7 @@ export const mapNodes=[
     },
     {
      "ko": "오드 몽주",
-     "itemId": "video-odd-monju"
+     "itemId": "oda-monja"
     }
    ],
    "observedRoute": "theodora",
@@ -9870,7 +9870,7 @@ export const mapNodes=[
     },
     {
      "ko": "금파초",
-     "itemId": "observed-golden-basho"
+     "itemId": "jin-ba-jiao"
     }
    ]
   }
@@ -10431,7 +10431,8 @@ export const mapCollectibles=[
   "en": "다카 몽주",
   "aliases": [
    "ダッカモンジュ",
-   "다카 몽주"
+   "다카 몽주",
+   "다카 몽쥬"
   ],
   "placeIds": [
    "map-orion-valley"
@@ -10472,7 +10473,7 @@ export const mapCollectibles=[
  },
  {
   "id": "pyrethrum",
-  "ko": "피레스 국화",
+  "ko": "피레스국화",
   "en": "Pyrethrum",
   "aliases": [
    "Pyrethrum",
@@ -11685,12 +11686,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "video-odd-monju",
+  "id": "oda-monja",
   "ko": "오드 몽주",
-  "en": "오드 몽주",
+  "en": "Oda Monja",
   "aliases": [
+   "Oda Monja",
+   "오다 몬자",
+   "오드 몽주",
    "オドモンジュ",
-   "오드 몽주"
+   "오다 몬자(Oda Monja)",
+   "오드 몽쥬"
   ],
   "placeIds": [
    "moonwatch-pass",
@@ -11716,11 +11721,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-golden-basho",
+  "id": "jin-ba-jiao",
   "ko": "금파초",
-  "en": "Golden Basho",
+  "en": "Jin Ba Jiao",
   "aliases": [
-   "금파초"
+   "Jin Ba Jiao",
+   "진바자오",
+   "キンバショウ",
+   "금파초",
+   "Golden Basho",
+   "진바자오(Jin Ba Jiao)"
   ],
   "placeIds": [
    "fauns-forest",
@@ -11744,7 +11754,7 @@ export const mapCollectibles=[
  },
  {
   "id": "observed-twinkling-star",
-  "ko": "반짝 별",
+  "ko": "반짝별",
   "en": "Twinkling Star",
   "aliases": [
    "반짝 별"
@@ -11854,3 +11864,332 @@ export const mapCollectibles=[
   ]
  }
 ];
+export const caiMap={
+ "checked": "2026-10-09",
+ "gameDate": "1449-11-26",
+ "placeIds": [
+  "collection-sunrise-pass",
+  "collection-dawn-plain",
+  "collection-farewell-rock",
+  "collection-bond-rock",
+  "collection-reunion-rock",
+  "collection-sunlight-garden",
+  "collection-sunset-path",
+  "collection-aegina-mountain",
+  "collection-dragon-cape",
+  "collection-bulang-plain",
+  "collection-black-wing-valley",
+  "collection-dragden-pass",
+  "collection-giant-bird-neck",
+  "video-damasen-cape",
+  "collection-pegasus-rock",
+  "collection-utsuna-pass",
+  "video-paro-forest",
+  "collection-sonai-pass",
+  "collection-whispering-rock",
+  "collection-zetos-falls",
+  "collection-brigadier-pass",
+  "fallen-generals-barrows",
+  "collection-silent-tomb",
+  "collection-sparstone-cave",
+  "collection-insect-hole",
+  "collection-lakeside-ruin",
+  "granada-fort-ruins",
+  "collection-silent-city",
+  "collection-megrez-village-ruins",
+  "collection-ryozan-fort",
+  "collection-sodan-gate",
+  "video-tartarus",
+  "collection-bio-altar",
+  "collection-megaira-lighthouse",
+  "collection-kruderinde-ruins",
+  "zanzibar-fort",
+  "collection-mordo-fort-ruins",
+  "collection-sunset-fort",
+  "collection-sorel-temple",
+  "collection-stranded-ship",
+  "collection-clove-pit-city",
+  "lost-forest",
+  "niglia-mine",
+  "galen-fort-ruins",
+  "heretics-cave",
+  "waterfall-cave",
+  "noah-cave",
+  "valhalla-mine",
+  "rubess-forest",
+  "forbidden-forest",
+  "ruined-fort",
+  "votive-altar",
+  "dione-fort",
+  "map-beast-trail",
+  "giants-footprint-fort",
+  "east-amalthea-station",
+  "west-amalthea-station",
+  "carmenta-station",
+  "ohad-station",
+  "peronia-station",
+  "salacia-station",
+  "callisto-station",
+  "urca-station",
+  "map-hugo-gate",
+  "map-libertas-gate",
+  "map-phrygia-gate",
+  "map-agris-gate",
+  "map-grani-gate",
+  "cryphus-gate",
+  "map-cavala-gate",
+  "map-zanta-gate",
+  "map-carmenta-gate",
+  "map-beretta-mountain-gate",
+  "map-gargo-fort",
+  "map-hecatoncheir-fort",
+  "fortunas-temple",
+  "dagsion",
+  "amuru",
+  "hibeira-village",
+  "pina-village",
+  "megaira",
+  "map-messilina-estate",
+  "aguino",
+  "callianeira-port",
+  "port-of-pandor",
+  "raivo-port",
+  "yaaman",
+  "orles-city",
+  "kira-village",
+  "benetnasi-village",
+  "map-bomba-s-remote-village",
+  "alecto-city",
+  "regia",
+  "auroras-temple",
+  "unidentified-idyia-temple",
+  "map-goddess-s-gate",
+  "map-heroes-memorial",
+  "map-troia-s-shrine",
+  "map-garden-of-purple-death",
+  "map-memorial-flower-garden",
+  "map-horizon-crossroads",
+  "map-aisobos-plains",
+  "map-alma-plains",
+  "collection-arsineus-bridge",
+  "collection-enkeladus-bridge",
+  "collection-cosalu-lake",
+  "collection-santana-bridge",
+  "video-ladon-lake",
+  "lake-brontes",
+  "collection-pelusa-cape",
+  "collection-pina-reef",
+  "collection-mist-plain",
+  "valeri-gorge",
+  "napier-woods",
+  "collection-elisa-pass",
+  "collection-breeze-hill",
+  "video-starwatch-mount-pass",
+  "collection-gora-grassland",
+  "collection-duel-clearing",
+  "collection-bodan-pass",
+  "collection-clitios-plain",
+  "collection-peony-crossroads",
+  "collection-dada-plain",
+  "oleance-plains",
+  "collection-stargazing-pass",
+  "collection-mulciber-wetland",
+  "moonwatch-pass",
+  "collection-uranos-mountain",
+  "collection-toritopatel-corridor",
+  "starbirth-garden",
+  "collection-driftwood-path",
+  "fauns-forest",
+  "collection-exion-valley",
+  "collection-howling-tree-forest",
+  "collection-headhunting-rock",
+  "map-luminaria-pass",
+  "map-deceptive-forest",
+  "collection-magnas-plateau"
+ ],
+ "markerKinds": {
+  "granada-fort-ruins": "clearing",
+  "video-paro-forest": "animal-ornius",
+  "video-starwatch-mount-pass": "animal-horse",
+  "collection-farewell-rock": "clearing",
+  "collection-bond-rock": "clearing",
+  "collection-reunion-rock": "clearing",
+  "collection-sunset-path": "animal-horse",
+  "collection-dragon-cape": "animal-bau",
+  "collection-bulang-plain": "clearing",
+  "collection-black-wing-valley": "animal-pegasus",
+  "collection-giant-bird-neck": "animal-pegasus",
+  "collection-pegasus-rock": "animal-pegasus",
+  "collection-sonai-pass": "clearing",
+  "collection-ryozan-fort": "clearing",
+  "collection-sodan-gate": "clearing",
+  "zanzibar-fort": "clearing",
+  "collection-mordo-fort-ruins": "clearing",
+  "collection-mist-plain": "clearing",
+  "collection-elisa-pass": "animal-ornius",
+  "collection-breeze-hill": "clearing",
+  "collection-peony-crossroads": "animal-ornius",
+  "collection-mulciber-wetland": "clearing",
+  "collection-uranos-mountain": "animal-ornius",
+  "collection-toritopatel-corridor": "clearing",
+  "collection-exion-valley": "animal-ornius",
+  "collection-headhunting-rock": "animal-ornius",
+  "collection-magnas-plateau": "clearing"
+ },
+ "animals": [
+  {
+   "id": "wild-ornius",
+   "ko": "야생 오르니우스",
+   "en": "Wild Ornius",
+   "aliases": [
+    "Wild Ornius",
+    "野生のオルニウス"
+   ],
+   "placeIds": [
+    "video-paro-forest",
+    "collection-elisa-pass",
+    "collection-peony-crossroads",
+    "collection-uranos-mountain"
+   ]
+  },
+  {
+   "id": "white-ornius",
+   "ko": "하얀 깃의 오르니우스",
+   "en": "White Ornius",
+   "aliases": [
+    "White Ornius",
+    "白羽のオルニウス"
+   ],
+   "placeIds": [
+    "video-paro-forest"
+   ]
+  },
+  {
+   "id": "wild-horse",
+   "ko": "야생마",
+   "en": "Wild Horse",
+   "aliases": [
+    "Wild Horse",
+    "野生の馬"
+   ],
+   "placeIds": [
+    "video-starwatch-mount-pass",
+    "collection-sunset-path"
+   ]
+  },
+  {
+   "id": "ferghanan-horse",
+   "ko": "한혈마",
+   "en": "Ferghanan Horse",
+   "aliases": [
+    "Ferghanan Horse",
+    "汗血馬"
+   ],
+   "placeIds": [
+    "collection-sunset-path"
+   ]
+  },
+  {
+   "id": "wild-bau",
+   "ko": "야생 바우",
+   "en": "Wild Bau",
+   "aliases": [
+    "Wild Bau",
+    "野生のバウ"
+   ],
+   "placeIds": [
+    "collection-dragon-cape"
+   ]
+  },
+  {
+   "id": "pegasus",
+   "ko": "야생 페가수스",
+   "en": "Pegasus",
+   "aliases": [
+    "Pegasus",
+    "野生のペガサス"
+   ],
+   "placeIds": [
+    "collection-black-wing-valley",
+    "collection-giant-bird-neck",
+    "collection-pegasus-rock"
+   ]
+  },
+  {
+   "id": "dark-pegasus",
+   "ko": "다크 페가수스",
+   "en": "Dark Pegasus",
+   "aliases": [
+    "Dark Pegasus",
+    "ダークペガサス"
+   ],
+   "placeIds": [
+    "collection-black-wing-valley"
+   ]
+  },
+  {
+   "id": "falicorn",
+   "ko": "팔콘",
+   "en": "Falicorn",
+   "aliases": [
+    "Falicorn",
+    "ファルコン"
+   ],
+   "placeIds": [
+    "collection-giant-bird-neck",
+    "collection-pegasus-rock"
+   ]
+  },
+  {
+   "id": "meganius",
+   "ko": "메가니우스",
+   "en": "Meganius",
+   "aliases": [
+    "Meganius",
+    "メガニウス"
+   ],
+   "placeIds": [
+    "collection-peony-crossroads",
+    "collection-uranos-mountain",
+    "collection-exion-valley"
+   ]
+  },
+  {
+   "id": "red-meganius",
+   "ko": "빨간 깃의 메가니우스",
+   "en": "Red Meganius",
+   "aliases": [
+    "Red Meganius",
+    "赤羽のメガニウス",
+    "빨간 깃의 오르니우스"
+   ],
+   "placeIds": [
+    "collection-exion-valley"
+   ]
+  },
+  {
+   "id": "magonius",
+   "ko": "마지니우스",
+   "en": "Magonius",
+   "aliases": [
+    "Magonius",
+    "マジニウス"
+   ],
+   "placeIds": [
+    "collection-headhunting-rock"
+   ]
+  },
+  {
+   "id": "black-magonius",
+   "ko": "검은 깃의 마지니우스",
+   "en": "Black Magonius",
+   "aliases": [
+    "Black Magonius",
+    "黒羽のマジニウス"
+   ],
+   "placeIds": [
+    "collection-headhunting-rock"
+   ]
+  }
+ ]
+};

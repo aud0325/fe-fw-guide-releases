@@ -1,5 +1,5 @@
 // Recording provenance is retained in local research, not in the public source list.
-export const internalSourceIds=new Set(['game-video-20260926','game-flavors-20260926']);
+export const internalSourceIds=new Set(['game-video-20260926','game-flavors-20260926','game-materials-20261009']);
 export const isPublicSource=(id,source)=>Boolean(source)&&!internalSourceIds.has(id);
 export function publicCatalogValue(value){
  if(Array.isArray(value))return value.map(publicCatalogValue);

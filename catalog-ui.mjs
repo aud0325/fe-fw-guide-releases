@@ -57,7 +57,7 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
  if(e.roles?.length)out+=`<p class="role-tags">${e.roles.map(r=>esc(t(...roleNames[r]))).join(' · ')}</p>`;
  const movedItemKeys=['game8-item-part1','game8-item-part3','game8-item-gathering','game8-report-817080','game8-report-817081'];
  const mountMoved=f=>foodFactKeys.includes(f.key)||/^(?:capture-|mount-stats|mount-skills|namu-|game8-(?:capture|acquisition|scope|food-conflict))/.test(f.key);
- const facts=consolidateFacts(localizedFacts((e.facts||[]).filter(f=>(e.type!=='mount'||!mountMoved(f))&&!(e.type==='item'&&acquisitionHtml&&movedItemKeys.includes(f.key))&&!(e.recruitment&&f.key.startsWith('game8-recruitment-'))),t));
+ const facts=consolidateFacts(localizedFacts((e.facts||[]).filter(f=>(e.type!=='mount'||!mountMoved(f))&&!(e.type==='item'&&acquisitionHtml&&movedItemKeys.includes(f.key))&&!(e.caiPlaceDetails&&e.mapPoint&&f.key==='cai-farming')&&!(e.recruitment&&f.key.startsWith('game8-recruitment-'))),t));
  if(e.type==='mount'){
   const category=mountCategory(e,t);
   if(category)facts.unshift({key:'mount-category',label:{ko:'분류',en:'Category'},value:category,literal:true});

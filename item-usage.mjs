@@ -23,6 +23,7 @@ export function itemDescription(e,{t,tx,entries,sources}){
   const stage=facts.find(f=>f.key==='weapon-stage');
   return prefix+t('item.effect-summary',{effect:field(effect)})+(stage?' '+field(stage):'');
  }
+ if(e.materialDescription)return tx(e.materialDescription);
  if(e.ingredientFlavor&&flavors[e.ingredientFlavor.flavor])return t('item.known-flavor',{flavor:tx(flavors[e.ingredientFlavor.flavor])});
  if(facts.some(f=>f.key==='game8-item-gathering')||e.gathering?.length)return t('item.material-summary',{kind:t(itemKinds[kind.kind].ko,itemKinds[kind.kind].en)});
  const original=tx(e.summary);

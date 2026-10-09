@@ -1,4 +1,5 @@
 import {mapNodes} from './part1-map.generated.mjs';
+import {reviewedPlace,placeNameKey,acquisitionContext} from './place-correspondences.mjs';
 const mapPointForEntry=id=>mapNodes.find(n=>n.entryId===id);
 const acquisitionCache=new WeakMap();
 // Explicit editorial correspondences to the existing Game8 item-place glossary.
@@ -40,8 +41,9 @@ const captureNames={
  'タルボス平原':{ko:'타르보스 평원',en:'Tarvos Plains'},'ヤシロ砦':{ko:'야시로 요새',en:'Yashiro Fort'},
  '戦士の道':{ko:'전사의 길',en:'Warrior’s Road'},'シデムの谷':{ko:'시뎀 계곡',en:'Sidem Valley'}
 };
-const placeKey=value=>String(value).normalize('NFKC').toLowerCase().replace(/[’']/g,'').replace(/\s+/g,' ').trim();
+const placeKey=placeNameKey;
 function existingPlace(value,entries){
+ const reviewed=reviewedPlace(value);if(reviewed)return reviewed.id;
  const explicit=japanesePlaces[value]||englishPlaceAliases[value];if(explicit)return explicit;
  const key=placeKey(value);
  const matches=entries.filter(e=>e.type==='location'&&e.mapPoint&&[e.name.ko,e.name.en,...(e.aliases||[])].some(n=>placeKey(n)===key));
@@ -107,13 +109,20 @@ export function acquisitionRecords(entry,entries){
   if(records.some(r=>r.locationId===link.to&&r.sourceId===link.sourceId&&r.observedRoute===link.observedRoute&&r.gameDate===link.gameDate))continue;
   records.push({...link,locationId:link.to,method:'acquisition'});
  }
- const result=records.map(r=>({...r,point:r.locationId?mapPointForEntry(r.locationId):null}));cache.set(entry,result);return result;
+ const result=records.map(r=>{
+  const context=acquisitionContext(r);
+  const names=[r.locationId,r.whereKey,...(typeof r.where==='object'?Object.values(r.where):[r.where])].filter(Boolean);
+  const correspondence=names.map(reviewedPlace).find(Boolean);
+  const locationId=context==='place'?(correspondence?.id||r.locationId||names.map(value=>existingPlace(value,entries)).find(Boolean)):r.locationId;
+  return {...r,context,locationId,...(r.locationId&&locationId!==r.locationId?{reportedLocationId:r.locationId}:{}),...(correspondence?{placeNameEvidence:{sourceIds:correspondence.sourceIds,method:'reviewed-place-correspondence'}}:{}),point:locationId?mapPointForEntry(locationId):null};
+ });cache.set(entry,result);return result;
 }
 export function acquisitionPlaces(entry,entries){
  const groups=new Map();
  for(const r of acquisitionRecords(entry,entries)){
+  if(r.context==='source-error')continue;
   const key=r.locationId||r.whereKey||(typeof r.where==='object'?JSON.stringify(r.where):r.where);if(!key)continue;
-  if(!groups.has(key))groups.set(key,{id:r.locationId||null,point:r.point,where:r.where,records:[]});
+  if(!groups.has(key))groups.set(key,{id:r.locationId||null,point:r.point,context:r.context,where:r.where,records:[]});
   groups.get(key).records.push(r);
  }
  return [...groups.values()].sort((a,b)=>Boolean(b.point)-Boolean(a.point));

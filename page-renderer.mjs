@@ -93,8 +93,9 @@ function card(e){
 function detail(e){
  const metadata=entryMetadata(e,{t,tx,name,entries,sources});
  const shownMaterials=new Set([...(e.mapDetails?.materials||[]),...(e.mapDetails?.loot||[])].map(row=>row.itemId).filter(Boolean));
+ const shownCai=new Set((e.caiPlaceDetails?.mounts||[]).map(row=>row.id));
  if(e.videoGathering)for(const link of e.links||[])if(link.label?.en==='Observed gathering')shownMaterials.add(link.to);
- const outgoing=groupedRelations((e.links||[]).filter(l=>isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')));
+ const outgoing=groupedRelations((e.links||[]).filter(l=>isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')&&!(shownCai.has(l.to)&&['Appearing mount','Appearing mount · inferred'].includes(l.label?.en))));
  const incoming=relatedTo(browseEntries,e.id);
  const relation=l=>{const target=entries.find(x=>x.id===l.to);return `<a class="relation" href="${href(l.to)}"><small>${esc(l.labels?l.labels.map(tx).join(' / '):tx(l.label))}</small><strong>${esc(name(target))}</strong>${icon('arrow')}</a>`};
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
@@ -166,7 +167,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  if(!e&&state.type==='mount')html='<div class="mount-listing">'+html+'</div>';
  if(!e&&state.type==='character')html='<div class="character-listing">'+html+'</div>';
  if(!e&&state.type==='item')html='<div class="item-listing">'+html+'</div>';
- const pageTitle=state.id?(e?name(e):t('app.not-found')):state.query?t('app.search-results'):state.type==='growth'?t('growth.title')+' · '+t('growth.'+(state.growthTab||'character')):state.type!=='all'?label(state.type):'';
+ const pageTitle=state.id?(e?name(e):t('app.not-found')):state.query?t('app.search-results'):state.type==='map'&&state.mapVariant==='cai'?t('map.cai-title'):state.type==='growth'?t('growth.title')+' · '+t('growth.'+(state.growthTab||'character')):state.type!=='all'?label(state.type):'';
  const metadata=e?entryMetadata(e,{t,tx,name,entries,sources}):null;
  const title=metadata?.title||(pageTitle?`${pageTitle} · ${t('app.fortune-s-weave-encyclopedia')}`:brandName);
  const description=(state.type==='growth'&&!state.id?t('growth.homeDescription'):'')||metadata?.description||(pageTitle?pageTitle+' · '+t('app.description'):t('app.description'));

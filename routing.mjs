@@ -3,8 +3,10 @@ import {types} from './locales/labels.mjs';
 import {routes} from './data.mjs';
 import {normalizeItemFilters} from './item-types.mjs';
 import {normalizeItemFlavor} from './food.mjs';
-import {mapNodes,mapProvinces} from './part1-map.generated.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+import {mapProvinces} from './part1-map.generated.mjs';
+import {canonicalItemId} from './item-identities.mjs';
+import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
+export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -12,8 +14,9 @@ export function preferredLanguage(saved,browserLanguage){
 // The header search starts a fresh, global query, independent of page filters.
 export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
+ if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
- return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(state.id)+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
+ return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(canonicalItemId(state.id))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
 export function stateQuery(state){
  const p=new URLSearchParams();
@@ -39,9 +42,10 @@ export function readRoute(url,base='/',fallback='ko'){
  let parts=relative.replace(/index\.html$/,'').split('/').filter(Boolean),lang=['ko','en'].includes(parts[0])?parts.shift():fallback;
  if(legacy)parts=url.hash.slice(1).split('?')[0].split('/').filter(Boolean);
  const growthPath=parts[0]==='category'&&parts[1]==='growth'&&parts.length===3&&['class','mount'].includes(parts[2]);
- if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath)return null;
+ const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
+ if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
- if(parts[0]==='entry'){try{state.id=decodeURIComponent(parts[1]);}catch{return null;}}
+ if(parts[0]==='entry'){try{state.id=canonicalItemId(decodeURIComponent(parts[1]));}catch{return null;}}
  if(parts[0]==='category'){
   if(!Object.hasOwn(types,parts[1]))return null;
   state.type=parts[1];
@@ -56,10 +60,11 @@ export function readRoute(url,base='/',fallback='ko'){
  Object.assign(state,normalizeItemFilters({itemMajor:params.get('main')||'',itemMinor:params.get('sub')||'',itemKind:params.get('kind')||''}));
  state.itemFlavor=state.type==='item'?normalizeItemFlavor(params.get('flavor')):'';
  if(state.type==='map'&&!state.id){
-  state.mapPlace=mapNodes.some(n=>n.id===params.get('place'))?params.get('place'):'';
-  state.mapItem=/^[a-z0-9-]+$/.test(params.get('item')||'')?params.get('item'):'';
+  state.mapVariant=caiMapPath||params.get('variant')==='cai'?'cai':'all';
+  state.mapPlace=mapVariantNodes(state.mapVariant).some(n=>n.id===params.get('place'))?params.get('place'):'';
+  state.mapItem=/^[a-z0-9-]+$/.test(params.get('item')||'')?canonicalItemId(params.get('item')):'';
   state.mapProvince=[...mapProvinces.map(p=>p.id),'undocumented'].includes(params.get('province'))?params.get('province'):'';
-  state.mapKind=['hub','town','temple','dungeon','station','gate'].includes(params.get('map-kind'))?params.get('map-kind'):'';
+  state.mapKind=['hub','town','temple','dungeon','station','gate','banquet','gathering',...['fish','plant','ore','loot'].map(k=>'gathering-'+k),...(state.mapVariant==='cai'?caiMarkerKinds:[])].includes(params.get('map-kind'))?params.get('map-kind'):'';
   state.mapQuery=params.get('mq')||'';
  }
  if(state.type==='quest'&&state.group==='Paralogue'){state.type='paralogue';state.group='';}
