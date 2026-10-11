@@ -52,7 +52,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-cai-400-0": {
     "src": "./assets/part1-map/cai/tile-400-0.webp",
@@ -61,7 +61,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-cai-800-0": {
     "src": "./assets/part1-map/cai/tile-800-0.webp",
@@ -70,7 +70,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-cai-0-400": {
     "src": "./assets/part1-map/cai/tile-0-400.webp",
@@ -79,7 +79,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-cai-400-400": {
     "src": "./assets/part1-map/cai/tile-400-400.webp",
@@ -88,7 +88,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-cai-800-400": {
     "src": "./assets/part1-map/cai/tile-800-400.webp",
@@ -97,7 +97,7 @@ export const media = {
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
-    "rights": "Game artwork; original screen coordinates and geography retained; bounded generated UI cleanup only. Repaired pixels are illustrative. No independent reuse permission verified."
+    "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
   },
   "part1-map-icon-hub": {
     "src": "./assets/part1-map/icons/hub.png",

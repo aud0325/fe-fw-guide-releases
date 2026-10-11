@@ -38,7 +38,7 @@ export function bindPart1Map(root,{state,view,t,change}){
  const gatheringLegend=host.querySelector('[data-map-gathering]');
  if(gatheringLegend)gatheringLegend.open=view?.gatheringOpen??false;
  const visibility=bindMapLegend(host,{hiddenKinds:view?.hiddenKinds});
- const camera=createMapCamera({width:viewport.clientWidth,height:viewport.clientHeight,aspect:mapMeta.width/mapMeta.height,zoom:view?.zoom||1,x:view?.x||0,y:view?.y||0});
+ const camera=createMapCamera({width:viewport.clientWidth,height:viewport.clientHeight,aspect:mapMeta.width/mapMeta.height,zoom:view?.zoom??1.5,x:view?.x||0,y:view?.y||0});
  const win=viewport.ownerDocument.defaultView,scale=host.querySelector('#part1-scale');
  let renderedWidth=0,renderedZoom=0,renderedScale=0,zoomTimer,commitWidth=false,labels;
  viewport.classList.add('has-camera');

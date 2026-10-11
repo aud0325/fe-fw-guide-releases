@@ -44,12 +44,12 @@ const caiDetailsFor=(node,entries)=>entries.find(e=>e.id===node.entryId)?.caiPla
 function caiPlaceContent(node,ctx,heading){
  const {t,name,href,entries}=ctx,cai=caiDetailsFor(node,entries);
  if(!cai)return '';
- const itemLink=(id,inferred=false)=>{
+ const itemLink=id=>{
   const item=entries.find(e=>e.id===id);if(!item)return '';
-  return `<li><a href="${href(item.id)}">${esc(name(item))}</a>${inferred?` <span class="place-inferred">(${t('map.cai-inferred')})</span>`:''}</li>`;
+  return `<li><a href="${href(item.id)}">${esc(name(item))}</a></li>`;
  };
  const farming=cai.farming?`<p>${t('map.cai-farming')}</p>`:'';
- const animals=cai.mounts?.length?`<h${heading} class="place-content-heading">${t('map.cai-animals')}</h${heading}><ul class="place-content-list">${cai.mounts.map(m=>itemLink(m.id,m.status==='inferred')).join('')}</ul>`:'';
+ const animals=cai.mounts?.length?`<h${heading} class="place-content-heading">${t('map.cai-animals')}</h${heading}><ul class="place-content-list">${cai.mounts.map(m=>itemLink(m.id)).join('')}</ul>`:'';
  return farming||animals?`<div class="cai-place-content">${farming}${animals}</div>`:'';
 }
 export function placeDetails(node,ctx,{description=true,heading=4,variant='all'}={}){

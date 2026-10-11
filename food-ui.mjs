@@ -37,5 +37,6 @@ export function mountFoodRow(e,{t,sources={},tx=x=>x}){
   }).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))}</a>`).join(' / ');
  };
  if(conflict)value+=`<div class="recruitment-comparison"><strong>${t('character.conflict')}</strong><ul>${reports.map(r=>`<li>${esc(t(flavors[r.flavor].ko,flavors[r.flavor].en))} · ${reportLinks(r)}</li>`).join('')}</ul></div>`;
- return `<tr><th>${t('item.preferred-food')}</th><td>${value}</td></tr>`;
+ const help=informationHint(t('item.mount-bait-advice'),t('item.preferred-food')+' · '+t('presentation.information'));
+ return `<tr><th>${t('item.preferred-food')} ${help}</th><td>${value}</td></tr>`;
 }

@@ -11921,7 +11921,6 @@ export const caiMap={
   "ruined-fort",
   "votive-altar",
   "dione-fort",
-  "map-beast-trail",
   "giants-footprint-fort",
   "east-amalthea-station",
   "west-amalthea-station",
@@ -11958,7 +11957,6 @@ export const caiMap={
   "orles-city",
   "kira-village",
   "benetnasi-village",
-  "map-bomba-s-remote-village",
   "alecto-city",
   "regia",
   "auroras-temple",
@@ -12003,8 +12001,6 @@ export const caiMap={
   "collection-exion-valley",
   "collection-howling-tree-forest",
   "collection-headhunting-rock",
-  "map-luminaria-pass",
-  "map-deceptive-forest",
   "collection-magnas-plateau"
  ],
  "markerKinds": {

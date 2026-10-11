@@ -12,6 +12,7 @@ export default {
  'item.flavor-video':{ko:'관리자 게임 화면 확인 · 연회 식재료 목록에 표시된 맛입니다. 포획 미끼 효과는 별도 확인이 필요합니다.',en:'Administrator gameplay check: flavor shown in the banquet ingredient list. Capture bait effects require separate verification.'},
  'item.flavor-description-differs':{ko:'기존 설명문 기반 분류는 {flavor}이지만, 여기서는 게임 화면의 맛 표시를 우선합니다.',en:'The earlier description-based classification was {flavor}; this entry prioritizes the in-game flavor label.'},
  'item.preferred-food':{ko:'선호 먹이·맛',en:'Preferred food & flavor'},
+ 'item.mount-bait-advice':{ko:'포획 시 맛이 다르더라도 같은 종류의 고등급 먹이로 시도해도 됩니다.',en:'You can try higher-grade bait of the same food category even if its flavor differs.'},
  'item.find-food':{ko:'재료 찾기',en:'Find ingredients'},
  'item.food-kind-unknown':{ko:'먹이 종류 미확인',en:'Food type undocumented'},
  'item.food-unknown':{ko:'선호 먹이와 맛은 확인 대기입니다.',en:'Preferred food and flavor remain undocumented.'},
