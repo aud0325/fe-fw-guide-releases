@@ -10018,6 +10018,69 @@ export const mapNodes=[
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
   }
+ },
+ {
+  "id": "verdant-hollow",
+  "ko": "심록의 구멍",
+  "en": "Verdant Hollow",
+  "province": "lambus",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "verdant-hollow",
+  "aliases": [
+   "짙푸른 구덩이",
+   "푸른 골짜기",
+   "深緑の穴",
+   "Deep Green Hollow",
+   "심록의 구멍",
+   "Verdant Hollow"
+  ],
+  "u": 0.17693836978131214,
+  "v": 0.4723684210526316,
+  "sourceId": "administrator-leda-map-20261013",
+  "details": {
+   "description": {
+    "ko": "작은 숲속에 갑자기 생긴 구멍. 안에는 여러 식물이 자생하고 있다.",
+    "en": "A hollow that appeared in a small wood, with various plants growing inside."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-03-31",
+   "materials": [
+    {
+     "ko": "스위트 리프",
+     "itemId": "sweet-leaves"
+    },
+    {
+     "ko": "리나리아",
+     "itemId": "linaria"
+    },
+    {
+     "ko": "잔게",
+     "itemId": "zang"
+    },
+    {
+     "ko": "리가네트",
+     "itemId": "liganet",
+     "sourceId": "administrator-leda-map-20261013",
+     "method": "administrator-confirmed",
+     "checked": "2026-10-13"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "routes": [
+     "leda"
+    ],
+    "condition": "after-city-performance",
+    "note": {
+     "ko": "레다 루트에서 도시 공연 후에만 접근 가능",
+     "en": "Accessible only in Leda’s route, after a city performance"
+    },
+    "sourceId": "administrator-leda-map-20261013",
+    "checked": "2026-10-13",
+    "method": "administrator-report"
+   }
+  }
  }
 ];
 export const mapCollectibles=[
@@ -10152,7 +10215,8 @@ export const mapCollectibles=[
    "map-wire-forest",
    "map-luminaria-pass",
    "map-deceptive-forest",
-   "map-nameless-graves"
+   "map-nameless-graves",
+   "verdant-hollow"
   ]
  },
  {
@@ -10206,7 +10270,8 @@ export const mapCollectibles=[
    "video-starwatch-mount-pass",
    "collection-gora-grassland",
    "map-darknight-pass",
-   "map-tacit-plains"
+   "map-tacit-plains",
+   "verdant-hollow"
   ]
  },
  {
@@ -10499,7 +10564,8 @@ export const mapCollectibles=[
   "placeIds": [
    "collection-brigadier-pass",
    "valeri-gorge",
-   "map-tacit-plains"
+   "map-tacit-plains",
+   "verdant-hollow"
   ]
  },
  {
@@ -11861,6 +11927,21 @@ export const mapCollectibles=[
   "placeIds": [
    "map-wire-forest",
    "map-nameless-graves"
+  ]
+ },
+ {
+  "id": "sweet-leaves",
+  "ko": "스위트 리프",
+  "en": "Sweet Leaves",
+  "aliases": [
+   "Sweet Leaves",
+   "단맛 잎",
+   "スウィートリーフ",
+   "단맛 잎(Sweet Leaves)",
+   "스위트 리프"
+  ],
+  "placeIds": [
+   "verdant-hollow"
   ]
  }
 ];

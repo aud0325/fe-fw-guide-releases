@@ -68,9 +68,9 @@ export function placeDetails(node,ctx,{description=true,heading=4,variant='all'}
 }
 function placeMetadata(node,ctx,variant='all'){
  const {t,tx}=ctx,access=node.details?.access;
- const tag=access?informationHint(tx(access.note),t('map.sea-area-help'),t('map.sea-area'),'sea-access-tag'):'';
+ const tag=access&&access.kind!=='route'?informationHint(tx(access.note),t('map.sea-area-help'),t('map.sea-area'),'sea-access-tag'):'';
  const cai=caiDetailsFor(node,ctx.entries),routeTags=[cai?.farming?t('map.cai-farming-tag'):'',cai?.mounts?.length?t('map.cai-animal-tag'):''].filter(Boolean);
- return `<p class="place-metadata"><span>${esc([provinceName(node.province,t),placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].join(' · '))}</span>${tag}</p>${access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
+ return `<p class="place-metadata"><span>${esc([provinceName(node.province,t),placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].join(' · '))}</span>${tag}</p>${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
 }
 function selectedDetails(node,ctx,variant='all'){
  const {t,href}=ctx;

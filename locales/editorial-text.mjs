@@ -431,7 +431,7 @@ Rear Mountain Path|뒷산 길
 Mount Aegina|아이기나 산
 Cougar Canopy|쿠거 수관
 Tasit Plain|타시트 평야
-Verdant Hollow|푸른 골짜기
+Verdant Hollow|심록의 구멍
 Midnight Turn|한밤의 굽잇길
 Valeri Gorge|발레리 협곡
 Luminaria Pass|루미나리아 고개
