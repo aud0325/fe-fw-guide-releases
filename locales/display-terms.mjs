@@ -1,5 +1,8 @@
 // Display translations; provisional names do not establish canonical English mappings.
 export const displayTerms={
+  "black horse": {"ko":"흑마","en":"Black Horse"},
+  "red bau": {"ko":"레드 바우","en":"Red Bau"},
+  "black bau": {"ko":"블랙 바우","en":"Black Bau"},
   "말 관련(수염풀, 갈기장식, 말 손질 키트), 훈련 아이템": {
     "ko": "말 관련(수염풀, 갈기장식, 말 손질 키트), 훈련 아이템",
     "en": "Horse-related items (beard grass, mane ornaments, horse grooming kit), training items"
@@ -594,51 +597,51 @@ export const displayTerms={
   },
   "라돈호": {
     "ko": "라돈호",
-    "en": "Ladon Lake (provisional)"
+    "en": "Ladon Lake"
   },
   "금단의 숲": {
     "ko": "금단의 숲",
-    "en": "Forbidden Forest (provisional)"
+    "en": "Forbidden Forest"
   },
   "보만 고개": {
     "ko": "보만 고개",
-    "en": "Boman Pass (provisional)"
+    "en": "Boman Pass"
   },
   "다마센곶": {
     "ko": "다마센곶",
-    "en": "Damasen Cape (provisional)"
+    "en": "Damasen Cape"
   },
   "타르타로스 대유구": {
     "ko": "타르타로스 대유구",
-    "en": "Great Ruins of Tartarus (provisional)"
+    "en": "Great Ruins of Tartarus"
   },
   "파로의 숲": {
     "ko": "파로의 숲",
-    "en": "Paro Forest (provisional)"
+    "en": "Paro Forest"
   },
   "별받이 고개": {
     "ko": "별받이 고개",
-    "en": "Starwatch Pass (provisional)"
+    "en": "Starwatch Pass"
   },
   "옥 강철": {
     "ko": "옥 강철",
-    "en": "Jade Steel (provisional)"
+    "en": "Jade Steel"
   },
   "라돈 잉어": {
     "ko": "라돈 잉어",
-    "en": "Ladon Carp (provisional)"
+    "en": "Ladon Carp"
   },
   "유나메이": {
     "ko": "유나메이",
-    "en": "Yunamei (provisional)"
+    "en": "Yunamei"
   },
   "사금": {
     "ko": "사금",
-    "en": "Gold Dust (provisional)"
+    "en": "Gold Dust"
   },
   "사금 덩어리": {
     "ko": "사금 덩어리",
-    "en": "Lump of Gold Dust (provisional)"
+    "en": "Lump of Gold Dust"
   },
   "이디이아주": {
     "ko": "이디이아주",

@@ -83,6 +83,7 @@ export default {
  'map.previous-report':{ko:'이전 카이 루트 기록',en:'Earlier Cai-route report'},
  'map.gate':{ko:'관문',en:'Gate'},
  'map.count':{ko:'{count}개 지점',en:'{count} places'},
+ 'map.count-one':{ko:'{count}개 지점',en:'{count} place'},
  'map.results':{ko:'장소 목록',en:'Places'},
  'map.browse-places':{ko:'전체 장소 보기',en:'Browse all locations'},
  'map.static-help':{ko:'전체 장소 정보는 위치 메뉴에서 확인할 수 있습니다.',en:'Find all place information in the Locations menu.'},

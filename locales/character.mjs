@@ -1,5 +1,6 @@
 // UI messages. Keep keys stable when editing translations.
 export default {
+ "character.gift-information": {"ko":"선물 선호 정보","en":"About gift preferences"},
  "character.beginner-guide": {"ko":"1부 육성 가이드","en":"Part I training guide"},
  "character.training-guide": {"ko":"육성 가이드","en":"Training guide"},
  "character.imported-help-label": {"ko":"Game8 육성 가이드 안내","en":"About this Game8 guide"},

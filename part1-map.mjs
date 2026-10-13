@@ -26,7 +26,7 @@ export function filterMapNodes({mapQuery='',mapProvince='',mapKind='',mapVariant
  const collectibles=mapVariant==='cai'?variantCollectibles(mapVariant):null;
  return mapVariantNodes(mapVariant).filter(n=>{
   const p=mapProvinces.find(p=>p.id===n.province);
-  const text=mapVariant==='cai'?normalize([n.ko,n.en,...n.aliases,...placeAliases(n.entryId),p?.ko,p?.en,p?localized({ko:p.ko,en:p.en||p.ko},'en'):'',...collectibles.filter(c=>c.placeIds.includes(n.id)).flatMap(namesForCollectible)].filter(Boolean).join(' ')):searchText.get(n.id);
+  const text=mapVariant==='cai'?normalize([n.ko,n.en,localized({ko:n.ko,en:n.en||n.ko},'en'),englishText(n.en||n.ko),...n.aliases,...placeAliases(n.entryId),p?.ko,p?.en,p?localized({ko:p.ko,en:p.en||p.ko},'en'):'',...collectibles.filter(c=>c.placeIds.includes(n.id)).flatMap(namesForCollectible)].filter(Boolean).join(' ')):searchText.get(n.id);
   const kind=mapMarkerKind(n,mapVariant);
   return (!mapProvince||n.province===mapProvince)&&(!mapKind||kind===mapKind||n.kind===mapKind&&!(mapVariant==='cai'&&caiChangedPlace(n.id)))&&tokens.every(q=>text.includes(q));
  });

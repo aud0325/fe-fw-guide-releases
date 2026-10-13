@@ -54,7 +54,7 @@ export default {
  'search.all-results':{ko:'전체 검색 결과 보기 ({count})',en:'View all results ({count})'},
  'search.result-count':{ko:'{count}개 검색 결과. 방향키로 선택하고 Enter로 이동하세요.',en:'{count} results. Use arrow keys to select and Enter to open.'},
  'search.empty':{ko:'검색 결과가 없습니다. 다른 이름이나 영어 이름으로 검색해 보세요.',en:'No results. Try another name or its Korean or English spelling.'},
- 'character.guide':{ko:'특징과 추천 육성',en:'Role & recommended training'},
+ 'character.guide':{ko:'특징과 추천 육성',en:'Training guide'},
  'character.guide-source':{ko:'Game8 일본어 추천',en:'Game8 JP recommendation'},
  'character.guide-note':{ko:'공략 작성자의 추천 경로입니다. 필수 전직 순서가 아니며, 요구 기능과 해금 조건은 각 병종에서 확인하세요.',en:'A route recommended by the guide, not a mandatory promotion sequence. Check each class for skill requirements and unlock conditions.'},
  'character.preparation':{ko:'준비 조건과 대안',en:'Preparation & alternatives'},

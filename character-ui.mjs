@@ -2,7 +2,7 @@ import {characterGrowthContext,characterGrowthSummary} from './growth-rates.mjs'
 import {growthCellStyle} from './growth-comparison.mjs';
 import {pagePath,stateQuery} from './routing.mjs';
 import {statLabels} from './locales/labels.mjs';
-import {displayText} from './presentation.mjs';
+import {displayText,informationHint} from './presentation.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {beginnerGuide,importedCharacterGuide} from './beginner-guide-ui.mjs';
 export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=false,part='all'}){
@@ -28,13 +28,13 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
  if(e.growthRates){out+=`<div class="character-growth-options"><p class="result-label">${t('growth.unitCharacter')}</p>${e.modifiedGrowthRates?`<label title="${esc(tx(e.modifiedGrowthRates.condition))}"><input id="character-growth-skill" type="checkbox" data-character-growth-skill disabled${skillApplied?' checked':''}><span>${t(e.id==='mu'?'character.signs-of-growth-toggle':'growth.compactSkill')}</span></label>`:''}</div>`;const row=skillApplied?{...e.modifiedGrowthRates,label:t('growth.corrected')}:{...e.growthRates,label:t('character.personal-base')};out+=grid([row])+`<p class="character-growth-legend" title="${esc(t('character.growth-help'))}"><span>${t('growth.low')}</span><span class="legend-scale" aria-hidden="true"></span><span>${t('growth.high')}</span></p>`;
  }else out+=`<p class="result-label">${t('character.personal-growth-rates-not-documented')}</p>`;
  const growth=out;out='';
- out+=`<h2>${t('character.preferred-gifts')}</h2>`;
- if(e.gifts?.length){out+=`<p class="notice">${t('character.unverified-public-game8-export-only-reported-preferences-are-shown')}</p><div class="table-wrap"><table><thead><tr><th>${t('character.preference')}</th><th>${t('character.gift')}</th></tr></thead><tbody>`;
+ out+=`<h2>${t('character.preferred-gifts')}${e.gifts?.length?' '+informationHint(t('character.unverified-public-game8-export-only-reported-preferences-are-shown'),t('character.gift-information')):''}</h2>`;
+ if(e.gifts?.length){out+=`<div class="table-wrap character-preferences"><table><thead><tr><th scope="col">${t('character.preference')}</th><th scope="col">${t('character.gift')}</th></tr></thead><tbody>`;
   out+=e.gifts.map(g=>{const item=entries.find(x=>x.id===g.itemId);return `<tr><td>${g.preference==='loved'?t('character.loved'):t('character.really-liked')}</td><td>${item?`<a href="${href(item.id)}">${esc(name(item))}</a>`:esc(text(t(g.nameKo||g.name,g.name)))}</td></tr>`}).join('')+'</tbody></table></div>';
  }else out+=`<p class="result-label">${t('character.gift-preferences-are-undocumented-this-does-not-imply-gifts')}</p>`;
  const gifts=out;out='';
  out+=`<details class="coverage"><summary>${t('character.support-partners-and-ranks-spoilers')} · ${e.supports?.length||0}</summary>`;
- if(e.supports?.length){out+=`<p class="notice">${t('character.ranks-from-the-game8-export-separate-from-recruitment-support')}</p><div class="table-wrap"><table><thead><tr><th>${t('character.partner')}</th><th>${t('character.reported-rank')}</th></tr></thead><tbody>`;
+ if(e.supports?.length){out+=`<p class="notice">${t('character.ranks-from-the-game8-export-separate-from-recruitment-support')}</p><div class="table-wrap character-supports"><table><thead><tr><th scope="col">${t('character.partner')}</th><th scope="col">${t('character.reported-rank')}</th></tr></thead><tbody>`;
   out+=e.supports.map(s=>{const partner=entries.find(x=>x.id===s.partnerId);return `<tr><th><a href="${href(partner.id)}">${esc(name(partner))}</a></th><td>${esc([...new Set(s.reports.map(r=>r.rank))].join(' / '))}${s.conflict?' ⚠':''}</td></tr>`}).join('')+'</tbody></table></div>';
  }else out+=`<p>${t('character.support-data-is-undocumented-this-does-not-mean-supports')}</p>`;
  const growthHtml=`<section id="section-training" tabindex="-1">${growth}</section>`,otherHtml=`<section id="section-gifts" tabindex="-1">${gifts}</section>`+out+'</details>';
