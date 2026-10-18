@@ -105,6 +105,15 @@ function inlineMap(points,entry,ctx,{reference=false,variant='all'}={}){
  const {t,lang,base}=ctx,tiles=variant==='cai'?caiMapTiles:mapTiles;
  return `<figure class="entry-place-map${reference?' reference-map':''}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${mapMeta.width} ${mapMeta.height}" role="group" aria-label="${t(reference?'map.reference-points':'map.place-map')}">${tiles.map(tile=>`<image href="${esc(tile.src)}" x="${tile.x}" y="${tile.y}" width="${tile.width}" height="${tile.height}" aria-hidden="true"/>`).join('')}${points.map((n,i)=>`<a href="${esc(mapHref(n.id,reference||entry.type==='location'||entry.type==='item'?'':entry.id,lang,base,variant))}" aria-label="${esc((i+1)+'. '+mapName(n,t)+' · '+t(reference?'map.reference-open':'map.open'))}"><title>${esc(mapName(n,t))}</title><circle class="entry-place-pin${reference?' landmark-pin':''}" cx="${n.u*mapMeta.width}" cy="${n.v*mapMeta.height}" r="21"/><text x="${n.u*mapMeta.width}" y="${n.v*mapMeta.height}" dy=".35em" text-anchor="middle" aria-hidden="true">${i+1}</text></a>`).join('')}</svg><figcaption>${t('map.credit')} <a href="${pagePath({type:'map'},lang,base)}#map-source">${t('map.image-source')}</a></figcaption></figure>`;
 }
+export function guideLocationMap(places,ctx){
+ const {t,tx,lang,base,href}=ctx;
+ const rows=places.map(place=>{
+  const point=mapPointForEntry(place.entryId);
+  if(!point)throw Error('Unknown guide map location: '+place.entryId);
+  return {...place,point};
+ });
+ return `<div class="guide-location-layout"><figure class="guide-location-map"><div class="guide-location-canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${mapMeta.width} ${mapMeta.height}" role="img" aria-label="${esc(t('tip.location-map',{count:rows.length}))}">${mapTiles.map(tile=>`<image href="${esc(tile.src)}" x="${tile.x}" y="${tile.y}" width="${tile.width}" height="${tile.height}" aria-hidden="true"/>`).join('')}</svg>${rows.map((row,i)=>`<a class="guide-location-pin" style="left:${row.point.u*100}%;top:${row.point.v*100}%" href="${esc(mapHref(row.point.id,'',lang,base))}" aria-label="${esc(t('tip.location-open',{number:i+1,label:tx(row.label),place:mapName(row.point,t)}))}"><span aria-hidden="true">${i+1}</span></a>`).join('')}</div><figcaption>${t('tip.location-map-help')}</figcaption></figure><ol class="guide-location-list">${rows.map((row,i)=>`<li><span class="entry-place-number" aria-hidden="true">${i+1}</span><div><small>${esc(tx(row.clue))}</small><h3>${esc(tx(row.label))}</h3><a href="${esc(href(row.entryId))}">${esc(mapName(row.point,t))}</a></div></li>`).join('')}</ol></div>`;
+}
 function itemAcquisitionLine(record,place,ctx,item){
  // Generic guide/observation scopes are evidence, not availability conditions.
  if(['gathering','dungeon'].includes(record.method)&&!record.route&&record.chapter==null&&!record.condition){

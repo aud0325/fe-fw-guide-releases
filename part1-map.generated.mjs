@@ -8,12 +8,15 @@ export const mapMeta={
   "1449-03-06",
   "1449-03-12",
   "1449-10-16",
-  "1449-10-19"
+  "1449-10-19",
+  "1449-06-06",
+  "1449-04-16"
  ],
  "observedRoute": null,
  "observedRoutes": [
   "cai",
-  "theodora"
+  "theodora",
+  "leda"
  ],
  "width": 1006,
  "height": 760
@@ -10081,6 +10084,89 @@ export const mapNodes=[
     "method": "administrator-report"
    }
   }
+ },
+ {
+  "id": "oracle-falls",
+  "ko": "신탁의 폭포",
+  "en": "Oracle Falls",
+  "province": "braxithea",
+  "kind": "gathering",
+  "gatheringType": "fish",
+  "entryId": "oracle-falls",
+  "aliases": [
+   "神託の滝",
+   "신탁의 폭포",
+   "Oracle Falls"
+  ],
+  "u": 0.2556660039761432,
+  "v": 0.6255263157894737,
+  "sourceId": "administrator-leda-map-20261018",
+  "details": {
+   "description": {
+    "ko": "숲속의 작은 폭포. 아름다운 정령에게 신탁을 받을 수 있다는 소문이 있다.",
+    "en": "A small waterfall in the woods, rumored to offer an oracle from a beautiful spirit."
+   },
+   "materials": [
+    {
+     "ko": "라돈 잉어",
+     "itemId": "video-ladon-carp"
+    },
+    {
+     "ko": "라돈 꼬치고기",
+     "itemId": "ladon-pike"
+    },
+    {
+     "ko": "여왕 잉어",
+     "itemId": "observed-queen-carp"
+    }
+   ],
+   "observedRoute": "leda",
+   "gameDate": "1449-06-06"
+  }
+ },
+ {
+  "id": "travelers-hill",
+  "ko": "여행자의 언덕",
+  "en": "Traveler’s Hill",
+  "province": "elektra",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "travelers-hill",
+  "aliases": [
+   "旅人の丘",
+   "Traveler's Hill",
+   "여행자의 언덕",
+   "Traveler’s Hill"
+  ],
+  "u": 0.5145129224652086,
+  "v": 0.4928947368421053,
+  "sourceId": "administrator-leda-map-20261018",
+  "details": {
+   "description": {
+    "ko": "아말테아 지방과의 경계에 있는 구릉 지대. 멋진 전망이 펼쳐져 있다.",
+    "en": "Hills on the border with Amalthea, with a sweeping view."
+   },
+   "materials": [
+    {
+     "ko": "스위트 리프",
+     "itemId": "sweet-leaves"
+    },
+    {
+     "ko": "하나 열매",
+     "itemId": "video-hana-fruit"
+    },
+    {
+     "ko": "올리바",
+     "itemId": "oliva"
+    },
+    {
+     "ko": "엔리예트",
+     "itemId": "enrietto"
+    }
+   ],
+   "observedRoute": "leda",
+   "gameDate": "1449-04-16"
+  }
  }
 ];
 export const mapCollectibles=[
@@ -10097,7 +10183,8 @@ export const mapCollectibles=[
    "collection-dawn-plain",
    "collection-bond-rock",
    "collection-sunlight-garden",
-   "collection-sunset-path"
+   "collection-sunset-path",
+   "travelers-hill"
   ]
  },
  {
@@ -10135,7 +10222,8 @@ export const mapCollectibles=[
    "video-paro-forest",
    "collection-whispering-rock",
    "map-unexplored-oasis",
-   "collection-magnas-plateau"
+   "collection-magnas-plateau",
+   "travelers-hill"
   ]
  },
  {
@@ -10251,7 +10339,8 @@ export const mapCollectibles=[
    "엔리예트"
   ],
   "placeIds": [
-   "collection-sunlight-garden"
+   "collection-sunlight-garden",
+   "travelers-hill"
   ]
  },
  {
@@ -11355,7 +11444,8 @@ export const mapCollectibles=[
    "collection-enkeladus-bridge",
    "video-ladon-lake",
    "lake-brontes",
-   "map-lake-val-der"
+   "map-lake-val-der",
+   "oracle-falls"
   ]
  },
  {
@@ -11413,7 +11503,8 @@ export const mapCollectibles=[
   ],
   "placeIds": [
    "video-ladon-lake",
-   "lake-brontes"
+   "lake-brontes",
+   "oracle-falls"
   ]
  },
  {
@@ -11489,7 +11580,8 @@ export const mapCollectibles=[
    "여왕 잉어"
   ],
   "placeIds": [
-   "map-lake-val-der"
+   "map-lake-val-der",
+   "oracle-falls"
   ]
  },
  {
@@ -11941,7 +12033,8 @@ export const mapCollectibles=[
    "스위트 리프"
   ],
   "placeIds": [
-   "verdant-hollow"
+   "verdant-hollow",
+   "travelers-hill"
   ]
  }
 ];

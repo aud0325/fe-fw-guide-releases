@@ -5,7 +5,7 @@ import {tipGuide} from './tip-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
 import {isPublicSource,referencedSources} from './source-visibility.mjs';
 import {itemUses} from './item-usage.mjs';
-import {part1Map,entryMapLinks} from './part1-map-ui.mjs';
+import {part1Map,entryMapLinks,guideLocationMap} from './part1-map-ui.mjs';
 import {groupedBrowse} from './browse-groups.mjs';
 import {isDiscoverable,entryDisplayName,groupedRelations} from './editorial-view.mjs';
 import {entryMetadata} from './seo.mjs';
@@ -94,8 +94,9 @@ function detail(e){
  const metadata=entryMetadata(e,{t,tx,name,entries,sources});
  const shownMaterials=new Set([...(e.mapDetails?.materials||[]),...(e.mapDetails?.loot||[])].map(row=>row.itemId).filter(Boolean));
  const shownCai=new Set((e.caiPlaceDetails?.mounts||[]).map(row=>row.id));
+ const guidePlaces=new Set((e.guideSections||[]).flatMap(s=>(s.mapPlaces||[]).map(p=>p.entryId)));
  if(e.videoGathering)for(const link of e.links||[])if(link.label?.en==='Observed gathering')shownMaterials.add(link.to);
- const outgoing=groupedRelations((e.links||[]).filter(l=>isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')&&!(shownCai.has(l.to)&&['Appearing mount','Appearing mount · inferred'].includes(l.label?.en))));
+ const outgoing=groupedRelations((e.links||[]).filter(l=>!guidePlaces.has(l.to)&&isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')&&!(shownCai.has(l.to)&&['Appearing mount','Appearing mount · inferred'].includes(l.label?.en))));
  const incoming=relatedTo(browseEntries,e.id);
  const relation=l=>{const target=entries.find(x=>x.id===l.to);return `<a class="relation" href="${href(l.to)}"><small>${esc(l.labels?l.labels.map(tx).join(' / '):tx(l.label))}</small><strong>${esc(name(target))}</strong>${icon('arrow')}</a>`};
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
@@ -109,7 +110,7 @@ function detail(e){
  if(e.type==='quest')body+=`<p class="notice">${t('editorial.the-quest-listing-has-been-retired-this-address-retains-reward-and-location-notes')} <a href="#category/paralogue">${t('editorial.view-paralogue-schedules')}</a></p>`;
  if(e.body&&e.type!=='mount')body+=`<p class="body">${prose(e.body)}</p>`;
  if(e.note&&e.type!=='mount')body+=`<p class="notice">${prose(e.note)}</p>`;
- body+=tipGuide(e,{t,tx,prose,sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,sourceTitle:id=>`${tx(sources[id].title)}${sources[id].checked?' · '+t('common.checked')+' '+sources[id].checked:''}`});
+ body+=tipGuide(e,{t,tx,prose,locationMap:places=>guideLocationMap(places,mapContext),sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,sourceTitle:id=>`${tx(sources[id].title)}${sources[id].checked?' · '+t('common.checked')+' '+sources[id].checked:''}`});
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
  body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill});

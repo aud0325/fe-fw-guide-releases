@@ -5,6 +5,7 @@ const acquisitionCache=new WeakMap();
 // Explicit editorial correspondences to the existing Game8 item-place glossary.
 // These identify a place, never a field tile or an unlock/availability condition.
 const japanesePlaces={
+ '神託の滝':'oracle-falls','旅人の丘':'travelers-hill',
  '封呪の祭壇':'votive-altar','巨人の足跡砦':'giants-footprint-fort','ニグリア鉱山':'niglia-mine',
  '崩れ砦':'ruined-fort','禁断の森':'video-forbidden-forest','異教徒の洞窟':'heretics-cave',
  'ワルハラ鉱山':'valhalla-mine','ノーアの洞窟':'noah-cave','ディオネ砦':'the-piercer-dione-fort','ガレーン砦跡':'galen-fort-ruins',
@@ -25,6 +26,7 @@ const japanesePlaces={
  'ルベスの森':'rubess-forest','哭き木の森':'collection-howling-tree-forest'
 };
 const englishPlaceAliases={
+ 'Oracle Falls':'oracle-falls','Traveler’s Hill':'travelers-hill',"Traveler's Hill":'travelers-hill',
  'Enceladus Bridge':'collection-enkeladus-bridge','Santana Bridge':'collection-santana-bridge','Utuna Pass':'collection-utsuna-pass',
  'Whispering Rock':'collection-whispering-rock','Zethus Falls':'collection-zetos-falls','Daybreak Plains':'collection-dawn-plain',
  'Sunwatch Pass':'collection-sunrise-pass','Collapsed Fort':'ruined-fort','Niraga Mine':'niglia-mine','Nowah’s Cave':'noah-cave',
