@@ -1,6 +1,9 @@
 https://fire-emblem-fortunes-weave.turam.dev/ko/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/growth/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/character/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/skill/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/combat-art/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/spell/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/item/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/class/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/mount/
@@ -142,6 +145,9 @@ https://fire-emblem-fortunes-weave.turam.dev/ko/entry/game8-paralogues/
 https://fire-emblem-fortunes-weave.turam.dev/en/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/growth/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/character/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/skill/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/combat-art/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/spell/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/item/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/class/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/mount/

@@ -61,7 +61,7 @@ export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
   return `<li class="reference-site"><strong>${esc(title)}</strong><details class="reference-originals"><summary>${t('presentation.original-sources')} (${items.length})</summary><ul>${originals}</ul></details></li>`;
  });
  const notes=list.flatMap(e=>{
-  const out=[];
+  const out=[...(e.abilitySourceNotes||[])];
   if(e.videoNameEvidence){const v=e.videoNameEvidence;out.push(`${t('presentation.name-evidence-video')} · ${v.method==='unmapped'?t('presentation.english-mapping-pending'):t('presentation.english-mapping-editorial')}`);}
   if(e.videoGathering&&e.type!=='location')out.push(t('presentation.gathering-display-cai-in-game-sep-25')+(e.videoGathering.unknownSlots?t('presentation.includes-unknown-slots'):''));
   if(e.koreanNameEvidence){

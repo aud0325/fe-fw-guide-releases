@@ -1,7 +1,8 @@
+import {abilityEntry} from './_abilities/ability-navigation.mjs';
 export {navigationGroups} from './locales/labels.mjs';
 import {navigationGroups} from './locales/labels.mjs';
 export function navigationContext(state,entries){
- const type=state.id?entries.find(e=>e.id===state.id)?.type:state.type;
+ const type=state.id?(entries.find(e=>e.id===state.id)||abilityEntry(state.id))?.type:state.type;
  return {type,group:navigationGroups.find(group=>group.types.includes(type))?.id};
 }
 export function filterContext(state,entries){

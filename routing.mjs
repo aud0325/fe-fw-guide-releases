@@ -72,7 +72,7 @@ export function readRoute(url,base='/',fallback='ko'){
  return {state,lang,legacy};
 }
 export function rewriteLinks(html,lang,base){
- return html.replace(/href="#((?:entry\/|category\/)[^" ]*|)"/g,(_,hash)=>{
+ return html.replace(/href="\/(ko|en)\//g,(_,locale)=>`href="${base}${locale}/`).replace(/href="#((?:entry\/|category\/)[^" ]*|)"/g,(_,hash)=>{
   const route=readRoute(new URL(base+'#'+hash,'https://local.invalid'),base,lang);
   return route?`href="${pagePath(route.state,lang,base)}${stateQuery(route.state).replaceAll('&','&amp;')}"`:_;
  });

@@ -1,5 +1,8 @@
 // UI messages. Keep keys stable when editing translations.
 export default {
+ "character.profile-proficiencies": {"ko":"프로필과 숙련","en":"Profile and proficiencies"},
+ "character.skills": {"ko":"캐릭터 스킬","en":"Character skills"},
+ "character.abilities": {"ko":"기술과 숙련","en":"Abilities & proficiencies"},
  "character.gift-information": {"ko":"선물 선호 정보","en":"About gift preferences"},
  "character.beginner-guide": {"ko":"1부 육성 가이드","en":"Part I training guide"},
  "character.training-guide": {"ko":"육성 가이드","en":"Training guide"},

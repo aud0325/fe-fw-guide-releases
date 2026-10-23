@@ -1,0 +1,6 @@
+/* Labels remain explicit; color reinforces the two categories in each menu. */
+.skill-type-tag{display:inline-block;padding:4px 8px;border-radius:4px;font-size:12px;font-weight:650;line-height:1.4;max-width:100%;overflow-wrap:normal;word-break:keep-all;text-align:center;box-sizing:border-box}
+.skill-type-personal{color:#275a7c;background:#e8f0f7}
+.skill-type-unique{color:#704560;background:#f2e7ef}
+.skill-type-mastery{color:#77501c;background:#f5ecd8}
+.skill-type-class{color:#355f4c;background:#e5eee7}

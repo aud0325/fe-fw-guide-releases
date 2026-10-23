@@ -1,3 +1,4 @@
+import {sampleAbilitySections,sampleCharacters,sampleItemAbilities,sampleProfileProficiencies} from './_abilities/sample-integration.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {itemUsageDetails} from './item-usage.mjs';
@@ -15,7 +16,6 @@ import {entries,routes,coverage,sources} from './data.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {recruitmentDetails} from './recruitment-ui.mjs';
 import {characterDetails,characterGuide} from './character-ui.mjs';
-import {beginnerGuideBrief} from './beginner-guide-ui.mjs';
 import {ingredientFoodRow,mountFoodRow} from './food-ui.mjs';
 import {foodFactKeys} from './food.mjs';
 import {mountCategory,mountBonusDetails,mountSkillDetails} from './mount-ui.mjs';
@@ -37,7 +37,7 @@ export function groupOptions(type){
  return ordered.map(x=>[x,[displayText(x,createTranslator('ko'),entries),x]]);
 }
 export function coveragePanel(t){const counts=['character','item','mount','class','location'].map(type=>entries.filter(e=>e.type===type).length);return `<details class="coverage"><summary>${t('catalog.coverage-and-remaining-gaps')} · ${entries.filter(isDiscoverable).length}</summary><p>${t('catalog.characters-items-mounts-classes-locations-quests',{characters:counts[0],items:counts[1],mounts:counts[2],classes:counts[3],locations:counts[4]})}</p><p>${t('catalog.audited-wiki-character-names-item-index-entries-weapon-rows',{characters:coverage.wikiCharacters.length,items:coverage.itemIndex.filter(id=>entries.some(e=>e.id===id)).length,weapons:coverage.weaponTable.length,classes:coverage.classTable.length,recruitment:coverage.recruitmentGuide.length})}</p><p>${t('catalog.this-measures-source-list-coverage-not-completeness-of-the')}</p><p>${t('catalog.complete-mount-varieties-and-capture-sites-some-item-effects')}</p></details>`;}
-export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acquisitionHtml='',base='/',growthSkill=false}){
+export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acquisitionHtml='',base='/',growthSkill=false,profileProficiencies=sampleProfileProficiencies(e,t.locale),characterSkills=sampleCharacters.includes(e.id)?sampleAbilitySections(e,t.locale):null}){
  const text=(x,literal,key)=>displayText(x,t,entries,literal,key);
  const table=(facts,extraRows='',head=true)=>{
   const rows=facts.map(f=>{
@@ -54,7 +54,7 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   return `<div class="table-wrap facts-table${e.type==='item'&&classifyItem(e).minor==='weapons'?' weapon-stats-table':''}"><table>${head?`<thead><tr><th>${t('catalog.field')}</th><th>${t('catalog.value')}</th></tr></thead>`:''}<tbody>${rows}${extraRows}</tbody></table></div>`;
  };
  let out=paralogueDetails(e,{t,tx,name,href,route});
- if(e.roles?.length)out+=`<p class="role-tags">${e.roles.map(r=>esc(t(...roleNames[r]))).join(' · ')}</p>`;
+ if(e.type!=='character'&&e.roles?.length)out+=`<p class="role-tags">${e.roles.map(r=>esc(t(...roleNames[r]))).join(' · ')}</p>`;
  const movedItemKeys=['game8-item-part1','game8-item-part3','game8-item-gathering','game8-report-817080','game8-report-817081'];
  const mountMoved=f=>foodFactKeys.includes(f.key)||/^(?:capture-|mount-stats|mount-skills|namu-|game8-(?:capture|acquisition|scope|food-conflict))/.test(f.key);
  const facts=consolidateFacts(localizedFacts((e.facts||[]).filter(f=>(e.type!=='mount'||!mountMoved(f))&&!(e.type==='item'&&acquisitionHtml&&movedItemKeys.includes(f.key))&&!(e.caiPlaceDetails&&e.mapPoint&&f.key==='cai-farming')&&!(e.recruitment&&f.key.startsWith('game8-recruitment-'))),t));
@@ -81,19 +81,24 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   const personal=value(basic.find(f=>f.key==='personal-ko')||basic.find(f=>f.key==='ability'));
   // Collapse only matching duplicate labels; keep differing reports and all source records.
   const core=basic.filter(f=>!(f.key==='namu-class'&&value(f)===initialClass)&&!(f.key==='namu-personal-skill'&&(value(f)===personal.split(/[:：]/)[0].trim()||(t.locale==='en'&&basic.some(x=>x.key==='ability')&&f.value.trim()===personalKo))));
-  const profileFacts=[...core.filter(f=>identityKeys.includes(f.key)),...core.filter(f=>capabilityKeys.includes(f.key))];
+  const profileFacts=core.filter(f=>identityKeys.includes(f.key));
+  const proficiencyFacts=core.filter(f=>['pref_skills','nonideal_skills'].includes(f.key));
+  const skillFacts=core.filter(f=>capabilityKeys.includes(f.key)&&!proficiencyFacts.includes(f));
+  const definitions=(facts,className)=>`<dl class="${className}">${[...table(facts,'',false).matchAll(/<tr><th[^>]*>([\s\S]*?)<\/th><td>([\s\S]*?)<\/td><\/tr>/g)].map(([,label,value],index)=>`<div><dt>${label}</dt><dd>${className==='proficiency-overview'?`<span class="proficiency-affinity affinity-${facts[index].key==='pref_skills'?'preferred':'nonpreferred'}">${value}</span>`:value}</dd></div>`).join('')}</dl>`;
+  const proficiencies=profileProficiencies??(proficiencyFacts.length?definitions(proficiencyFacts,'proficiency-overview'):'');
+  const skills=characterSkills??(skillFacts.length?`<section id="section-abilities" tabindex="-1"><h2>${t('character.skills')}</h2>${table(skillFacts,'',false)}</section>`:'');
   const biography=basic.filter(f=>!identityKeys.includes(f.key)&&!capabilityKeys.includes(f.key));
-  const sections=['profile',...(e.recruitment?['recruitment']:[]),...(growth?['training']:[]),...(e.trainingGuide?['guide']:[]),...(extra?['gifts']:[]),...(biography.length?['biography']:[])];
+  const sections=['profile',...(e.recruitment?['recruitment']:[]),...(growth?['training']:[]),...(skills?['abilities']:[]),...(e.trainingGuide?['guide']:[]),...(extra?['gifts']:[]),...(biography.length?['biography']:[])];
   out+=`<nav class="character-sections" aria-label="${t('character.sections')}">${sections.map(id=>`<a href="#section-${id}">${t('character.'+id)}</a>`).join('')}</nav>`;
-  out+=beginnerGuideBrief(e,{t,tx,name,href,entries});
-  out+=`<section id="section-profile" tabindex="-1"><h2>${t('character.core-profile')}</h2><div class="character-overview${portraitHtml?' has-portrait':''}">${portraitHtml}${profileFacts.length?table(profileFacts,'',false):''}</div></section>`;
+  out+=`<section id="section-profile" class="character-profile${portraitHtml?' has-portrait':''}" aria-label="${t('character.profile-proficiencies')}" tabindex="-1"><div class="profile-top">${portraitHtml}<div class="profile-info"><h1 tabindex="-1" id="entry-title">${esc(name(e))}</h1>${profileFacts.length?definitions(profileFacts,'profile-facts'):''}</div>${proficiencies}</div></section>`;
   out+=recruitmentDetails(e,{t,tx,name,href,entries,routes,sources,route,text});
   out+=growth;
+  out+=skills;
   out+=characterGuide(e,{t,tx,name,href,entries,sources});
   out+=extra;
   if(biography.length)out+=`<section id="section-biography" tabindex="-1"><h2>${t('character.biography')}</h2>${table(biography,'',false)}</section>`;
  }else if(e.type==='mount')out+=basicHtml+mountBonusDetails(e,{t,tx})+mountSkillDetails(e,{t,tx})+acquisitionHtml;
- else out+=basicHtml+acquisitionHtml+itemUsageDetails(e,{t,name,href,entries});
+ else out+=basicHtml+sampleItemAbilities(e,t.locale)+acquisitionHtml+itemUsageDetails(e,{t,name,href,entries});
  if(story.length||e.lateJoin)out+=`<details class="coverage"><summary>${t('catalog.appearances-later-recruitment-spoilers')}</summary>${story.length?table(story):''}${e.lateJoin?`<p>${esc(tx(e.lateJoin))}</p>`:''}</details>`;
 
  if(e.acquisition?.length&&!acquisitionHtml)out+=`<h2>${t('catalog.reported-acquisition')} ${informationHint(t('catalog.these-are-unverified-secondary-reports-an-absent-route-or'),t('catalog.reported-acquisition')+' · '+t('presentation.information'))}</h2><div class="table-wrap"><table><thead><tr><th>${t('catalog.method')}</th><th>${t('catalog.location-quest')}</th><th>${t('catalog.route-chapter')}</th></tr></thead><tbody>${e.acquisition.map(a=>`<tr><td>${esc(text(a.method))}</td><td>${a.locationId?`<a href="${href(a.locationId)}">${esc(a.locationId?name(entries.find(e=>e.id===a.locationId)):text(a.where))}</a>`:esc(a.locationId?name(entries.find(e=>e.id===a.locationId)):text(a.where))}</td><td>${esc(text(a.route||'—'))} · ${a.chapter??'—'}</td></tr>`).join('')}</tbody></table></div>`;
