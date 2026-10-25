@@ -95,7 +95,7 @@ export const englishTerms=Object.fromEntries(`
 헤카톤케이르 요새|Hecatoncheir Fort
 왕도 그랑 아라곤|Gran Aragon
 영도 카시트|Kashit
-곤륜 마을|Gonryun Village
+곤륜 마을|Kunlun
 메실리나 대농원|Messilina Estate
 오시리스 마을|Osiris Village
 데모닉 마을|Demonic Village
@@ -166,7 +166,7 @@ export const englishTerms=Object.fromEntries(`
 이름 없는 묘비|Nameless Graves
 램버스주|Lambus
 브락시테아주|Braxithea
-바시테아주|Basithea
+바시테아주|Pasithea
 솔리두스주|Solidus
 니시아데스주|Nysiades
 솔로몬의 땅|Land of Solomon
@@ -399,7 +399,7 @@ export const englishTerms=Object.fromEntries(`
 百穴洞窟|Hundred-Hole Cave
 熱の道の洞窟|Heatway Cave
 百穴岩窟|Hundred-Hole Cavern
-南の通路|South Passage
+南の通路|Southern Passage
 北の通路|North Passage
 砂の王宮|Sand Palace
 ベルナール峠|Bernard Pass
@@ -520,7 +520,7 @@ export const englishTerms=Object.fromEntries(`
 바포스구|Bafosgu
 잔지바르 요새|Zanzibar Fort
 클로브 수혈 도시|Clove Burrow City
-오그마주|Ogma Province
+오그마주|Ogmios
 탈리아주|Thaleia Province
 새벽녘 평원|Dawn Plains
 우츠나 고개|Utsuna Pass

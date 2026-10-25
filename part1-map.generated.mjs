@@ -10,7 +10,16 @@ export const mapMeta={
   "1449-10-16",
   "1449-10-19",
   "1449-06-06",
-  "1449-04-16"
+  "1449-04-16",
+  "1449-08-16",
+  "1449-07-24",
+  "1449-07-26",
+  "1449-08-03",
+  "1449-09-30",
+  "1449-10-28",
+  "1449-07-23",
+  "1449-11-26",
+  "1449-11-27"
  ],
  "observedRoute": null,
  "observedRoutes": [
@@ -55,7 +64,11 @@ export const mapProvinces=[
  {
   "id": "ogma",
   "ko": "오그마주",
-  "en": null
+  "en": "Ogmios",
+  "aliases": [
+   "Ogma",
+   "Ogma Province"
+  ]
  },
  {
   "id": "thalia",
@@ -85,7 +98,10 @@ export const mapProvinces=[
  {
   "id": "basithea",
   "ko": "바시테아주",
-  "en": null
+  "en": "Pasithea",
+  "aliases": [
+   "Basithea"
+  ]
  },
  {
   "id": "solidus",
@@ -131,7 +147,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     },
     {
      "ko": "바쿠",
@@ -176,15 +192,20 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "노어 열매",
+     "itemId": "noa-fruit",
+     "status": "inferred",
+     "sourceId": "game8-identity-817020",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "observedRoute": "theodora",
@@ -213,7 +234,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     }
    ],
    "observedRoute": "theodora",
@@ -242,7 +263,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     }
    ],
    "observedRoute": "theodora",
@@ -300,7 +321,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     },
     {
      "ko": "올리바",
@@ -341,11 +362,11 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     }
    ],
    "observedRoute": "theodora",
@@ -374,7 +395,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "리나리아",
@@ -394,7 +415,7 @@ export const mapNodes=[
     },
     {
      "ko": "니네이아카",
-     "itemId": "video-nineiaka"
+     "itemId": "ninokka"
     }
    ],
    "observedRoute": "theodora",
@@ -458,7 +479,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "잔게",
@@ -524,7 +545,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "학셴",
@@ -604,7 +625,7 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "레드 플리커",
@@ -649,7 +670,7 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "레드 플리커",
@@ -801,7 +822,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "안젤리카",
@@ -1013,7 +1034,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "바쿠",
@@ -1058,7 +1079,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "밀라닐라",
@@ -1095,7 +1116,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "밀라닐라",
@@ -1173,7 +1194,7 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "밀라닐라",
@@ -1184,8 +1205,13 @@ export const mapNodes=[
      "itemId": "tenebato"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "피레스국화",
+     "itemId": "pyrethrum",
+     "status": "inferred",
+     "sourceId": "game8-identity-817017",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "observedRoute": "theodora",
@@ -1214,7 +1240,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "밀라닐라",
@@ -1467,7 +1493,7 @@ export const mapNodes=[
     },
     {
      "ko": "연옥초",
-     "itemId": "observed-purgatory-grass"
+     "itemId": "torment-grass"
     }
    ]
   }
@@ -1733,7 +1759,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "풍석",
@@ -1786,7 +1812,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "아다만트",
@@ -1860,7 +1886,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "풍석",
@@ -1909,7 +1935,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "컬렛",
@@ -1917,7 +1943,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ]
   }
@@ -1950,7 +1976,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -1983,7 +2009,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "컬렛",
@@ -2006,8 +2032,13 @@ export const mapNodes=[
      "itemId": "lunar-stone"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "오리할콘",
+     "itemId": "orichalcum",
+     "status": "inferred",
+     "sourceId": "game8-identity-816986",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ]
   }
@@ -2037,8 +2068,13 @@ export const mapNodes=[
      "itemId": "venomstone"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "열소 광석",
+     "itemId": "phlogiston",
+     "status": "inferred",
+     "sourceId": "game8-identity-816996",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "observedRoute": "theodora",
@@ -2085,7 +2121,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -3504,7 +3540,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ],
    "observedRoute": "theodora",
@@ -3536,7 +3572,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "블루 스노르",
@@ -3570,7 +3606,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "열소 광석",
-     "itemId": "observed-thermal-ore"
+     "itemId": "phlogiston"
     },
     {
      "ko": "아가르타니움",
@@ -3606,7 +3642,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "풍석",
@@ -3626,11 +3662,19 @@ export const mapNodes=[
  {
   "id": "map-southern-passage",
   "ko": "남쪽 통로",
-  "en": null,
+  "en": "Southern Passage",
   "province": "nysiades",
   "kind": "dungeon",
   "entryId": "map-southern-passage",
+  "englishNameEvidence": {
+   "sourceId": "rpgsite-dungeons-name-review-20261025",
+   "method": "english-guide-name-region-and-materials-match",
+   "checked": "2026-10-25"
+  },
   "aliases": [
+   "South Passage",
+   "南の通路",
+   "Southern Passage",
    "남쪽 통로"
   ],
   "u": 0.09980119284294232,
@@ -3646,7 +3690,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "열소 광석",
-     "itemId": "observed-thermal-ore"
+     "itemId": "phlogiston"
     },
     {
      "ko": "아가르타니움",
@@ -3681,7 +3725,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "컬렛",
@@ -3715,7 +3759,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "열소 광석",
-     "itemId": "observed-thermal-ore"
+     "itemId": "phlogiston"
     },
     {
      "ko": "아가르타니움",
@@ -3751,7 +3795,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "해성석",
@@ -3767,7 +3811,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -3799,7 +3843,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "뇌석",
@@ -3807,7 +3851,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ],
    "observedRoute": "theodora",
@@ -3837,7 +3881,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "열소 광석",
-     "itemId": "observed-thermal-ore"
+     "itemId": "phlogiston"
     },
     {
      "ko": "아가르타니움",
@@ -3867,7 +3911,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "열소 광석",
-     "itemId": "observed-thermal-ore"
+     "itemId": "phlogiston"
     },
     {
      "ko": "아가르타니움",
@@ -3904,7 +3948,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "해성석",
@@ -4113,7 +4157,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -4153,7 +4197,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ]
   }
@@ -4183,7 +4227,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ],
    "observedRoute": "theodora",
@@ -4283,7 +4327,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "풍석",
@@ -4351,7 +4395,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -4389,7 +4433,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ],
    "observedRoute": "theodora",
@@ -4460,7 +4504,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "태양석",
@@ -4504,7 +4548,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 메탈",
-     "itemId": "observed-dark-metal"
+     "itemId": "umbral-steel"
     }
    ]
   }
@@ -4537,7 +4581,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "컬렛",
@@ -4549,7 +4593,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ]
   }
@@ -4581,7 +4625,7 @@ export const mapNodes=[
     },
     {
      "ko": "옥 강철",
-     "itemId": "video-jade-steel"
+     "itemId": "black-sand-steel"
     },
     {
      "ko": "독석",
@@ -4639,7 +4683,7 @@ export const mapNodes=[
     },
     {
      "ko": "매직 어레이",
-     "itemId": "observed-magic-array"
+     "itemId": "spellshard"
     }
    ],
    "observedRoute": "theodora",
@@ -5754,11 +5798,19 @@ export const mapNodes=[
  {
   "id": "map-gonryun-village",
   "ko": "곤륜 마을",
-  "en": null,
+  "en": "Kunlun",
   "province": "nysiades",
   "kind": "hub",
   "entryId": "map-gonryun-village",
+  "englishNameEvidence": {
+   "sourceId": "gather-stones",
+   "method": "english-guide-name-region-and-materials-match",
+   "checked": "2026-10-25"
+  },
   "aliases": [
+   "Gonryun Village",
+   "Kunlun Village",
+   "Kunlun",
    "곤륜 마을"
   ],
   "u": 0.0807157057654076,
@@ -7175,7 +7227,7 @@ export const mapNodes=[
     },
     {
      "ko": "라돈 잉어",
-     "itemId": "video-ladon-carp"
+     "itemId": "ladon-loach"
     },
     {
      "ko": "바알 꼬치고기",
@@ -7292,7 +7344,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "라돈 잉어",
-     "itemId": "video-ladon-carp"
+     "itemId": "ladon-loach"
     },
     {
      "ko": "라돈 꼬치고기",
@@ -7334,7 +7386,7 @@ export const mapNodes=[
     },
     {
      "ko": "라돈 잉어",
-     "itemId": "video-ladon-carp"
+     "itemId": "ladon-loach"
     },
     {
      "ko": "라돈 꼬치고기",
@@ -7443,7 +7495,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "라돈 잉어",
-     "itemId": "video-ladon-carp"
+     "itemId": "ladon-loach"
     },
     {
      "ko": "방패 꼬치고기",
@@ -7451,7 +7503,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 피시",
-     "itemId": "observed-dark-fish"
+     "itemId": "bedfish"
     },
     {
      "ko": "검은 잉어",
@@ -7459,7 +7511,7 @@ export const mapNodes=[
     },
     {
      "ko": "여왕 잉어",
-     "itemId": "observed-queen-carp"
+     "itemId": "queen-loach"
     }
    ]
   }
@@ -7536,8 +7588,13 @@ export const mapNodes=[
      "itemId": "kothar-gar"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "조토곤",
+     "itemId": "video-jotogon",
+     "status": "inferred",
+     "sourceId": "game8-identity-817376",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ]
   }
@@ -7607,7 +7664,7 @@ export const mapNodes=[
     },
     {
      "ko": "하드 피시",
-     "itemId": "video-hard-fish"
+     "itemId": "steelfish"
     },
     {
      "ko": "알비네 청어",
@@ -7747,7 +7804,7 @@ export const mapNodes=[
     },
     {
      "ko": "다크 피시",
-     "itemId": "observed-dark-fish"
+     "itemId": "bedfish"
     }
    ],
    "access": {
@@ -7859,7 +7916,7 @@ export const mapNodes=[
     },
     {
      "ko": "하드 피시",
-     "itemId": "video-hard-fish"
+     "itemId": "steelfish"
     },
     {
      "ko": "알비네 청어",
@@ -7939,15 +7996,20 @@ export const mapNodes=[
     },
     {
      "ko": "하드 피시",
-     "itemId": "video-hard-fish"
+     "itemId": "steelfish"
     },
     {
      "ko": "떠내려온 나무 상자",
      "itemId": "observed-driftwood-crate"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "갈라 멀린",
+     "itemId": "observed-gala-marlin",
+     "status": "inferred",
+     "sourceId": "game8-identity-817059",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "access": {
@@ -8003,15 +8065,20 @@ export const mapNodes=[
     },
     {
      "ko": "하드 피시",
-     "itemId": "video-hard-fish"
+     "itemId": "steelfish"
     },
     {
      "ko": "리르 피시",
      "itemId": "lir-fish"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "금송어",
+     "itemId": "golden-trout",
+     "status": "inferred",
+     "sourceId": "game8-identity-817065",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "access": {
@@ -8486,8 +8553,13 @@ export const mapNodes=[
      "itemId": "sugar-marlin"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "갈라 멀린",
+     "itemId": "observed-gala-marlin",
+     "status": "inferred",
+     "sourceId": "game8-identity-817059",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "access": {
@@ -8575,7 +8647,7 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     },
     {
      "ko": "멜라라",
@@ -8658,7 +8730,7 @@ export const mapNodes=[
     },
     {
      "ko": "태양 열매",
-     "itemId": "video-sun-fruit"
+     "itemId": "thry-fruit"
     }
    ],
    "observedRoute": "theodora",
@@ -9030,8 +9102,13 @@ export const mapNodes=[
      "itemId": "caltrop-flower"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "니네이아카",
+     "itemId": "ninokka",
+     "status": "inferred",
+     "sourceId": "game8-identity-817023",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "observedRoute": "theodora",
@@ -9246,8 +9323,13 @@ export const mapNodes=[
      "itemId": "obroma"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "오드 몽주",
+     "itemId": "oda-monja",
+     "status": "inferred",
+     "sourceId": "game8-identity-817021",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ],
    "observedRoute": "theodora",
@@ -9429,7 +9511,7 @@ export const mapNodes=[
     },
     {
      "ko": "반짝 별",
-     "itemId": "observed-twinkling-star"
+     "itemId": "lightstar"
     }
    ]
   }
@@ -9511,7 +9593,7 @@ export const mapNodes=[
     },
     {
      "ko": "반짝 별",
-     "itemId": "observed-twinkling-star"
+     "itemId": "lightstar"
     }
    ]
   }
@@ -9544,7 +9626,7 @@ export const mapNodes=[
     },
     {
      "ko": "연옥초",
-     "itemId": "observed-purgatory-grass"
+     "itemId": "torment-grass"
     }
    ]
   }
@@ -9913,8 +9995,13 @@ export const mapNodes=[
      "itemId": "obroma"
     },
     {
-     "ko": "???",
-     "itemId": null
+     "ko": "금파초",
+     "itemId": "jin-ba-jiao",
+     "status": "inferred",
+     "sourceId": "game8-identity-817016",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
     }
    ]
   }
@@ -10093,10 +10180,21 @@ export const mapNodes=[
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "oracle-falls",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-oracle-falls",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Oracle Falls",
+   "sourceUrl": "https://yuphastemple.com/map/oracle-falls/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 신탁의 폭포",
+    "en": "Yu Phas’ Temple · Oracle Falls"
+   }
+  },
   "aliases": [
    "神託の滝",
-   "신탁의 폭포",
-   "Oracle Falls"
+   "Oracle Falls",
+   "신탁의 폭포"
   ],
   "u": 0.2556660039761432,
   "v": 0.6255263157894737,
@@ -10109,7 +10207,7 @@ export const mapNodes=[
    "materials": [
     {
      "ko": "라돈 잉어",
-     "itemId": "video-ladon-carp"
+     "itemId": "ladon-loach"
     },
     {
      "ko": "라돈 꼬치고기",
@@ -10117,11 +10215,22 @@ export const mapNodes=[
     },
     {
      "ko": "여왕 잉어",
-     "itemId": "observed-queen-carp"
+     "itemId": "queen-loach"
     }
    ],
    "observedRoute": "leda",
-   "gameDate": "1449-06-06"
+   "gameDate": "1449-06-06",
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
   }
  },
  {
@@ -10132,11 +10241,22 @@ export const mapNodes=[
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "travelers-hill",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-travelers-hill",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Traveler's Hill",
+   "sourceUrl": "https://yuphastemple.com/map/travelers-hill/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 여행자의 언덕",
+    "en": "Yu Phas’ Temple · Traveler’s Hill"
+   }
+  },
   "aliases": [
    "旅人の丘",
    "Traveler's Hill",
-   "여행자의 언덕",
-   "Traveler’s Hill"
+   "Traveler’s Hill",
+   "여행자의 언덕"
   ],
   "u": 0.5145129224652086,
   "v": 0.4928947368421053,
@@ -10153,7 +10273,7 @@ export const mapNodes=[
     },
     {
      "ko": "하나 열매",
-     "itemId": "video-hana-fruit"
+     "itemId": "wun-fruit"
     },
     {
      "ko": "올리바",
@@ -10165,18 +10285,561 @@ export const mapNodes=[
     }
    ],
    "observedRoute": "leda",
-   "gameDate": "1449-04-16"
+   "gameDate": "1449-04-16",
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "forest-of-no-return",
+  "ko": "돌아올 수 없는 숲",
+  "en": "Forest of No Return",
+  "province": "basithea",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "forest-of-no-return",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-forest-of-no-return",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Forest of No Return",
+   "sourceUrl": "https://yuphastemple.com/map/forest-of-no-return/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 돌아올 수 없는 숲",
+    "en": "Yu Phas’ Temple · Forest of No Return"
+   }
+  },
+  "aliases": [
+   "還らずの森",
+   "돌아오지 못하는 숲",
+   "Forest of No Return",
+   "돌아올 수 없는 숲"
+  ],
+  "u": 0.04254473161033804,
+  "v": 0.5855263157894737,
+  "sourceId": "administrator-leda-map-20261025",
+  "correctedName": true,
+  "details": {
+   "description": {
+    "ko": "오거스 산의 수행을 견디지 못하고 도망친 이들이 모인 곳.",
+    "en": "A refuge for people who fled the trials of Mount Orgus."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-08-16",
+   "materials": [
+    {
+     "ko": "비터 리프",
+     "itemId": "observed-bitter-leaf"
+    },
+    {
+     "ko": "스파이시 리프",
+     "itemId": "pepper-leaves"
+    },
+    {
+     "ko": "글루마오사",
+     "itemId": "glirmosa"
+    },
+    {
+     "ko": "오브로마",
+     "itemId": "obroma"
+    },
+    {
+     "ko": "시나모스",
+     "itemId": "observed-sinamos"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "hermits-hut",
+  "ko": "은자의 산막",
+  "en": "Mountainside Hermitage",
+  "province": "basithea",
+  "kind": "banquet",
+  "entryId": "hermits-hut",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-hermits-hut",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Mountainside Hermitage",
+   "sourceUrl": "https://yuphastemple.com/map/mountainside-hermitage/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 은자의 산막",
+    "en": "Yu Phas’ Temple · Mountainside Hermitage"
+   }
+  },
+  "aliases": [
+   "Hermit’s Hut",
+   "Mountainside Hermitage",
+   "은자의 산막"
+  ],
+  "u": 0.09502982107355867,
+  "v": 0.5307894736842106,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "오거스 산 정상의 허름한 오두막. 괴짜 노인이 산다는 소문이 있다.",
+    "en": "A ramshackle hut atop Mount Orgus, said to be home to an eccentric old man."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-07-24",
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "edge-tower",
+  "ko": "끝자락 탑",
+  "en": "Land's-Limit Tower",
+  "province": "nysiades",
+  "kind": "gathering",
+  "gatheringType": "loot",
+  "entryId": "edge-tower",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-edge-tower",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Land's-Limit Tower",
+   "sourceUrl": "https://yuphastemple.com/map/lands-limit-tower/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 끝자락 탑",
+    "en": "Yu Phas’ Temple · Land's-Limit Tower"
+   }
+  },
+  "aliases": [
+   "Edge Tower",
+   "Land's-Limit Tower",
+   "끝자락 탑"
+  ],
+  "u": 0.04095427435387679,
+  "v": 0.383421052631579,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "서쪽 바다를 감시하려고 세웠으나 지금은 비어 있는 탑.",
+    "en": "An abandoned watchtower once used to monitor the western sea."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-07-26",
+   "loot": [
+    {
+     "ko": "사금",
+     "itemId": "video-gold-dust"
+    },
+    {
+     "ko": "사금 덩어리",
+     "itemId": "video-gold-dust-lump"
+    },
+    {
+     "ko": "보주 상자",
+     "itemId": "gem-box"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "travelers-garden",
+  "ko": "유랑자의 옛 정원",
+  "en": "Traveler’s Garden",
+  "province": "castalia",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "travelers-garden",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-travelers-garden",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Traveler's Garden",
+   "sourceUrl": "https://yuphastemple.com/map/travelers-garden/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 유랑자의 옛 정원",
+    "en": "Yu Phas’ Temple · Traveler’s Garden"
+   }
+  },
+  "aliases": [
+   "Traveler's Garden",
+   "Traveler’s Garden",
+   "유랑자의 옛 정원"
+  ],
+  "u": 0.7137176938369781,
+  "v": 0.19815789473684214,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "전설의 음유 시인 코엔의 방문을 기념한 정원.",
+    "en": "A garden commemorating a visit by the legendary bard Coen."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-08-03",
+   "materials": [
+    {
+     "ko": "비터 리프",
+     "itemId": "observed-bitter-leaf"
+    },
+    {
+     "ko": "스파이시 리프",
+     "itemId": "pepper-leaves"
+    },
+    {
+     "ko": "밀라닐라",
+     "itemId": "miranilla"
+    },
+    {
+     "ko": "올리바",
+     "itemId": "oliva"
+    },
+    {
+     "ko": "유나메이",
+     "itemId": "video-yunamei",
+     "status": "inferred",
+     "sourceId": "game8-identity-817018",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "cape-nereus",
+  "ko": "네레우스의 곶",
+  "en": "Cape Nereus",
+  "province": "solidus",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "cape-nereus",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-cape-nereus",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Cape Nereus",
+   "sourceUrl": "https://yuphastemple.com/map/cape-nereus/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 네레우스의 곶",
+    "en": "Yu Phas’ Temple · Cape Nereus"
+   }
+  },
+  "aliases": [
+   "ネレウスの岬",
+   "네레우스 곶",
+   "Cape Nereus",
+   "네레우스의 곶"
+  ],
+  "u": 0.09343936381709742,
+  "v": 0.283421052631579,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "습기를 머금은 바닷바람 덕에 다양한 식물이 자라는 사막의 곶.",
+    "en": "A desert cape where moist sea breezes sustain varied plants."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-09-30",
+   "materials": [
+    {
+     "ko": "비터 리프",
+     "itemId": "observed-bitter-leaf"
+    },
+    {
+     "ko": "스파이시 리프",
+     "itemId": "pepper-leaves"
+    },
+    {
+     "ko": "로카",
+     "itemId": "roca"
+    },
+    {
+     "ko": "숄다넬라",
+     "itemId": "observed-soldanella"
+    },
+    {
+     "ko": "빈하사",
+     "itemId": "observed-binhassa",
+     "status": "inferred",
+     "sourceId": "game8-identity-817015",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "arrecif-saltmarsh",
+  "ko": "아레시프 염전",
+  "en": "Arrecif Saltmarsh",
+  "province": "thalia",
+  "kind": "gathering",
+  "gatheringType": "ore",
+  "entryId": "arrecif-saltmarsh",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-arrecif-saltmarsh",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Arrecif Saltmarsh",
+   "sourceUrl": "https://yuphastemple.com/map/arrecif-saltmarsh/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 아레시프 염전",
+    "en": "Yu Phas’ Temple · Arrecif Saltmarsh"
+   }
+  },
+  "aliases": [
+   "アレシフ塩田",
+   "아레시프 염습지",
+   "Arrecif Saltmarsh",
+   "아레시프 염전"
+  ],
+  "u": 0.34791252485089463,
+  "v": 0.17605263157894738,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "아라고 왕국에서 주로 소비하는 소금을 생산하는 소규모 염전.",
+    "en": "A small saltworks supplying salt mainly consumed in the Kingdom of Arago."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-09-30",
+   "materials": [
+    {
+     "ko": "해성석",
+     "itemId": "sea-star-stone"
+    },
+    {
+     "ko": "블루 스노르",
+     "itemId": "blue-snoll",
+     "status": "inferred",
+     "sourceId": "game8-identity-816991",
+     "checked": "2026-10-25",
+     "observedKo": "???",
+     "identificationMethod": "single-remaining-item-in-individual-guide"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "maharipa-garden",
+  "ko": "마하리파의 동산",
+  "en": "Maharipa Garden",
+  "province": "ogma",
+  "kind": "gathering",
+  "gatheringType": "plant",
+  "entryId": "maharipa-garden",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-maharipa-garden",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Maharipa Garden",
+   "sourceUrl": "https://yuphastemple.com/map/maharipa-garden/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 마하리파의 동산",
+    "en": "Yu Phas’ Temple · Maharipa Garden"
+   }
+  },
+  "aliases": [
+   "マハリパの園",
+   "마하리파 정원",
+   "Maharipa Garden",
+   "마하리파의 동산"
+  ],
+  "u": 0.5920477137176939,
+  "v": 0.8097368421052633,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "인근 부족들이 공동묘지로 이용하는 곳.",
+    "en": "A communal burial ground used by the local tribes."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-10-28",
+   "materials": [
+    {
+     "ko": "원더 리프",
+     "itemId": "observed-wonder-leaf"
+    },
+    {
+     "ko": "비터 리프",
+     "itemId": "observed-bitter-leaf"
+    },
+    {
+     "ko": "오브로마",
+     "itemId": "obroma"
+    },
+    {
+     "ko": "바스캐치",
+     "itemId": "observed-bascatch"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
+  }
+ },
+ {
+  "id": "ash-tower",
+  "ko": "재의 고탑",
+  "en": "Ancient Tower of Ash",
+  "province": "basithea",
+  "kind": "gathering",
+  "gatheringType": "loot",
+  "entryId": "ash-tower",
+  "englishNameEvidence": {
+   "sourceId": "yuphas-leda-place-ash-tower",
+   "checked": "2026-10-26",
+   "method": "english-map-description-and-yields-match",
+   "sourceName": "Ancient Tower of Ash",
+   "sourceUrl": "https://yuphastemple.com/map/ancient-tower-of-ash/leda/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · 재의 고탑",
+    "en": "Yu Phas’ Temple · Ancient Tower of Ash"
+   }
+  },
+  "aliases": [
+   "Tower of Ash",
+   "Ancient Tower of Ash",
+   "재의 고탑"
+  ],
+  "u": 0.1952286282306164,
+  "v": 0.6518421052631579,
+  "sourceId": "administrator-leda-map-20261025",
+  "details": {
+   "description": {
+    "ko": "은자가 된 마도사가 살았다고 전해지는 작은 탑.",
+    "en": "A small tower said to have housed a reclusive mage."
+   },
+   "observedRoute": "leda",
+   "gameDate": "1449-07-23",
+   "loot": [
+    {
+     "ko": "사금",
+     "itemId": "video-gold-dust"
+    },
+    {
+     "ko": "사금 덩어리",
+     "itemId": "video-gold-dust-lump"
+    },
+    {
+     "ko": "수수께끼의 상자",
+     "itemId": "observed-riddle-box"
+    },
+    {
+     "ko": "흑마술 지침서",
+     "itemId": "black-magic-manual"
+    },
+    {
+     "ko": "백마술 지침서",
+     "itemId": "white-magic-manual"
+    },
+    {
+     "ko": "???"
+    }
+   ],
+   "access": {
+    "kind": "route",
+    "route": "leda",
+    "requires": "performance",
+    "sourceId": "administrator-leda-map-20261025",
+    "checked": "2026-10-25",
+    "note": {
+     "ko": "레다 루트 공연을 통해 해금",
+     "en": "Unlocked through performances in Leda’s route"
+    }
+   }
   }
  }
 ];
 export const mapCollectibles=[
  {
-  "id": "video-hana-fruit",
+  "id": "wun-fruit",
   "ko": "하나 열매",
-  "en": "하나 열매",
+  "en": "Wun Fruit",
   "aliases": [
+   "Wun Fruit",
+   "운 열매",
    "イチノミ",
-   "하나 열매"
+   "Hana Fruit",
+   "하나 열매",
+   "운 열매(Wun Fruit)"
   ],
   "placeIds": [
    "collection-sunrise-pass",
@@ -10223,7 +10886,8 @@ export const mapCollectibles=[
    "collection-whispering-rock",
    "map-unexplored-oasis",
    "collection-magnas-plateau",
-   "travelers-hill"
+   "travelers-hill",
+   "travelers-garden"
   ]
  },
  {
@@ -10238,16 +10902,21 @@ export const mapCollectibles=[
    "노어 열매"
   ],
   "placeIds": [
-   "collection-sunrise-pass"
+   "collection-sunrise-pass",
+   "collection-dawn-plain"
   ]
  },
  {
-  "id": "video-sun-fruit",
+  "id": "thry-fruit",
   "ko": "태양 열매",
-  "en": "태양 열매",
+  "en": "Thry Fruit",
   "aliases": [
+   "Thry Fruit",
+   "스리 열매",
    "サンノミ",
-   "태양 열매"
+   "Sun Fruit",
+   "태양 열매",
+   "스리 열매(Thry Fruit)"
   ],
   "placeIds": [
    "collection-dawn-plain",
@@ -10399,15 +11068,20 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "video-nineiaka",
+  "id": "ninokka",
   "ko": "니네이아카",
-  "en": "니네이아카",
+  "en": "Ninokka",
   "aliases": [
+   "Ninokka",
+   "니노카",
    "ニネイアッカ",
-   "니네이아카"
+   "Nineiaka",
+   "니네이아카",
+   "니노카(Ninokka)"
   ],
   "placeIds": [
-   "collection-aegina-mountain"
+   "collection-aegina-mountain",
+   "collection-stargazing-pass"
   ]
  },
  {
@@ -10442,15 +11116,19 @@ export const mapCollectibles=[
    "map-dubhe-pass",
    "map-mintaka-rock-gate",
    "map-orion-valley",
-   "map-howling-beast-valley"
+   "map-howling-beast-valley",
+   "cape-nereus"
   ]
  },
  {
   "id": "observed-geummae",
   "ko": "금매",
-  "en": "Geummae",
+  "en": "Kinbai",
   "aliases": [
-   "금매"
+   "금매",
+   "Geummae",
+   "Kinbai",
+   "キンバイ"
   ],
   "placeIds": [
    "map-beratri-valley",
@@ -10513,7 +11191,9 @@ export const mapCollectibles=[
   "ko": "알마메트",
   "en": "Almamet",
   "aliases": [
-   "알마메트"
+   "알마메트",
+   "Almamet",
+   "アルマメット"
   ],
   "placeIds": [
    "map-merak-pass",
@@ -10523,12 +11203,16 @@ export const mapCollectibles=[
  {
   "id": "observed-binhassa",
   "ko": "빈하사",
-  "en": "Binhassa",
+  "en": "Hingosh",
   "aliases": [
-   "빈하사"
+   "빈하사",
+   "Binhassa",
+   "Hingosh",
+   "ヒンガシャ"
   ],
   "placeIds": [
-   "map-el-mountains"
+   "map-el-mountains",
+   "cape-nereus"
   ]
  },
  {
@@ -10557,12 +11241,16 @@ export const mapCollectibles=[
   "ko": "솔다넬라",
   "en": "Soldanella",
   "aliases": [
-   "솔다넬라"
+   "솔다넬라",
+   "숄다넬라",
+   "Soldanella",
+   "ソルダネラ"
   ],
   "placeIds": [
    "map-mintaka-rock-gate",
    "map-orion-valley",
-   "map-unexplored-oasis"
+   "map-unexplored-oasis",
+   "cape-nereus"
   ]
  },
  {
@@ -10582,11 +11270,13 @@ export const mapCollectibles=[
  {
   "id": "video-daka-monju",
   "ko": "다카 몽주",
-  "en": "다카 몽주",
+  "en": "Dakka Monja",
   "aliases": [
    "ダッカモンジュ",
    "다카 몽주",
-   "다카 몽쥬"
+   "다카 몽쥬",
+   "Daka Monju",
+   "Dakka Monja"
   ],
   "placeIds": [
    "map-orion-valley"
@@ -10599,6 +11289,8 @@ export const mapCollectibles=[
   "aliases": [
    "Miranilla",
    "ミラニラ",
+   "멜라넬라",
+   "Melanella",
    "밀라닐라"
   ],
   "placeIds": [
@@ -10610,19 +11302,23 @@ export const mapCollectibles=[
    "collection-whispering-rock",
    "collection-zetos-falls",
    "collection-brigadier-pass",
-   "map-unexplored-oasis"
+   "map-unexplored-oasis",
+   "travelers-garden"
   ]
  },
  {
   "id": "video-yunamei",
   "ko": "유나메이",
-  "en": "유나메이",
+  "en": "Yuna Mei",
   "aliases": [
    "ユナメイ",
-   "유나메이"
+   "유나메이",
+   "Yunamei",
+   "Yuna Mei"
   ],
   "placeIds": [
-   "video-damasen-cape"
+   "video-damasen-cape",
+   "travelers-garden"
   ]
  },
  {
@@ -10634,11 +11330,13 @@ export const mapCollectibles=[
    "제충국",
    "ピレスギク",
    "제충국(Pyrethrum)",
-   "피레스 국화"
+   "피레스 국화",
+   "피레스국화"
   ],
   "placeIds": [
    "collection-utsuna-pass",
-   "collection-whispering-rock"
+   "collection-whispering-rock",
+   "collection-zetos-falls"
   ]
  },
  {
@@ -10662,7 +11360,9 @@ export const mapCollectibles=[
   "ko": "용설란",
   "en": "Agave",
   "aliases": [
-   "용설란"
+   "용설란",
+   "Agave",
+   "アガヴェ"
   ],
   "placeIds": [
    "map-shifting-sand-road",
@@ -10706,7 +11406,9 @@ export const mapCollectibles=[
   "ko": "솔기",
   "en": "Solgi",
   "aliases": [
-   "솔기"
+   "솔기",
+   "Solgi",
+   "ソルギ"
   ],
   "placeIds": [
    "map-sandworm-den",
@@ -10714,11 +11416,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-purgatory-grass",
+  "id": "torment-grass",
   "ko": "연옥초",
-  "en": "Purgatory Grass",
+  "en": "Torment Grass",
   "aliases": [
-   "연옥초"
+   "Torment Grass",
+   "고통의 풀",
+   "煉獄草",
+   "연옥초",
+   "Purgatory Grass",
+   "고통의 풀(Torment Grass)"
   ],
   "placeIds": [
    "map-quicksand-graveyard",
@@ -10758,12 +11465,16 @@ export const mapCollectibles=[
  {
   "id": "observed-bascatch",
   "ko": "바스캐치",
-  "en": "Bascatch",
+  "en": "Baquatti",
   "aliases": [
-   "바스캐치"
+   "바스캐치",
+   "Bascatch",
+   "Baquatti",
+   "バスカッチ"
   ],
   "placeIds": [
-   "collection-chere-island"
+   "collection-chere-island",
+   "maharipa-garden"
   ]
  },
  {
@@ -10875,12 +11586,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "video-jade-steel",
+  "id": "black-sand-steel",
   "ko": "옥 강철",
-  "en": "옥 강철",
+  "en": "Black-Sand Steel",
   "aliases": [
+   "Black-Sand Steel",
+   "흑사강",
    "玉鋼",
-   "옥 강철"
+   "Jade Steel",
+   "옥 강철",
+   "흑사강(Black-Sand Steel)"
   ],
   "placeIds": [
    "map-homer-rock-formations",
@@ -10944,9 +11659,12 @@ export const mapCollectibles=[
  {
   "id": "observed-agarthanium",
   "ko": "아가르타니움",
-  "en": "Agarthanium",
+  "en": "Agarthium",
   "aliases": [
-   "아가르타니움"
+   "아가르타니움",
+   "Agarthanium",
+   "Agarthium",
+   "アガルチウム"
   ],
   "placeIds": [
    "map-homer-rock-formations",
@@ -11008,15 +11726,21 @@ export const mapCollectibles=[
    "map-anu-island",
    "valhalla-mine",
    "uncharted-island",
-   "map-iapetos-cavern"
+   "map-iapetos-cavern",
+   "arrecif-saltmarsh"
   ]
  },
  {
-  "id": "observed-magic-array",
+  "id": "spellshard",
   "ko": "매직 어레이",
-  "en": "Magic Array",
+  "en": "Spellshard",
   "aliases": [
-   "매직 어레이"
+   "Spellshard",
+   "마법 파편",
+   "매직 어레이",
+   "Magic Array",
+   "마법 파편(Spellshard)",
+   "マジックアレイ"
   ],
   "placeIds": [
    "map-muzra-s-corpse-cave",
@@ -11028,11 +11752,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-dark-metal",
+  "id": "umbral-steel",
   "ko": "다크 메탈",
-  "en": "Dark Metal",
+  "en": "Umbral Steel",
   "aliases": [
-   "다크 메탈"
+   "Umbral Steel",
+   "그림자 강철",
+   "다크 메탈",
+   "Dark Metal",
+   "그림자 강철(Umbral Steel)",
+   "ダークメタル"
   ],
   "placeIds": [
    "map-valley-of-death",
@@ -11043,6 +11772,39 @@ export const mapCollectibles=[
    "sand-shadow-fort",
    "votive-altar",
    "map-beast-trail"
+  ]
+ },
+ {
+  "id": "orichalcum",
+  "ko": "오리할콘(Orichalcum)",
+  "en": "Orichalcum",
+  "aliases": [
+   "Orichalcum",
+   "오리할콘"
+  ],
+  "placeIds": [
+   "map-mount-atra-summit"
+  ]
+ },
+ {
+  "id": "phlogiston",
+  "ko": "열소 광석",
+  "en": "Phlogiston",
+  "aliases": [
+   "Phlogiston",
+   "플로지스톤",
+   "熱素鉱",
+   "열소 광석",
+   "Thermal Ore",
+   "플로지스톤(Phlogiston)"
+  ],
+  "placeIds": [
+   "collection-insect-hole",
+   "map-eastern-passage",
+   "map-southern-passage",
+   "map-scorching-road-cave",
+   "map-white-hole-rock-cave",
+   "waterfall-cave"
   ]
  },
  {
@@ -11061,7 +11823,8 @@ export const mapCollectibles=[
    "map-dark-cave",
    "noah-cave",
    "map-anu-island",
-   "uncharted-island"
+   "uncharted-island",
+   "arrecif-saltmarsh"
   ]
  },
  {
@@ -11101,7 +11864,9 @@ export const mapCollectibles=[
    "map-yashiro-fort",
    "collection-clove-pit-city",
    "map-endless-wind-beach",
-   "map-dragon-s-eye-tower"
+   "map-dragon-s-eye-tower",
+   "edge-tower",
+   "ash-tower"
   ]
  },
  {
@@ -11138,7 +11903,9 @@ export const mapCollectibles=[
    "map-madel-altar",
    "map-yashiro-fort",
    "collection-clove-pit-city",
-   "map-dragon-s-eye-tower"
+   "map-dragon-s-eye-tower",
+   "edge-tower",
+   "ash-tower"
   ]
  },
  {
@@ -11336,21 +12103,6 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-thermal-ore",
-  "ko": "열소 광석",
-  "en": "Thermal Ore",
-  "aliases": [
-   "열소 광석"
-  ],
-  "placeIds": [
-   "map-eastern-passage",
-   "map-southern-passage",
-   "map-scorching-road-cave",
-   "map-white-hole-rock-cave",
-   "waterfall-cave"
-  ]
- },
- {
   "id": "wootz-steel",
   "ko": "우츠 강철",
   "en": "Wootz Steel",
@@ -11368,9 +12120,12 @@ export const mapCollectibles=[
  {
   "id": "observed-nemead",
   "ko": "네메아드",
-  "en": "Nemead",
+  "en": "Nemearite",
   "aliases": [
-   "네메아드"
+   "네메아드",
+   "Nemead",
+   "Nemearite",
+   "ネメアード"
   ],
   "placeIds": [
    "map-nemea-cavern"
@@ -11434,11 +12189,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "video-ladon-carp",
+  "id": "ladon-loach",
   "ko": "라돈 잉어",
-  "en": "라돈 잉어",
+  "en": "Ladon Loach",
   "aliases": [
-   "라돈 잉어"
+   "Ladon Loach",
+   "라돈 미꾸라지",
+   "ラドンローチ",
+   "Ladon Carp",
+   "라돈 잉어",
+   "라돈 미꾸라지(Ladon Loach)"
   ],
   "placeIds": [
    "collection-enkeladus-bridge",
@@ -11488,6 +12248,7 @@ export const mapCollectibles=[
   "placeIds": [
    "collection-santana-bridge",
    "collection-pina-reef",
+   "map-panja-bay",
    "map-dione-current",
    "map-niza-s-gate"
   ]
@@ -11538,10 +12299,12 @@ export const mapCollectibles=[
  {
   "id": "video-shield-pike",
   "ko": "방패 꼬치고기",
-  "en": "방패 꼬치고기",
+  "en": "Aegis Pike",
   "aliases": [
    "シールドパイク",
-   "방패 꼬치고기"
+   "Shield Pike",
+   "방패 꼬치고기",
+   "Aegis Pike"
   ],
   "placeIds": [
    "map-salt-lake",
@@ -11550,11 +12313,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-dark-fish",
+  "id": "bedfish",
   "ko": "다크 피시",
-  "en": "Dark Fish",
+  "en": "Bedfish",
   "aliases": [
-   "다크 피시"
+   "Bedfish",
+   "베드피시",
+   "다크 피시",
+   "Dark Fish",
+   "베드피시(Bedfish)",
+   "ダークフィッシュ"
   ],
   "placeIds": [
    "map-lake-val-der",
@@ -11564,20 +12332,28 @@ export const mapCollectibles=[
  {
   "id": "observed-black-carp",
   "ko": "검은 잉어",
-  "en": "Black Carp",
+  "en": "Black Loach",
   "aliases": [
-   "검은 잉어"
+   "검은 잉어",
+   "Black Carp",
+   "Black Loach",
+   "ブラックローチ"
   ],
   "placeIds": [
    "map-lake-val-der"
   ]
  },
  {
-  "id": "observed-queen-carp",
+  "id": "queen-loach",
   "ko": "여왕 잉어",
-  "en": "Queen Carp",
+  "en": "Queen Loach",
   "aliases": [
-   "여왕 잉어"
+   "Queen Loach",
+   "여왕 미꾸라지",
+   "クイーンローチ",
+   "여왕 잉어",
+   "Queen Carp",
+   "여왕 미꾸라지(Queen Loach)"
   ],
   "placeIds": [
    "map-lake-val-der",
@@ -11605,15 +12381,34 @@ export const mapCollectibles=[
  {
   "id": "observed-gala-marlin",
   "ko": "갈라 멀린",
-  "en": "Gala Marlin",
+  "en": "Garla Marlin",
   "aliases": [
-   "갈라 멀린"
+   "갈라 멀린",
+   "Gala Marlin",
+   "Garla Marlin",
+   "ガラマーリン"
   ],
   "placeIds": [
    "collection-pelusa-cape",
    "map-sosie-bay",
    "map-pelusa-offshore-waters",
-   "map-aife-strait"
+   "map-ende-s-small-whirlpool",
+   "map-aife-strait",
+   "map-horus-strait"
+  ]
+ },
+ {
+  "id": "video-jotogon",
+  "ko": "조토곤",
+  "en": "Zotogon",
+  "aliases": [
+   "ゾトーゴン",
+   "Jotogon",
+   "조토곤",
+   "Zotogon"
+  ],
+  "placeIds": [
+   "map-lake-joto"
   ]
  },
  {
@@ -11657,12 +12452,16 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "video-hard-fish",
+  "id": "steelfish",
   "ko": "하드 피시",
-  "en": "하드 피시",
+  "en": "Steelfish",
   "aliases": [
+   "Steelfish",
+   "강철 물고기",
    "ハードフィッシュ",
-   "하드 피시"
+   "Hard Fish",
+   "하드 피시",
+   "강철 물고기(Steelfish)"
   ],
   "placeIds": [
    "map-sosie-bay",
@@ -11674,9 +12473,12 @@ export const mapCollectibles=[
  {
   "id": "observed-albine-herring",
   "ko": "알비네 청어",
-  "en": "Albine Herring",
+  "en": "Albinean Herring",
   "aliases": [
-   "알비네 청어"
+   "알비네 청어",
+   "Albine Herring",
+   "Albinean Herring",
+   "アルビネニシン"
   ],
   "placeIds": [
    "map-sosie-bay",
@@ -11719,7 +12521,9 @@ export const mapCollectibles=[
   "ko": "하트 가다랑어",
   "en": "Heart Bonito",
   "aliases": [
-   "하트 가다랑어"
+   "하트 가다랑어",
+   "Heart Bonito",
+   "ハートボニート"
   ],
   "placeIds": [
    "map-quiet-sea",
@@ -11729,10 +12533,12 @@ export const mapCollectibles=[
  {
   "id": "video-dream-guide",
   "ko": "꿈 길잡이",
-  "en": "꿈 길잡이",
+  "en": "Dreamtracer",
   "aliases": [
    "ユメノシルベ",
-   "꿈 길잡이"
+   "Dream Guide",
+   "꿈 길잡이",
+   "Dreamtracer"
   ],
   "placeIds": [
    "map-fish-shoal-reef"
@@ -11785,9 +12591,12 @@ export const mapCollectibles=[
  {
   "id": "observed-sharmir",
   "ko": "샤르미르",
-  "en": "Sharmir",
+  "en": "Zamir",
   "aliases": [
-   "샤르미르"
+   "샤르미르",
+   "Sharmir",
+   "Zamir",
+   "シャルミール"
   ],
   "placeIds": [
    "collection-gora-grassland"
@@ -11853,10 +12662,14 @@ export const mapCollectibles=[
    "오드 몽주",
    "オドモンジュ",
    "오다 몬자(Oda Monja)",
-   "오드 몽쥬"
+   "오드 몽쥬",
+   "Oda Moja",
+   "오다 모자",
+   "오다 모자(Oda Moja)"
   ],
   "placeIds": [
    "moonwatch-pass",
+   "collection-driftwood-path",
    "collection-howling-tree-forest"
   ]
  },
@@ -11875,7 +12688,9 @@ export const mapCollectibles=[
    "fauns-forest",
    "collection-exion-valley",
    "map-ogers-mountain-road",
-   "map-luminaria-pass"
+   "map-luminaria-pass",
+   "forest-of-no-return",
+   "maharipa-garden"
   ]
  },
  {
@@ -11892,7 +12707,8 @@ export const mapCollectibles=[
   ],
   "placeIds": [
    "fauns-forest",
-   "map-cougar-s-roof"
+   "map-cougar-s-roof",
+   "map-luminaria-pass"
   ]
  },
  {
@@ -11911,11 +12727,17 @@ export const mapCollectibles=[
   ]
  },
  {
-  "id": "observed-twinkling-star",
+  "id": "lightstar",
   "ko": "반짝별",
-  "en": "Twinkling Star",
+  "en": "Lightstar",
   "aliases": [
-   "반짝 별"
+   "Lightstar",
+   "빛의 별",
+   "ヒカリボシ",
+   "반짝 별",
+   "반짝별",
+   "Twinkling Star",
+   "빛의 별(Lightstar)"
   ],
   "placeIds": [
    "map-darknight-pass",
@@ -11942,7 +12764,9 @@ export const mapCollectibles=[
   "ko": "파야",
   "en": "Paya",
   "aliases": [
-   "파야"
+   "파야",
+   "Paya",
+   "パイヤ"
   ],
   "placeIds": [
    "map-ogers-mountain-road",
@@ -11967,27 +12791,35 @@ export const mapCollectibles=[
   "placeIds": [
    "map-ogers-mountain-road",
    "map-back-mountain-road",
-   "map-giant-s-hill"
+   "map-giant-s-hill",
+   "forest-of-no-return"
   ]
  },
  {
   "id": "observed-sinamos",
   "ko": "시나모스",
-  "en": "Sinamos",
+  "en": "Cinnamos",
   "aliases": [
-   "시나모스"
+   "시나모스",
+   "Sinamos",
+   "Cinnamos",
+   "シナモス"
   ],
   "placeIds": [
    "map-ogers-mountain-road",
-   "map-back-mountain-road"
+   "map-back-mountain-road",
+   "forest-of-no-return"
   ]
  },
  {
   "id": "observed-shaktu",
   "ko": "샥투",
-  "en": "Shaktu",
+  "en": "Shaktoh",
   "aliases": [
-   "샥투"
+   "샥투",
+   "Shaktu",
+   "Shaktoh",
+   "シャクトウ"
   ],
   "placeIds": [
    "map-back-mountain-road",
@@ -11999,9 +12831,12 @@ export const mapCollectibles=[
  {
   "id": "observed-rajanivarta",
   "ko": "라자니바르타",
-  "en": "Rajanivarta",
+  "en": "Lazanibata",
   "aliases": [
-   "라자니바르타"
+   "라자니바르타",
+   "Rajanivarta",
+   "Lazanibata",
+   "ラザニバータ"
   ],
   "placeIds": [
    "map-giant-s-hill"
@@ -12035,6 +12870,105 @@ export const mapCollectibles=[
   "placeIds": [
    "verdant-hollow",
    "travelers-hill"
+  ]
+ },
+ {
+  "id": "observed-bitter-leaf",
+  "ko": "비터 리프",
+  "en": "Bitter Leaves",
+  "aliases": [
+   "비터 리프",
+   "Bitter Leaf",
+   "Bitter Leaves",
+   "ビターリーフ"
+  ],
+  "placeIds": [
+   "forest-of-no-return",
+   "travelers-garden",
+   "cape-nereus",
+   "maharipa-garden"
+  ]
+ },
+ {
+  "id": "pepper-leaves",
+  "ko": "스파이시 리프",
+  "en": "Pepper Leaves",
+  "aliases": [
+   "Pepper Leaves",
+   "후추 잎",
+   "스파이시 리프",
+   "Spicy Leaf",
+   "후추 잎(Pepper Leaves)",
+   "スパイスリーフ"
+  ],
+  "placeIds": [
+   "forest-of-no-return",
+   "travelers-garden",
+   "cape-nereus"
+  ]
+ },
+ {
+  "id": "gem-box",
+  "ko": "보주 상자(Gem Box)",
+  "en": "Gem Box",
+  "aliases": [
+   "Gem Box",
+   "보주 상자",
+   "宝珠箱"
+  ],
+  "placeIds": [
+   "edge-tower"
+  ]
+ },
+ {
+  "id": "observed-wonder-leaf",
+  "ko": "원더 리프",
+  "en": "Wonder Leaves",
+  "aliases": [
+   "원더 리프",
+   "Wonder Leaf",
+   "Wonder Leaves",
+   "ワンダーリーフ"
+  ],
+  "placeIds": [
+   "maharipa-garden"
+  ]
+ },
+ {
+  "id": "observed-riddle-box",
+  "ko": "수수께끼의 상자",
+  "en": "Riddle Box",
+  "aliases": [
+   "수수께끼의 상자"
+  ],
+  "placeIds": [
+   "ash-tower"
+  ]
+ },
+ {
+  "id": "black-magic-manual",
+  "ko": "흑마술 지침서(Black-Magic Manual)",
+  "en": "Black-Magic Manual",
+  "aliases": [
+   "Black-Magic Manual",
+   "흑마술 지침서",
+   "黒魔術指南書"
+  ],
+  "placeIds": [
+   "ash-tower"
+  ]
+ },
+ {
+  "id": "white-magic-manual",
+  "ko": "백마술 지침서(White-Magic Manual)",
+  "en": "White-Magic Manual",
+  "aliases": [
+   "White-Magic Manual",
+   "백마술 지침서",
+   "白魔術指南書"
+  ],
+  "placeIds": [
+   "ash-tower"
   ]
  }
 ];

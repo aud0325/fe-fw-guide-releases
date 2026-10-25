@@ -14,7 +14,7 @@ export function mapSearchSuggestions(query,t,limit=8,variant='all'){
  };
  const nodes=mapVariantNodes(variant),collectibleRows=variantCollectibles(variant);
  const provinces=mapProvinces.filter(p=>nodes.some(n=>n.province===p.id)).map(p=>({
-  type:'province',id:p.id,label:t(p.ko,p.en||p.ko),meta:t('map.province'),score:score([p.ko,p.en,localized({ko:p.ko,en:p.en||p.ko},'en'),englishText(p.en||p.ko)])
+  type:'province',id:p.id,label:t(p.ko,p.en||p.ko),meta:t('map.province'),score:score([p.ko,p.en,...(p.aliases||[]),localized({ko:p.ko,en:p.en||p.ko},'en'),englishText(p.en||p.ko)])
  }));
  const places=nodes.filter(n=>n.ko!=='???').map(n=>{
   const p=mapProvinces.find(p=>p.id===n.province);

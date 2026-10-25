@@ -6,6 +6,8 @@ const acquisitionCache=new WeakMap();
 // These identify a place, never a field tile or an unlock/availability condition.
 const japanesePlaces={
  '神託の滝':'oracle-falls','旅人の丘':'travelers-hill',
+ '還らずの森':'forest-of-no-return','ネレウスの岬':'cape-nereus','マハリパの園':'maharipa-garden','アレシフ塩田':'arrecif-saltmarsh',
+ '流浪者の古庭':'travelers-garden',
  '封呪の祭壇':'votive-altar','巨人の足跡砦':'giants-footprint-fort','ニグリア鉱山':'niglia-mine',
  '崩れ砦':'ruined-fort','禁断の森':'video-forbidden-forest','異教徒の洞窟':'heretics-cave',
  'ワルハラ鉱山':'valhalla-mine','ノーアの洞窟':'noah-cave','ディオネ砦':'the-piercer-dione-fort','ガレーン砦跡':'galen-fort-ruins',
@@ -27,6 +29,8 @@ const japanesePlaces={
 };
 const englishPlaceAliases={
  'Oracle Falls':'oracle-falls','Traveler’s Hill':'travelers-hill',"Traveler's Hill":'travelers-hill',
+ 'Forest of No Return':'forest-of-no-return','Cape Nereus':'cape-nereus','Maharipa Garden':'maharipa-garden','Arrecif Saltmarsh':'arrecif-saltmarsh',
+ 'Traveler’s Garden':'travelers-garden',"Traveler's Garden":'travelers-garden',
  'Enceladus Bridge':'collection-enkeladus-bridge','Santana Bridge':'collection-santana-bridge','Utuna Pass':'collection-utsuna-pass',
  'Whispering Rock':'collection-whispering-rock','Zethus Falls':'collection-zetos-falls','Daybreak Plains':'collection-dawn-plain',
  'Sunwatch Pass':'collection-sunrise-pass','Collapsed Fort':'ruined-fort','Niraga Mine':'niglia-mine','Nowah’s Cave':'noah-cave',
@@ -99,7 +103,7 @@ export function acquisitionRecords(entry,entries){
  for(const row of entry.acquisition||[])records.push({...row,method:row.method||'acquisition'});
  for(const place of entries.filter(e=>e.type==='location'&&e.mapDetails)){
   for(const [key,method] of [['materials','gathering'],['loot',{ko:'출현물',en:'Loot'}]]){
-   if(place.mapDetails[key]?.some(row=>row.itemId===entry.id))records.push({locationId:place.id,method,part:1,observedRoute:place.mapDetails.observedRoute,gameDate:place.mapDetails.gameDate,sourceId:place.mapDetails.sourceId});
+   for(const row of place.mapDetails[key]||[])if(row.itemId===entry.id)records.push({locationId:place.id,method,part:1,...(row.status==='inferred'?{status:'inferred',slotObservation:{sourceId:place.mapDetails.sourceId,observedRoute:place.mapDetails.observedRoute,gameDate:place.mapDetails.gameDate}}:{observedRoute:place.mapDetails.observedRoute,gameDate:place.mapDetails.gameDate}),sourceId:row.sourceId||place.mapDetails.sourceId});
   }
  }
  for(const place of entries.filter(e=>e.type==='location'&&e.mapDetails))for(const report of place.mapDetails.previousReports||[])if(report.rows.some(r=>r.itemId===entry.id))records.push({locationId:place.id,method:'gathering',part:1,observedRoute:report.observedRoute,gameDate:report.gameDate,sourceId:place.mapDetails.sourceId});

@@ -239,8 +239,8 @@ export const media = {
     "originalHeight": 760,
     "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
-    "checkedAt": "2026-10-07",
-    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Original capture colors and coordinates retained; bounded HUD/quest-pin cleanup only. No independent reuse permission verified."
+    "checkedAt": "2026-10-25",
+    "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Leda and Theodora capture pixels combined at unchanged coordinates; larger captures downsampled once; bounded HUD/quest-pin cleanup only. No independent reuse permission verified."
   },
   "eshmel": {
     "src": "./assets/portraits/eshmel.png",
