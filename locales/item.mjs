@@ -1,5 +1,6 @@
 // UI messages. Keep keys stable when editing translations.
 export default {
+ 'item.trade-materials':{ko:'교환 재료',en:'Trade materials'},
  'item.all-items':{ko:'전체 아이템',en:'All items'},
  'item.category-all':{ko:'{category} 전체',en:'All {category}'},
  'item.result-count':{ko:'{scope} {count}개',en:'{scope}: {count}'},

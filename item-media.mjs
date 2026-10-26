@@ -6,10 +6,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -20,10 +23,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -34,10 +40,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -48,10 +57,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -62,10 +74,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -84,10 +99,13 @@ export const itemMedia={
     "height": 35,
     "originalWidth": 34,
     "originalHeight": 35,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -107,10 +125,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 34,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -138,10 +159,13 @@ export const itemMedia={
     "height": 31,
     "originalWidth": 29,
     "originalHeight": 31,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -152,10 +176,13 @@ export const itemMedia={
     "height": 31,
     "originalWidth": 29,
     "originalHeight": 31,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop",
@@ -167,10 +194,13 @@ export const itemMedia={
     "height": 31,
     "originalWidth": 29,
     "originalHeight": 31,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -181,10 +211,13 @@ export const itemMedia={
     "height": 31,
     "originalWidth": 29,
     "originalHeight": 31,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -195,10 +228,13 @@ export const itemMedia={
     "height": 31,
     "originalWidth": 29,
     "originalHeight": 31,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop",
@@ -210,10 +246,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -224,10 +263,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -246,10 +288,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -260,10 +305,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -274,10 +322,13 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
     },
     "checked": "2026-10-07",
     "method": "administrator-gameplay-crop"
@@ -288,12 +339,32 @@ export const itemMedia={
     "height": 34,
     "originalWidth": 33,
     "originalHeight": 34,
-    "sourceUrl": "./evidence/item-icons.html",
     "credit": {
       "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
       "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
     },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
+    },
     "checked": "2026-10-07",
+    "method": "administrator-gameplay-crop"
+  },
+  "spell-learning": {
+    "src": "./assets/item-types/spell-learning.png",
+    "width": 22,
+    "height": 22,
+    "originalWidth": 22,
+    "originalHeight": 22,
+    "credit": {
+      "ko": "관리자 · Nintendo / INTELLIGENT SYSTEMS",
+      "en": "administrator · Nintendo / INTELLIGENT SYSTEMS"
+    },
+    "sourceNote": {
+      "ko": "제공된 게임 화면에서 발췌한 아이템 분류별 대표 문양입니다.",
+      "en": "Representative item-category icons cropped from provided gameplay captures."
+    },
+    "checked": "2026-10-26",
     "method": "administrator-gameplay-crop"
   }
 };

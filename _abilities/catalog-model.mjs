@@ -5,7 +5,7 @@ import {characters,entities} from './catalog-context.mjs';
 export const proficiencyOrder=['sword','spear','axe','bow','gauntlet','black-magic','white-magic','authority','infantry','armor','cavalry','flying'];
 export const categoryLabels={character:['캐릭터 스킬','Character skills'],training:['기술능력','Proficiencies'],class:['병종','Classes'],mount:['탈것','Mounts']};
 export const characterOrder=characters.map(x=>x.id);
-export function normalizeSection(kind,section){return kind==='skill'?(['','personal','unique'].includes(section)?'character':section==='mastery'?'class':section==='unknown'?'mount':section):section;}
+export function normalizeSection(kind,section){return kind==='spell'&&['dark','unknown'].includes(section)?'black':kind==='skill'?(['','personal','unique'].includes(section)?'character':section==='mastery'?'class':section==='unknown'?'mount':section):section;}
 export function orderedCharacters(rows){const ids=new Set(rows.flatMap(r=>r.relations.filter(x=>x.type==='character').map(x=>x.id)));const known=characters.filter(c=>ids.has(c.id));const missing=[...new Map(rows.flatMap(r=>r.relations.filter(x=>x.type==='character'&&!characters.some(c=>c.id===x.id)).map(x=>[x.id,x]))).values()];return [...known,...missing];}
 export function characterSkills(rows){return orderedCharacters(rows).map(c=>({...c,personal:rows.filter(r=>r.kind==='skill'&&r.category==='personal'&&r.relations.some(x=>x.type==='character'&&x.id===c.id)),unique:rows.filter(r=>r.kind==='skill'&&r.category==='unique'&&r.relations.some(x=>x.type==='character'&&x.id===c.id))})).filter(c=>c.personal.length||c.unique.length);}
 export function proficiencies(row){return [...new Set(row.relations.flatMap(x=>(x.routes||[x]).map(r=>r.proficiency)).filter(Boolean))];}

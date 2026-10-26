@@ -1,3 +1,4 @@
+import {sourceOverviewGroups,sourceOverview} from './source-overview.mjs';
 import {renderAbilityPage} from './_abilities/ability-page.mjs';
 import {abilityEntries} from './_abilities/ability-navigation.mjs';
 import {abilityReferences} from './_abilities/sample-integration.mjs';
@@ -6,7 +7,7 @@ import {renderEntityText} from './entity-text.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {tipGuide} from './tip-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
-import {isPublicSource,referencedSources} from './source-visibility.mjs';
+import {isPublicSource,referencedSources,publicSourceRecord} from './source-visibility.mjs';
 import {itemUses} from './item-usage.mjs';
 import {part1Map,entryMapLinks,guideLocationMap} from './part1-map-ui.mjs';
 import {groupedBrowse} from './browse-groups.mjs';
@@ -21,7 +22,7 @@ import {itemMedia} from './item-media.mjs';
 import {navigationGroups,navigationContext,filterContext,listingState} from './navigation.mjs';
 import {localized,referenceSection,referenceSite,displayText,characterFaction,sourceHint} from './presentation.mjs';
 import {paralogueOverview} from './paralogue-ui.mjs';
-import {catalogDetails,coveragePanel,groupOptions,locationRegions} from './catalog-ui.mjs';
+import {catalogDetails,groupOptions,locationRegions} from './catalog-ui.mjs';
 import {entries,sources,routes,updated} from './data.mjs';
 import {media} from './media.mjs';
 import {entryIconMedia} from './entity-media.mjs';
@@ -42,16 +43,6 @@ export function renderPage(state,lang='ko',visibleLimit=36,base='/'){
 function portrait(e,full=false){const m=media[e.id]||e.portrait;return e.type==='character'&&m?`<img class="portrait" src="${esc(full?m.src:(m.thumbnailSrc||m.src))}" alt="${esc(name(e))}" loading="${full?'eager':'lazy'}" decoding="async" width="${m.width||240}" height="${m.height||240}">`:'';}
 function mediaHint(m){return m?.sourceUrl?sourceHint({href:m.sourceUrl,tooltip:`${t('presentation.image-credit')} · ${m.credit||referenceSite(m.sourceUrl)}`,className:'source-hint image-source-hint',external:true}):'';}
 function entryIcon(e,extraClass=''){const m=entryIconMedia(e);return m?`<img class="entity-icon${extraClass?' '+extraClass:''}" src="${esc(m.src)}" alt="" width="50" height="50" loading="lazy" decoding="async">`:'';}
-function sourceList(ids){
- const groups=new Map();
- for(const id of ids){const source=sources[id],site=referenceSite(source.url);if(!groups.has(site))groups.set(site,[]);groups.get(site).push(source);}
- const priority=['game8','nintendo.com','rpgsite.net','fireemblemwiki.org','namu.wiki'];
- const ordered=[...groups].sort(([a],[b])=>{const rank=site=>priority.includes(site)?priority.indexOf(site):priority.length;return rank(a)-rank(b)||a.localeCompare(b);});
- return `<div class="source-groups">${ordered.map(([site,list])=>{
-  const notes=[...new Set(list.map(s=>tx(s.note)).filter(Boolean))];
-  return `<details class="source-group"><summary>${esc(site==='game8'?'Game8':site==='local'?t('presentation.gameplay-recordings'):site)} <span>${t(list.length===1?'browse.source-record-one':'browse.source-records',{count:list.length})}</span></summary>${notes.length===1?`<p class="result-label">${esc(notes[0])}</p>`:''}<div class="sources">${list.map(s=>`<div class="source"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))} ${icon('external')}</a><small>${s.checked?`${t('common.checked')} ${esc(s.checked)}`:t('editorial.individual-check-date-not-recorded')} · ${esc(({official:t('app.official-2'),guide:t('app.guide-2'),community:t('app.community'),reference:t('app.reference'),unavailable:t('app.unavailable'),unverified:t('app.unverified')})[s.kind]||s.kind)}</small>${notes.length!==1?`<p>${esc(tx(s.note))}</p>`:''}</div>`).join('')}</div></details>`;
- }).join('')}</div>`;
-}
 function listingMeta(e){
  if(e.type==='tip')return tx(e.summary);
  if(e.type==='location'){
@@ -106,7 +97,7 @@ function detail(e){
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
  const titleImage=entryIcon(e,'entity-detail-icon')||(e.type==='item'?itemIcon(e,{t},'item-detail-icon'):'');
  const prose=value=>renderEntityText(localized(value,lang),e,{entries,lang,href,format:tx});
- let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${e.id==='banshee-theta-scroll-report'?t('소모품 · 마법 습득 아이템','Consumable · Spell-learning item'):esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`;
+ let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`;
  if(e.type==='character')body=`<article class="detail detail-top character-detail"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/character${state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}</div>`;
  let portraitHtml='';
  if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span></figure>`;}
@@ -131,8 +122,8 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  else if(state.type==='growth'){html=growthComparison(state,{entries,sources,t,lang,base});}
  else if(state.type==='quest'){html=`<h1>${t('editorial.quest-notes')}</h1><p>${t('editorial.the-standalone-quest-listing-has-been-retired-find-schedules-and-rewards-under-paralogues-and-acquisition-notes-under-items')}</p><div class="archive-links"><a href="#category/paralogue">${label('paralogue')}</a><a href="#category/item">${label('item')}</a></div>`;}
  else if(state.type==='sources'){
-  const ids=Object.keys(referencedSources(entries,sources)).filter(id=>isPublicSource(id,sources[id])),sites=new Set(ids.map(id=>referenceSite(sources[id].url)));
-  html=`<div class="section-head"><h2>${t('app.source-register')}</h2><small>${t('browse.source-count',{sites:sites.size,count:ids.length})}</small></div><p class="notice">${t('app.unavailable-or-stale-pages-are-not-treated-as-verified')}</p><div class="sources-layout"><section class="sources-index"><h2>${t('browse.source-originals')}</h2><p class="result-label">${t('editorial.dates-by-source')}</p>${sourceList(ids)}</section><div class="source-coverage">${coveragePanel(t)}</div></div>`;
+  const records=Object.entries(referencedSources(entries,sources)).filter(([id,source])=>isPublicSource(id,source)).map(([id,source])=>({id,...publicSourceRecord(id,source)})),groups=sourceOverviewGroups(records);
+  html=`<div class="section-head"><h2>${t('app.source-register')}</h2></div><section class="sources-index" aria-label="${t('browse.source-sites')}">${sourceOverview(groups,lang)}</section>`;
  }
  else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href});}
  else{
@@ -145,7 +136,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   if(state.type==='location')html+=`<p class="location-atlas-link"><a href="#category/map">${t('browse.open-atlas')}</a></p>`;
   if(state.type==='item'&&state.itemFlavor&&!list.length)html+="<p class=\"notice\">"+t('item.flavor-empty')+'</p>';
   if(state.type==='map'&&!state.query)html+=part1Map(state,mapContext);
-  if(state.type==='item')html+=itemFilters(searchEntries(entries,{...listingState(state,entries),group:'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''}),state,{t});
+  if(state.type==='item')html+=itemFilters(searchEntries(browseEntries,{...listingState(state,browseEntries),group:'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''}),state,{t});
   const options=groupOptions(state.type);if(state.type!=='item'&&options.length>1)html+=`<label class="catalog-filter">${t(state.type==='character'?'browse.character-role':state.type==='mount'?'browse.mount-type':state.type==='class'?'browse.class-tier':state.type==='location'?'browse.location-region':state.type==='tip'?'browse.guide-topic':'app.filter-category')} <select id="catalog-group"><option value="">${t('common.all')}</option>${options.map(([id,n])=>`<option value="${esc(id)}" ${state.group===id?'selected':''}>${esc(t(...n))}</option>`).join('')}</select></label>`;
   const grouped=!state.query&&((state.type==='tip'&&!state.group)||(state.type==='location'&&!state.group)||(state.type==='character'&&scoutRoute(state)==='all'&&!state.faction&&!state.group)||(state.type==='item'&&!state.itemMinor&&!state.itemKind&&!state.itemFlavor)||(state.type==='class'&&!state.group));
   if((state.type==='tip'&&state.group)||(state.type==='location'&&state.group)||(state.type==='character'&&(state.faction||state.group))||(state.type==='item'&&state.query&&(state.itemMinor||state.itemKind))||(state.type==='class'&&state.group))html+=`<p class="browse-overview-link"><a class="group-more" href="#category/${state.type}">${t('browse.back-overview')}</a></p>`;

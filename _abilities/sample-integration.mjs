@@ -36,7 +36,7 @@ export function sampleItemAbilities(e,lang){
   const selected=links.filter(x=>x.relation===relation),abilities=rows.filter(r=>selected.some(x=>x.abilityId===r.id));
   if(!abilities.length)return '';
   return `<h2>${title}</h2>${relation==='equipment-granted'?`<p class="matrix-help">${text('이 장비를 사용하는 동안 제공되는 전투 기술입니다.','Combat arts available while using this equipment.')}</p>`:''}${abilityTable(abilities,lang)}`;
- }).join('')}${e.id==='banshee-theta-scroll-report'?`<p class="matrix-help">${text('아카이브 Θ와 같은 아이템인지는 미확인입니다.','Identity with Archive Θ is unconfirmed.')}</p>`:''}</section>`;
+ }).join('')}</section>`;
 }
 
 export function abilityReferences(e,lang){
@@ -47,14 +47,12 @@ export function abilityReferences(e,lang){
    {url:'https://game8.jp/fe-banshisenko/818786',title:'Game8 · '+text('스킬','Skills')},
    {url:'https://gamewith.jp/fefw/574420',title:'GameWith · '+text('스킬','Skills')});
   abilitySourceNotes.push(text('기술능력 12종 아이콘: 사용자 제공 게임 화면에서 추출. © Nintendo / INTELLIGENT SYSTEMS','Twelve proficiency icons: cropped from user-provided game screenshots. © Nintendo / INTELLIGENT SYSTEMS'));
-  if(rows.some(r=>r.provisional&&['personal','unique'].includes(r.category)&&r.relations.some(x=>x.id===e.id)))abilitySourceNotes.push(text('한국어명이 확인되지 않은 캐릭터 스킬은 임시 번역을 사용합니다.','Character skills without a verified Korean name use provisional translations.'));
   const availability=uniqueAvailability[e.id];
   if(availability?.sources.length){
    externalGuides.push(...availability.sources.map(x=>({url:x.url,title:x.name+' · '+text('고유스킬 부재 보고','Unique skill absence report')})));
-   abilitySourceNotes.push(text('고유스킬 부재는 출처의 보고이며 모든 레벨을 직접 검증한 판정이 아닙니다.','Unique skill absence is reported by the cited sources and has not been directly verified at every level.'));
   }
  }
- for(const link of itemConnections.filter(x=>x.itemId===e.id))externalGuides.push({url:link.url,title:link.relation==='equipment-granted'?text('장비 전투 기술 대응표','Equipment combat art correspondence'):text('마법 습득 제보','Spell acquisition report')});
+ for(const link of itemConnections.filter(x=>x.itemId===e.id&&x.url))externalGuides.push({url:link.url,title:link.relation==='equipment-granted'?text('장비 전투 기술 대응표','Equipment combat art correspondence'):link.status==='guide-correspondence'?text('마법 습득 아이템 · 공략 자료','Spell-learning items · guides'):text('마법 습득 제보','Spell acquisition report')});
  if(legacySpellEntries.some(x=>x.itemId===e.id))externalGuides.push({url:'https://game8.jp/fe-banshisenko/817283',title:'Game8 · '+text('마법','Magic')});
  return {externalGuides,abilitySourceNotes};
 }

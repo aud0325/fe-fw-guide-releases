@@ -2,6 +2,7 @@ import {flavors,foodKinds,ingredientFlavorId,preferredMountFood,mountFoodReports
 import {classifyItem} from './item-types.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {informationHint} from './presentation.mjs';
+import {publicSourceRecord} from './source-visibility.mjs';
 export function ingredientFlavorLabel(e,t){const f=flavors[ingredientFlavorId(e)];return t(f.ko,f.en);}
 export function foodDetails(e,{t}){
  if(e.type==='item'&&foodKinds[classifyItem(e).kind]){
@@ -31,10 +32,10 @@ export function mountFoodRow(e,{t,sources={},tx=x=>x}){
  const conflict=new Set(reports.map(r=>r.flavor).filter(f=>f!=='unknown')).size>1;
  const reportLinks=r=>{
   const seen=new Set();
-  return r.reports.map(s=>sources[s.sourceId]).filter(s=>{
-   if(!s||seen.has(s.url))return false;
-   seen.add(s.url);return true;
-  }).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))}</a>`).join(' / ');
+  return r.reports.map(r=>({id:r.sourceId,source:publicSourceRecord(r.sourceId,sources[r.sourceId])})).filter(({id,source:s})=>{
+   const key=s?.url||id;if(!s||seen.has(key))return false;
+   seen.add(key);return true;
+  }).map(({id,source:s})=>`<a href="${esc(s.url||'#source-'+id)}"${s.url?' target="_blank" rel="noopener noreferrer"':''}>${esc(tx(s.title))}</a>`).join(' / ');
  };
  if(conflict)value+=`<div class="recruitment-comparison"><strong>${t('character.conflict')}</strong><ul>${reports.map(r=>`<li>${esc(t(flavors[r.flavor].ko,flavors[r.flavor].en))} · ${reportLinks(r)}</li>`).join('')}</ul></div>`;
  const help=informationHint(t('item.mount-bait-advice'),t('item.preferred-food')+' · '+t('presentation.information'));

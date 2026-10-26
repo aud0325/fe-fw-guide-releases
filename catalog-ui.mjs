@@ -22,7 +22,7 @@ import {mountCategory,mountBonusDetails,mountSkillDetails} from './mount-ui.mjs'
 export const classTierOrder=['Unique','Beginner','Specialty','Advanced','Master','Divine'];
 export const locationRegion=e=>e.mapProvince?.ko||e.region||'Unverified';
 export function locationRegions(list,t){
- const titles=new Map([['Capital',t('app.capital-dagsion')],['Saveilon',t('app.saveilon')],['Southern Dagda',t('app.southern-dagda')],['Northwestern desert',t('app.northwestern-desert')],['Dagsion outskirts',t('app.dagsion-outskirts')],['Pasithea',t('app.pasithea')],['Nation',t('app.nations')]]);
+ const titles=new Map([['Capital',t('app.capital-dagsion')],['Southern Dagda',t('app.southern-dagda')],['Northwestern desert',t('app.northwestern-desert')],['Dagsion outskirts',t('app.dagsion-outskirts')],['Pasithea',t('app.pasithea')]]);
  const ids=[...new Set(list.map(locationRegion))];
  const ordered=[...titles.keys()].filter(id=>ids.includes(id)).concat(ids.filter(id=>!titles.has(id)&&id!=='Unverified'));
  if(ids.includes('Unverified'))ordered.push('Unverified');
@@ -36,7 +36,7 @@ export function groupOptions(type){
  const ordered=type==='class'?[...classTierOrder.filter(x=>categories.includes(x)),...categories.filter(x=>!classTierOrder.includes(x)).sort()]:categories.sort();
  return ordered.map(x=>[x,[displayText(x,createTranslator('ko'),entries),x]]);
 }
-export function coveragePanel(t){const counts=['character','item','mount','class','location'].map(type=>entries.filter(e=>e.type===type).length);return `<details class="coverage"><summary>${t('catalog.coverage-and-remaining-gaps')} · ${entries.filter(isDiscoverable).length}</summary><p>${t('catalog.characters-items-mounts-classes-locations-quests',{characters:counts[0],items:counts[1],mounts:counts[2],classes:counts[3],locations:counts[4]})}</p><p>${t('catalog.audited-wiki-character-names-item-index-entries-weapon-rows',{characters:coverage.wikiCharacters.length,items:coverage.itemIndex.filter(id=>entries.some(e=>e.id===id)).length,weapons:coverage.weaponTable.length,classes:coverage.classTable.length,recruitment:coverage.recruitmentGuide.length})}</p><p>${t('catalog.this-measures-source-list-coverage-not-completeness-of-the')}</p><p>${t('catalog.complete-mount-varieties-and-capture-sites-some-item-effects')}</p></details>`;}
+export function coveragePanel(t){const counts=['character','item','mount','class','location'].map(type=>entries.filter(e=>e.type===type).length);return `<details class="coverage"><summary>${t('catalog.coverage')} · ${entries.filter(isDiscoverable).length}</summary><p>${t('catalog.characters-items-mounts-classes-locations-quests',{characters:counts[0],items:counts[1],mounts:counts[2],classes:counts[3],locations:counts[4]})}</p></details>`;}
 export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acquisitionHtml='',base='/',growthSkill=false,profileProficiencies=sampleProfileProficiencies(e,t.locale),characterSkills=sampleCharacters.includes(e.id)?sampleAbilitySections(e,t.locale):null}){
  const text=(x,literal,key)=>displayText(x,t,entries,literal,key);
  const table=(facts,extraRows='',head=true)=>{

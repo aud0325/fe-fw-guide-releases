@@ -41,7 +41,7 @@ export function groupedBrowse(list,state,{t,lang,base,card,classCards,entries}){
   }).join('')}</div>`;
  }
  return `<div class="grouped-browse item-browse">${Object.entries(itemMajors).filter(([id])=>!state.itemMajor||state.itemMajor===id).map(([major,title])=>{
-  const groups=Object.entries(itemMinors).filter(([,m])=>m.major===major).map(([id,m])=>({id,...m,entries:list.filter(e=>classifyItem(e).minor===id)})).filter(g=>g.entries.length);
+  const groups=Object.entries(itemMinors).filter(([,m])=>!m.archived&&m.major===major).map(([id,m])=>({id,...m,entries:list.filter(e=>classifyItem(e).minor===id)})).filter(g=>g.entries.length);
   if(!groups.length)return '';
   return `<section>${!state.itemMajor?`<h2>${esc(t(title.ko,title.en))}</h2>`:''}<div class="item-group-grid">${groups.map(g=>{
    const label=t(g.ko,g.en),kinds=Object.entries(itemKinds).filter(([id,k])=>k.minor===g.id&&g.entries.some(e=>classifyItem(e).kind===id));

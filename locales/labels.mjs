@@ -9,7 +9,7 @@ export const navigationGroups=[
 export const itemMajors={equipment:{ko:'장비',en:'Equipment'},materials:{ko:'소재',en:'Materials'}};
 export const itemMinors={
  weapons:{major:'equipment',ko:'무기',en:'Weapons',icon:'sword'},
- magic:{major:'equipment',ko:'마법',en:'Magic',icon:'black-magic'},
+ magic:{major:'equipment',ko:'마법',en:'Magic',icon:'black-magic',archived:true},
  consumables:{major:'equipment',ko:'소모품',en:'Consumables',icon:'consumable'},
  accessories:{major:'equipment',ko:'방패·장신구',en:'Shields & accessories',icon:'shield'},
  promotion:{major:'equipment',ko:'전직용 아이템',en:'Class-change items',icon:'promotion'},
@@ -20,7 +20,7 @@ export const itemMinors={
 export const itemKinds={
  sword:{minor:'weapons',ko:'검',en:'Swords',icon:'sword'},spear:{minor:'weapons',ko:'창',en:'Spears',icon:'spear'},axe:{minor:'weapons',ko:'도끼',en:'Axes',icon:'axe'},bow:{minor:'weapons',ko:'활',en:'Bows',icon:'bow'},gauntlet:{minor:'weapons',ko:'건틀릿',en:'Gauntlets',icon:'gauntlet'},
  'black-magic':{minor:'magic',ko:'흑마법',en:'Black magic',icon:'black-magic'},'white-magic':{minor:'magic',ko:'백마법',en:'White magic',icon:'white-magic'},'dark-magic':{minor:'magic',ko:'암흑마법',en:'Dark magic',icon:'dark-magic'},
- consumable:{minor:'consumables',ko:'회복·보조 도구',en:'Recovery & support',icon:'consumable'},manual:{minor:'consumables',ko:'숙련서',en:'Skill manuals',icon:'manual'},
+ consumable:{minor:'consumables',ko:'회복·보조 도구',en:'Recovery & support',icon:'consumable'},manual:{minor:'consumables',ko:'숙련서',en:'Skill manuals',icon:'manual'},'spell-learning':{minor:'consumables',ko:'마법 습득 아이템',en:'Spell-learning items',icon:'spell-learning'},
  shield:{minor:'accessories',ko:'방패',en:'Shields',icon:'shield'},accessory:{minor:'accessories',ko:'장신구',en:'Accessories',icon:'accessory'},promotion:{minor:'promotion',ko:'전직·자격증',en:'Certifications',icon:'promotion'},
  gift:{minor:'gifts',ko:'선물',en:'Gifts',icon:'gift'},plant:{minor:'ingredients',ko:'식재료·식물',en:'Food & plants',icon:'plant'},meat:{minor:'ingredients',ko:'고기',en:'Meat',icon:'meat'},fish:{minor:'ingredients',ko:'물고기',en:'Fish',icon:'fish'},ore:{minor:'ingredients',ko:'광석·제련 재료',en:'Ore & smithing',icon:'ore'},material:{minor:'ingredients',ko:'기타 재료',en:'Other materials',icon:'ore'},quest:{minor:'other',ko:'의뢰용 아이템',en:'Quest items',icon:'other'},other:{minor:'other',ko:'기타·분류 미확인',en:'Other / unclassified',icon:'other'}
 };

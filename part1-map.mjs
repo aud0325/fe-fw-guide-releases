@@ -1,11 +1,13 @@
-import {mapNodes,mapProvinces,mapMeta,mapCollectibles} from './part1-map.generated.mjs';
+import {canonicalLocationId} from './location-review.mjs';
+import {mapNodes,mapProvinces as originalMapProvinces,mapMeta,mapCollectibles} from './part1-map.generated.mjs';
 import {normalize} from './core.mjs';
 import {englishText} from './locales/english-text.mjs';
 import {localized} from './locales/index.mjs';
 import {acquisitionRecords} from './acquisition-map.mjs';
 import {placeAliases} from './place-correspondences.mjs';
 import {mapVariantNodes,variantMarkerKind,caiMarkerKinds,caiChangedPlace,caiMapAnimals} from './map-variants.mjs';
-export {mapNodes,mapProvinces,mapMeta,mapCollectibles};
+export {mapNodes,mapMeta,mapCollectibles};
+export const mapProvinces=originalMapProvinces.map(province=>province.id==='saveilon'?{...province,aliases:[...new Set([...(province.aliases||[]),'사베일론'])]}:province);
 export const mapKinds=['hub','town','temple','dungeon','station','gate','gathering','banquet'];
 export const gatheringTypes=['fish','plant','ore','loot'];
 export const mapMarkerKind=variantMarkerKind;
@@ -43,4 +45,4 @@ export function mapAcquisitions(entries,node){
 export function itemMapNodes(item,entries){
  return mapNodes.filter(n=>mapAcquisitions(entries,n).some(r=>r.item.id===item.id));
 }
-export const mapPointForEntry=id=>mapNodes.find(n=>n.entryId===id);
+export const mapPointForEntry=id=>mapNodes.find(n=>n.entryId===canonicalLocationId(id));

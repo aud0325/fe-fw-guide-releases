@@ -1,8 +1,9 @@
 import {escapeHtml as esc} from './core.mjs';
 import {recruitmentComparison,recruitmentValue,isTutorialRecruit} from './recruitment.mjs';
+import {publicSourceRecord} from './source-visibility.mjs';
 export function recruitmentDetails(e,{t,tx,name,href,entries,routes,sources,route,text}){
  if(!e.recruitment)return '';
- const source=(id,label)=>sources[id]?`<a href="${esc(sources[id].url)}" target="_blank" rel="noopener noreferrer">${esc(label||tx(sources[id].title))}</a>`:'';
+ const source=(id,label)=>{const s=publicSourceRecord(id,sources[id]);return s?`<a href="${esc(s.url||'#source-'+id)}"${s.url?' target="_blank" rel="noopener noreferrer"':''}>${esc(label||tx(s.title))}</a>`:'';};
  const comparisons=[];
  const row=([id,ko,en])=>{
   const r=e.recruitment[id];if(!r)return '';

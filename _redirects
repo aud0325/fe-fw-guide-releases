@@ -1,3 +1,13 @@
+/ko/entry/saveilon/ /ko/category/map/?province=saveilon 301
+/en/entry/saveilon/ /en/category/map/?province=saveilon 301
+/ko/entry/mount-orgus-trail/ /ko/entry/map-ogers-mountain-road/ 301
+/en/entry/mount-orgus-trail/ /en/entry/map-ogers-mountain-road/ 301
+/ko/entry/rear-mountain-path/ /ko/entry/map-back-mountain-road/ 301
+/en/entry/rear-mountain-path/ /en/entry/map-back-mountain-road/ 301
+/ko/entry/giants-mount/ /ko/entry/map-giant-s-hill/ 301
+/en/entry/giants-mount/ /en/entry/map-giant-s-hill/ 301
+/ko/entry/video-boman-pass/ /ko/entry/collection-bodan-pass/ 301
+/en/entry/video-boman-pass/ /en/entry/collection-bodan-pass/ 301
 /ko/entry/video-odd-monju/ /ko/entry/oda-monja/ 301
 /en/entry/video-odd-monju/ /en/entry/oda-monja/ 301
 /ko/entry/observed-golden-basho/ /ko/entry/jin-ba-jiao/ 301
@@ -217,6 +227,8 @@
 /ko/entry/skill-9a971c6b5e76/ /ko/entry/io/#ability-skill-9a971c6b5e76 301
 /ko/entry/skill-74954bb39189/ /ko/entry/troy/#ability-skill-74954bb39189 301
 /ko/entry/skill-7dad8f4beb6e/ /ko/entry/hong-hua/#ability-skill-7dad8f4beb6e 301
+/ko/entry/spell-cd0ed1fe7e61/ /ko/entry/spell-b2e9e0fdbd65/ 301
+/ko/entry/spell-2bbaa8905c9b/ /ko/entry/spell-3072ff18b628/ 301
 /en/entry/skill-24ebf7662391/ /en/entry/lysander/#ability-skill-24ebf7662391 301
 /en/entry/skill-b64cfa205c85/ /en/entry/lysander/#ability-skill-b64cfa205c85 301
 /en/entry/skill-7082a02c7dab/ /en/entry/halvin/#ability-skill-7082a02c7dab 301
@@ -394,3 +406,5 @@
 /en/entry/skill-9a971c6b5e76/ /en/entry/io/#ability-skill-9a971c6b5e76 301
 /en/entry/skill-74954bb39189/ /en/entry/troy/#ability-skill-74954bb39189 301
 /en/entry/skill-7dad8f4beb6e/ /en/entry/hong-hua/#ability-skill-7dad8f4beb6e 301
+/en/entry/spell-cd0ed1fe7e61/ /en/entry/spell-b2e9e0fdbd65/ 301
+/en/entry/spell-2bbaa8905c9b/ /en/entry/spell-3072ff18b628/ 301

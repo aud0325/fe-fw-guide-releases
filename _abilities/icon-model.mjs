@@ -1,10 +1,14 @@
 import {media} from './preview-media.mjs';
 import {proficiencyMedia} from './proficiency-media.mjs';
+// All observed spell rows share their school’s book glyph; reuse the representative
+// Fire/Heal assets when a spelling variant has no per-row icon mapping.
+const spellIcons={black:media.abilities['spell-9bd345189ecf'],white:media.abilities['spell-cc1a89815538']};
 export function abilityIcon(row){
  if(row.kind==='skill')return null;
  const direct=media.abilities[row.id];
  if(direct)return media.assets[direct];
  if(row.kind==='combat-art')return media.assets[media.groups[row.category]]||null;
+ if(row.kind==='spell')return media.assets[spellIcons[row.stats.magicSchool]]||null;
  return null;
 }
 export function characterIcon(id){return media.characters[id]||null;}

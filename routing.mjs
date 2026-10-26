@@ -1,3 +1,4 @@
+import {locationRedirects} from './location-review.mjs';
 import {normalizeGrowthState} from './growth-comparison.mjs';
 import {types} from './locales/labels.mjs';
 import {routes} from './data.mjs';
@@ -5,6 +6,7 @@ import {normalizeItemFilters} from './item-types.mjs';
 import {normalizeItemFlavor} from './food.mjs';
 import {mapProvinces} from './part1-map.generated.mjs';
 import {canonicalItemId} from './item-identities.mjs';
+import {canonicalAbilityId} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
 export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
@@ -16,7 +18,7 @@ export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
- return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(canonicalItemId(state.id))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
+ return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(canonicalAbilityId(canonicalItemId(state.id)))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
 export function stateQuery(state){
  const p=new URLSearchParams();
@@ -45,7 +47,8 @@ export function readRoute(url,base='/',fallback='ko'){
  const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
  if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
- if(parts[0]==='entry'){try{state.id=canonicalItemId(decodeURIComponent(parts[1]));}catch{return null;}}
+ if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalItemId(decodeURIComponent(parts[1])));}catch{return null;}}
+ if(state.id&&locationRedirects[state.id])Object.assign(state,locationRedirects[state.id],{id:locationRedirects[state.id].id||null});
  if(parts[0]==='category'){
   if(!Object.hasOwn(types,parts[1]))return null;
   state.type=parts[1];
@@ -53,6 +56,9 @@ export function readRoute(url,base='/',fallback='ko'){
  if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
  if(state.id)state.growthSkill=params.get('skill')==='1';
  state.query=params.get('q')||'';state.group=params.get('group')||'';
+ if(state.type==='location'&&state.group==='Saveilon')state.group='사벨론주';
+ if(state.type==='location'&&state.group==='Nation')state.group='';
+ if(state.type==='spell'&&['dark','unknown'].includes(state.group))state.group='black';
  state.faction=state.type==='character'?params.get('faction')||'':'';
  state.scout=state.type==='character'&&!state.id&&routes.some(([id])=>id===params.get('scout'))?params.get('scout'):'all';
  state.route=routes.some(r=>r[0]===params.get('route'))?params.get('route'):'all';state.includeTips=params.get('tips')!=='0';
@@ -63,12 +69,18 @@ export function readRoute(url,base='/',fallback='ko'){
   state.mapVariant=caiMapPath||params.get('variant')==='cai'?'cai':'all';
   state.mapPlace=mapVariantNodes(state.mapVariant).some(n=>n.id===params.get('place'))?params.get('place'):'';
   state.mapItem=/^[a-z0-9-]+$/.test(params.get('item')||'')?canonicalItemId(params.get('item')):'';
-  state.mapProvince=[...mapProvinces.map(p=>p.id),'undocumented'].includes(params.get('province'))?params.get('province'):'';
+  state.mapProvince=[...mapProvinces.map(p=>p.id),'undocumented'].includes(params.get('province')||state.mapProvince)?params.get('province')||state.mapProvince:'';
   state.mapKind=['hub','town','temple','dungeon','station','gate','banquet','gathering',...['fish','plant','ore','loot'].map(k=>'gathering-'+k),...(state.mapVariant==='cai'?caiMarkerKinds:[])].includes(params.get('map-kind'))?params.get('map-kind'):'';
   state.mapQuery=params.get('mq')||'';
  }
  if(state.type==='quest'&&state.group==='Paralogue'){state.type='paralogue';state.group='';}
  if(state.type==='item'&&state.group){Object.assign(state,normalizeItemFilters({...state,group:state.group}));state.group='';}
+ // Old equipment-magic filters now open the dedicated spell catalog.
+ if(state.type==='item'&&!state.id){
+  const groups={'black-magic':'black','white-magic':'white','dark-magic':'black','black magic':'black','white magic':'white','dark magic':'black'};
+  const kind=(params.get('kind')||params.get('group')||'').toLowerCase();
+  if(params.get('sub')==='magic'||Object.hasOwn(groups,kind))Object.assign(state,{type:'spell',group:groups[kind]||'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''});
+ }
  return {state,lang,legacy};
 }
 export function rewriteLinks(html,lang,base){

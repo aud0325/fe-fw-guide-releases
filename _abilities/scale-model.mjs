@@ -5,7 +5,7 @@ export const skillGroups = {
  class:['병종 제공','Class access'], mount:['탈것 제공','Mount access'], unknown:['분류 미확인','Unclassified']
 };
 export const artGroups = {sword:['검','Sword'],spear:['창','Spear'],axe:['도끼','Axe'],bow:['활','Bow'],gauntlet:['격투','Gauntlet'],general:['공용·지원','General & support'],unknown:['분류 미확인','Unclassified']};
-export const spellGroups = {black:['흑마법','Black magic'],white:['백마법','White magic'],dark:['암흑마법','Dark magic'],unknown:['계통 미확인','Unclassified']};
+export const spellGroups = {black:['흑마법','Black magic'],white:['백마법','White magic']};
 export function labelsForKind(kind){return kind==='spell'?spellGroups:kind==='skill'?skillGroups:artGroups;}
 export function categoryOf(row){return row.kind==='spell'?(row.stats.magicSchool||'unknown'):row.category;}
 export function groupFamilies(rows,lang='ko'){

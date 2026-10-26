@@ -162,7 +162,7 @@ function parseLocation(){
  const characterTarget=state.id&&characterAbilityTarget(state.id,lang);
  if(characterTarget){history.replaceState(history.state,'',basePath+characterTarget.slice(1));return parseLocation();}
  visibleLimit=history.state?.limit||36;
- if(route.legacy||location.pathname===basePath)history.replaceState(history.state,'',pagePath(state,lang,basePath)+stateQuery(state));
+ if(route.legacy||location.pathname===basePath||(state.id&&location.pathname!==pagePath(state,lang,basePath)))history.replaceState(history.state,'',pagePath(state,lang,basePath)+stateQuery(state)+(route.legacy?'':location.hash));
  searchUI?.sync(state.query);$('route').value=state.route;$('tips').checked=state.includeTips;render();
 }
 function saveHash(){history.replaceState({...history.state,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state));}
@@ -179,6 +179,9 @@ document.addEventListener('click',event=>{
   let anchorId;try{anchorId=decodeURIComponent(url.hash.slice(1));}catch{return;}
   if(url.pathname===location.pathname&&url.search===location.search&&document.getElementById(anchorId)){
    event.preventDefault();remember();if(url.hash!==location.hash)history.pushState({...history.state},'',url.href);revealAnchor(document,url.hash);
+  }else if(url.pathname!==location.pathname||url.search!==location.search){
+   const route=readRoute(url,basePath,lang);
+   if(route){event.preventDefault();navigateTo(url.pathname+url.search+url.hash);}
   }
   return;
  }

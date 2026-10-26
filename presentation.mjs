@@ -1,4 +1,4 @@
-import {isPublicSource} from './source-visibility.mjs';
+import {isPublicSource,publicSourceRecord} from './source-visibility.mjs';
 import {skillTerms,factLabels} from './locales/labels.mjs';
 import {icon} from './icons.mjs';
 import {displayTerms} from './display-terms.mjs';
@@ -38,15 +38,18 @@ export function informationHint(tooltip,label,symbol='i',className=''){
 export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  const records=new Map();
  for(const e of list)for(const id of collectReferences(e)){
-  const source=sources[id];if(!isPublicSource(id,source))continue;
-  if(!records.has(source.url))records.set(source.url,{...source,anchorIds:[]});
-  const record=records.get(source.url);if(!record.anchorIds.includes(id))record.anchorIds.push(id);
+  if(!isPublicSource(id,sources[id]))continue;
+  const source=publicSourceRecord(id,sources[id]);
+  const key=source.url||'source:'+id;
+  if(!records.has(key))records.set(key,{...source,anchorIds:[]});
+  const record=records.get(key);if(!record.anchorIds.includes(id))record.anchorIds.push(id);
+  for(const original of source.originals||[])if(!records.has(original.url))records.set(original.url,{...original,anchorIds:[]});
  }
 
  const extra=new Map();
  for(const e of list){
   if(e.referenceUrl&&!records.has(e.referenceUrl))extra.set(e.referenceUrl,{title:t('presentation.reference-entry')+' · '+tx(e.name)});
-  for(const g of e.externalGuides||[])if(!records.has(g.url))extra.set(g.url,{title:g.title,note:g.status==='unavailable'?t('presentation.unavailable'):g.status==='image-only'?t('presentation.image-based'):t('presentation.body-accessed')});
+  for(const g of e.externalGuides||[])if(!records.has(g.url))extra.set(g.url,{title:g.title});
  }
  for(const m of images)if(m?.sourceUrl){
   extra.set(m.sourceUrl,{title:t('presentation.image-credit')+' · '+tx(m.credit),imageNote:m.sourceNote});
@@ -54,27 +57,18 @@ export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  }
  for(const [url,s]of extra)if(!records.has(url))records.set(url,{...s,url});
  const groups=new Map();
- for(const s of records.values()){const site=referenceSite(s.url);if(!groups.has(site))groups.set(site,[]);groups.get(site).push(s);}
+ for(const s of records.values())if(s.url){const site=referenceSite(s.url);if(!groups.has(site))groups.set(site,[]);groups.get(site).push(s);}
  const links=[...groups].map(([site,items])=>{
   const title=site==='local'?t('presentation.gameplay-recordings'):site==='game8'?'Game8':site;
   const originals=items.map(s=>`<li>${(s.anchorIds||[]).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')}<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))} ${icon('external')}</a>${s.checked&&!s.hideChecked?`<small>${t('common.checked')} ${esc(s.checked)}</small>`:''}${s.note?`<p>${esc(tx(s.note))}</p>`:''}${s.imageNote?`<p>${esc(tx(s.imageNote))}</p>`:''}</li>`).join('');
   return `<li class="reference-site"><strong>${esc(title)}</strong><details class="reference-originals"><summary>${t('presentation.original-sources')} (${items.length})</summary><ul>${originals}</ul></details></li>`;
  });
- const notes=list.flatMap(e=>{
-  const out=[...(e.abilitySourceNotes||[])];
-  if(e.videoNameEvidence){const v=e.videoNameEvidence;out.push(`${t('presentation.name-evidence-video')} · ${v.method==='unmapped'?t('presentation.english-mapping-pending'):t('presentation.english-mapping-editorial')}`);}
-  if(e.videoGathering&&e.type!=='location')out.push(t('presentation.gathering-display-cai-in-game-sep-25')+(e.videoGathering.unknownSlots?t('presentation.includes-unknown-slots'):''));
-  if(e.koreanNameEvidence){
-   const evidence=e.koreanNameEvidence;
-   if(evidence.method==='user-reported-game-label')out.push(t('presentation.korean-name-user-reported'));
-   else if(evidence.method==='community-game-screenshot')out.push(t('presentation.korean-name-community-screenshot'));
-   else if(evidence.method==='user-requested-label')out.push(t('presentation.korean-name-user-requested'));
-   else if(evidence.sourceId===e.weaponNameEvidence?.sourceId)out.push(t('presentation.korean-name-blog-provisional'));
-   else if(evidence.sourceId?.startsWith('namu-'))out.push(t('presentation.korean-names-cross-checked-against-namuwiki'));
-  }
-  return out.map(n=>`<p>${esc(n)}</p>`);
- });
- return links.length?`<details class="page-references"><summary>${t('presentation.references')} (${groups.size})</summary>${notes.join('')}<ol>${links.join('')}</ol></details>`:'';
+ const notes=[...new Set(list.flatMap(e=>e.abilitySourceNotes||[]))].map(n=>`<p>${esc(n)}</p>`);
+ const localRecords=[...records.values()].filter(s=>!s.url);
+ const localNotes=localRecords.length?[localRecords.flatMap(s=>s.anchorIds).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')+'<p>'+[...new Set(localRecords.map(s=>tx(s.provider||s.title)))].map(esc).join(' · ')+'</p>']:[];
+ const imageNotes=[...new Set(images.filter(m=>m?.credit&&!m.sourceUrl).map(m=>t('presentation.image-credit')+' · '+tx(m.credit)+(m.sourceNote?' · '+tx(m.sourceNote):'')))].map(note=>`<p>${esc(note)}</p>`);
+ const count=groups.size+(localNotes.length||imageNotes.length?1:0);
+ return links.length||localNotes.length||imageNotes.length?`<details class="page-references"><summary>${t('presentation.references')} (${count})</summary>${localNotes.join('')}${imageNotes.join('')}${notes.join('')}${links.length?`<ol>${links.join('')}</ol>`:''}</details>`:'';
 }
 
 const editorialDictionaries=new WeakMap();

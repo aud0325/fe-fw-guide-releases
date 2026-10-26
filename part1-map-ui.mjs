@@ -38,7 +38,12 @@ function recordConditions(r,{t,routes}){
 function recordLine(r,ctx,item){
  const {t}=ctx;
  const method=r.label?ctx.tx(r.label):r.method==='gathering'?t('map.gathering-method'):r.method==='dungeon'?t('map.dungeon-record'):typeof r.method==='object'?ctx.tx(r.method):r.method&&r.method!=='acquisition'?ctx.text(r.method):t('map.acquisition');
- return renderEntityText([method,recordConditions(r,ctx)].filter(Boolean).join(' · '),item,{entries:ctx.entries,lang:ctx.lang,href:ctx.href,format:ctx.text});
+ const text=renderEntityText([method,recordConditions(r,ctx)].filter(Boolean).join(' · '),item,{entries:ctx.entries,lang:ctx.lang,href:ctx.href,format:ctx.text});
+ const materials=(r.materials||[]).map(({itemId,quantity})=>{
+  const material=ctx.entries.find(e=>e.id===itemId);
+  return material?`<a href="${esc(ctx.href(itemId))}">${esc(ctx.name(material))}</a> ×${esc(quantity)}`:'';
+ }).filter(Boolean);
+ return text+(materials.length?' · '+t('item.trade-materials')+': '+materials.join(' + '):'');
 }
 const caiDetailsFor=(node,entries)=>entries.find(e=>e.id===node.entryId)?.caiPlaceDetails;
 function caiPlaceContent(node,ctx,heading){
@@ -66,8 +71,8 @@ export function placeDetails(node,ctx,{description=true,heading=4,variant='all'}
  }).join('')}${d.unknownDestinations?`<li>${t('map.hidden-destinations',{count:d.unknownDestinations})}</li>`:''}</ul>`:'';
  return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${variant==='cai'&&caiChangedPlace(node.id)?`${caiPlaceContent(node,ctx,heading)}<details class="part1-linked-records"><summary>${t('map.other-route-materials')}</summary>${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}</details>`:`${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${caiPlaceContent(node,ctx,heading)}`}${destinations}${d.previousReports?.length?`<details class="part1-linked-records"><summary>${t('map.previous-report')}</summary>${d.previousReports.map(r=>`<p>${esc(recordConditions(r,ctx))}</p>${list(r.rows,r.key==='loot'?'map.loot':'map.materials')}`).join('')}</details>`:''}`;
 }
-function placeMetadata(node,ctx,variant='all'){
- const {t,tx}=ctx,access=node.details?.access;
+function placeMetadata(node,ctx,variant='all',{showAccess=true}={}){
+ const {t,tx}=ctx,access=showAccess?node.details?.access:null;
  const tag=access&&access.kind!=='route'?informationHint(tx(access.note),t('map.sea-area-help'),t('map.sea-area'),'sea-access-tag'):'';
  const cai=caiDetailsFor(node,ctx.entries),routeTags=[cai?.farming?t('map.cai-farming-tag'):'',cai?.mounts?.length?t('map.cai-animal-tag'):''].filter(Boolean);
  return `<p class="place-metadata"><span>${esc([provinceName(node.province,t),placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].join(' · '))}</span>${tag}</p>${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
@@ -98,7 +103,7 @@ export function part1Map(state,ctx){
  </div></div><details class="part1-legend" open><summary>${t('map.legend-title')}</summary><ul>${mapLegend(hiddenKinds,t,variant)}</ul><div class="part1-name-toggle"><label title="${t('map.show-names-help')}"><input type="checkbox" data-map-toggle-names checked disabled><span>${t('map.show-names')}</span></label></div></details></div><p class="part1-pan">${t('map.pan')}<span class="part1-route-limits">${t(variant==='cai'?'map.cai-route-limits':'map.route-limits')}</span><span class="part1-mobile-names-help">${t('map.mobile-names-help')}</span></p>
  </div><div class="part1-sidebar"><section class="part1-selection" id="map-selection" tabindex="-1" aria-live="polite">${selectedDetails(selected,ctx,variant)}</section>
  </div></div>
- <footer class="part1-credit" id="map-source"><span>${t('map.credit')}</span> <a href="./evidence/part1-map.html">${t('map.evidence')}</a></footer>
+ <footer class="part1-credit"><details class="page-references"><summary>${t('presentation.references')}</summary><div id="map-source"><p>${t('map.credit')}</p>${variant==='all'?`<p>${t('map.composite-reference')}</p>`:''}</div></details></footer>
  </section>`;
 }
 function inlineMap(points,entry,ctx,{reference=false,variant='all'}={}){
@@ -129,7 +134,8 @@ function placeRows(places,entry,ctx){
   const target=entries.find(e=>e.id===place.id),title=place.point?mapName(place.point,t):target?name(target):tx(place.where);
   const lines=[...new Set(place.records.map(r=>entry.type==='item'||r.sourceId==='administrator-cai-observations'?itemAcquisitionLine(r,place,ctx,entry):recordLine(r,ctx,entry)).filter(Boolean))];
   const shownLines=lines.filter(line=>line.includes(' · ')||!lines.some(other=>other!==line&&other.startsWith(line+' · '))).map(line=>`<small>${line}</small>`);
-  return `<li><div class="entry-acquisition-heading"><span class="entry-place-number" aria-hidden="true">${i+1}</span><h3>${target?`<a href="${href(target.id)}">${esc(title)}</a>`:esc(title)}</h3></div>${place.point?`${placeMetadata(place.point,ctx)}<a class="entry-map-link" href="${esc(mapHref(place.point.id,entry.type==='item'?'':entry.id,lang,base,variant))}">${t('map.open')}</a>`:place.context==='method'?'':`<p class="entry-unmapped">${esc([...new Set(place.records.map(r=>r.region?ctx.text(r.region):'').filter(Boolean))].join(' · '))}${place.records.some(r=>r.region)?' · ':''}${t('map.map-unconfirmed')}</p>`}${shownLines.join('')}</li>`;
+  const showAccess=!place.records.every(r=>r.part&&r.part!==1);
+  return `<li><div class="entry-acquisition-heading"><span class="entry-place-number" aria-hidden="true">${i+1}</span><h3>${target?`<a href="${href(target.id)}">${esc(title)}</a>`:esc(title)}</h3></div>${place.point?`${placeMetadata(place.point,ctx,variant,{showAccess})}<a class="entry-map-link" href="${esc(mapHref(place.point.id,entry.type==='item'?'':entry.id,lang,base,variant))}">${t('map.open')}</a>`:place.context==='method'?'':`<p class="entry-unmapped">${esc([...new Set(place.records.map(r=>r.region?ctx.text(r.region):'').filter(Boolean))].join(' · '))}${place.records.some(r=>r.region)?' · ':''}${t('map.map-unconfirmed')}</p>`}${shownLines.join('')}</li>`;
  }).join('')}</ol>`;
 }
 function mountPlaces(entry,ctx){

@@ -6,6 +6,14 @@ import {englishSourceTitles} from './english-source-titles.mjs';
 // Display-only translations and romanizations. These do not establish official names,
 // new relationships, or in-game verification. Original fields and aliases stay intact.
 export const englishTerms=Object.fromEntries(`
+상점가|Shopping arcade
+투기장|Arena
+다그다 제국|Dagdan Empire
+아라고 왕국|Kingdom of Arago
+브레저란트 왕국|Kingdom of Brezarant
+살라미스 왕국|Kingdom of Saramis
+히베이라|Ribeira
+브리기트|Brigid
 액시온 골짜기|Exion Valley
 베라트리의 계곡|Beratri Valley
 베르나르 고개|Bernard Pass

@@ -632,28 +632,22 @@ main .information-hint:focus-visible{outline:2px solid var(--accent);outline-off
 @container(max-width:850px){.guide-topics{grid-template-columns:1fr;gap:24px}}
 @container(max-width:480px){.guide-listing .section-head h1{font-size:20px}.guide-listing .catalog-filter select{flex:1;min-width:0}.guide-listing .guide-list h3{font-size:15px}}
 
-/* Source register separates original records from encyclopedia coverage. */
+/* Provider introductions keep the source index separate from article evidence. */
 .sources-listing{container-type:inline-size}
 .sources-listing .section-head{margin:6px 0 12px;min-height:32px;gap:12px}
 .sources-listing .section-head h1{font-size:24px;line-height:1.35;margin:0}
 .sources-listing .section-head small{font-size:12px;background:transparent;padding:0;white-space:normal;text-align:right}
 .sources-listing>.notice{font-size:13px;line-height:1.8;margin:0 0 20px}
-.sources-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:28px;align-items:start}
-.sources-index{min-width:0}
+.sources-index{min-width:0;max-width:76ch}
 .sources-index>h2{font-size:17px;margin:0 0 4px}
 .sources-index>.result-label{font-size:12px;margin:0 0 10px}
-.sources-listing .source-groups{margin-top:0}
-.sources-listing .source-group{padding:0}
-.sources-listing .source-group>summary{font-size:14px;min-height:52px;padding:14px 4px;line-height:1.7;overflow-wrap:anywhere}
-.sources-listing .source-group>summary span{float:right;font-size:12px;white-space:nowrap;margin-left:12px}
-.sources-listing .source{padding:10px 4px}
-.sources-listing .source>a{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;line-height:1.7;overflow-wrap:anywhere}
-.sources-listing .source small{display:block;font-size:12px;line-height:1.7;margin-top:4px}
-.sources-listing .source p,.sources-listing .source-group>.result-label{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
-.sources-listing .coverage{margin:0;border-radius:4px}
-.sources-listing .coverage summary{min-height:44px;font-size:14px;line-height:1.8}
-.sources-listing .coverage p{font-size:13px;line-height:1.8}
-@container(max-width:850px){.sources-layout{grid-template-columns:1fr;gap:24px}}
+.source-overview{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.source-provider{padding:12px 0 16px;border-bottom:1px solid var(--line)}
+.source-provider h2{margin:0;font-size:15px;line-height:1.6;color:var(--link)}
+.source-provider h2 a{display:inline-flex;align-items:center;gap:7px;min-height:44px;max-width:100%;overflow-wrap:anywhere}
+.source-provider h2 a:hover{text-decoration:underline;text-underline-offset:3px}
+.source-provider h2 .icon{flex-shrink:0}
+.source-provider p{margin:0;max-width:70ch;font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}
 @container(max-width:480px){.sources-listing .section-head h1{font-size:20px}.sources-listing>.notice{font-size:12px;margin-bottom:16px}}
 
 /* All entries opens with a directory, then keeps the complete paged document list. */

@@ -4,7 +4,6 @@ export const media = {
     "src": "./assets/part1-map/icons/clearing.png",
     "width": 30,
     "height": 32,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
@@ -13,7 +12,6 @@ export const media = {
     "src": "./assets/part1-map/icons/animal-horse.png",
     "width": 30,
     "height": 32,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
@@ -22,7 +20,6 @@ export const media = {
     "src": "./assets/part1-map/icons/animal-ornius.png",
     "width": 30,
     "height": 32,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
@@ -31,7 +28,6 @@ export const media = {
     "src": "./assets/part1-map/icons/animal-pegasus.png",
     "width": 30,
     "height": 32,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
@@ -40,7 +36,6 @@ export const media = {
     "src": "./assets/part1-map/icons/animal-bau.png",
     "width": 26,
     "height": 29,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Native game place-list icon crop. Original colors and motif retained; surrounding list matte removed, no generated shapes or upscaling. Game artwork; no independent reuse permission verified."
@@ -49,7 +44,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-0-0.webp",
     "width": 401,
     "height": 401,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -58,7 +52,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-400-0.webp",
     "width": 402,
     "height": 401,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -67,7 +60,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-800-0.webp",
     "width": 207,
     "height": 401,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -76,7 +68,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-0-400.webp",
     "width": 401,
     "height": 361,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -85,7 +76,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-400-400.webp",
     "width": 402,
     "height": 361,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -94,7 +84,6 @@ export const media = {
     "src": "./assets/part1-map/cai/tile-800-400.webp",
     "width": 207,
     "height": 361,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay capture · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-09",
     "rights": "Game artwork; original screen coordinates and colors retained. Pegasus Rock uses a cursor-free native video patch; other bounded generated HUD repairs are illustrative. No independent reuse permission verified."
@@ -105,7 +94,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -116,7 +104,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -127,7 +114,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -138,7 +124,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -149,7 +134,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -160,7 +144,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -171,7 +154,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -182,7 +164,6 @@ export const media = {
     "height": 192,
     "originalWidth": 34,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "High-resolution restoration of the original game UI icon; original crop retained; no independent reuse permission verified."
@@ -193,7 +174,6 @@ export const media = {
     "height": 32,
     "originalWidth": 32,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
@@ -204,7 +184,6 @@ export const media = {
     "height": 32,
     "originalWidth": 32,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
@@ -215,7 +194,6 @@ export const media = {
     "height": 32,
     "originalWidth": 32,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
@@ -226,7 +204,6 @@ export const media = {
     "height": 32,
     "originalWidth": 32,
     "originalHeight": 36,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-07",
     "rights": "Native game place-list parchment icon crop; ivory sheet and dark type motif retained, exterior list matte removed; original crop retained; no independent reuse permission verified."
@@ -237,7 +214,6 @@ export const media = {
     "height": 378,
     "originalWidth": 1006,
     "originalHeight": 760,
-    "sourceUrl": "./evidence/part1-map.html",
     "credit": "Administrator gameplay captures · Nintendo / INTELLIGENT SYSTEMS",
     "checkedAt": "2026-10-25",
     "rights": "Game artwork belongs to Nintendo / INTELLIGENT SYSTEMS. Leda and Theodora capture pixels combined at unchanged coordinates; larger captures downsampled once; bounded HUD/quest-pin cleanup only. No independent reuse permission verified."

@@ -1,4 +1,7 @@
 export default {
+ 'browse.source-sites':{ko:'참고한 사이트와 자료',en:'Reference sites and materials'},
+ 'catalog.coverage':{ko:'수록 범위',en:'Catalog coverage'},
+ 'map.composite-reference':{ko:'여러 루트의 화면을 합친 참고 지도입니다. 통행 가능 여부는 각 장소의 접근 조건을 확인하세요.',en:'This reference map combines captures from several routes. Check each location’s access conditions before travelling.'},
  'tip.contents':{ko:'이 공략에서 확인할 내용',en:'In this guide'},
  'tip.spoiler':{ko:'스포일러',en:'Spoilers'},
  'tip.section-sources':{ko:'이 절의 출처',en:'Sources for this section'},

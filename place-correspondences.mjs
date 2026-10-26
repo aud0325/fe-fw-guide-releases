@@ -18,15 +18,16 @@ export function acquisitionContext(record){
  const names=[record.whereKey,...(typeof record.where==='object'?Object.values(record.where):[record.where])].filter(Boolean).map(placeNameKey);
  if(names.some(n=>errors.has(n)))return 'source-error';
  const method=typeof record.method==='object'?record.method.en:record.method;
- if(record.characterId||['Initial equipment','Quest reward','Paralogue reward','Training reward','Traveling merchant purchase'].includes(method)||names.some(n=>methods.has(n)))return 'method';
+ if(record.containerId||record.characterId||['Initial equipment','Quest reward','Paralogue reward','Training reward','Traveling merchant purchase'].includes(method)||names.some(n=>methods.has(n)))return 'method';
  return 'place';
 }
 export function applyPlaceCorrespondences(merged,sources){
+ Object.assign(sources,placeReview.sources||{});
  sources['game8-jp-place-817376']={title:'Game8 · ゾトー湖',url:'https://game8.jp/fe-banshisenko/817376',kind:'guide',checked:placeReview.checked};
  for(const place of placeReview.places){
   const entry=merged.get(place.id);if(!entry)throw Error('Missing place entry: '+place.id);
   entry.aliases=[...new Set([...(entry.aliases||[]),...place.aliases])];
-  entry.placeNameEvidence={sourceIds:place.sourceIds,checked:placeReview.checked,method:'reviewed-place-correspondence',basis:place.basis};
+  entry.placeNameEvidence={sourceIds:place.sourceIds,checked:place.checked||placeReview.checked,method:place.method||'reviewed-place-correspondence',basis:place.basis};
   entry.sourceIds=[...new Set([...entry.sourceIds,...place.sourceIds])];
  }
 }
