@@ -6,7 +6,7 @@ import {normalizeItemFilters} from './item-types.mjs';
 import {normalizeItemFlavor} from './food.mjs';
 import {mapProvinces} from './part1-map.generated.mjs';
 import {canonicalItemId} from './item-identities.mjs';
-import {canonicalAbilityId} from './_abilities/ability-identities.mjs';
+import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
 export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
@@ -18,7 +18,7 @@ export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
- return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(canonicalAbilityId(canonicalItemId(state.id)))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
+ return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(canonicalItemId(state.id)))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
 export function stateQuery(state){
  const p=new URLSearchParams();
@@ -87,5 +87,8 @@ export function rewriteLinks(html,lang,base){
  return html.replace(/href="\/(ko|en)\//g,(_,locale)=>`href="${base}${locale}/`).replace(/href="#((?:entry\/|category\/)[^" ]*|)"/g,(_,hash)=>{
   const route=readRoute(new URL(base+'#'+hash,'https://local.invalid'),base,lang);
   return route?`href="${pagePath(route.state,lang,base)}${stateQuery(route.state).replaceAll('&','&amp;')}"`:_;
+ }).replace(/href="((?:\/[^"?#]*)?\/(?:ko|en)\/entry\/)([^/"?#]+)\//g,(match,prefix,id)=>{
+  const slug=abilitySlug(decodeURIComponent(id));
+  return `href="${prefix}${encodeURIComponent(slug)}/`;
  });
 }

@@ -1,12 +1,13 @@
 import {proficiencyGlyph} from './proficiency-ui.mjs';
 import {rows} from './full-data.mjs';
+import {abilitySlug} from './ability-identities.mjs';
 import {uniqueAvailability,itemConnections,legacySpellEntries} from './integration-data.mjs';
 import {characterMatrix,learningRanks,specialties,nonSpecialties,abilityTarget,acquisitionLevel,orderedCharacters,characterSkillHref} from './catalog-model.mjs';
 import {groupFamilies,skillGroups} from './scale-model.mjs';
 export const sampleCharacters=orderedCharacters(rows).map(c=>c.id);
 const names={sword:['검술','Sword'],spear:['창술','Spear'],axe:['도끼술','Axe'],bow:['궁술','Bow'],gauntlet:['격투술','Gauntlet'],'black-magic':['흑마술','Black magic'],'white-magic':['백마술','White magic'],authority:['지휘','Authority'],infantry:['보병','Infantry'],armor:['중장','Armor'],cavalry:['기마','Riding'],flying:['비행','Flying'],...skillGroups,'combat-art':['전투 기술','Combat arts'],spell:['마법','Magic'],skill:['장비 스킬','Equipable skills']};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function abilityHref(r,lang){return characterSkillHref(r,lang)||`/${lang}/entry/${encodeURIComponent(r.id)}/`;}
+export function abilityHref(r,lang){return characterSkillHref(r,lang)||`/${lang}/entry/${encodeURIComponent(abilitySlug(r.id))}/`;}
 function abilityTable(items,lang){return `<table class="sample-ability-table"><thead><tr><th>${lang==='ko'?'기술명':'Name'}</th><th>${lang==='ko'?'효과':'Effect'}</th></tr></thead><tbody>${groupFamilies(items).map(f=>`<tr data-skill-family="${esc(f[0].family)}"><td colspan="2">${f.map(r=>`<div class="sample-ability-line"><a href="${abilityHref(r,lang)}">${esc(r.name[lang])}</a><span>${esc(r.effect[lang])}</span></div>`).join('')}</td></tr>`).join('')}</tbody></table>`;}
 function matrixTable(lines,lang,title){
  const text=(ko,en)=>lang==='ko'?ko:en,label=p=>p?.[lang==='ko'?0:1]||text('미확인','Unknown');

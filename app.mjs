@@ -4,7 +4,7 @@ import {bindAbilityControls} from './_abilities/ability-controls.mjs';
 import {bindGrowthControls,bindCharacterGrowthControls,revealGrowthFocus} from './growth-controls.mjs';
 import {navigationHtml,shellFilters,renderKey,hydrateContent,homeCategoriesHtml} from './shell-renderer.mjs';
 import {revealAnchor} from './anchors.mjs';
-import {isArchivedState} from './editorial-view.mjs';
+import {isNoindexState} from './indexing-policy.mjs';
 import {trackPage} from './analytics.mjs';
 import {setupUpdateCheck} from './update-check.mjs';
 import {pageStructuredData,serializeStructuredData,siteNames} from './seo.mjs';
@@ -151,7 +151,7 @@ function updateMetadata(page){
  document.querySelector('meta[property="og:locale"]')?.setAttribute('content',lang==='ko'?'ko_KR':'en_US');
  document.querySelector('meta[property="og:image"]')?.setAttribute('content',new URL('assets/encyclopedia-logo'+(lang==='en'?'-en':'')+'.png',origin||document.baseURI).href);
  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link=>link.href=new URL(pagePath(state,link.hreflang==='en'?'en':'ko',basePath),origin||location.origin).href);
- document.querySelector('meta[name="robots"]')?.setAttribute('content',!origin||stateQuery(state)||page.missing||isArchivedState(state,entries)?'noindex,follow':'index,follow');
+ document.querySelector('meta[name="robots"]')?.setAttribute('content',!origin||stateQuery(state)||page.missing||isNoindexState(state,entries)?'noindex,follow':'index,follow');
 }
 function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
 function parseLocation(){

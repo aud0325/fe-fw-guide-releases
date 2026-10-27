@@ -1,7 +1,7 @@
 import {rewriteLinks} from '../routing.mjs';
 import {categoryLabels,normalizeSection,characterSkills,providerGroups,abilityTarget,acquisitionLevel,catalogEntryHref,characterSkillHref} from './catalog-model.mjs';
 import {rows} from './full-data.mjs';
-import {canonicalAbilityId} from './ability-identities.mjs';
+import {canonicalAbilityId,abilitySlug} from './ability-identities.mjs';
 import {uniqueAvailability,itemConnections} from './integration-data.mjs';
 import {proficiencyGlyph} from './proficiency-ui.mjs';
 import {abilityIcon,characterIcon,proficiencyIcon,categoryIcon} from './icon-model.mjs';
@@ -20,7 +20,7 @@ const school=spellGroups;
 const pair=p=>p?txt(...p):txt('미확인','Unknown');
 function url(patch){
  const next={...state,...patch};
- if(next.view==='detail'&&next.id)return `${base}${next.lang}/entry/${encodeURIComponent(next.id)}/`;
+ if(next.view==='detail'&&next.id)return `${base}${next.lang}/entry/${encodeURIComponent(abilitySlug(next.id))}/`;
  const query=next.section?'?group='+encodeURIComponent(next.section):'';
  return `${base}${next.lang}/category/${next.kind}/${query}`;
 }
