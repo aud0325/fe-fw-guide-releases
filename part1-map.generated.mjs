@@ -169,13 +169,24 @@ export const mapNodes=[
  {
   "id": "collection-dawn-plain",
   "ko": "새벽녘 평원",
-  "en": null,
+  "en": "Daybreak Plains",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-dawn-plain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "새벽녘 평원"
+   "새벽녘 평원",
+   "Daybreak Plains"
   ],
   "u": 0.556262425447316,
   "v": 0.5192105263157895,
@@ -215,13 +226,24 @@ export const mapNodes=[
  {
   "id": "collection-farewell-rock",
   "ko": "작별 바위",
-  "en": null,
+  "en": "Farewell Stone",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-farewell-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "작별 바위"
+   "작별 바위",
+   "Farewell Stone"
   ],
   "u": 0.6055666003976143,
   "v": 0.47710526315789475,
@@ -244,13 +266,24 @@ export const mapNodes=[
  {
   "id": "collection-bond-rock",
   "ko": "연결 바위",
-  "en": null,
+  "en": "Staying Stone",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-bond-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "연결 바위"
+   "연결 바위",
+   "Staying Stone"
   ],
   "u": 0.5976143141153082,
   "v": 0.48973684210526314,
@@ -273,13 +306,24 @@ export const mapNodes=[
  {
   "id": "collection-reunion-rock",
   "ko": "순환 바위",
-  "en": null,
+  "en": "Resurgence Stone",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-reunion-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "순환 바위"
+   "순환 바위",
+   "Resurgence Stone"
   ],
   "u": 0.610337972166998,
   "v": 0.4918421052631579,
@@ -302,13 +346,24 @@ export const mapNodes=[
  {
   "id": "collection-sunlight-garden",
   "ko": "햇빛의 화원",
-  "en": null,
+  "en": "Sunlit Garden",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-sunlight-garden",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "햇빛의 화원"
+   "햇빛의 화원",
+   "Sunlit Garden"
   ],
   "u": 0.5753479125248508,
   "v": 0.5718421052631579,
@@ -343,13 +398,24 @@ export const mapNodes=[
  {
   "id": "collection-sunset-path",
   "ko": "해 지는 길",
-  "en": null,
+  "en": "Sunfall Path",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-sunset-path",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "해 지는 길"
+   "해 지는 길",
+   "Sunfall Path"
   ],
   "u": 0.5005964214711729,
   "v": 0.5528947368421052,
@@ -425,13 +491,24 @@ export const mapNodes=[
  {
   "id": "collection-dragon-cape",
   "ko": "용을 부르는 곶",
-  "en": null,
+  "en": "Bau-Caller's Cape",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-dragon-cape",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "용을 부르는 곶"
+   "용을 부르는 곶",
+   "Bau-Caller's Cape"
   ],
   "u": 0.7200795228628232,
   "v": 0.30868421052631584,
@@ -458,14 +535,25 @@ export const mapNodes=[
  {
   "id": "collection-bulang-plain",
   "ko": "블랑 평원",
-  "en": null,
+  "en": "Bran Plains",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-bulang-plain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "불랑 평원",
-   "블랑 평원"
+   "블랑 평원",
+   "Bran Plains"
   ],
   "u": 0.7662027833001988,
   "v": 0.3655263157894737,
@@ -493,13 +581,24 @@ export const mapNodes=[
  {
   "id": "collection-black-wing-valley",
   "ko": "검은 날개 계곡",
-  "en": null,
+  "en": "Valley of Black Wings",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-black-wing-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "검은 날개 계곡"
+   "검은 날개 계곡",
+   "Valley of Black Wings"
   ],
   "u": 0.6755467196819085,
   "v": 0.36131578947368426,
@@ -526,13 +625,24 @@ export const mapNodes=[
  {
   "id": "collection-dragden-pass",
   "ko": "드래그덴 고개",
-  "en": null,
+  "en": "Dragdon Pass",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-dragden-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "드래그덴 고개"
+   "드래그덴 고개",
+   "Dragdon Pass"
   ],
   "u": 0.6055666003976143,
   "v": 0.35289473684210526,
@@ -567,13 +677,24 @@ export const mapNodes=[
  {
   "id": "map-beratri-valley",
   "ko": "베라트리의 계곡",
-  "en": null,
+  "en": "Velatori Valley",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-beratri-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "베라트리의 계곡"
+   "베라트리의 계곡",
+   "Velatori Valley"
   ],
   "u": 0.3606361829025844,
   "v": 0.3107894736842105,
@@ -686,13 +807,26 @@ export const mapNodes=[
  {
   "id": "map-el-mountains",
   "ko": "엘 산지",
-  "en": null,
+  "en": "Ere Mountains",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-el-mountains",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "엘 산지"
+   "엘 산지",
+   "エール山地",
+   "에르 산지(エール山地)",
+   "Ere Mountains"
   ],
   "u": 0.4194831013916501,
   "v": 0.19921052631578948,
@@ -727,13 +861,24 @@ export const mapNodes=[
  {
   "id": "map-dubhe-pass",
   "ko": "두베 고개",
-  "en": null,
+  "en": "Dubhe Ridge",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-dubhe-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "두베 고개"
+   "두베 고개",
+   "Dubhe Ridge"
   ],
   "u": 0.220675944333996,
   "v": 0.28131578947368424,
@@ -768,13 +913,24 @@ export const mapNodes=[
  {
   "id": "map-mintaka-rock-gate",
   "ko": "민타카의 바위 문",
-  "en": null,
+  "en": "Mintaka Rockway",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-mintaka-rock-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "민타카의 바위 문"
+   "민타카의 바위 문",
+   "Mintaka Rockway"
   ],
   "u": 0.19045725646123263,
   "v": 0.275,
@@ -801,13 +957,27 @@ export const mapNodes=[
  {
   "id": "map-pale-raven-s-stone",
   "ko": "백아의 석대",
-  "en": null,
+  "en": "Pale Raven's Perch",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-pale-raven-s-stone",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "백아의 석대"
+   "백아의 석대",
+   "Pale Raven’s Perch",
+   "白鴉の台",
+   "백아의 대지(白鴉の台)",
+   "Pale Raven's Perch"
   ],
   "u": 0.12206759443339955,
   "v": 0.2665789473684211,
@@ -834,13 +1004,26 @@ export const mapNodes=[
  {
   "id": "map-orion-valley",
   "ko": "오리온 골짜기",
-  "en": null,
+  "en": "Orion Canyon",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-orion-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "오리온 골짜기"
+   "오리온 골짜기",
+   "オライオン渓谷",
+   "오리온 계곡(オライオン渓谷)",
+   "Orion Canyon"
   ],
   "u": 0.18091451292246521,
   "v": 0.21815789473684213,
@@ -879,13 +1062,24 @@ export const mapNodes=[
  {
   "id": "map-howling-beast-valley",
   "ko": "짐승 우는 골짜기",
-  "en": null,
+  "en": "Howling Gorge",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-howling-beast-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "짐승 우는 골짜기"
+   "짐승 우는 골짜기",
+   "Howling Gorge"
   ],
   "u": 0.2572564612326043,
   "v": 0.1613157894736842,
@@ -916,13 +1110,24 @@ export const mapNodes=[
  {
   "id": "collection-giant-bird-neck",
   "ko": "거대 새의 목",
-  "en": null,
+  "en": "Raptor's Throat",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-giant-bird-neck",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "거대 새의 목"
+   "거대 새의 목",
+   "Raptor's Throat"
   ],
   "u": 0.5260437375745527,
   "v": 0.20552631578947367,
@@ -945,13 +1150,24 @@ export const mapNodes=[
  {
   "id": "video-damasen-cape",
   "ko": "다마센곶",
-  "en": null,
+  "en": "Cape Damasen",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "video-damasen-cape",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "다마센곶"
+   "다마센곶",
+   "Cape Damasen"
   ],
   "u": 0.5149105367793241,
   "v": 0.1613157894736842,
@@ -982,13 +1198,24 @@ export const mapNodes=[
  {
   "id": "collection-pegasus-rock",
   "ko": "천마암",
-  "en": null,
+  "en": "Pegasi's Peak",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-pegasus-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "천마암"
+   "천마암",
+   "Pegasi's Peak"
   ],
   "u": 0.7550695825049701,
   "v": 0.2013157894736842,
@@ -1015,13 +1242,24 @@ export const mapNodes=[
  {
   "id": "collection-utsuna-pass",
   "ko": "우츠나 고개",
-  "en": null,
+  "en": "Utuna Pass",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-utsuna-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "우츠나 고개"
+   "우츠나 고개",
+   "Utuna Pass"
   ],
   "u": 0.5992047713717693,
   "v": 0.21605263157894736,
@@ -1060,13 +1298,24 @@ export const mapNodes=[
  {
   "id": "video-paro-forest",
   "ko": "파로의 숲",
-  "en": null,
+  "en": "Faro Forest",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "video-paro-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "파로의 숲"
+   "파로의 숲",
+   "Faro Forest"
   ],
   "u": 0.6262425447316103,
   "v": 0.28763157894736846,
@@ -1171,13 +1420,24 @@ export const mapNodes=[
  {
   "id": "collection-zetos-falls",
   "ko": "제토스 대폭포",
-  "en": null,
+  "en": "Zethus Falls",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-zetos-falls",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "제토스 대폭포"
+   "제토스 대폭포",
+   "Zethus Falls"
   ],
   "u": 0.7105367793240556,
   "v": 0.21394736842105264,
@@ -1262,13 +1522,26 @@ export const mapNodes=[
  {
   "id": "map-shifting-sand-road",
   "ko": "흐르는 모랫길",
-  "en": null,
+  "en": "Sandflow Road",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-shifting-sand-road",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "흐르는 모랫길"
+   "흐르는 모랫길",
+   "Sandflow Road",
+   "砂流れの道",
+   "유사 길(砂流れの道)"
   ],
   "u": 0.1952286282306163,
   "v": 0.36131578947368426,
@@ -1332,13 +1605,25 @@ export const mapNodes=[
  {
   "id": "map-tarvos-plains",
   "ko": "타르보스 평원",
-  "en": null,
+  "en": "Tarvos",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-tarvos-plains",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "타르보스 평원"
+   "타르보스 평원",
+   "タルボス平原",
+   "Tarvos"
   ],
   "u": 0.3256461232604374,
   "v": 0.3781578947368421,
@@ -1361,13 +1646,24 @@ export const mapNodes=[
  {
   "id": "map-north-tarvos-road",
   "ko": "타르보스 북도",
-  "en": null,
+  "en": "Tarvos North Road",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-north-tarvos-road",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "타르보스 북도"
+   "타르보스 북도",
+   "Tarvos North Road"
   ],
   "u": 0.3081510934393638,
   "v": 0.33394736842105266,
@@ -1390,13 +1686,24 @@ export const mapNodes=[
  {
   "id": "map-south-tarvos-road",
   "ko": "타르보스 남도",
-  "en": null,
+  "en": "Tarvos South Road",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-south-tarvos-road",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "타르보스 남도"
+   "타르보스 남도",
+   "Tarvos South Road"
   ],
   "u": 0.3065606361829026,
   "v": 0.40342105263157896,
@@ -1419,13 +1726,26 @@ export const mapNodes=[
  {
   "id": "map-sandworm-den",
   "ko": "모래 벌레 소굴",
-  "en": null,
+  "en": "Sandworm Nest",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-sandworm-den",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "모래 벌레 소굴"
+   "모래 벌레 소굴",
+   "Sandworm Nest",
+   "砂虫の巣",
+   "모래벌레 둥지(砂虫の巣)"
   ],
   "u": 0.2508946322067594,
   "v": 0.38236842105263164,
@@ -1456,13 +1776,27 @@ export const mapNodes=[
  {
   "id": "map-quicksand-graveyard",
   "ko": "시체의 대유사",
-  "en": null,
+  "en": "Corpses' Gutter",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-quicksand-graveyard",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "시체의 대유사"
+   "시체의 대유사",
+   "Corpses’ Gutter",
+   "骸の大流砂",
+   "시체의 거대 유사(骸の大流砂)",
+   "Corpses' Gutter"
   ],
   "u": 0.16341948310139162,
   "v": 0.3634210526315789,
@@ -1501,13 +1835,24 @@ export const mapNodes=[
  {
   "id": "map-unexplored-oasis",
   "ko": "미개척 오아시스",
-  "en": null,
+  "en": "Closed Oasis",
   "province": "solomon",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-unexplored-oasis",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "미개척 오아시스"
+   "미개척 오아시스",
+   "Closed Oasis"
   ],
   "u": 0.9061630218687872,
   "v": 0.7676315789473684,
@@ -1555,13 +1900,24 @@ export const mapNodes=[
  {
   "id": "collection-chere-island",
   "ko": "체레섬",
-  "en": null,
+  "en": "Thiere Island",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-chere-island",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "체레섬"
+   "체레섬",
+   "Thiere Island"
   ],
   "u": 0.5705765407554672,
   "v": 0.8034210526315789,
@@ -1611,13 +1967,24 @@ export const mapNodes=[
  {
   "id": "collection-balor-island",
   "ko": "발로르의 섬",
-  "en": null,
+  "en": "Isle of Balor",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-balor-island",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "발로르의 섬"
+   "발로르의 섬",
+   "Isle of Balor"
   ],
   "u": 0.4671968190854871,
   "v": 0.7886842105263158,
@@ -1701,13 +2068,24 @@ export const mapNodes=[
  {
   "id": "collection-silent-tomb",
   "ko": "암묵의 묘소",
-  "en": null,
+  "en": "Wordless Graves",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "collection-silent-tomb",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "암묵의 묘소"
+   "암묵의 묘소",
+   "Wordless Graves"
   ],
   "u": 0.43697813121272366,
   "v": 0.6918421052631578,
@@ -1734,13 +2112,24 @@ export const mapNodes=[
  {
   "id": "map-homer-rock-formations",
   "ko": "호메로스 기암 지대",
-  "en": null,
+  "en": "Homeros Outcrop",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-homer-rock-formations",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "호메로스 기암 지대"
+   "호메로스 기암 지대",
+   "Homeros Outcrop"
   ],
   "u": 0.15546719681908547,
   "v": 0.5023684210526316,
@@ -1787,13 +2176,24 @@ export const mapNodes=[
  {
   "id": "map-gravel-mountain",
   "ko": "자갈 산",
-  "en": null,
+  "en": "Pebble Mountain",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-gravel-mountain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "자갈 산"
+   "자갈 산",
+   "Pebble Mountain"
   ],
   "u": 0.295427435387674,
   "v": 0.7002631578947369,
@@ -1861,13 +2261,26 @@ export const mapNodes=[
  {
   "id": "map-lindrake-rocks",
   "ko": "린드레이크 바위 지대",
-  "en": null,
+  "en": "Lindrake Rock Belt",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-lindrake-rocks",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "린드레이크 바위 지대"
+   "린드레이크 바위 지대",
+   "Lindrake Rock Belt",
+   "リンドレイク岩帯",
+   "린드레이크 암석 지대(リンドレイク岩帯)"
   ],
   "u": 0.2540755467196819,
   "v": 0.2518421052631579,
@@ -1906,13 +2319,26 @@ export const mapNodes=[
  {
   "id": "map-muzra-s-corpse-cave",
   "ko": "무즈라의 시체 동굴",
-  "en": null,
+  "en": "Muzura Death Cave",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-muzra-s-corpse-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "무즈라의 시체 동굴"
+   "무즈라의 시체 동굴",
+   "Muzura Death Cave",
+   "ムズラの屍洞",
+   "무즈라 시체 동굴(ムズラの屍洞)"
   ],
   "u": 0.24453280318091453,
   "v": 0.20763157894736844,
@@ -1951,13 +2377,24 @@ export const mapNodes=[
  {
   "id": "map-valley-of-death",
   "ko": "죽음의 계곡",
-  "en": null,
+  "en": "The Valley of Death",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-valley-of-death",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "죽음의 계곡"
+   "죽음의 계곡",
+   "The Valley of Death"
   ],
   "u": 0.22385685884691853,
   "v": 0.14236842105263156,
@@ -1984,13 +2421,24 @@ export const mapNodes=[
  {
   "id": "map-mount-atra-summit",
   "ko": "아트라 산 정상",
-  "en": null,
+  "en": "Atla Peak",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-mount-atra-summit",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아트라 산 정상"
+   "아트라 산 정상",
+   "Atla Peak"
   ],
   "u": 0.19840954274353878,
   "v": 0.12552631578947368,
@@ -2084,13 +2532,24 @@ export const mapNodes=[
  {
   "id": "map-iron-tower-graveyard",
   "ko": "게 철탑 묘석군",
-  "en": null,
+  "en": "Ge Tower Cemetery",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-iron-tower-graveyard",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "게 철탑 묘석군"
+   "게 철탑 묘석군",
+   "Ge Tower Cemetery"
   ],
   "u": 0.14592445328031806,
   "v": 0.30026315789473684,
@@ -2129,13 +2588,24 @@ export const mapNodes=[
  {
   "id": "map-bataha-reef",
   "ko": "바타하 암초",
-  "en": null,
+  "en": "Vataha Reef",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-bataha-reef",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "바타하 암초"
+   "바타하 암초",
+   "Vataha Reef"
   ],
   "u": 0.807554671968191,
   "v": 0.5486842105263158,
@@ -2185,13 +2655,24 @@ export const mapNodes=[
  {
   "id": "map-star-coral-sea",
   "ko": "별 산호 바다",
-  "en": null,
+  "en": "Montastraea Sea",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-star-coral-sea",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "별 산호 바다"
+   "별 산호 바다",
+   "Montastraea Sea"
   ],
   "u": 0.3829025844930418,
   "v": 0.10868421052631579,
@@ -2241,13 +2722,24 @@ export const mapNodes=[
  {
   "id": "map-undersea-cave",
   "ko": "해저 동굴",
-  "en": null,
+  "en": "Underwater Cave",
   "province": "lucil-sea",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "map-undersea-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "해저 동굴"
+   "해저 동굴",
+   "Underwater Cave"
   ],
   "u": 0.7884691848906561,
   "v": 0.2834210526315789,
@@ -2297,13 +2789,24 @@ export const mapNodes=[
  {
   "id": "collection-lakeside-ruin",
   "ko": "호숫가의 폐가",
-  "en": null,
+  "en": "Forsaken Lakehouse",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-lakeside-ruin",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "호숫가의 폐가"
+   "호숫가의 폐가",
+   "Forsaken Lakehouse"
   ],
   "u": 0.4640159045725646,
   "v": 0.4392105263157895,
@@ -2376,13 +2879,24 @@ export const mapNodes=[
  {
   "id": "collection-silent-city",
   "ko": "침묵의 도시",
-  "en": null,
+  "en": "Necropolis of Silence",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-silent-city",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "침묵의 도시"
+   "침묵의 도시",
+   "Necropolis of Silence"
   ],
   "u": 0.4465208747514911,
   "v": 0.4855263157894737,
@@ -2421,13 +2935,24 @@ export const mapNodes=[
  {
   "id": "collection-megrez-village-ruins",
   "ko": "메그레즈 촌락 옛터",
-  "en": null,
+  "en": "Ruins of Megrez",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-megrez-village-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "메그레즈 촌락 옛터"
+   "메그레즈 촌락 옛터",
+   "Ruins of Megrez"
   ],
   "u": 0.42107355864811136,
   "v": 0.5402631578947369,
@@ -2466,13 +2991,24 @@ export const mapNodes=[
  {
   "id": "collection-ryozan-fort",
   "ko": "료잔 요새",
-  "en": null,
+  "en": "Lyoshan Fort",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-ryozan-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "료잔 요새"
+   "료잔 요새",
+   "Lyoshan Fort"
   ],
   "u": 0.4163021868787276,
   "v": 0.5971052631578948,
@@ -2503,13 +3039,24 @@ export const mapNodes=[
  {
   "id": "collection-sodan-gate",
   "ko": "소단의 마교 관문",
-  "en": null,
+  "en": "Devil's Bridge of Sodan",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-sodan-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "소단의 마교 관문"
+   "소단의 마교 관문",
+   "Devil's Bridge of Sodan"
   ],
   "u": 0.4656063618290258,
   "v": 0.5718421052631579,
@@ -2540,13 +3087,24 @@ export const mapNodes=[
  {
   "id": "video-tartarus",
   "ko": "타르타로스 대유구",
-  "en": null,
+  "en": "Great Tartarus Ruins",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "video-tartarus",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "타르타로스 대유구"
+   "타르타로스 대유구",
+   "Great Tartarus Ruins"
   ],
   "u": 0.3606361829025844,
   "v": 0.6476315789473684,
@@ -2577,13 +3135,24 @@ export const mapNodes=[
  {
   "id": "collection-bio-altar",
   "ko": "비오의 제단",
-  "en": null,
+  "en": "Secret Altar",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-bio-altar",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "비오의 제단"
+   "비오의 제단",
+   "Secret Altar"
   ],
   "u": 0.4099403578528827,
   "v": 0.6960526315789474,
@@ -2655,13 +3224,24 @@ export const mapNodes=[
  {
   "id": "collection-kruderinde-ruins",
   "ko": "크루데린데 유적",
-  "en": null,
+  "en": "Kurdelind Ruins",
   "province": "ogma",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-kruderinde-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "크루데린데 유적"
+   "크루데린데 유적",
+   "Kurdelind Ruins"
   ],
   "u": 0.6071570576540755,
   "v": 0.906578947368421,
@@ -2692,13 +3272,24 @@ export const mapNodes=[
  {
   "id": "zanzibar-fort",
   "ko": "잔지바르 요새",
-  "en": null,
+  "en": "Fort Zanbar",
   "province": "ogma",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "zanzibar-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "잔지바르 요새"
+   "잔지바르 요새",
+   "Fort Zanbar"
   ],
   "u": 0.583300198807157,
   "v": 0.8771052631578947,
@@ -2770,13 +3361,24 @@ export const mapNodes=[
  {
   "id": "map-niasa-village-ruins",
   "ko": "니아사 촌락 옛터",
-  "en": null,
+  "en": "Ruins of Nyassa",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-niasa-village-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "니아사 촌락 옛터"
+   "니아사 촌락 옛터",
+   "Ruins of Nyassa"
   ],
   "u": 0.04572564612326044,
   "v": 0.5318421052631579,
@@ -2815,13 +3417,24 @@ export const mapNodes=[
  {
   "id": "map-tower-of-icarus",
   "ko": "이카로스의 탑",
-  "en": null,
+  "en": "Tower of Ikaros",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-tower-of-icarus",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "이카로스의 탑"
+   "이카로스의 탑",
+   "Tower of Ikaros"
   ],
   "u": 0.3017892644135189,
   "v": 0.5486842105263158,
@@ -2889,13 +3502,24 @@ export const mapNodes=[
  {
   "id": "collection-mordo-fort-ruins",
   "ko": "모르도 요새 옛터",
-  "en": null,
+  "en": "Abandoned Fort Moldo",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-mordo-fort-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "모르도 요새 옛터"
+   "모르도 요새 옛터",
+   "Abandoned Fort Moldo"
   ],
   "u": 0.5308151093439364,
   "v": 0.5360526315789473,
@@ -2926,13 +3550,24 @@ export const mapNodes=[
  {
   "id": "collection-sunset-fort",
   "ko": "해넘이 요새",
-  "en": null,
+  "en": "Sunset Fortress",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-sunset-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "해넘이 요새"
+   "해넘이 요새",
+   "Sunset Fortress"
   ],
   "u": 0.6119284294234592,
   "v": 0.4392105263157895,
@@ -2971,13 +3606,24 @@ export const mapNodes=[
  {
   "id": "collection-sorel-temple",
   "ko": "소렐 신전 본전",
-  "en": null,
+  "en": "Solel's Temple",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-sorel-temple",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "소렐 신전 본전"
+   "소렐 신전 본전",
+   "Solel's Temple"
   ],
   "u": 0.603976143141153,
   "v": 0.5171052631578947,
@@ -3008,13 +3654,24 @@ export const mapNodes=[
  {
   "id": "collection-stranded-ship",
   "ko": "좌초된 대형 선박",
-  "en": null,
+  "en": "Ship Aground",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-stranded-ship",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "좌초된 대형 선박"
+   "좌초된 대형 선박",
+   "Ship Aground"
   ],
   "u": 0.7980119284294234,
   "v": 0.35289473684210526,
@@ -3049,13 +3706,24 @@ export const mapNodes=[
  {
   "id": "map-coen-s-tomb",
   "ko": "코엔의 묘",
-  "en": null,
+  "en": "Cohen's Mausoleum",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-coen-s-tomb",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "코엔의 묘"
+   "코엔의 묘",
+   "Cohen's Mausoleum"
   ],
   "u": 0.4608349900596422,
   "v": 0.17815789473684213,
@@ -3135,13 +3803,24 @@ export const mapNodes=[
  {
   "id": "map-sedo-fort",
   "ko": "세도 요새",
-  "en": null,
+  "en": "Fort Theed",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-sedo-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "세도 요새"
+   "세도 요새",
+   "Fort Theed"
   ],
   "u": 0.4115308151093439,
   "v": 0.24552631578947368,
@@ -3172,13 +3851,24 @@ export const mapNodes=[
  {
   "id": "map-gorbea-gate-ruins",
   "ko": "고르베아 관문 옛터",
-  "en": null,
+  "en": "Gorbea Stronghold Ruins",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-gorbea-gate-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "고르베아 관문 옛터"
+   "고르베아 관문 옛터",
+   "Gorbea Stronghold Ruins"
   ],
   "u": 0.3288270377733598,
   "v": 0.3044736842105263,
@@ -3209,13 +3899,24 @@ export const mapNodes=[
  {
   "id": "map-is-village-ruins",
   "ko": "이스 촌락 옛터",
-  "en": null,
+  "en": "Ruins of Ys",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-is-village-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "이스 촌락 옛터"
+   "이스 촌락 옛터",
+   "Ruins of Ys"
   ],
   "u": 0.15864811133200798,
   "v": 0.19921052631578948,
@@ -3258,13 +3959,24 @@ export const mapNodes=[
  {
   "id": "map-lake-menol",
   "ko": "메놀호",
-  "en": null,
+  "en": "Lake Menor",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-lake-menol",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "메놀호"
+   "메놀호",
+   "Lake Menor"
   ],
   "u": 0.1681908548707754,
   "v": 0.17815789473684213,
@@ -3295,13 +4007,24 @@ export const mapNodes=[
  {
   "id": "map-madel-altar",
   "ko": "마들의 제단",
-  "en": null,
+  "en": "Mahdel's Shrine",
   "province": "solidus",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-madel-altar",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "마들의 제단"
+   "마들의 제단",
+   "Mahdel's Shrine"
   ],
   "u": 0.2906560636182902,
   "v": 0.0981578947368421,
@@ -3377,13 +4100,24 @@ export const mapNodes=[
  {
   "id": "collection-clove-pit-city",
   "ko": "클로브 수혈 도시",
-  "en": null,
+  "en": "Krove Ditch",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-clove-pit-city",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "클로브 수혈 도시"
+   "클로브 수혈 도시",
+   "Krove Ditch"
   ],
   "u": 0.6326043737574554,
   "v": 0.23710526315789474,
@@ -3426,13 +4160,24 @@ export const mapNodes=[
  {
   "id": "map-endless-wind-beach",
   "ko": "끝없는 바람의 해변",
-  "en": null,
+  "en": "Shore of Ceaseless Winds",
   "province": "solomon",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-endless-wind-beach",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "끝없는 바람의 해변"
+   "끝없는 바람의 해변",
+   "Shore of Ceaseless Winds"
   ],
   "u": 0.8234592445328033,
   "v": 0.7002631578947369,
@@ -3518,12 +4263,23 @@ export const mapNodes=[
  {
   "id": "lost-forest",
   "ko": "미혹의 숲",
-  "en": null,
+  "en": "Wandering Wood",
   "province": "saveilon",
   "kind": "dungeon",
   "entryId": "lost-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "미혹의 숲"
+   "미혹의 숲",
+   "Wandering Wood"
   ],
   "u": 0.38131212723658053,
   "v": 0.7739473684210527,
@@ -3550,12 +4306,23 @@ export const mapNodes=[
  {
   "id": "niglia-mine",
   "ko": "니글리아 광산",
-  "en": null,
+  "en": "Niraga Mine",
   "province": "amalthea",
   "kind": "dungeon",
   "entryId": "niglia-mine",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "니글리아 광산"
+   "니글리아 광산",
+   "Niraga Mine"
   ],
   "u": 0.40516898608349905,
   "v": 0.39921052631578946,
@@ -3618,12 +4385,26 @@ export const mapNodes=[
  {
   "id": "map-corus-mine",
   "ko": "코러스 광산",
-  "en": null,
+  "en": "Coris Mine",
   "province": "thalia",
   "kind": "dungeon",
   "entryId": "map-corus-mine",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "코러스 광산"
+   "코러스 광산",
+   "Coris Mine",
+   "コーラス鉱山",
+   "코라스 광산(コーラス鉱山)",
+   "Chorus Mine"
   ],
   "u": 0.44174950298210736,
   "v": 0.19710526315789476,
@@ -3739,12 +4520,25 @@ export const mapNodes=[
  {
   "id": "map-scorching-road-cave",
   "ko": "작열하는 길의 동굴",
-  "en": null,
+  "en": "Cindered Road Cave",
   "province": "solidus",
   "kind": "dungeon",
   "entryId": "map-scorching-road-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "작열하는 길의 동굴"
+   "작열하는 길의 동굴",
+   "熱の道の洞窟",
+   "열의 길 동굴(熱の道の洞窟)",
+   "Cindered Road Cave"
   ],
   "u": 0.2318091451292247,
   "v": 0.18236842105263157,
@@ -3771,12 +4565,24 @@ export const mapNodes=[
  {
   "id": "map-dark-cave",
   "ko": "어두운 동굴",
-  "en": null,
+  "en": "Shadowy Cave",
   "province": "lambus",
   "kind": "dungeon",
   "entryId": "map-dark-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "어두운 동굴"
+   "어두운 동굴",
+   "Shadowy Cave",
+   "어둠의 동굴"
   ],
   "u": 0.2572564612326043,
   "v": 0.47289473684210526,
@@ -3861,12 +4667,27 @@ export const mapNodes=[
  {
   "id": "map-white-hole-rock-cave",
   "ko": "백혈 바위 굴",
-  "en": null,
+  "en": "Hundred-Hole Cave",
   "province": "basithea",
   "kind": "dungeon",
   "entryId": "map-white-hole-rock-cave",
+  "englishNameEvidence": {
+   "sourceId": "rpg-dungeons-followup",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://www.rpgsite.net/guide/21400-fire-emblem-fortunes-weave-dungeons-all-dungeons-in-game-how-to-navigate-them-all-keys-diadem",
+   "sourceTitle": {
+    "ko": "RPG Site · Dungeons",
+    "en": "RPG Site · Dungeons"
+   }
+  },
   "aliases": [
-   "백혈 바위 굴"
+   "백혈 바위 굴",
+   "백혈 암굴",
+   "Hundred-Hole Grotto",
+   "百穴岩窟",
+   "백혈 암굴(百穴岩窟)",
+   "Hundred-Hole Cave"
   ],
   "u": 0.1506958250497018,
   "v": 0.5213157894736842,
@@ -3925,13 +4746,23 @@ export const mapNodes=[
  {
   "id": "noah-cave",
   "ko": "노어의 동굴",
-  "en": "Noah’s Cave",
+  "en": "Nowah's Cave",
   "province": "elektra",
   "kind": "dungeon",
   "entryId": "noah-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "노어의 동굴",
-   "Noah’s Cave"
+   "Nowah's Cave"
   ],
   "u": 0.5324055666003975,
   "v": 0.5718421052631579,
@@ -3966,12 +4797,26 @@ export const mapNodes=[
  {
   "id": "map-anu-island",
   "ko": "아누섬",
-  "en": null,
+  "en": "Enno Isle",
   "province": "danann-sea",
   "kind": "dungeon",
   "entryId": "map-anu-island",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아누섬"
+   "아누섬",
+   "アヌ島",
+   "아누 섬(アヌ島)",
+   "Enno Isle",
+   "아누 섬"
   ],
   "u": 0.8266401590457255,
   "v": 0.5444736842105263,
@@ -4070,12 +4915,23 @@ export const mapNodes=[
  {
   "id": "uncharted-island",
   "ko": "지도에 없는 섬",
-  "en": null,
+  "en": "Uncharted Isle",
   "province": "lir-sea",
   "kind": "dungeon",
   "entryId": "uncharted-island",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "지도에 없는 섬"
+   "지도에 없는 섬",
+   "Uncharted Isle"
   ],
   "u": 0.6548707753479125,
   "v": 0.11289473684210528,
@@ -4165,12 +5021,25 @@ export const mapNodes=[
  {
   "id": "map-cougar-great-forest",
   "ko": "쿠거 대삼림 지대",
-  "en": null,
+  "en": "Cougar Woodlands",
   "province": "braxithea",
   "kind": "dungeon",
   "entryId": "map-cougar-great-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "쿠거 대삼림 지대"
+   "쿠거 대삼림 지대",
+   "Cougar Woodlands",
+   "クーガー大森林帯",
+   "쿠거 대삼림(クーガー大森林帯)"
   ],
   "u": 0.23658051689860835,
   "v": 0.6897368421052632,
@@ -4237,12 +5106,23 @@ export const mapNodes=[
  {
   "id": "forbidden-forest",
   "ko": "금단의 숲",
-  "en": "금단의 숲",
+  "en": "Masked Woods",
   "province": "melias",
   "kind": "dungeon",
   "entryId": "video-forbidden-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "금단의 숲"
+   "금단의 숲",
+   "Masked Woods"
   ],
   "u": 0.4322067594433399,
   "v": 0.6581578947368422,
@@ -4273,12 +5153,23 @@ export const mapNodes=[
  {
   "id": "map-hain-fort",
   "ko": "하인 요새",
-  "en": null,
+  "en": "Fort Hayn",
   "province": "braxithea",
   "kind": "dungeon",
   "entryId": "map-hain-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "하인 요새"
+   "하인 요새",
+   "Fort Hayn"
   ],
   "u": 0.27952286282306166,
   "v": 0.5697368421052632,
@@ -4403,12 +5294,23 @@ export const mapNodes=[
  {
   "id": "votive-altar",
   "ko": "봉주의 제단",
-  "en": null,
+  "en": "Stoppered Shrine",
   "province": "idyia",
   "kind": "dungeon",
   "entryId": "votive-altar",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "봉주의 제단"
+   "봉주의 제단",
+   "Stoppered Shrine"
   ],
   "u": 0.7009940357852883,
   "v": 0.34868421052631576,
@@ -4443,13 +5345,23 @@ export const mapNodes=[
  {
   "id": "dione-fort",
   "ko": "디오네 요새",
-  "en": "the Piercer, Dione Fort",
+  "en": "Dione Fort",
   "province": "castalia",
   "kind": "dungeon",
   "entryId": "the-piercer-dione-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "디오네 요새",
-   "the Piercer, Dione Fort"
+   "Dione Fort"
   ],
   "u": 0.6119284294234592,
   "v": 0.19078947368421054,
@@ -4480,12 +5392,23 @@ export const mapNodes=[
  {
   "id": "map-coroios-fort",
   "ko": "코로이오스 요새",
-  "en": null,
+  "en": "Corroios Fort Ruins",
   "province": "thalia",
   "kind": "dungeon",
   "entryId": "map-coroios-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "코로이오스 요새"
+   "코로이오스 요새",
+   "Corroios Fort Ruins"
   ],
   "u": 0.3590457256461233,
   "v": 0.2581578947368421,
@@ -4516,12 +5439,26 @@ export const mapNodes=[
  {
   "id": "map-beast-trail",
   "ko": "마수가 지나간 흔적",
-  "en": null,
+  "en": "Beast's Path",
   "province": "braxithea",
   "kind": "dungeon",
   "entryId": "map-beast-trail",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "마수가 지나간 흔적"
+   "마수가 지나간 흔적",
+   "魔獣の通り跡",
+   "마수의 발자취(魔獣の通り跡)",
+   "마수의 통행 흔적",
+   "Beast's Path"
   ],
   "u": 0.35268389662027827,
   "v": 0.6876315789473685,
@@ -4556,13 +5493,24 @@ export const mapNodes=[
  {
   "id": "adids-cave",
   "ko": "아디티의 동굴",
-  "en": "Adid’s Cave",
+  "en": "Aditi's Cave",
   "province": "nysiades",
   "kind": "dungeon",
   "entryId": "adids-cave",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "아디티의 동굴",
-   "Adid’s Cave"
+   "Aditi’s Cave",
+   "Aditi's Cave"
   ],
   "u": 0.20954274353876734,
   "v": 0.3171052631578947,
@@ -4601,12 +5549,25 @@ export const mapNodes=[
  {
   "id": "map-iapetos-cavern",
   "ko": "이아페토스 대동굴",
-  "en": null,
+  "en": "Iapetus Cavern",
   "province": "solidus",
   "kind": "dungeon",
   "entryId": "map-iapetos-cavern",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "이아페토스 대동굴"
+   "이아페토스 대동굴",
+   "Iapetus Cavern",
+   "イアペトス大洞窟",
+   "이아페투스 대동굴(イアペトス大洞窟)"
   ],
   "u": 0.22385685884691853,
   "v": 0.11710526315789474,
@@ -4649,12 +5610,23 @@ export const mapNodes=[
  {
   "id": "giants-footprint-fort",
   "ko": "거인의 발자국 요새",
-  "en": null,
+  "en": "Giant's-Print Fort",
   "province": "ogma",
   "kind": "dungeon",
   "entryId": "giants-footprint-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "거인의 발자국 요새"
+   "거인의 발자국 요새",
+   "Giant's-Print Fort"
   ],
   "u": 0.5737574552683897,
   "v": 0.9823684210526316,
@@ -4693,12 +5665,23 @@ export const mapNodes=[
  {
   "id": "east-amalthea-station",
   "ko": "동아말테아역",
-  "en": null,
+  "en": "East Amalthea Posthouse",
   "province": "amalthea",
   "kind": "station",
   "entryId": "east-amalthea-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "동아말테아역"
+   "동아말테아역",
+   "East Amalthea Posthouse"
   ],
   "u": 0.5196819085487077,
   "v": 0.41605263157894734,
@@ -4721,12 +5704,23 @@ export const mapNodes=[
  {
   "id": "west-amalthea-station",
   "ko": "서아말테아역",
-  "en": null,
+  "en": "West Amalthea Posthouse",
   "province": "amalthea",
   "kind": "station",
   "entryId": "west-amalthea-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "서아말테아역"
+   "서아말테아역",
+   "West Amalthea Posthouse"
   ],
   "u": 0.4306163021868788,
   "v": 0.3907894736842105,
@@ -4750,12 +5744,23 @@ export const mapNodes=[
  {
   "id": "carmenta-station",
   "ko": "카르멘타역",
-  "en": null,
+  "en": "Carmenta Posthouse",
   "province": "idyia",
   "kind": "station",
   "entryId": "carmenta-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카르멘타역"
+   "카르멘타역",
+   "Carmenta Posthouse"
   ],
   "u": 0.6294234592445328,
   "v": 0.3907894736842105,
@@ -4775,12 +5780,23 @@ export const mapNodes=[
  {
   "id": "ohad-station",
   "ko": "오하드역",
-  "en": null,
+  "en": "Eochaid Posthouse",
   "province": "castalia",
   "kind": "station",
   "entryId": "ohad-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "오하드역"
+   "오하드역",
+   "Eochaid Posthouse"
   ],
   "u": 0.6469184890656063,
   "v": 0.19499999999999998,
@@ -4800,12 +5816,23 @@ export const mapNodes=[
  {
   "id": "peronia-station",
   "ko": "페로니아역",
-  "en": null,
+  "en": "Feronia Posthouse",
   "province": "elektra",
   "kind": "station",
   "entryId": "peronia-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "페로니아역"
+   "페로니아역",
+   "Feronia Posthouse"
   ],
   "u": 0.5737574552683897,
   "v": 0.5086842105263158,
@@ -4826,12 +5853,23 @@ export const mapNodes=[
  {
   "id": "salacia-station",
   "ko": "살라키아역",
-  "en": null,
+  "en": "Salacia Posthouse",
   "province": "saveilon",
   "kind": "station",
   "entryId": "salacia-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "살라키아역"
+   "살라키아역",
+   "Salacia Posthouse"
   ],
   "u": 0.31292246520874745,
   "v": 0.7928947368421053,
@@ -4853,12 +5891,23 @@ export const mapNodes=[
  {
   "id": "callisto-station",
   "ko": "칼리스토역",
-  "en": null,
+  "en": "Callisto Posthouse",
   "province": "melias",
   "kind": "station",
   "entryId": "callisto-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "칼리스토역"
+   "칼리스토역",
+   "Callisto Posthouse"
   ],
   "u": 0.390854870775348,
   "v": 0.6686842105263159,
@@ -4880,12 +5929,23 @@ export const mapNodes=[
  {
   "id": "map-chiron-station",
   "ko": "카이론역",
-  "en": null,
+  "en": "Chiron Posthouse",
   "province": "basithea",
   "kind": "station",
   "entryId": "map-chiron-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카이론역"
+   "카이론역",
+   "Chiron Posthouse"
   ],
   "u": 0.21590457256461237,
   "v": 0.555,
@@ -4893,7 +5953,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "중앙과 바시테아 지방을 연결하는, 왕도 브레스턴에서 가까운 역",
-    "en": "A station near Bresten, connecting the central region and Basithea."
+    "en": "A station near Breston, connecting the central region and Basithea."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -4907,12 +5967,23 @@ export const mapNodes=[
  {
   "id": "map-aragona-station",
   "ko": "아라고나역",
-  "en": null,
+  "en": "Aragona Posthouse",
   "province": "thalia",
   "kind": "station",
   "entryId": "map-aragona-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아라고나역"
+   "아라고나역",
+   "Aragona Posthouse"
   ],
   "u": 0.3065606361829026,
   "v": 0.23710526315789474,
@@ -4920,7 +5991,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "중앙과 탈리아 지방을 연결하는, 왕도 그랑 아라곤에서 가까운 역",
-    "en": "A station near Gran Aragon, connecting the central region and Thalia."
+    "en": "A station near Grand Aragon, connecting the central region and Thalia."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -4933,12 +6004,23 @@ export const mapNodes=[
  {
   "id": "map-cartod-station",
   "ko": "카르토드역",
-  "en": null,
+  "en": "Cartodo Posthouse",
   "province": "solidus",
   "kind": "station",
   "entryId": "map-cartod-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카르토드역"
+   "카르토드역",
+   "Cartodo Posthouse"
   ],
   "u": 0.3081510934393638,
   "v": 0.115,
@@ -4959,12 +6041,23 @@ export const mapNodes=[
  {
   "id": "urca-station",
   "ko": "우르카역",
-  "en": null,
+  "en": "Urka Posthouse",
   "province": "idyia",
   "kind": "station",
   "entryId": "urca-station",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "우르카역"
+   "우르카역",
+   "Urka Posthouse"
   ],
   "u": 0.7089463220675944,
   "v": 0.4097368421052631,
@@ -4985,12 +6078,23 @@ export const mapNodes=[
  {
   "id": "map-hugo-gate",
   "ko": "후고 관문",
-  "en": null,
+  "en": "Hugo Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-hugo-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "후고 관문"
+   "후고 관문",
+   "Hugo Stronghold"
   ],
   "u": 0.5610337972166999,
   "v": 0.34236842105263154,
@@ -5007,12 +6111,23 @@ export const mapNodes=[
  {
   "id": "map-libertas-gate",
   "ko": "리베르타스 관문",
-  "en": null,
+  "en": "Libertas Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-libertas-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "리베르타스 관문"
+   "리베르타스 관문",
+   "Libertas Stronghold"
   ],
   "u": 0.6437375745526838,
   "v": 0.4476315789473684,
@@ -5029,12 +6144,23 @@ export const mapNodes=[
  {
   "id": "map-phrygia-gate",
   "ko": "프리기아 관문",
-  "en": null,
+  "en": "Phyrgia Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-phrygia-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "프리기아 관문"
+   "프리기아 관문",
+   "Phyrgia Stronghold"
   ],
   "u": 0.4640159045725646,
   "v": 0.6897368421052632,
@@ -5051,12 +6177,23 @@ export const mapNodes=[
  {
   "id": "map-agris-gate",
   "ko": "아그리스 관문",
-  "en": null,
+  "en": "Agris Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-agris-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아그리스 관문"
+   "아그리스 관문",
+   "Agris Stronghold"
   ],
   "u": 0.3829025844930418,
   "v": 0.5128947368421053,
@@ -5073,12 +6210,23 @@ export const mapNodes=[
  {
   "id": "map-leiria-gate",
   "ko": "레이리아 관문",
-  "en": null,
+  "en": "Leiria Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-leiria-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "레이리아 관문"
+   "레이리아 관문",
+   "Leiria Stronghold"
   ],
   "u": 0.2556660039761432,
   "v": 0.5444736842105263,
@@ -5095,12 +6243,23 @@ export const mapNodes=[
  {
   "id": "map-grani-gate",
   "ko": "그라니 관문",
-  "en": null,
+  "en": "Grania Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-grani-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "그라니 관문"
+   "그라니 관문",
+   "Grania Stronghold"
   ],
   "u": 0.508548707753479,
   "v": 0.8771052631578947,
@@ -5117,12 +6276,23 @@ export const mapNodes=[
  {
   "id": "cryphus-gate",
   "ko": "크뤼푸스 관문",
-  "en": null,
+  "en": "Kyklops Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "cryphus-gate",
+  "englishNameEvidence": {
+   "sourceId": "neoseeker-leda-followup",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://www.neoseeker.com/fire-emblem-fortunes-weave/walkthrough/Chapter_Five_Leda_Activities",
+   "sourceTitle": {
+    "ko": "Neoseeker · Leda Chapter Five activities",
+    "en": "Neoseeker · Leda Chapter Five activities"
+   }
+  },
   "aliases": [
-   "크뤼푸스 관문"
+   "크뤼푸스 관문",
+   "Kyklops Stronghold"
   ],
   "u": 0.3765407554671968,
   "v": 0.6960526315789474,
@@ -5139,12 +6309,23 @@ export const mapNodes=[
  {
   "id": "map-muster-bridge-gate",
   "ko": "무스터 다리 관문",
-  "en": null,
+  "en": "Musta Bridge",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-muster-bridge-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "무스터 다리 관문"
+   "무스터 다리 관문",
+   "Musta Bridge"
   ],
   "u": 0.3320079522862823,
   "v": 0.6307894736842105,
@@ -5161,12 +6342,23 @@ export const mapNodes=[
  {
   "id": "map-cavala-gate",
   "ko": "카발라 관문",
-  "en": null,
+  "en": "Kavala Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-cavala-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카발라 관문"
+   "카발라 관문",
+   "Kavala Stronghold"
   ],
   "u": 0.5403578528827037,
   "v": 0.4455263157894737,
@@ -5183,12 +6375,23 @@ export const mapNodes=[
  {
   "id": "map-urkul-gate",
   "ko": "우르쿨 관문",
-  "en": null,
+  "en": "Urkulu Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-urkul-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "우르쿨 관문"
+   "우르쿨 관문",
+   "Urkulu Stronghold"
   ],
   "u": 0.2874751491053678,
   "v": 0.1655263157894737,
@@ -5205,12 +6408,23 @@ export const mapNodes=[
  {
   "id": "map-benara-gate",
   "ko": "베냐라 관문",
-  "en": null,
+  "en": "Benyera Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-benara-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "베냐라 관문"
+   "베냐라 관문",
+   "Benyera Stronghold"
   ],
   "u": 0.295427435387674,
   "v": 0.2623684210526316,
@@ -5227,12 +6441,23 @@ export const mapNodes=[
  {
   "id": "map-north-salt-gate",
   "ko": "솔트 북부 관문",
-  "en": null,
+  "en": "North Zorto Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-north-salt-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "솔트 북부 관문"
+   "솔트 북부 관문",
+   "North Zorto Stronghold"
   ],
   "u": 0.3033797216699802,
   "v": 0.4371052631578947,
@@ -5249,12 +6474,23 @@ export const mapNodes=[
  {
   "id": "map-south-salt-gate",
   "ko": "솔트 남부 관문",
-  "en": null,
+  "en": "South Zorto Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-south-salt-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "솔트 남부 관문"
+   "솔트 남부 관문",
+   "South Zorto Stronghold"
   ],
   "u": 0.34791252485089463,
   "v": 0.5044736842105263,
@@ -5271,12 +6507,23 @@ export const mapNodes=[
  {
   "id": "map-cayenne-gate",
   "ko": "카이엔 관문",
-  "en": null,
+  "en": "Kayen Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-cayenne-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카이엔 관문"
+   "카이엔 관문",
+   "Kayen Stronghold"
   ],
   "u": 0.38608349900596417,
   "v": 0.38868421052631574,
@@ -5293,12 +6540,23 @@ export const mapNodes=[
  {
   "id": "map-north-lis-gate",
   "ko": "리스 북부 관문",
-  "en": null,
+  "en": "Ries North Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-north-lis-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "리스 북부 관문"
+   "리스 북부 관문",
+   "Ries North Stronghold"
   ],
   "u": 0.18409542743538773,
   "v": 0.5971052631578948,
@@ -5306,7 +6564,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "왕도 브레스턴으로 가는 주요 가도 중간에 설치된 관문",
-    "en": "A gate on the main road to Bresten."
+    "en": "A gate on the main road to Breston."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -5315,12 +6573,23 @@ export const mapNodes=[
  {
   "id": "map-south-lis-gate",
   "ko": "리스 남부 관문",
-  "en": null,
+  "en": "Ries South Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-south-lis-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "리스 남부 관문"
+   "리스 남부 관문",
+   "Ries South Stronghold"
   ],
   "u": 0.21590457256461237,
   "v": 0.7044736842105263,
@@ -5328,7 +6597,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "쿠거 대삼림을 통과하는 가도 중간에 설치된 관문",
-    "en": "A gate on the road through Cougar Great Forest."
+    "en": "A gate on the road through Cougar Woodlands."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -5337,12 +6606,23 @@ export const mapNodes=[
  {
   "id": "map-zanta-gate",
   "ko": "잔타 관문",
-  "en": null,
+  "en": "Xantha Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-zanta-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "잔타 관문"
+   "잔타 관문",
+   "Xantha Stronghold"
   ],
   "u": 0.41789264413518884,
   "v": 0.35078947368421054,
@@ -5359,12 +6639,23 @@ export const mapNodes=[
  {
   "id": "map-lu-monte-gate",
   "ko": "루 몬테 관문",
-  "en": null,
+  "en": "Lemont Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-lu-monte-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "루 몬테 관문"
+   "루 몬테 관문",
+   "Lemont Stronghold"
   ],
   "u": 0.31292246520874745,
   "v": 0.5992105263157894,
@@ -5381,12 +6672,23 @@ export const mapNodes=[
  {
   "id": "map-carmenta-gate",
   "ko": "카르멘타 관문",
-  "en": null,
+  "en": "Carmenta Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-carmenta-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "카르멘타 관문"
+   "카르멘타 관문",
+   "Carmenta Stronghold"
   ],
   "u": 0.6135188866799205,
   "v": 0.4118421052631579,
@@ -5403,12 +6705,23 @@ export const mapNodes=[
  {
   "id": "map-paras-bridge-gate",
   "ko": "파라스대교 관문",
-  "en": null,
+  "en": "Pallas Bridge",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-paras-bridge-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "파라스대교 관문"
+   "파라스대교 관문",
+   "Pallas Bridge"
   ],
   "u": 0.22703777335984093,
   "v": 0.5823684210526316,
@@ -5425,12 +6738,23 @@ export const mapNodes=[
  {
   "id": "map-small-sylvas-gate",
   "ko": "실바스의 작은 문",
-  "en": null,
+  "en": "Sylvas Hold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-small-sylvas-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "실바스의 작은 문"
+   "실바스의 작은 문",
+   "Sylvas Hold"
   ],
   "u": 0.3797216699801193,
   "v": 0.3128947368421053,
@@ -5447,12 +6771,23 @@ export const mapNodes=[
  {
   "id": "map-small-riza-gate",
   "ko": "리자의 작은 문",
-  "en": null,
+  "en": "Liza Hold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-small-riza-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "리자의 작은 문"
+   "리자의 작은 문",
+   "Liza Hold"
   ],
   "u": 0.3797216699801193,
   "v": 0.2644736842105263,
@@ -5460,7 +6795,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "칼라 신전으로 가는 가도를 감시하기 위해 산간 지대 입구에 설치된 관문",
-    "en": "A gate watching the road to Kala’s Temple."
+    "en": "A gate watching the road to Kalla's Temple."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -5469,12 +6804,23 @@ export const mapNodes=[
  {
   "id": "map-phezan-gate",
   "ko": "페잔 관문",
-  "en": null,
+  "en": "Fezzan Gate",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-phezan-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "페잔 관문"
+   "페잔 관문",
+   "Fezzan Gate"
   ],
   "u": 0.07435387673956258,
   "v": 0.3928947368421053,
@@ -5491,12 +6837,23 @@ export const mapNodes=[
  {
   "id": "map-areus-gate",
   "ko": "아레우스 관문",
-  "en": null,
+  "en": "Areus Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-areus-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아레우스 관문"
+   "아레우스 관문",
+   "Areus Stronghold"
   ],
   "u": 0.18091451292246521,
   "v": 0.5339473684210526,
@@ -5513,12 +6870,23 @@ export const mapNodes=[
  {
   "id": "map-beretta-mountain-gate",
   "ko": "베레타 산 관문",
-  "en": null,
+  "en": "Veletta Range Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-beretta-mountain-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "베레타 산 관문"
+   "베레타 산 관문",
+   "Veletta Range Stronghold"
   ],
   "u": 0.6405566600397615,
   "v": 0.30657894736842106,
@@ -5535,12 +6903,23 @@ export const mapNodes=[
  {
   "id": "map-ludria-gate",
   "ko": "루드리아 관문",
-  "en": null,
+  "en": "Ludria Stronghold",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-ludria-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "루드리아 관문"
+   "루드리아 관문",
+   "Ludria Stronghold"
   ],
   "u": 0.4640159045725646,
   "v": 0.28131578947368424,
@@ -5548,7 +6927,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "탈리아 지방과 아말테아 지방의 경계에 있는, 칼라 신전으로 가는 가도에 설치된 관문",
-    "en": "A border gate on the road to Kala’s Temple."
+    "en": "A border gate on the road to Kalla's Temple."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -5557,12 +6936,23 @@ export const mapNodes=[
  {
   "id": "map-gargo-fort",
   "ko": "가르고 요새",
-  "en": null,
+  "en": "Fort Galcar",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-gargo-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "가르고 요새"
+   "가르고 요새",
+   "Fort Galcar"
   ],
   "u": 0.49105367793240556,
   "v": 0.275,
@@ -5579,12 +6969,23 @@ export const mapNodes=[
  {
   "id": "map-hecatoncheir-fort",
   "ko": "헤카톤케이르 요새",
-  "en": null,
+  "en": "Fort Hecatoncheires",
   "province": "undocumented",
   "kind": "gate",
   "entryId": "map-hecatoncheir-fort",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "헤카톤케이르 요새"
+   "헤카톤케이르 요새",
+   "Fort Hecatoncheires"
   ],
   "u": 0.47355864811133197,
   "v": 0.5297368421052632,
@@ -5624,12 +7025,23 @@ export const mapNodes=[
  {
   "id": "gran-aragon",
   "ko": "왕도 그랑 아라곤",
-  "en": null,
+  "en": "Grand Aragon",
   "province": "thalia",
   "kind": "town",
   "entryId": "gran-aragon",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "왕도 그랑 아라곤"
+   "왕도 그랑 아라곤",
+   "Grand Aragon"
   ],
   "u": 0.32723658051689863,
   "v": 0.2476315789473684,
@@ -5711,12 +7123,24 @@ export const mapNodes=[
  {
   "id": "map-kashit",
   "ko": "영도 카시트",
-  "en": null,
+  "en": "Kassite",
   "province": "thalia",
   "kind": "hub",
   "entryId": "map-kashit",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "영도 카시트"
+   "영도 카시트",
+   "Cassito",
+   "Kassite"
   ],
   "u": 0.40516898608349905,
   "v": 0.16342105263157894,
@@ -5743,12 +7167,23 @@ export const mapNodes=[
  {
   "id": "amuru",
   "ko": "죽음의 도시 아무 르",
-  "en": null,
+  "en": "Ahm Lu",
   "province": "saveilon",
   "kind": "hub",
   "entryId": "amuru",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "죽음의 도시 아무 르"
+   "죽음의 도시 아무 르",
+   "Ahm Lu"
   ],
   "u": 0.42107355864811136,
   "v": 0.7739473684210527,
@@ -5766,12 +7201,23 @@ export const mapNodes=[
  {
   "id": "hibeira-village",
   "ko": "히베이라 마을",
-  "en": null,
+  "en": "Ribeira",
   "province": "idyia",
   "kind": "hub",
   "entryId": "hibeira-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "히베이라 마을"
+   "히베이라 마을",
+   "Ribeira"
   ],
   "u": 0.6437375745526838,
   "v": 0.34236842105263154,
@@ -5829,12 +7275,23 @@ export const mapNodes=[
  {
   "id": "pina-village",
   "ko": "피나 어촌",
-  "en": null,
+  "en": "Fina",
   "province": "castalia",
   "kind": "hub",
   "entryId": "pina-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "피나 어촌"
+   "피나 어촌",
+   "Fina"
   ],
   "u": 0.5514910536779324,
   "v": 0.21815789473684213,
@@ -5900,12 +7357,23 @@ export const mapNodes=[
  {
   "id": "map-messilina-estate",
   "ko": "메실리나 대농원",
-  "en": null,
+  "en": "Messalina Orchards",
   "province": "saveilon",
   "kind": "town",
   "entryId": "map-messilina-estate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "메실리나 대농원"
+   "메실리나 대농원",
+   "Messalina Orchards"
   ],
   "u": 0.3956262425447316,
   "v": 0.963421052631579,
@@ -5961,12 +7429,23 @@ export const mapNodes=[
  {
   "id": "map-osiris-village",
   "ko": "오시리스 마을",
-  "en": null,
+  "en": "Osiris",
   "province": "solidus",
   "kind": "town",
   "entryId": "map-osiris-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "오시리스 마을"
+   "오시리스 마을",
+   "Osiris"
   ],
   "u": 0.14274353876739565,
   "v": 0.2518421052631579,
@@ -6026,12 +7505,25 @@ export const mapNodes=[
  {
   "id": "map-demonic-village",
   "ko": "데모닉 마을",
-  "en": null,
+  "en": "Daimon",
   "province": "lambus",
   "kind": "town",
   "entryId": "map-demonic-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "데모닉 마을"
+   "데모닉 마을",
+   "데모니크 마을",
+   "Demonik village",
+   "Daimon"
   ],
   "u": 0.19363817097415503,
   "v": 0.47710526315789475,
@@ -6039,7 +7531,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "주라 신전에서 가까운 작은 마을 마을 변두리에 깊은 구멍이 있다고 한다",
-    "en": "A village near Jura’s Temple, with a deep hole on its outskirts."
+    "en": "A village near Jurah's Temple, with a deep hole on its outskirts."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -6058,13 +7550,23 @@ export const mapNodes=[
  {
   "id": "port-of-pandor",
   "ko": "판도라 항구 도시",
-  "en": "Port of Pandor",
+  "en": "Port of Pandora",
   "province": "castalia",
   "kind": "town",
   "entryId": "port-of-pandor",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "판도라 항구 도시",
-   "Port of Pandor"
+   "Port of Pandora"
   ],
   "u": 0.6771371769383698,
   "v": 0.21815789473684213,
@@ -6095,12 +7597,25 @@ export const mapNodes=[
  {
   "id": "map-tvalin-village",
   "ko": "트발린 마을",
-  "en": null,
+  "en": "Twalinn",
   "province": "lambus",
   "kind": "town",
   "entryId": "map-tvalin-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "트발린 마을"
+   "트발린 마을",
+   "토바린 마을",
+   "Tobarin village",
+   "Twalinn"
   ],
   "u": 0.05685884691848911,
   "v": 0.4118421052631579,
@@ -6127,12 +7642,25 @@ export const mapNodes=[
  {
   "id": "map-jasta-village",
   "ko": "자스타 촌락",
-  "en": null,
+  "en": "Zoste",
   "province": "lambus",
   "kind": "town",
   "entryId": "map-jasta-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "자스타 촌락"
+   "자스타 촌락",
+   "자스타 취락",
+   "Zasta settlement",
+   "Zoste"
   ],
   "u": 0.31769383697813125,
   "v": 0.48763157894736847,
@@ -6222,12 +7750,24 @@ export const mapNodes=[
  {
   "id": "map-basque-inn-district",
   "ko": "바스크 여관 거리",
-  "en": null,
+  "en": "Barsk Post Town",
   "province": "thalia",
   "kind": "town",
   "entryId": "map-basque-inn-district",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "바스크 여관 거리"
+   "바스크 여관 거리",
+   "バスク宿場町",
+   "Barsk Post Town"
   ],
   "u": 0.2986083499005964,
   "v": 0.20342105263157895,
@@ -6235,7 +7775,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "그랑 아라곤의 북쪽에 위치한 여관 거리 가도를 오가는 여행자들의 중요한 휴식처",
-    "en": "An inn district north of Gran Aragon."
+    "en": "An inn district north of Grand Aragon."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -6287,13 +7827,24 @@ export const mapNodes=[
  {
   "id": "orles-city",
   "ko": "올렌스 도시",
-  "en": null,
+  "en": "Orens",
   "province": "idyia",
   "kind": "town",
   "entryId": "orles-city",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "올레스 도시",
-   "올렌스 도시"
+   "올렌스 도시",
+   "Orens"
   ],
   "u": 0.7248508946322068,
   "v": 0.39499999999999996,
@@ -6321,13 +7872,24 @@ export const mapNodes=[
  {
   "id": "kira-village",
   "ko": "키라 마을",
-  "en": "Kira village",
+  "en": "Kira",
   "province": "saveilon",
   "kind": "town",
   "entryId": "kira-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
+   "キラの村",
    "키라 마을",
-   "Kira village"
+   "Kira"
   ],
   "u": 0.4449304174950298,
   "v": 0.7065789473684211,
@@ -6354,12 +7916,23 @@ export const mapNodes=[
  {
   "id": "map-zima-port",
   "ko": "지마 항구",
-  "en": null,
+  "en": "Shama Port",
   "province": "solomon",
   "kind": "town",
   "entryId": "map-zima-port",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "지마 항구"
+   "지마 항구",
+   "Shama Port"
   ],
   "u": 0.8393638170974156,
   "v": 0.715,
@@ -6395,12 +7968,23 @@ export const mapNodes=[
  {
   "id": "map-willy-village",
   "ko": "윌리 마을",
-  "en": null,
+  "en": "Whill",
   "province": "basithea",
   "kind": "town",
   "entryId": "map-willy-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "윌리 마을"
+   "윌리 마을",
+   "Whill"
   ],
   "u": 0.10139165009940358,
   "v": 0.5992105263157894,
@@ -6427,12 +8011,23 @@ export const mapNodes=[
  {
   "id": "benetnasi-village",
   "ko": "베네트나시 마을",
-  "en": null,
+  "en": "Benetnasch",
   "province": "ogma",
   "kind": "town",
   "entryId": "benetnasi-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "베네트나시 마을"
+   "베네트나시 마을",
+   "Benetnasch"
   ],
   "u": 0.5403578528827037,
   "v": 0.8581578947368421,
@@ -6459,12 +8054,25 @@ export const mapNodes=[
  {
   "id": "map-niza-port",
   "ko": "니자 항구",
-  "en": null,
+  "en": "Niiza Port",
   "province": "solidus",
   "kind": "town",
   "entryId": "map-niza-port",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "니자 항구"
+   "니자 항구",
+   "ニーザの港",
+   "二ーザの港",
+   "Niiza Port"
   ],
   "u": 0.3224652087475149,
   "v": 0.0981578947368421,
@@ -6491,12 +8099,23 @@ export const mapNodes=[
  {
   "id": "map-bomba-s-remote-village",
   "ko": "봄바에 외딴 마을",
-  "en": null,
+  "en": "Bombae",
   "province": "braxithea",
   "kind": "town",
   "entryId": "map-bomba-s-remote-village",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "봄바에 외딴 마을"
+   "봄바에 외딴 마을",
+   "Bombae"
   ],
   "u": 0.343141153081511,
   "v": 0.731842105263158,
@@ -6519,12 +8138,25 @@ export const mapNodes=[
  {
   "id": "map-da-mina-graphite-valley",
   "ko": "흑연의 계곡 다 미나",
-  "en": null,
+  "en": "Da Mina",
   "province": "solidus",
   "kind": "town",
   "entryId": "map-da-mina-graphite-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "흑연의 계곡 다 미나"
+   "흑연의 계곡 다 미나",
+   "검은 연기의 계곡 다 미나",
+   "Da Mina, Black Smoke Valley",
+   "Da Mina"
   ],
   "u": 0.18409542743538773,
   "v": 0.14868421052631578,
@@ -6551,12 +8183,25 @@ export const mapNodes=[
  {
   "id": "map-bresten",
   "ko": "왕도 브레스턴",
-  "en": null,
+  "en": "Breston",
   "province": "basithea",
   "kind": "town",
   "entryId": "map-bresten",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "왕도 브레스턴"
+   "왕도 브레스턴",
+   "왕도 브레스톤",
+   "Breston capital",
+   "Breston"
   ],
   "u": 0.1681908548707754,
   "v": 0.5655263157894737,
@@ -6624,12 +8269,23 @@ export const mapNodes=[
  {
   "id": "map-maon-castle",
   "ko": "마온 성곽",
-  "en": null,
+  "en": "Mahon Castle Town",
   "province": "solidus",
   "kind": "town",
   "entryId": "map-maon-castle",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "마온 성곽"
+   "마온 성곽",
+   "Mahon Castle Town"
   ],
   "u": 0.22385685884691853,
   "v": 0.2518421052631579,
@@ -6660,12 +8316,25 @@ export const mapNodes=[
  {
   "id": "map-mons-fortress-city",
   "ko": "성채 도시 몽스",
-  "en": null,
+  "en": "Mons",
   "province": "braxithea",
   "kind": "town",
   "entryId": "map-mons-fortress-city",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "성채 도시 몽스"
+   "성채 도시 몽스",
+   "성채 도시 몬스",
+   "Fortress City Mons",
+   "Mons"
   ],
   "u": 0.27634194831013914,
   "v": 0.6118421052631579,
@@ -6729,12 +8398,23 @@ export const mapNodes=[
  {
   "id": "map-kala-s-temple",
   "ko": "칼라 신전 본전",
-  "en": null,
+  "en": "Kalla's Temple",
   "province": "thalia",
   "kind": "temple",
   "entryId": "map-kala-s-temple",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "칼라 신전 본전"
+   "칼라 신전 본전",
+   "Kalla's Temple"
   ],
   "u": 0.44174950298210736,
   "v": 0.22657894736842105,
@@ -6751,12 +8431,23 @@ export const mapNodes=[
  {
   "id": "map-crere-s-temple",
   "ko": "크레르 신전 본전",
-  "en": null,
+  "en": "Credna's Temple",
   "province": "braxithea",
   "kind": "temple",
   "entryId": "map-crere-s-temple",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "크레르 신전 본전"
+   "크레르 신전 본전",
+   "Credna's Temple"
   ],
   "u": 0.2572564612326043,
   "v": 0.6560526315789474,
@@ -6773,12 +8464,23 @@ export const mapNodes=[
  {
   "id": "map-smirnos-s-temple",
   "ko": "스미르노스 신전 본전",
-  "en": null,
+  "en": "Smyrnos's Temple",
   "province": "solidus",
   "kind": "temple",
   "entryId": "map-smirnos-s-temple",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "스미르노스 신전 본전"
+   "스미르노스 신전 본전",
+   "Smyrnos's Temple"
   ],
   "u": 0.21749502982107352,
   "v": 0.20973684210526317,
@@ -6817,12 +8519,23 @@ export const mapNodes=[
  {
   "id": "map-jura-s-temple",
   "ko": "주라 신전 본전",
-  "en": null,
+  "en": "Jurah's Temple",
   "province": "lambus",
   "kind": "temple",
   "entryId": "map-jura-s-temple",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "주라 신전 본전"
+   "주라 신전 본전",
+   "Jurah's Temple"
   ],
   "u": 0.23339960238568583,
   "v": 0.5044736842105263,
@@ -6881,12 +8594,23 @@ export const mapNodes=[
  {
   "id": "map-goddess-s-gate",
   "ko": "여신의 문",
-  "en": null,
+  "en": "Goddess's Gateway",
   "province": "amalthea",
   "kind": "banquet",
   "entryId": "map-goddess-s-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "여신의 문"
+   "여신의 문",
+   "Goddess's Gateway"
   ],
   "u": 0.40516898608349905,
   "v": 0.4602631578947369,
@@ -6903,12 +8627,23 @@ export const mapNodes=[
  {
   "id": "map-heroes-memorial",
   "ko": "영령의 비",
-  "en": null,
+  "en": "Hero's Spirit Monument",
   "province": "saveilon",
   "kind": "banquet",
   "entryId": "map-heroes-memorial",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "영령의 비"
+   "영령의 비",
+   "Hero's Spirit Monument"
   ],
   "u": 0.3797216699801193,
   "v": 0.7297368421052632,
@@ -6925,12 +8660,23 @@ export const mapNodes=[
  {
   "id": "map-troia-s-shrine",
   "ko": "트로이아의 사당",
-  "en": null,
+  "en": "Troy's Shrine",
   "province": "saveilon",
   "kind": "banquet",
   "entryId": "map-troia-s-shrine",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "트로이아의 사당"
+   "트로이아의 사당",
+   "Troy's Shrine"
   ],
   "u": 0.3988071570576541,
   "v": 0.7444736842105263,
@@ -6947,12 +8693,23 @@ export const mapNodes=[
  {
   "id": "map-garden-of-purple-death",
   "ko": "죽음의 자색 화원",
-  "en": null,
+  "en": "Dead Amethyst Garden",
   "province": "saveilon",
   "kind": "banquet",
   "entryId": "map-garden-of-purple-death",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "죽음의 자색 화원"
+   "죽음의 자색 화원",
+   "Dead Amethyst Garden"
   ],
   "u": 0.41471172962226643,
   "v": 0.7549999999999999,
@@ -6969,12 +8726,23 @@ export const mapNodes=[
  {
   "id": "map-memorial-flower-garden",
   "ko": "위령의 화원",
-  "en": null,
+  "en": "Memorial Garden",
   "province": "ogma",
   "kind": "banquet",
   "entryId": "map-memorial-flower-garden",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "위령의 화원"
+   "위령의 화원",
+   "Memorial Garden"
   ],
   "u": 0.6023856858846919,
   "v": 0.9465789473684211,
@@ -6991,12 +8759,23 @@ export const mapNodes=[
  {
   "id": "map-garamantes-salt-lake",
   "ko": "가라만테스 소금 호수",
-  "en": null,
+  "en": "Garamantes Lake",
   "province": "lambus",
   "kind": "banquet",
   "entryId": "map-garamantes-salt-lake",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "가라만테스 소금 호수"
+   "가라만테스 소금 호수",
+   "Garamantes Lake"
   ],
   "u": 0.29701789264413514,
   "v": 0.4581578947368421,
@@ -7013,12 +8792,23 @@ export const mapNodes=[
  {
   "id": "map-hill-of-light",
   "ko": "빛의 언덕",
-  "en": null,
+  "en": "Gleaming Hill",
   "province": "braxithea",
   "kind": "banquet",
   "entryId": "map-hill-of-light",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "빛의 언덕"
+   "빛의 언덕",
+   "Gleaming Hill"
   ],
   "u": 0.2620278330019881,
   "v": 0.7360526315789473,
@@ -7035,12 +8825,23 @@ export const mapNodes=[
  {
   "id": "map-horizon-crossroads",
   "ko": "지평의 교차점",
-  "en": null,
+  "en": "Horizon's Crossing",
   "province": "elektra",
   "kind": "banquet",
   "entryId": "map-horizon-crossroads",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "지평의 교차점"
+   "지평의 교차점",
+   "Horizon's Crossing"
   ],
   "u": 0.6405566600397615,
   "v": 0.4834210526315789,
@@ -7048,7 +8849,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "해안 가도에 설치된 교차점 바다 쪽으로 가면 펠루사곶이 나온다",
-    "en": "A coastal junction leading to Pelusa Cape."
+    "en": "A coastal junction leading to Peluza Cape."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -7057,12 +8858,23 @@ export const mapNodes=[
  {
   "id": "map-aisobos-plains",
   "ko": "아이소보스 평원",
-  "en": null,
+  "en": "Aesobos Plain",
   "province": "idyia",
   "kind": "banquet",
   "entryId": "map-aisobos-plains",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아이소보스 평원"
+   "아이소보스 평원",
+   "Aesobos Plain"
   ],
   "u": 0.6469184890656063,
   "v": 0.3781578947368421,
@@ -7079,12 +8891,23 @@ export const mapNodes=[
  {
   "id": "map-knor-grotto",
   "ko": "크노르 소동굴",
-  "en": null,
+  "en": "Knohr Hollow",
   "province": "solidus",
   "kind": "banquet",
   "entryId": "map-knor-grotto",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "크노르 소동굴"
+   "크노르 소동굴",
+   "Knohr Hollow"
   ],
   "u": 0.2779324055666004,
   "v": 0.2413157894736842,
@@ -7101,12 +8924,23 @@ export const mapNodes=[
  {
   "id": "map-osiris-altar",
   "ko": "오시리스의 제단",
-  "en": null,
+  "en": "Shrine of Osiris",
   "province": "solidus",
   "kind": "banquet",
   "entryId": "map-osiris-altar",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "오시리스의 제단"
+   "오시리스의 제단",
+   "Shrine of Osiris"
   ],
   "u": 0.15546719681908547,
   "v": 0.275,
@@ -7114,7 +8948,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "오시리스 마을의 기도사가 기도를 올리는 제단 다른 지역에는 없는 독특한 것이라고 한다",
-    "en": "An unusual altar used by the prayer keepers of Osiris Village."
+    "en": "An unusual altar used by the prayer keepers of Osiris."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16"
@@ -7123,12 +8957,23 @@ export const mapNodes=[
  {
   "id": "map-alma-plains",
   "ko": "알마 대평원",
-  "en": null,
+  "en": "Alma Greatplains",
   "province": "castalia",
   "kind": "banquet",
   "entryId": "map-alma-plains",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "알마 대평원"
+   "알마 대평원",
+   "Alma Greatplains"
   ],
   "u": 0.5658051689860836,
   "v": 0.26868421052631575,
@@ -7145,12 +8990,23 @@ export const mapNodes=[
  {
   "id": "map-windless-desert",
   "ko": "바람 없는 사막",
-  "en": null,
+  "en": "Windless Waste",
   "province": "nysiades",
   "kind": "banquet",
   "entryId": "map-windless-desert",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "바람 없는 사막"
+   "바람 없는 사막",
+   "Windless Waste"
   ],
   "u": 0.15546719681908547,
   "v": 0.32973684210526316,
@@ -7167,13 +9023,24 @@ export const mapNodes=[
  {
   "id": "collection-arsineus-bridge",
   "ko": "아르시네우스대교",
-  "en": null,
+  "en": "Alcineus Span",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "collection-arsineus-bridge",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아르시네우스대교"
+   "아르시네우스대교",
+   "Alcineus Span"
   ],
   "u": 0.4608349900596422,
   "v": 0.40131578947368424,
@@ -7404,13 +9271,26 @@ export const mapNodes=[
  {
   "id": "map-salt-lake",
   "ko": "솔트호",
-  "en": null,
+  "en": "Zorto Lake",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-salt-lake",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "솔트호"
+   "솔트호",
+   "ソルト湖",
+   "솔트 호수(ソルト湖)",
+   "Zorto Lake"
   ],
   "u": 0.33359840954274356,
   "v": 0.48973684210526314,
@@ -7441,13 +9321,24 @@ export const mapNodes=[
  {
   "id": "map-lake-naimi",
   "ko": "나이미호",
-  "en": null,
+  "en": "Naimi Lake",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-lake-naimi",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "나이미호"
+   "나이미호",
+   "Naimi Lake"
   ],
   "u": 0.23339960238568583,
   "v": 0.523421052631579,
@@ -7455,7 +9346,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "램버스 지방의 큰 담수호 호수에 비친 주라 신전의 경관이 유명하다",
-    "en": "A freshwater lake famous for reflections of Jura’s Temple."
+    "en": "A freshwater lake famous for reflections of Jurah's Temple."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -7474,13 +9365,26 @@ export const mapNodes=[
  {
   "id": "map-lake-val-der",
   "ko": "발 데르호",
-  "en": null,
+  "en": "Lake Baldr",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-lake-val-der",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "발 데르호"
+   "발 데르호",
+   "Lake Baldr",
+   "バル・デル湖",
+   "발 델 호수(バル・デル湖)"
   ],
   "u": 0.1443339960238569,
   "v": 0.546578947368421,
@@ -7488,7 +9392,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "수질이 좋은 호수로, 상류에 위치한 나이미호를 원류로 한다",
-    "en": "A clear lake fed by the waters of Lake Naimi."
+    "en": "A clear lake fed by the waters of Naimi Lake."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -7519,13 +9423,24 @@ export const mapNodes=[
  {
   "id": "collection-pelusa-cape",
   "ko": "펠루사곶",
-  "en": null,
+  "en": "Peluza Cape",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "collection-pelusa-cape",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "펠루사곶"
+   "펠루사곶",
+   "Peluza Cape"
   ],
   "u": 0.658051689860835,
   "v": 0.5318421052631579,
@@ -7560,13 +9475,31 @@ export const mapNodes=[
  {
   "id": "map-lake-joto",
   "ko": "조토호",
-  "en": null,
+  "en": "Zeet Lake",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-lake-joto",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "조토호"
+   "조토호",
+   "ゾトー湖",
+   "조토 호수(ゾトー湖)",
+   "조토 호수",
+   "Zeet Lake",
+   "지트 호수",
+   "ゾドー湖",
+   "조도 호수(ゾドー湖)",
+   "조도 호수"
   ],
   "u": 0.38449304174950294,
   "v": 0.20973684210526317,
@@ -7602,13 +9535,24 @@ export const mapNodes=[
  {
   "id": "collection-pina-reef",
   "ko": "피나의 암초",
-  "en": null,
+  "en": "Fina Reef",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "collection-pina-reef",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "피나의 암초"
+   "피나의 암초",
+   "Fina Reef"
   ],
   "u": 0.5642147117296222,
   "v": 0.20973684210526317,
@@ -7639,13 +9583,26 @@ export const mapNodes=[
  {
   "id": "map-sosie-bay",
   "ko": "소시에만",
-  "en": null,
+  "en": "Socie Bay",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-sosie-bay",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "소시에만"
+   "소시에만",
+   "Socie Bay",
+   "ソシエ湾",
+   "소시에 만(ソシエ湾)"
   ],
   "u": 0.4926441351888667,
   "v": 0.6328947368421053,
@@ -7707,13 +9664,28 @@ export const mapNodes=[
  {
   "id": "map-pelusa-offshore-waters",
   "ko": "펠루사 앞바다",
-  "en": null,
+  "en": "Peluza Gulf",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-pelusa-offshore-waters",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "펠루사 앞바다"
+   "펠루사 앞바다",
+   "Peluza Gulf",
+   "ぺルーサの沖",
+   "펠루자 앞바다(ぺルーサの沖)",
+   "ペルーサの沖",
+   "펠루자 앞바다(ペルーサの沖)"
   ],
   "u": 0.6628230616302186,
   "v": 0.5613157894736842,
@@ -7721,7 +9693,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "펠루사곶이 보이는 해역 다난해 해적들의 영역이다",
-    "en": "Waters within sight of Pelusa Cape, frequented by pirates."
+    "en": "Waters within sight of Peluza Cape, frequented by pirates."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -7771,13 +9743,25 @@ export const mapNodes=[
  {
   "id": "map-perilous-waters",
   "ko": "마의 해역",
-  "en": null,
+  "en": "Demon's Seawaters",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-perilous-waters",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "마의 해역"
+   "마의 해역",
+   "Demon’s Seawaters",
+   "Demon's Seawaters"
   ],
   "u": 0.7153081510934393,
   "v": 0.49815789473684213,
@@ -7835,13 +9819,26 @@ export const mapNodes=[
  {
   "id": "map-quiet-sea",
   "ko": "고요의 바다",
-  "en": null,
+  "en": "Silent Sea",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-quiet-sea",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "고요의 바다"
+   "고요의 바다",
+   "静寂の海",
+   "고요한 바다(静寂の海)",
+   "Silent Sea"
   ],
   "u": 0.7471172962226639,
   "v": 0.8160526315789475,
@@ -7891,13 +9888,27 @@ export const mapNodes=[
  {
   "id": "map-fish-shoal-reef",
   "ko": "어군 암초",
-  "en": null,
+  "en": "Fish Schools' Reef",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-fish-shoal-reef",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "어군 암초"
+   "어군 암초",
+   "Fish Schools’ Reef",
+   "魚群岩礁",
+   "물고기 떼 암초(魚群岩礁)",
+   "Fish Schools' Reef"
   ],
   "u": 0.6278330019880715,
   "v": 0.8055263157894738,
@@ -7967,13 +9978,24 @@ export const mapNodes=[
  {
   "id": "map-ende-s-small-whirlpool",
   "ko": "엔데의 작은 소용돌이",
-  "en": null,
+  "en": "Edne Whirlpools",
   "province": "danann-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-ende-s-small-whirlpool",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "엔데의 작은 소용돌이"
+   "엔데의 작은 소용돌이",
+   "Edne Whirlpools"
   ],
   "u": 0.541948310139165,
   "v": 0.7739473684210527,
@@ -8040,13 +10062,26 @@ export const mapNodes=[
  {
   "id": "map-panja-bay",
   "ko": "판자만",
-  "en": null,
+  "en": "Pasha Bay",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-panja-bay",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "판자만"
+   "판자만",
+   "Pasha Bay",
+   "パンジャ湾",
+   "판자 만(パンジャ湾)"
   ],
   "u": 0.4942345924453281,
   "v": 0.21394736842105264,
@@ -8109,13 +10144,24 @@ export const mapNodes=[
  {
   "id": "map-panja-current",
   "ko": "판자 해류",
-  "en": null,
+  "en": "Pasha Currents",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-panja-current",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "판자 해류"
+   "판자 해류",
+   "Pasha Currents"
   ],
   "u": 0.49105367793240556,
   "v": 0.14236842105263156,
@@ -8229,13 +10275,24 @@ export const mapNodes=[
  {
   "id": "map-niza-s-gate",
   "ko": "니자의 문",
-  "en": null,
+  "en": "Niiza Gate",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-niza-s-gate",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "니자의 문"
+   "니자의 문",
+   "Niiza Gate"
   ],
   "u": 0.3399602385685885,
   "v": 0.1023684210526316,
@@ -8243,7 +10300,7 @@ export const mapNodes=[
   "details": {
    "description": {
     "ko": "니자 항구의 앞바다에 위치한, 두 개의 바위 기둥이 문처럼 보이는 곳",
-    "en": "Two great rocks resembling a gate off Niza Port."
+    "en": "Two great rocks resembling a gate off Niiza Port."
    },
    "observedRoute": "theodora",
    "gameDate": "1449-10-16",
@@ -8289,13 +10346,24 @@ export const mapNodes=[
  {
   "id": "map-wandering-great-whirlpool",
   "ko": "길 잃은 거대 소용돌이",
-  "en": null,
+  "en": "Wandering Whirlpool",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-wandering-great-whirlpool",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "길 잃은 거대 소용돌이"
+   "길 잃은 거대 소용돌이",
+   "Wandering Whirlpool"
   ],
   "u": 0.47514910536779326,
   "v": 0.08763157894736841,
@@ -8345,13 +10413,27 @@ export const mapNodes=[
  {
   "id": "map-great-shark-den",
   "ko": "대상어 소굴",
-  "en": null,
+  "en": "Great Shark's Den",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-great-shark-den",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "대상어 소굴"
+   "대상어 소굴",
+   "Great Shark’s Den",
+   "大鮫の巣",
+   "거대 상어의 둥지(大鮫の巣)",
+   "Great Shark's Den"
   ],
   "u": 0.4322067594433399,
   "v": 0.10447368421052633,
@@ -8401,13 +10483,24 @@ export const mapNodes=[
  {
   "id": "map-aife-strait",
   "ko": "아이프 해협",
-  "en": null,
+  "en": "Eif Channel",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-aife-strait",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아이프 해협"
+   "아이프 해협",
+   "Eif Channel"
   ],
   "u": 0.42425447316103376,
   "v": 0.05605263157894736,
@@ -8461,13 +10554,26 @@ export const mapNodes=[
  {
   "id": "map-pandor-fishing-grounds",
   "ko": "판도라의 어장",
-  "en": null,
+  "en": "Pandora Shoal",
   "province": "lir-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-pandor-fishing-grounds",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "판도라의 어장"
+   "판도라의 어장",
+   "Pandora Shoal",
+   "パンドラの魚巣",
+   "판도라의 물고기 둥지(パンドラの魚巣)"
   ],
   "u": 0.6739562624254473,
   "v": 0.16973684210526316,
@@ -8525,13 +10631,24 @@ export const mapNodes=[
  {
   "id": "map-horus-strait",
   "ko": "호루스 해협",
-  "en": null,
+  "en": "Horus Channel",
   "province": "lucil-sea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "map-horus-strait",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "호루스 해협"
+   "호루스 해협",
+   "Horus Channel"
   ],
   "u": 0.7662027833001988,
   "v": 0.19078947368421054,
@@ -8590,13 +10707,24 @@ export const mapNodes=[
  {
   "id": "collection-mist-plain",
   "ko": "안개 평원",
-  "en": null,
+  "en": "Evermist Plain",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-mist-plain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "안개 평원"
+   "안개 평원",
+   "Evermist Plain"
   ],
   "u": 0.5467196819085487,
   "v": 0.34657894736842104,
@@ -8740,13 +10868,24 @@ export const mapNodes=[
  {
   "id": "collection-breeze-hill",
   "ko": "산들바람 언덕",
-  "en": null,
+  "en": "Rolling Breeze Hill",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-breeze-hill",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "산들바람 언덕"
+   "산들바람 언덕",
+   "Rolling Breeze Hill"
   ],
   "u": 0.43379721669980115,
   "v": 0.4392105263157895,
@@ -8808,13 +10947,24 @@ export const mapNodes=[
  {
   "id": "collection-gora-grassland",
   "ko": "고라 초원 지대",
-  "en": null,
+  "en": "Gaura Grassland",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-gora-grassland",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "고라 초원 지대"
+   "고라 초원 지대",
+   "Gaura Grassland"
   ],
   "u": 0.40039761431411525,
   "v": 0.42236842105263156,
@@ -8849,13 +10999,24 @@ export const mapNodes=[
  {
   "id": "collection-duel-clearing",
   "ko": "결투 광장",
-  "en": null,
+  "en": "Showdown Square",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-duel-clearing",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "결투 광장"
+   "결투 광장",
+   "Showdown Square"
   ],
   "u": 0.4274353876739563,
   "v": 0.4665789473684211,
@@ -8919,13 +11080,24 @@ export const mapNodes=[
  {
   "id": "collection-clitios-plain",
   "ko": "클리티오스 평원",
-  "en": null,
+  "en": "Klytius Plains",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-clitios-plain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "클리티오스 평원"
+   "클리티오스 평원",
+   "Klytius Plains"
   ],
   "u": 0.3797216699801193,
   "v": 0.5781578947368421,
@@ -8964,13 +11136,24 @@ export const mapNodes=[
  {
   "id": "collection-peony-crossroads",
   "ko": "작약의 갈림길",
-  "en": null,
+  "en": "Sparrow's Thoroughfare",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-peony-crossroads",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "작약의 갈림길"
+   "작약의 갈림길",
+   "Sparrow's Thoroughfare"
   ],
   "u": 0.3733598409542744,
   "v": 0.6265789473684211,
@@ -9118,13 +11301,24 @@ export const mapNodes=[
  {
   "id": "collection-mulciber-wetland",
   "ko": "물키베르 습지대",
-  "en": null,
+  "en": "Mulciber Marshlands",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-mulciber-wetland",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "물키베르 습지대"
+   "물키베르 습지대",
+   "Mulciber Marshlands"
   ],
   "u": 0.3463220675944334,
   "v": 0.5907894736842105,
@@ -9189,13 +11383,24 @@ export const mapNodes=[
  {
   "id": "collection-uranos-mountain",
   "ko": "우라노스 산",
-  "en": null,
+  "en": "Mount Ouranos",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-uranos-mountain",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "우라노스 산"
+   "우라노스 산",
+   "Mount Ouranos"
   ],
   "u": 0.3288270377733598,
   "v": 0.7549999999999999,
@@ -9230,13 +11435,24 @@ export const mapNodes=[
  {
   "id": "collection-toritopatel-corridor",
   "ko": "토리토파텔 대회랑",
-  "en": null,
+  "en": "Tritopater Corridor",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-toritopatel-corridor",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "토리토파텔 대회랑"
+   "토리토파텔 대회랑",
+   "Tritopater Corridor"
   ],
   "u": 0.3654075546719682,
   "v": 0.7739473684210527,
@@ -9297,13 +11513,24 @@ export const mapNodes=[
  {
   "id": "collection-driftwood-path",
   "ko": "부목의 좁은 길",
-  "en": null,
+  "en": "Rotwood Pass",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-driftwood-path",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "부목의 좁은 길"
+   "부목의 좁은 길",
+   "Rotwood Pass"
   ],
   "u": 0.4481113320079522,
   "v": 0.7297368421052632,
@@ -9381,14 +11608,25 @@ export const mapNodes=[
  {
   "id": "collection-exion-valley",
   "ko": "액시온 골짜기",
-  "en": null,
+  "en": "Axion Gorge",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-exion-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "엑시온 골짜기",
-   "액시온 골짜기"
+   "액시온 골짜기",
+   "Axion Gorge"
   ],
   "u": 0.378131212723658,
   "v": 0.8560526315789474,
@@ -9416,13 +11654,24 @@ export const mapNodes=[
  {
   "id": "collection-howling-tree-forest",
   "ko": "울부짖는 나무 숲",
-  "en": null,
+  "en": "Wailing Woods",
   "province": "ogma",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-howling-tree-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "울부짖는 나무 숲"
+   "울부짖는 나무 숲",
+   "Wailing Woods"
   ],
   "u": 0.5658051689860836,
   "v": 0.9402631578947369,
@@ -9449,13 +11698,24 @@ export const mapNodes=[
  {
   "id": "collection-headhunting-rock",
   "ko": "머리 사냥 바위",
-  "en": null,
+  "en": "Headsman's Rock",
   "province": "ogma",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-headhunting-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "머리 사냥 바위"
+   "머리 사냥 바위",
+   "Headsman's Rock"
   ],
   "u": 0.6087475149105369,
   "v": 0.8476315789473685,
@@ -9478,13 +11738,26 @@ export const mapNodes=[
  {
   "id": "map-darknight-pass",
   "ko": "암야 고개",
-  "en": null,
+  "en": "Midnight Turn",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-darknight-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "암야 고개"
+   "암야 고개",
+   "Midnight Turn",
+   "闇夜峠",
+   "어두운 밤 고개(闇夜峠)"
   ],
   "u": 0.2508946322067594,
   "v": 0.4939473684210526,
@@ -9519,13 +11792,26 @@ export const mapNodes=[
  {
   "id": "map-tacit-plains",
   "ko": "타시트 평원",
-  "en": null,
+  "en": "Tasit Plain",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-tacit-plains",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "타시트 평원"
+   "타시트 평원",
+   "Tasit Plain",
+   "タシット平原",
+   "타시트 평야(タシット平原)"
   ],
   "u": 0.1872763419483101,
   "v": 0.515,
@@ -9564,13 +11850,26 @@ export const mapNodes=[
  {
   "id": "map-smiling-rock",
   "ko": "미소 바위",
-  "en": null,
+  "en": "Smiling Stone",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-smiling-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "미소 바위"
+   "미소 바위",
+   "笑み岩",
+   "웃는 바위(笑み岩)",
+   "Smiling Stone"
   ],
   "u": 0.26361829025844935,
   "v": 0.44973684210526316,
@@ -9601,13 +11900,26 @@ export const mapNodes=[
  {
   "id": "map-charred-dunes",
   "ko": "그을린 초목의 사구",
-  "en": null,
+  "en": "Scorched-Grass Dunes",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-charred-dunes",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "그을린 초목의 사구"
+   "그을린 초목의 사구",
+   "焼け草の砂丘",
+   "불탄 풀 사구(焼け草の砂丘)",
+   "Scorched-Grass Dunes"
   ],
   "u": 0.12683896620278332,
   "v": 0.42026315789473684,
@@ -9634,13 +11946,24 @@ export const mapNodes=[
  {
   "id": "map-jore-pass",
   "ko": "조레 고개",
-  "en": null,
+  "en": "Djole Fort Ruins",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-jore-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "조레 고개"
+   "조레 고개",
+   "Djole Fort Ruins"
   ],
   "u": 0.0775347912524851,
   "v": 0.43500000000000005,
@@ -9700,13 +12023,28 @@ export const mapNodes=[
  {
   "id": "map-ogers-mountain-road",
   "ko": "오거스 산길",
-  "en": null,
+  "en": "Mount Orgus Trail",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-ogers-mountain-road",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "오거스 산길"
+   "오거스 산길",
+   "Mount Orgus Trail",
+   "オーガス山道",
+   "오르구스 산길(オーガス山道)",
+   "오르구스 산길(Mount Orgus Trail)",
+   "오르구스 산길"
   ],
   "u": 0.09343936381709742,
   "v": 0.5486842105263158,
@@ -9745,13 +12083,28 @@ export const mapNodes=[
  {
   "id": "map-back-mountain-road",
   "ko": "뒤쪽 산길",
-  "en": null,
+  "en": "Rear Mountain Path",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-back-mountain-road",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "뒤쪽 산길"
+   "뒤쪽 산길",
+   "Rear Mountain Path",
+   "裏山道",
+   "뒷산길(裏山道)",
+   "뒷산길(Rear Mountain Path)",
+   "뒷산길"
   ],
   "u": 0.07594433399602384,
   "v": 0.5171052631578947,
@@ -9819,13 +12172,26 @@ export const mapNodes=[
  {
   "id": "map-sidem-valley",
   "ko": "시뎀의 계곡",
-  "en": null,
+  "en": "Valley of Sedden",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-sidem-valley",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "시뎀의 계곡"
+   "시뎀의 계곡",
+   "シデムの谷",
+   "시뎀 계곡",
+   "Valley of Sedden"
   ],
   "u": 0.18886679920477137,
   "v": 0.7044736842105263,
@@ -9848,13 +12214,28 @@ export const mapNodes=[
  {
   "id": "map-giant-s-hill",
   "ko": "거인의 언덕",
-  "en": null,
+  "en": "Giants' Mount",
   "province": "basithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-giant-s-hill",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "거인의 언덕"
+   "거인의 언덕",
+   "Giants’ Mount",
+   "거인의 산(Giant's Mount)",
+   "거인의 산",
+   "Giant's Mount",
+   "Giants' Mount"
   ],
   "u": 0.21272365805168986,
   "v": 0.6771052631578948,
@@ -9889,13 +12270,27 @@ export const mapNodes=[
  {
   "id": "map-wire-forest",
   "ko": "위레 숲",
-  "en": null,
+  "en": "Walle's Woodlands",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-wire-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "위레 숲"
+   "위레 숲",
+   "Walle’s Woodlands",
+   "ウォレの森",
+   "왈레 숲(ウォレの森)",
+   "Walle's Woodlands"
   ],
   "u": 0.2715705765407555,
   "v": 0.6539473684210526,
@@ -9930,13 +12325,24 @@ export const mapNodes=[
  {
   "id": "map-cougar-s-roof",
   "ko": "쿠거의 지붕",
-  "en": null,
+  "en": "Cougar Canopy",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-cougar-s-roof",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "쿠거의 지붕"
+   "쿠거의 지붕",
+   "Cougar Canopy"
   ],
   "u": 0.23339960238568583,
   "v": 0.6476315789473684,
@@ -10009,13 +12415,24 @@ export const mapNodes=[
  {
   "id": "map-deceptive-forest",
   "ko": "눈속임 숲",
-  "en": null,
+  "en": "Forest of Enigmas",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-deceptive-forest",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "눈속임 숲"
+   "눈속임 숲",
+   "Forest of Enigmas"
   ],
   "u": 0.32087475149105366,
   "v": 0.666578947368421,
@@ -10046,13 +12463,24 @@ export const mapNodes=[
  {
   "id": "map-nameless-graves",
   "ko": "이름 없는 묘비",
-  "en": null,
+  "en": "Unmarked Graves",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-nameless-graves",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "이름 없는 묘비"
+   "이름 없는 묘비",
+   "Unmarked Graves"
   ],
   "u": 0.2986083499005964,
   "v": 0.731842105263158,
@@ -10079,13 +12507,24 @@ export const mapNodes=[
  {
   "id": "collection-magnas-plateau",
   "ko": "마그나스 고원",
-  "en": null,
+  "en": "Magnus Plateau",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-magnas-plateau",
+  "englishNameEvidence": {
+   "sourceId": "english-places-20261028",
+   "checked": "2026-10-28",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/map/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "마그나스 고원"
+   "마그나스 고원",
+   "Magnus Plateau"
   ],
   "u": 0.5387673956262425,
   "v": 0.48763157894736847,
@@ -11123,11 +13562,10 @@ export const mapCollectibles=[
  {
   "id": "observed-geummae",
   "ko": "금매",
-  "en": "Kinbai",
+  "en": "Kimbai",
   "aliases": [
    "금매",
    "Geummae",
-   "Kinbai",
    "キンバイ"
   ],
   "placeIds": [
@@ -11679,7 +14117,7 @@ export const mapCollectibles=[
  {
   "id": "observed-adamant",
   "ko": "아다만트",
-  "en": "Adamant",
+  "en": "Adamantine",
   "aliases": [
    "아다만트"
   ],
@@ -11830,7 +14268,7 @@ export const mapCollectibles=[
  {
   "id": "video-gold-dust",
   "ko": "사금",
-  "en": "사금",
+  "en": "Coin",
   "aliases": [
    "사금"
   ],
@@ -11872,7 +14310,7 @@ export const mapCollectibles=[
  {
   "id": "video-gold-dust-lump",
   "ko": "사금 덩어리",
-  "en": "사금 덩어리",
+  "en": "Large Coin",
   "aliases": [
    "사금 덩어리"
   ],
@@ -12003,7 +14441,7 @@ export const mapCollectibles=[
  {
   "id": "observed-fine-meat-crate",
   "ko": "고급 고기 상자",
-  "en": "Fine Meat Crate",
+  "en": "Luxury Meat Crate",
   "aliases": [
    "고급 고기 상자"
   ],
@@ -12055,7 +14493,7 @@ export const mapCollectibles=[
  {
   "id": "observed-fine-weapon-crate",
   "ko": "질 좋은 무구 상자",
-  "en": "Fine Weapon Crate",
+  "en": "Quality Weapon Crate",
   "aliases": [
    "질 좋은 무구 상자"
   ],
@@ -12066,7 +14504,7 @@ export const mapCollectibles=[
  {
   "id": "observed-da-mina-weapon-crate",
   "ko": "다 미나의 무구 상자",
-  "en": "Da Mina Weapon Crate",
+  "en": "Da Mina Crate",
   "aliases": [
    "다 미나의 무구 상자"
   ],
@@ -12077,7 +14515,7 @@ export const mapCollectibles=[
  {
   "id": "observed-driftwood-crate",
   "ko": "떠내려온 나무 상자",
-  "en": "Driftwood Crate",
+  "en": "Washed-Up Crate",
   "aliases": [
    "떠내려온 나무 상자"
   ],
@@ -12094,7 +14532,7 @@ export const mapCollectibles=[
  {
   "id": "observed-fine-vegetable-crate",
   "ko": "고급 야채 상자",
-  "en": "Fine Vegetable Crate",
+  "en": "Luxury Veg. Crate",
   "aliases": [
    "고급 야채 상자"
   ],
@@ -12937,7 +15375,7 @@ export const mapCollectibles=[
  {
   "id": "observed-riddle-box",
   "ko": "수수께끼의 상자",
-  "en": "Riddle Box",
+  "en": "Mystery Box",
   "aliases": [
    "수수께끼의 상자"
   ],
@@ -13208,9 +15646,8 @@ export const caiMap={
   {
    "id": "pegasus",
    "ko": "야생 페가수스",
-   "en": "Pegasus",
+   "en": "Wild Pegasus",
    "aliases": [
-    "Pegasus",
     "野生のペガサス"
    ],
    "placeIds": [

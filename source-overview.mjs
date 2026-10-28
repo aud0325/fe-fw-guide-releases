@@ -4,6 +4,10 @@ import {icon} from './icons.mjs';
 
 // Site introductions belong to the index; article-level evidence stays on details.
 const providers={
+ 'forums.serenesforest.net':{name:'Serenes Forest Forums',url:'https://forums.serenesforest.net/topic/108370-mounts-give-bonus-stats-and-growth-rates/',ko:'파이어 엠블렘 플레이어 포럼. 야생 탈것의 이름과 포획 장소를 참고했습니다.',en:'A player forum used for wild mount names and capture locations.'},
+ 'annasnotebook.net':{name:'Anna’s Notebook',url:'https://annasnotebook.net/en/',ko:'커뮤니티 공략 도감. 아이템 영문명·획득처와 개인스킬의 강화 조건을 참고했습니다.',en:'A community guide used for English item names, gathering locations and personal ability upgrade conditions.'},
+ 'neoseeker.com':{name:'Neoseeker',url:'https://www.neoseeker.com/fire-emblem-fortunes-weave/',ko:'영문 게임 공략 사이트. 지명과 탐색 동선을 참고했습니다.',en:'An English walkthrough used for location names and exploration routes.'},
+ 'videogameschronicle.com':{name:'VGC',url:'https://www.videogameschronicle.com/guide/fire-emblem-fortunes-weave-yaamanthemum-location-petals-of-encouragement-quest-guide/',ko:'게임 전문 매체. 야먼 국화의 영문명과 획득처를 참고했습니다.',en:'Gaming coverage used for the English name and acquisition of Yaamanthemum.'},
  game8:{name:'Game8',url:'https://game8.jp/fe-banshisenko/',ko:'일본어·영어 게임 공략 사이트. 영입 조건, 병종·장비·기술, 획득처와 추천 육성 경로를 참고했습니다.',en:'Japanese and English game guides used for recruitment, classes, equipment, abilities, acquisition and training recommendations.'},
  'nintendo.com':{name:'Nintendo',ko:'게임 공식 소개. 작품 개요와 주요 시스템 설명을 참고했습니다.',en:'Official game coverage used for the game overview and core systems.'},
  'rpgsite.net':{name:'RPG Site',ko:'영문 RPG 공략 매체. 캐릭터 영입, 외전 일정과 던전 획득물을 참고했습니다.',en:'English-language RPG coverage used for recruitment, paralogue schedules and dungeon rewards.'},
@@ -29,7 +33,7 @@ const providers={
  'reddit.com':{name:'Reddit · FE Fortunes Weave',ko:'영문 게임 커뮤니티. 미끼 희귀도와 탈것 출현에 관한 플레이 경험담을 참고했습니다.',en:'An English gaming community used for player reports on bait rarity and mount appearances.'},
  'serenesforest.net':{name:'Serenes Forest',ko:'파이어 엠블렘 팬 사이트. 캐릭터별 개인 성장률을 참고했습니다.',en:'A Fire Emblem fan site used for personal character growth rates.'},
  'siliconera.com':{name:'Siliconera',ko:'영문 게임 매체. 모노케로스의 획득 방법을 참고했습니다.',en:'An English gaming publication used for Monoceros acquisition.'},
- 'yuphastemple.com':{name:'Yu Phas’ Temple',ko:'지역별 지도·장소 안내 사이트. 레다 지역의 지명과 장소 정보를 참고했습니다.',en:'A map and location guide used for Leda place names and location information.'}
+ 'yuphastemple.com':{name:'Yu Phas’ Temple',ko:'게임 도감과 지도 안내 사이트. 장소·아이템·병종·기술의 영문 이름을 참고했습니다.',en:'A game database and map guide used for English place, item, class and ability names.'}
 };
 const priority=['game8','nintendo.com','rpgsite.net','fireemblemwiki.org','namu.wiki'];
 export function sourceOverviewGroups(records){

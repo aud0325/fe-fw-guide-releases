@@ -4,6 +4,7 @@ import {characterFaction} from './presentation.mjs';
 import {createTranslator} from './locales/index.mjs';
 import {media} from './media.mjs';
 import {entryIconMedia} from './entity-media.mjs';
+import {canonicalMountId} from './mount-review.mjs';
 export const growthKeys=['hp','str','mag','spd','dex','def','res','lck','cha'];
 export const growthTabs=['character','class','mount'];
 export const growthTiers={Unique:0,Beginner:1,Specialty:2,Intermediate:2,Advanced:3,Master:4,Divine:5};
@@ -21,8 +22,8 @@ export function growthRows(entries){
   return {id:e.id,type:e.type,name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:e.type==='class'?{ko:e.category,en:e.category}:{ko:characterFaction(e,ko,entries),en:characterFaction(e,en,entries)},values:growth?.values||{},modified:e.modifiedGrowthRates?.values,sourceId:growth?.sourceId,status:growth?.status,image:m?.thumbnailSrc||m?.src||'',imageSource:m?.sourceUrl||'',imageCredit:m?.credit||'',hasDetail:true};
  });
  for(const report of mountGrowthReports){
-  const e=entries.find(e=>e.id===report.id);
-  rows.push({...report,type:'mount',name:e?{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')}:{ko:report.sourceName,en:'Red Falicorn'},group:{en:report.group,ko:mountGrowthGroups[report.group].ko},hasDetail:!!e,image:''});
+  const id=canonicalMountId(report.id),e=entries.find(e=>e.id===id);
+  rows.push({...report,id,type:'mount',name:e?{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')}:{ko:report.sourceName,en:'Red Falicorn'},group:{en:report.group,ko:mountGrowthGroups[report.group].ko},hasDetail:!!e,image:''});
  }
  return rows;
 }

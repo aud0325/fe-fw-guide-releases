@@ -28,8 +28,8 @@ export default {
   "en": "Class growth modifiers"
  },
  "growth.contextMount": {
-  "ko": "탈것 성장률 보정",
-  "en": "Mount growth modifiers"
+  "ko": "장비한 탈것 성장률 보정",
+  "en": "Equipped mount growth modifiers"
  },
  "growth.unitCharacter": {
   "ko": "병종·탈것 보정 전 (%)",

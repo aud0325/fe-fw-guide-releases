@@ -42,6 +42,9 @@ export function sampleItemAbilities(e,lang){
 
 export function abilityReferences(e,lang){
  const text=(ko,en)=>lang==='ko'?ko:en,externalGuides=[],abilitySourceNotes=[];
+ for(const row of rows.filter(row=>row.relations.some(relation=>relation.id===e.id)))for(const source of [...(row.englishNameSources||[]),...(row.reviewedSources||[])]){
+  if(!externalGuides.some(guide=>guide.url===source.url))externalGuides.push(source);
+ }
  if(sampleCharacters.includes(e.id)){
   externalGuides.push(
    {url:'https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit',title:text('커뮤니티 기술·숙련도 표','Community ability and proficiency tables')},

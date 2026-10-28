@@ -6,6 +6,8 @@ import {normalizeItemFilters} from './item-types.mjs';
 import {normalizeItemFlavor} from './food.mjs';
 import {mapProvinces} from './part1-map.generated.mjs';
 import {canonicalItemId} from './item-identities.mjs';
+import {canonicalMountId} from './mount-review.mjs';
+import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
 export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
@@ -18,7 +20,7 @@ export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
- return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(canonicalItemId(state.id)))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
+ return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(entrySlug(canonicalMountId(canonicalItemId(state.id)))))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
 export function stateQuery(state){
  const p=new URLSearchParams();
@@ -47,7 +49,7 @@ export function readRoute(url,base='/',fallback='ko'){
  const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
  if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
- if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalItemId(decodeURIComponent(parts[1])));}catch{return null;}}
+ if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalMountId(canonicalItemId(canonicalEntryId(decodeURIComponent(parts[1])))));}catch{return null;}}
  if(state.id&&locationRedirects[state.id])Object.assign(state,locationRedirects[state.id],{id:locationRedirects[state.id].id||null});
  if(parts[0]==='category'){
   if(!Object.hasOwn(types,parts[1]))return null;
@@ -88,7 +90,7 @@ export function rewriteLinks(html,lang,base){
   const route=readRoute(new URL(base+'#'+hash,'https://local.invalid'),base,lang);
   return route?`href="${pagePath(route.state,lang,base)}${stateQuery(route.state).replaceAll('&','&amp;')}"`:_;
  }).replace(/href="((?:\/[^"?#]*)?\/(?:ko|en)\/entry\/)([^/"?#]+)\//g,(match,prefix,id)=>{
-  const slug=abilitySlug(decodeURIComponent(id));
+  const slug=abilitySlug(entrySlug(canonicalMountId(canonicalItemId(decodeURIComponent(id)))));
   return `href="${prefix}${encodeURIComponent(slug)}/`;
  });
 }

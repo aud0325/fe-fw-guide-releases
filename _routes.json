@@ -1,0 +1,12 @@
+{
+ "version": 1,
+ "include": [
+  "/ko/entry/skill-*",
+  "/ko/entry/combat-art-*",
+  "/ko/entry/spell-*",
+  "/en/entry/skill-*",
+  "/en/entry/combat-art-*",
+  "/en/entry/spell-*"
+ ],
+ "exclude": []
+}

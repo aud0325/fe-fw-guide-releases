@@ -2,6 +2,7 @@ import {displayTerms} from './display-terms.mjs';
 import {editorialPhrases} from './editorial-text.mjs';
 import {generalTerms} from './gameplay-terms.mjs';
 import {englishSourceTitles} from './english-source-titles.mjs';
+import {reviewedEnglishNames} from './reviewed-english-names.generated.mjs';
 
 // Display-only translations and romanizations. These do not establish official names,
 // new relationships, or in-game verification. Original fields and aliases stay intact.
@@ -626,6 +627,7 @@ export const englishTerms=Object.fromEntries(`
 アイギーナ山|Mount Aegina
 `.trim().split('\n').map(row=>row.split('|')));
 
+Object.assign(englishTerms,reviewedEnglishNames);
 const cjk=/[가-힣ぁ-ゖァ-ヺ一-龯]/u;
 const dictionaries=new WeakMap(),emptyEntries=[];
 function dictionaryFor(entries){

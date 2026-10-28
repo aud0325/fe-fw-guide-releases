@@ -18,5 +18,6 @@ export const reviewedItemAliases={
  "video-sun-fruit": "thry-fruit",
  "video-hana-fruit": "wun-fruit",
  "mask-of-turmoil-report": "turmoil-mask",
- "observed-certain-star-gem": "sacred-gem"
+ "observed-certain-star-gem": "sacred-gem",
+ "sanbael-meat": "sandbael-meat"
 };
