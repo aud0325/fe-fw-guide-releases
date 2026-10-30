@@ -1,0 +1,8 @@
+.equipment-variants table{table-layout:fixed;width:100%;min-width:0}
+.equipment-variants thead th:nth-child(1){width:35%}
+.equipment-variants thead th:nth-child(2){width:18%;text-align:center;white-space:nowrap}
+.equipment-variants thead th:nth-child(3){width:47%}
+.equipment-variants th,.equipment-variants td{white-space:normal;overflow-wrap:anywhere;vertical-align:top}
+.equipment-variants td:nth-child(2){text-align:center;font-variant-numeric:tabular-nums}
+.equipment-variants .equipment-related-heading th{background:var(--panel2);color:var(--muted);font-size:.9em}
+.equipment-family-link{margin:14px 0}

@@ -773,7 +773,10 @@ export const abilitySlugCatalog={
   "skill-7dad8f4beb6e": "skill-zhu-ming",
   "skill-b5bf56601829": "skill-brio-plus",
   "skill-ddb63317af29": "skill-murderous-intent-plus",
-  "skill-1c64cdf7c086": "skill-royal-resolve-plus"
+  "skill-1c64cdf7c086": "skill-royal-resolve-plus",
+  "skill-0a1d78121a27": "skill-vanguard-plus",
+  "skill-c986e1e38824": "skill-cavalry-move-plus",
+  "skill-f11c85c2e6fc": "skill-airfighter-plus"
  },
  "aliases": {
   "skill-axe-lv-1": "skill-f5087c98af7b",

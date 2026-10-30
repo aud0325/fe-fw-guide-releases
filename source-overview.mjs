@@ -19,7 +19,7 @@ const providers={
  'bluegirl6.blogspot.com':{name:'My Way',ko:'개인 게임 블로그. 음성 설정 경험담을 참고했습니다.',en:'A personal gaming blog used for a player report on voice settings.'},
  'cass07.github.io':{name:{ko:'Cass07 · 만자천홍 DB',en:'Cass07 · Fortune’s Weave DB'},url:'https://cass07.github.io/fe18-db/',ko:'커뮤니티 제작 데이터베이스. 개인·병종 성장률, 능력치 보정과 외전 일정을 참고했습니다.',en:'A community database used for character and class growth rates, stat modifiers and paralogue schedules.'},
  'dcinside.com':{name:{ko:'디시인사이드 · 파이어 엠블렘 갤러리',en:'DC Inside · Fire Emblem gallery'},url:'https://gall.dcinside.com/mgallery/board/view/?id=fireemblem&no=746786',ko:'한국어 게임 커뮤니티. 영입·외전·육성 공략, 탈것 포획과 게임 화면 제보를 참고했습니다.',en:'A Korean gaming community used for recruitment, paralogues, training, mount capture and gameplay screenshots.'},
- 'docs.google.com':{name:{ko:'커뮤니티 기술표',en:'Community ability spreadsheet'},url:'https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit',ko:'플레이어들이 정리한 스프레드시트. 장비와 전투 기술의 대응 정보를 참고했습니다.',en:'A player-compiled spreadsheet used for equipment and combat art connections.'},
+ 'docs.google.com':{name:{ko:'커뮤니티 자료표',en:'Community spreadsheets'},url:'https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit',ko:'플레이어들이 정리한 스프레드시트. 영입 조건·장별 레벨, 성장률, 장비와 교환 재료를 참고했습니다.',en:'Player-compiled spreadsheets used for recruitment conditions and chapter levels, growth rates, equipment and trade materials.'},
  'edricsn.com':{name:{ko:'에드릭슨',en:'Edricsn'},ko:'한국어 게임 공략 블로그. 캐릭터·병종·무기 명칭과 무기 성능을 참고했습니다.',en:'A Korean game guide blog used for character, class and weapon names, and weapon stats.'},
  'fefw.azaws.workers.dev':{name:{ko:'만자천홍 육성 도감',en:'Fortune’s Weave training guide'},ko:'커뮤니티 번역 육성 도감. 캐릭터별 육성 안내의 구성을 참고했습니다.',en:'A community-translated training guide used as a reference for character training guide structure.'},
  'forums.somethingawful.com':{name:'Something Awful',ko:'영문 커뮤니티 게시판. 탈것의 선호 먹이와 포획 경험담을 참고했습니다.',en:'An English-language forum used for preferred mount foods and capture reports.'},
@@ -33,7 +33,7 @@ const providers={
  'reddit.com':{name:'Reddit · FE Fortunes Weave',ko:'영문 게임 커뮤니티. 미끼 희귀도와 탈것 출현에 관한 플레이 경험담을 참고했습니다.',en:'An English gaming community used for player reports on bait rarity and mount appearances.'},
  'serenesforest.net':{name:'Serenes Forest',ko:'파이어 엠블렘 팬 사이트. 캐릭터별 개인 성장률을 참고했습니다.',en:'A Fire Emblem fan site used for personal character growth rates.'},
  'siliconera.com':{name:'Siliconera',ko:'영문 게임 매체. 모노케로스의 획득 방법을 참고했습니다.',en:'An English gaming publication used for Monoceros acquisition.'},
- 'yuphastemple.com':{name:'Yu Phas’ Temple',ko:'게임 도감과 지도 안내 사이트. 장소·아이템·병종·기술의 영문 이름을 참고했습니다.',en:'A game database and map guide used for English place, item, class and ability names.'}
+ 'yuphastemple.com':{name:'Yu Phas’ Temple',ko:'게임 도감과 지도 안내 사이트. 장소·아이템·병종·기술의 영문 이름, 영입 시 소지품과 상자 내용물을 참고했습니다.',en:'A game database and map guide used for English place, item, class and ability names, recruitment equipment and crate contents.'}
 };
 const priority=['game8','nintendo.com','rpgsite.net','fireemblemwiki.org','namu.wiki'];
 export function sourceOverviewGroups(records){

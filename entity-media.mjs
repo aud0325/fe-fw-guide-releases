@@ -1,5 +1,6 @@
 // Game8 Japanese icon references checked against saved source pages on 2026-10-01.
 // Artwork rights remain with Nintendo / INTELLIGENT SYSTEMS; attribution is not a licence.
+import {yuphasImages} from './yuphas-images.generated.mjs';
 const classIconSources = {
  "class-gladiator": [
   816670,
@@ -303,6 +304,7 @@ const mountIconGroups = {
  "ferghanan-horse": "horse",
  "monoceros": "horse",
  "rocinan": "horse",
+ "rocinans-brother": "horse",
  "black-horse": "horse",
  "wild-ornius": "ornius",
  "white-ornius": "ornius",
@@ -316,6 +318,7 @@ const mountIconGroups = {
  "falicorn": "pegasus",
  "red-falicorn": "pegasus",
  "bucephalus": "pegasus",
+ "bucephalus-foal": "pegasus",
  "wild-bau": "bau",
  "red-bau": "bau",
  "black-bau": "bau"
@@ -325,6 +328,7 @@ const rights = "Game artwork; no open redistribution licence verified.";
 const classSourceNote = {ko:'병종 아이콘은 Game8 일본어 문서의 게임 이미지입니다. 이미지 출처 표기는 이용 허락을 뜻하지 않습니다.',en:'Class icon from the Game8 Japanese guide. Image credit does not imply permission to redistribute.'};
 const mountSourceNote = {ko:'탈것 계열 공통 아이콘은 Game8 일본어 문서의 게임 이미지입니다. 개별 탈것의 모습이나 색상은 구분하지 않으며, 출처 표기는 이용 허락을 뜻하지 않습니다.',en:'Shared mount category icon from the Game8 Japanese guide. It does not distinguish individual animals or colors; image credit does not imply permission to redistribute.'};
 export function entryIconMedia(entry) {
+ if(entry.type==='class'&&yuphasImages[entry.id])return yuphasImages[entry.id];
  if(entry.type==='class'&&classIconSources[entry.id]) {
   const [articleId,originalUrl,sourceAlt]=classIconSources[entry.id];
   return {src:`./assets/classes/${entry.id}.webp`,originalUrl,sourceUrl:`https://game8.jp/fe-banshisenko/${articleId}`,sourceAlt,credit,rights,checkedAt:'2026-10-01',sourceNote:classSourceNote};

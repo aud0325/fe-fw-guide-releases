@@ -9,3 +9,6 @@
 .sample-abilities .sample-rank-matrix tr>:first-child{width:116px}
 .sample-rank-matrix .proficiency-label{gap:6px}
 @media(max-width:600px){.sample-abilities .sample-rank-matrix tr>:first-child{width:102px}.proficiency-overview>div{align-items:center}.proficiency-affinity{padding:3px 6px}}
+
+/* Square game glyphs have a single source of size, unaffected by generic image rules. */
+.proficiency-glyph{display:inline-block!important;width:var(--proficiency-size,28px)!important;height:var(--proficiency-size,28px)!important;min-width:0!important;max-width:none!important;max-height:none!important;flex:0 0 var(--proficiency-size,28px)!important;aspect-ratio:1/1!important;object-fit:contain!important;padding:0!important;border:0!important;border-radius:0!important;box-sizing:border-box}.proficiency-affinity{padding:0!important;border:0!important;border-radius:0!important;background:none!important;color:inherit!important}.proficiency-affinity .proficiency-glyph{--proficiency-size:24px}

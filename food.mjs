@@ -4,6 +4,7 @@ export const foodFactKeys=['food','food-guide','namu-bait','game8-bait','food-co
 export const normalizeItemFlavor=value=>Object.hasOwn(flavors,value)?value:'';
 export const ingredientFlavorId=e=>e.ingredientFlavor?.flavor||'unknown';
 export function preferredMountFood(e){
+ if(e.preferredFood)return {...e.preferredFood,reports:[{sourceId:e.preferredFood.sourceId}]};
  const reports=mountFoodReports(e);
  return reports.find(r=>r.reports.some(source=>source.sourceId===e.preferredFoodSourceId))||reports.find(r=>r.reports.some(source=>source.key==='food-guide'))||reports[0]||null;
 }

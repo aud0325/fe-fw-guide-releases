@@ -1,3 +1,7 @@
+import {isRetiredCharacterId} from './character-visibility.mjs';
+import {directoryPage} from './catalog-overview.mjs';
+import {battalionDirectory,battalionDetails,placeBattalions} from './battalion-ui.mjs';
+import {linkContentKeywords} from './game-keywords.mjs';
 import {sourceOverviewGroups,sourceOverview} from './source-overview.mjs';
 import {renderAbilityPage} from './_abilities/ability-page.mjs';
 import {abilityEntries} from './_abilities/ability-navigation.mjs';
@@ -6,6 +10,8 @@ import {growthComparison} from './growth-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {tipGuide} from './tip-ui.mjs';
+import {reconstructionGuideSection} from './reconstruction-ui.mjs';
+import {templeServicePreferences} from './activity-preferences-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
 import {isPublicSource,referencedSources,publicSourceRecord} from './source-visibility.mjs';
 import {itemUses} from './item-usage.mjs';
@@ -22,7 +28,7 @@ import {itemMedia} from './item-media.mjs';
 import {navigationGroups,navigationContext,filterContext,listingState} from './navigation.mjs';
 import {localized,referenceSection,referenceSite,displayText,characterFaction,sourceHint} from './presentation.mjs';
 import {paralogueOverview} from './paralogue-ui.mjs';
-import {catalogDetails,groupOptions,locationRegions} from './catalog-ui.mjs';
+import {catalogDetails,locationRegions} from './catalog-ui.mjs';
 import {entries,sources,routes,updated} from './data.mjs';
 import {media} from './media.mjs';
 import {entryIconMedia} from './entity-media.mjs';
@@ -32,8 +38,10 @@ import {searchShortcuts} from './search-shortcuts.mjs';
 import {foodKinds,flavors,preferredMountFood,mountFoodReports} from './food.mjs';
 import {ingredientFlavorLabel} from './food-ui.mjs';
 import {scoutRoute,sortScouts,scoutConditions,scoutToolbar,scoutGroupedList} from './character-list.mjs';
-export function renderPage(state,lang='ko',visibleLimit=36,base='/'){
- const abilityPage=renderAbilityPage(state,lang,base);if(abilityPage)return abilityPage;
+export function renderPage(state,lang='ko',visibleLimit=36,base='/',{keywordAudit}={}){
+ if(isRetiredCharacterId(state.id))return renderPage({...state,type:'character',id:null},lang,visibleLimit,base,{keywordAudit});
+ const abilityPage=renderAbilityPage(state,lang,base);if(abilityPage)return {...abilityPage,html:linkContentKeywords(abilityPage.html,{entryId:state.id,lang,base,onDecision:keywordAudit})};
+ const isDirectory=!state.id&&['character','class','mount','battalion','gambit'].includes(state.type);
  const t=createTranslator(lang),tx=x=>displayText(localized(x,lang),t,entries),name=e=>entryDisplayName(e,lang),text=x=>displayText(x,t,entries);
  const href=id=>'#entry/'+encodeURIComponent(id),label=type=>types[type][lang==='ko'?0:1];
  const mapContext={t,lang,base,entries,sources,routes,name,href,tx,text,factText:(value,key)=>displayText(value,t,entries,false,key)};
@@ -44,19 +52,18 @@ function portrait(e,full=false){const m=media[e.id]||e.portrait;return e.type===
 function mediaHint(m){return m?.sourceUrl?sourceHint({href:m.sourceUrl,tooltip:`${t('presentation.image-credit')} · ${m.credit||referenceSite(m.sourceUrl)}`,className:'source-hint image-source-hint',external:true}):'';}
 function entryIcon(e,extraClass=''){const m=entryIconMedia(e);return m?`<img class="entity-icon${extraClass?' '+extraClass:''}" src="${esc(m.src)}" alt="" width="50" height="50" loading="lazy" decoding="async">`:'';}
 function listingMeta(e){
+ if(e.battalion||e.gambit)return [label(e.type),t('battalion.'+e.category),e.battalion?.rank].filter(Boolean).join(' · ');
  if(e.type==='tip')return tx(e.summary);
  if(e.type==='location'){
   if(e.mapDetails?.facilities?.length)return t('map.facilities')+': '+e.mapDetails.facilities.map(row=>t('map.facility-'+row.kind)+(row.count>1?' ('+row.count+')':'')).join(' · ');
   if(e.mapDetails?.materials?.length)return t('map.materials')+': '+e.mapDetails.materials.map(row=>{const item=entries.find(e=>e.id===row.itemId);return t.locale==='en'&&item?name(item):row.ko;}).join(' · ');
   const items=relatedTo(browseEntries,e.id).filter(x=>x.type==='item');
-  return items.length?`${t('editorial.related-items')}: ${items.slice(0,3).map(name).join(', ')}${items.length>3?' …':''}`:e.mapProvince||e.region&&e.region!=='Unverified'?locationRegions([e],t)[0].title:t('editorial.region-unverified-view-acquisition-notes');
+  return e.mapProvince||e.region&&e.region!=='Unverified'?locationRegions([e],t)[0].title:items.length?`${t('editorial.related-items')}: ${items.slice(0,3).map(name).join(', ')}${items.length>3?' …':''}`:t('editorial.region-unverified-view-acquisition-notes');
  }
  if(e.type==='mount'){
-  const food=preferredMountFood(e),reports=mountFoodReports(e);
+  const food=preferredMountFood(e);
   const choice=food?[food.kind?t(foodKinds[food.kind].ko,foodKinds[food.kind].en):t('item.food-kind-unknown'),t(flavors[food.flavor].ko,flavors[food.flavor].en)].join(' · '):t('item.food-unknown');
-  const conflict=new Set(reports.map(r=>r.flavor).filter(f=>f!=='unknown')).size>1;
-  const uncertain=food?.reports.some(r=>r.uncertain);
-  return t('item.preferred-food')+': '+choice+(conflict?' · '+t('character.conflict'):uncertain?' · '+t('app.unverified'):'');
+  return t('item.preferred-food')+': '+choice;
  }
  return text(e.category||label(e.type));
 }
@@ -88,16 +95,23 @@ function card(e){
 function detail(e){
  const metadata=entryMetadata(e,{t,tx,name,entries,sources});
  const shownMaterials=new Set([...(e.mapDetails?.materials||[]),...(e.mapDetails?.loot||[])].map(row=>row.itemId).filter(Boolean));
+ const shownSupplyItems=new Set([...(e.locationSupplies?.gathering||[]),...(e.locationSupplies?.shops||[])].map(r=>r.itemId).filter(Boolean));
+ const shownSupplyPlaces=new Set((e.acquisition||[]).filter(r=>r.supplyRecord||r.materials?.length||r.promotionItem).map(r=>r.locationId));
+ const shownPromotionItems=new Set([...(e.promotionItems||[]).map(p=>p.itemId),e.promotionUse?.classId,e.promotionRequirement?.itemId].filter(Boolean));
+ const shownDungeonItems=new Set((e.dungeonChests?.groups||[]).flatMap(g=>g.entries.map(r=>r.itemId)).filter(Boolean));
+ const shownDungeonPlaces=new Set((e.acquisition||[]).filter(r=>r.dungeonChest).map(r=>r.locationId));
+ const companionMountOwner=e.type==='mount'&&(e.links||[]).find(l=>l.label?.en==='Recruited with')?.to;
  const shownCai=new Set((e.caiPlaceDetails?.mounts||[]).map(row=>row.id));
  const guidePlaces=new Set((e.guideSections||[]).flatMap(s=>(s.mapPlaces||[]).map(p=>p.entryId)));
  if(e.videoGathering)for(const link of e.links||[])if(link.label?.en==='Observed gathering')shownMaterials.add(link.to);
- const outgoing=groupedRelations((e.links||[]).filter(l=>!guidePlaces.has(l.to)&&isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')&&!(shownCai.has(l.to)&&['Appearing mount','Appearing mount · inferred'].includes(l.label?.en))));
- const incoming=relatedTo(browseEntries,e.id);
+ const coveredCarrier=l=>e.recruitmentCarriers?.some(row=>row.characterId===l.to)&&['Initial carrier','Default carrier','Carries when scouted · Intermediate-or-higher report'].includes(l.label?.en);
+ const outgoing=groupedRelations((e.links||[]).filter(l=>!(companionMountOwner&&(l.to===companionMountOwner&&['Reported owner','Recruited with'].includes(l.label?.en)||l.label?.en==='Capture route reference'))&&!shownPromotionItems.has(l.to)&&!guidePlaces.has(l.to)&&!coveredCarrier(l)&&!(shownSupplyItems.has(l.to)&&['Gatherable item','Shop or trade item','Observed gathering','Obtainable item'].includes(l.label?.en))&&!(shownSupplyPlaces.has(l.to)&&l.label?.en==='Acquisition location')&&isDiscoverable(entries.find(x=>x.id===l.to))&&!(shownMaterials.has(l.to)&&l.label?.en==='Observed gathering')&&!(shownDungeonItems.has(l.to)&&['Dungeon chest content','Obtainable item'].includes(l.label?.en))&&!(shownDungeonPlaces.has(l.to)&&l.label?.en==='Acquisition location')&&!(shownCai.has(l.to)&&['Appearing mount','Appearing mount · inferred'].includes(l.label?.en))));
+ const incoming=relatedTo(browseEntries,e.id).filter(e=>!shownPromotionItems.has(e.id)&&!shownSupplyItems.has(e.id)&&!shownSupplyPlaces.has(e.id)&&!shownDungeonItems.has(e.id)&&!shownDungeonPlaces.has(e.id));
  const relation=l=>{const target=entries.find(x=>x.id===l.to);return `<a class="relation" href="${href(l.to)}"><small>${esc(l.labels?l.labels.map(tx).join(' / '):tx(l.label))}</small><strong>${esc(name(target))}</strong>${icon('arrow')}</a>`};
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
  const titleImage=entryIcon(e,'entity-detail-icon')||(e.type==='item'?itemIcon(e,{t},'item-detail-icon'):'');
  const prose=value=>renderEntityText(localized(value,lang),e,{entries,lang,href,format:tx});
- let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`;
+ let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}${e.crateContents||e.forging||e.equipmentVariants||e.battalion||e.gambit?'':`<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`}`;
  if(e.type==='character')body=`<article class="detail detail-top character-detail"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/character${state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}</div>`;
  let portraitHtml='';
  if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span></figure>`;}
@@ -105,27 +119,33 @@ function detail(e){
  if(lang==='ko'&&e.translation==='provisional')body+=`<p class="result-label">${t('app.korean-provisional')}</p>`;
  if(e.type==='quest')body+=`<p class="notice">${t('editorial.the-quest-listing-has-been-retired-this-address-retains-reward-and-location-notes')} <a href="#category/paralogue">${t('editorial.view-paralogue-schedules')}</a></p>`;
  if(e.body&&e.type!=='mount')body+=`<p class="body">${prose(e.body)}</p>`;
- if(e.note&&e.type!=='mount')body+=`<p class="notice">${prose(e.note)}</p>`;
- body+=tipGuide(e,{t,tx,prose,locationMap:places=>guideLocationMap(places,mapContext),sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,sourceTitle:id=>`${tx(sources[id].title)}${sources[id].checked?' · '+t('common.checked')+' '+sources[id].checked:''}`});
+ // The scoped class report is shown beside the recruitment-level condition.
+ const consolidatedRecruitmentNote=e.id==='ursas-right-claw'&&e.recruitmentCarriers?.some(row=>row.additionalSourceId==='user-ursa-claw-condition-20260930');
+ if(e.note&&e.type!=='mount'&&!consolidatedRecruitmentNote)body+=`<p class="notice">${prose(e.note)}</p>`;
+ body+=tipGuide(e,{t,tx,prose,locationMap:places=>guideLocationMap(places,mapContext),sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,afterSection:i=>i===2?reconstructionGuideSection(e,{t,name,entries,base,query:stateQuery(state)}):'',contentsAfter:i=>i===2?(e.reconstructionProjects?`<li><a href="${esc(pagePath(state,lang,base)+stateQuery(state)+'#section-reconstruction')}">${t('reconstruction.title')} · ${t('tip.spoiler')}</a></li>`:''):''});
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
- body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill});
- if(e.type==='mount'&&state.route!=='all'&&e.routeIds&&!e.routeIds.includes(state.route))body+=`<p class="notice">${t('app.this-capture-method-is-documented-for-cai-s-route')}</p>`;
+ body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill,forgeSelection:{from:state.forgeFrom,to:state.forgeTo}});
+ body+=battalionDetails(e,{entries,lang,base})+placeBattalions(e,{entries,lang,base});
+ body+=templeServicePreferences(e,{t,name,entries,base});
+ if(e.type==='mount'&&!companionMountOwner&&!e.acquisition?.some(r=>r.mountSource)&&state.route!=='all'&&e.routeIds&&!e.routeIds.includes(state.route))body+=`<p class="notice">${t('app.this-capture-method-is-documented-for-cai-s-route')}</p>`;
  if(outgoing.length)body+=`<h2>${t('app.follow-the-trail')}</h2><div class="relations">${outgoing.map(relation).join('')}</div>`;
  if(incoming.length)body+=`<details class="backlinks"><summary>${t('app.linked-from')} (${incoming.length})</summary><div class="relations">${incoming.map(x=>relation({to:x.id,label:{ko:label(x.type),en:label(x.type)}})).join('')}</div></details>`;
- body+=references([e,abilityReferences(e,lang),{sourceIds:itemUses(e,entries).sourceIds}],e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait])+'</article>';
+ const abilitySources=abilityReferences(e,lang);
+ body+=references([e,abilitySources,{sourceIds:itemUses(e,entries).sourceIds}],[...(e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait]),...abilitySources.imageCredits])+'</article>';
  return body;
 }
 const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,images});
  let html='';const e=entries.find(x=>x.id===state.id);
  if(state.id){html=e?detail(e):`<div class="empty"><h2>${t('app.entry-not-found')}</h2><a class="back" href="#">${t('app.back-to-archive')}</a></div>`;}
  else if(state.type==='growth'){html=growthComparison(state,{entries,sources,t,lang,base});}
+ else if(isDirectory){html=(['battalion','gambit'].includes(state.type)?battalionDirectory(state,lang,entries,base):directoryPage(state,lang,base)).html;}
  else if(state.type==='quest'){html=`<h1>${t('editorial.quest-notes')}</h1><p>${t('editorial.the-standalone-quest-listing-has-been-retired-find-schedules-and-rewards-under-paralogues-and-acquisition-notes-under-items')}</p><div class="archive-links"><a href="#category/paralogue">${label('paralogue')}</a><a href="#category/item">${label('item')}</a></div>`;}
  else if(state.type==='sources'){
   const records=Object.entries(referencedSources(entries,sources)).filter(([id,source])=>isPublicSource(id,source)).map(([id,source])=>({id,...publicSourceRecord(id,source)})),groups=sourceOverviewGroups(records);
   html=`<div class="section-head"><h2>${t('app.source-register')}</h2></div><section class="sources-index" aria-label="${t('browse.source-sites')}">${sourceOverview(groups,lang)}</section>`;
  }
- else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href});}
+ else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href,lang,base});}
  else{
   const matches=searchEntries(browseEntries,listingState(state,browseEntries));const list=state.type==='character'?sortScouts(matches,scoutRoute(state)):matches;const home=state.type==='all'&&!state.query;
   const shortcuts=state.type==='all'?searchShortcuts(state.query):[];
@@ -137,7 +157,6 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   if(state.type==='item'&&state.itemFlavor&&!list.length)html+="<p class=\"notice\">"+t('item.flavor-empty')+'</p>';
   if(state.type==='map'&&!state.query)html+=part1Map(state,mapContext);
   if(state.type==='item')html+=itemFilters(searchEntries(browseEntries,{...listingState(state,browseEntries),group:'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''}),state,{t});
-  const options=groupOptions(state.type);if(state.type!=='item'&&options.length>1)html+=`<label class="catalog-filter">${t(state.type==='character'?'browse.character-role':state.type==='mount'?'browse.mount-type':state.type==='class'?'browse.class-tier':state.type==='location'?'browse.location-region':state.type==='tip'?'browse.guide-topic':'app.filter-category')} <select id="catalog-group"><option value="">${t('common.all')}</option>${options.map(([id,n])=>`<option value="${esc(id)}" ${state.group===id?'selected':''}>${esc(t(...n))}</option>`).join('')}</select></label>`;
   const grouped=!state.query&&((state.type==='tip'&&!state.group)||(state.type==='location'&&!state.group)||(state.type==='character'&&scoutRoute(state)==='all'&&!state.faction&&!state.group)||(state.type==='item'&&!state.itemMinor&&!state.itemKind&&!state.itemFlavor)||(state.type==='class'&&!state.group));
   if((state.type==='tip'&&state.group)||(state.type==='location'&&state.group)||(state.type==='character'&&(state.faction||state.group))||(state.type==='item'&&state.query&&(state.itemMinor||state.itemKind))||(state.type==='class'&&state.group))html+=`<p class="browse-overview-link"><a class="group-more" href="#category/${state.type}">${t('browse.back-overview')}</a></p>`;
   const routeGrouped=state.type==='character'&&scoutRoute(state)!=='all'&&list.length>0;
@@ -148,9 +167,9 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   else if(routeGrouped)html+=scoutGroupedList(list,scoutRoute(state),{t,card});
   else if(grouped)html+=groupedBrowse(list,state,{t,lang,base,card,classCards:classComparison,entries});
   else html+=list.length?`${state.type==='class'?classComparison(list.slice(0,visibleLimit)):`<div class="cards ${state.type==='tip'?'guide-list':state.type==='location'?'location-list':state.type==='mount'?'mount-list icon-cards':state.type==='item'?'icon-cards':''}">${list.slice(0,visibleLimit).map(card).join('')}</div>`}`:shortcuts.length?'':`<div class="empty"><h3>${t('app.no-matching-entries')}</h3><p>${t('app.try-another-name-english-or-korean-or-reset-the')}</p></div>`;
-  if(!grouped&&!routeGrouped&&list.length>visibleLimit)html+=`<button id="show-more" class="load-more">${t('app.show-36-more')} (${visibleLimit} / ${list.length})</button>`;
+  if(!grouped&&!routeGrouped&&list.length>visibleLimit)html+=`<button id="show-more" class="load-more">${t('app.show-more',{count:Math.min(36,list.length-visibleLimit)})} (${visibleLimit} / ${list.length})</button>`;
  }
- if(!e){
+ if(!e&&!isDirectory){
   const current=state.id?t('app.not-found'):state.query?t('app.search-results'):state.type!=='all'?label(state.type):t('app.archive');
   html=breadcrumbRow(state.id||state.query||state.type!=='all'?`<a href="#">${t('app.archive')}</a> / <span aria-current="page">${esc(current)}</span>`:`<span aria-current="page">${esc(current)}</span>`,'page-breadcrumb-row')+html;
  }
@@ -160,15 +179,15 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  if(!e&&state.type==='paralogue')html='<div class="paralogue-listing">'+html+'</div>';
  if(!e&&state.type==='location')html='<div class="location-listing">'+html+'</div>';
  if(!e&&state.type==='map')html='<div class="atlas-listing">'+html+'</div>';
- if(!e&&state.type==='class')html='<div class="class-listing">'+html+'</div>';
+ if(!e&&!isDirectory&&state.type==='class')html='<div class="class-listing">'+html+'</div>';
  if(!e&&state.type==='mount')html='<div class="mount-listing">'+html+'</div>';
- if(!e&&state.type==='character')html='<div class="character-listing">'+html+'</div>';
+ if(!e&&!isDirectory&&state.type==='character')html='<div class="character-listing">'+html+'</div>';
  if(!e&&state.type==='item')html='<div class="item-listing">'+html+'</div>';
  const pageTitle=state.id?(e?name(e):t('app.not-found')):state.query?t('app.search-results'):state.type==='map'&&state.mapVariant==='cai'?t('map.cai-title'):state.type==='growth'?t('growth.title')+' · '+t('growth.'+(state.growthTab||'character')):state.type!=='all'?label(state.type):'';
  const metadata=e?entryMetadata(e,{t,tx,name,entries,sources}):null;
  const title=metadata?.title||(pageTitle?`${pageTitle} · ${t('app.fortune-s-weave-encyclopedia')}`:brandName);
  const description=(state.type==='growth'&&!state.id?t('growth.homeDescription'):'')||metadata?.description||(pageTitle?pageTitle+' · '+t('app.description'):t('app.description'));
- if(!state.id&&state.type!=='all')html=html.replace('<h2>','<h1>').replace('</h2>','</h1>');
+ if(!state.id&&!isDirectory&&state.type!=='all')html=html.replace('<h2>','<h1>').replace('</h2>','</h1>');
  if(e)html=html.replace(/href="#(section-[a-z]+|field-reference-[0-9]+|source-[a-zA-Z0-9_-]+)"/g,(_,id)=>`href="${esc(pagePath(state,lang,base)+stateQuery(state))}#${id}"`);
- return {html:rewriteLinks(html,lang,base),title,description,entryType:e?.type,entryName:e?name(e):null,missing:Boolean(state.id&&!e)};
+ return {html:linkContentKeywords(rewriteLinks(html,lang,base),{entryId:state.id,lang,base,onDecision:keywordAudit}),title,description,entryType:e?.type,entryName:e?name(e):null,missing:Boolean(state.id&&!e)};
 }

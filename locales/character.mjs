@@ -30,7 +30,7 @@ export default {
  "character.beginner-tier-master": {"ko":"최상급","en":"Master"},
  "character.beginner-tier-divine": {"ko":"신장","en":"Divine"},
  "character.beginner-unlock-master": {"ko":"3부 구세편 제1구분 완료 후 해금","en":"Unlocked after completing Part III Salvation segment 1"},
- "character.beginner-unlock-swordmaster": {"ko":"3부 구세편 제3구분에서 마즈 신전 복구 후 「マーズからの依頼」 완료. 병종 목록과 개별 문서의 시기 안내가 달라, 여기서는 개별 문서를 따릅니다.","en":"Complete Mars’s Request after restoring Mars Shrine in Part III Salvation segment 3. The class list and individual article differ on timing; this guide follows the individual article."},
+ "character.beginner-unlock-swordmaster": {"ko":"3부 구세편 제3구분에서 마즈 신전 복구 후 「マーズからの依頼」 완료.","en":"Complete Mars’s Request after restoring Mars Shrine in Part III Salvation segment 3."},
  "character.beginner-unlock-divine": {"ko":"3부 구세편 제4구분 이후. 天冠の神殿에서 전직 아이템을 확보하며 天冠の鍵도 필요합니다.","en":"From Part III Salvation segment 4. Obtain the class-change item at the Crown Temple; the Crown Key is also needed."},
  "character.beginner-item": {"ko":"전직 아이템","en":"Class-change item"},
  "character.beginner-exam": {"ko":"표시한 숙련은 합격률을 높이는 목표이며 확정 합격을 보장하지 않습니다. 신장직의 S급 목표와 추가 숙련·전직 아이템을 함께 준비하세요.","en":"The listed ranks improve exam chances; they do not guarantee passing. Prepare the divine class’s S-rank target, any additional skill rank and its class-change item together."},
@@ -117,8 +117,8 @@ export default {
   "en": "Preferred gifts"
  },
  "character.unverified-public-game8-export-only-reported-preferences-are-shown": {
-  "ko": "Game8 전재 자료 기준 · 게임 내 미검증. 목록에 없는 선물의 선호도는 알 수 없습니다.",
-  "en": "Unverified public Game8 export. Only reported preferences are shown; absent gifts are not assumed disliked."
+  "ko": "목록에 없는 선물의 선호도는 아직 정리되지 않았습니다.",
+  "en": "Preferences for gifts outside this list are not yet documented."
  },
  "character.preference": {
   "ko": "선호",
@@ -145,8 +145,8 @@ export default {
   "en": "Support partners and ranks (spoilers)"
  },
  "character.ranks-from-the-game8-export-separate-from-recruitment-support": {
-  "ko": "Game8 추출본의 지원회화 랭크입니다. 영입표의 지원 레벨과 다르며, S지원·연애 가능 여부·해금 조건은 확인되지 않았습니다.",
-  "en": "Ranks from the Game8 export, separate from recruitment support levels. S supports, romance and unlock conditions are not verified."
+  "ko": "지원회화 랭크와 영입에 필요한 지원 레벨은 별개입니다.",
+  "en": "Support conversation ranks are separate from recruitment support levels."
  },
  "character.partner": {
   "ko": "상대",

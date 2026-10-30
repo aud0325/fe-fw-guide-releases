@@ -1,3 +1,4 @@
+import {isRetiredCharacterId} from './character-visibility.mjs';
 import {locationRedirects} from './location-review.mjs';
 import {normalizeGrowthState} from './growth-comparison.mjs';
 import {types} from './locales/labels.mjs';
@@ -10,7 +11,7 @@ import {canonicalMountId} from './mount-review.mjs';
 import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -26,10 +27,12 @@ export function stateQuery(state){
  const p=new URLSearchParams();
  if(!state.id&&state.type==='growth'){
   const next=normalizeGrowthState(state);
-  for(const [key,value]of Object.entries({heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
+  for(const [key,value]of Object.entries({mode:next.growthMode==='stats'?'stats':'',find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
   return p.size?'?'+p:'';
  }
+ if(!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
  if(state.id&&state.growthSkill)p.set('skill','1');
+ if(state.id)for(const [key,value]of [['forge-from',state.forgeFrom],['forge-to',state.forgeTo]])if(/^\d+$/.test(String(value??'')))p.set(key,String(value));
  if(state.type==='character'&&!state.id&&state.faction)p.set('faction',state.faction);
  if(state.type==='character'&&!state.id&&routes.some(([id])=>id===state.scout))p.set('scout',state.scout);
  if(state.type==='item'&&normalizeItemFlavor(state.itemFlavor))p.set('flavor',state.itemFlavor);
@@ -50,13 +53,15 @@ export function readRoute(url,base='/',fallback='ko'){
  if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
  if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalMountId(canonicalItemId(canonicalEntryId(decodeURIComponent(parts[1])))));}catch{return null;}}
+ if(state.id&&isRetiredCharacterId(state.id))Object.assign(state,{type:'character',id:null});
  if(state.id&&locationRedirects[state.id])Object.assign(state,locationRedirects[state.id],{id:locationRedirects[state.id].id||null});
  if(parts[0]==='category'){
   if(!Object.hasOwn(types,parts[1]))return null;
   state.type=parts[1];
  }
- if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
- if(state.id)state.growthSkill=params.get('skill')==='1';
+ if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthMode:params.get('mode'),growthQuery:params.get('find'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
+ if(state.id){state.growthSkill=params.get('skill')==='1';for(const [key,param]of [['forgeFrom','forge-from'],['forgeTo','forge-to']])state[key]=/^\d+$/.test(params.get(param)||'')?params.get(param):'';}
+ state.catalogQuery=!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)?params.get('find')||'':'';
  state.query=params.get('q')||'';state.group=params.get('group')||'';
  if(state.type==='location'&&state.group==='Saveilon')state.group='사벨론주';
  if(state.type==='location'&&state.group==='Nation')state.group='';
@@ -85,6 +90,13 @@ export function readRoute(url,base='/',fallback='ko'){
  }
  return {state,lang,legacy};
 }
+export function entryLanguageAnchor(target,current,base='/',lang='ko'){
+ if(target.origin!==current.origin||target.hash||!current.hash)return '';
+ try{decodeURIComponent(current.hash.slice(1));}catch{return '';}
+ const next=readRoute(target,base,lang),previous=readRoute(current,base,lang);
+ return next&&previous&&next.lang!==previous.lang&&next.state.id&&next.state.id===previous.state.id?current.hash:'';
+}
+
 export function rewriteLinks(html,lang,base){
  return html.replace(/href="\/(ko|en)\//g,(_,locale)=>`href="${base}${locale}/`).replace(/href="#((?:entry\/|category\/)[^" ]*|)"/g,(_,hash)=>{
   const route=readRoute(new URL(base+'#'+hash,'https://local.invalid'),base,lang);

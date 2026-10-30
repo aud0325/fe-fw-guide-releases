@@ -1,3 +1,4 @@
+import {gatheringAcquisitionRecords} from './gathering-model.mjs';
 import {mapNodes} from './part1-map.generated.mjs';
 import {reviewedPlace,placeNameKey,acquisitionContext} from './place-correspondences.mjs';
 const mapPointForEntry=id=>mapNodes.find(n=>n.entryId===id);
@@ -52,7 +53,7 @@ function existingPlace(value,entries){
  const reviewed=reviewedPlace(value);if(reviewed)return reviewed.id;
  const explicit=japanesePlaces[value]||englishPlaceAliases[value];if(explicit)return explicit;
  const key=placeKey(value);
- const matches=entries.filter(e=>e.type==='location'&&e.mapPoint&&[e.name.ko,e.name.en,...(e.aliases||[])].some(n=>placeKey(n)===key));
+ const matches=entries.filter(e=>e.type==='location'&&[e.name.ko,e.name.en,...(e.aliases||[])].some(n=>placeKey(n)===key));
  return matches.length===1?matches[0].id:null;
 }
 function gatheringRows(row,entries){
@@ -108,10 +109,13 @@ export function acquisitionRecords(entry,entries){
  }
  for(const place of entries.filter(e=>e.type==='location'&&e.mapDetails))for(const report of place.mapDetails.previousReports||[])if(report.rows.some(r=>r.itemId===entry.id))records.push({locationId:place.id,method:'gathering',part:1,observedRoute:report.observedRoute,gameDate:report.gameDate,sourceId:place.mapDetails.sourceId});
  const trade=tradeReports[entry.id],tradeFact=trade&&(entry.facts||[]).find(f=>f.key===trade.key);
- if(tradeFact)for(const [locationId,method,condition] of trade.rows)records.push({locationId,method,condition,sourceId:tradeFact.sourceId,factKey:tradeFact.key});
+ if(tradeFact)for(const [locationId,method,condition] of trade.rows){if((entry.acquisition||[]).some(r=>r.locationId===locationId&&(r.supplier==='vandal-company'||/trade|exchange/i.test(r.method?.en||''))))continue;records.push({locationId,method,condition,sourceId:tradeFact.sourceId,factKey:tradeFact.key});}
+ records.push(...gatheringAcquisitionRecords(entry,entries));
  const links=[...(entry.links||[]).filter(l=>acquisitionLabel(l.label)&&entries.some(e=>e.id===l.to&&e.type==='location')),
   ...entries.filter(e=>e.type==='location').flatMap(e=>(e.links||[]).filter(l=>l.to===entry.id&&acquisitionLabel(l.label)).map(l=>({...l,to:e.id})))];
  for(const link of links){
+  // A structural relation adds no second, unscoped path beside selected chest data.
+  if(Object.keys(link).every(k=>['to','label','sourceId','sourceIds'].includes(k))&&records.some(r=>(r.dungeonChest||r.supplyRecord||r.materials?.length||r.promotionItem)&&r.locationId===link.to))continue;
   if(records.some(r=>r.locationId===link.to&&r.sourceId===link.sourceId&&r.observedRoute===link.observedRoute&&r.gameDate===link.gameDate))continue;
   records.push({...link,locationId:link.to,method:'acquisition'});
  }
@@ -127,11 +131,28 @@ export function acquisitionPlaces(entry,entries){
  const groups=new Map();
  for(const r of acquisitionRecords(entry,entries)){
   if(r.context==='source-error')continue;
-  const key=r.locationId||r.whereKey||(typeof r.where==='object'?JSON.stringify(r.where):r.where);if(!key)continue;
-  if(!groups.has(key))groups.set(key,{id:r.locationId||null,point:r.point,context:r.context,where:r.where,records:[]});
+  const key=r.containerId||r.locationId||r.whereKey||(typeof r.where==='object'?JSON.stringify(r.where):r.where);if(!key)continue;
+  if(!groups.has(key))groups.set(key,{id:r.containerId||r.locationId||null,point:r.point,context:r.context,where:r.where,records:[]});
   groups.get(key).records.push(r);
  }
  return [...groups.values()].sort((a,b)=>Boolean(b.point)-Boolean(a.point));
+}
+// Recruitment has its own condition table; retain original records for evidence.
+export function uncoveredAcquisitionRecords(entry,records=entry.acquisition||[]){
+ return records.filter(r=>{
+  const noted=(entry.acquisition||[]).filter(n=>n.weaponNote),sameMethod=noted.find(n=>n.method.en===r.method?.en&&JSON.stringify(n.where)===JSON.stringify(r.where)&&n.route===r.route&&(r.part==null||n.part===r.part));
+  if(!r.weaponNote&&sameMethod&&r.sourceId?.startsWith('game8-equipment-')&&r.chapter==null&&r.fromChapter==null){
+   if(r.method.en==='Free update bonus'&&!r.condition)return false;
+   if(r.method.en==='Clear reward'&&r.condition?.en==='War-arc clear reward; the article does not specify a route.')return false;
+   if(entry.id==='star-spear'&&r.condition?.en==='Received from Cai’s mother during the story.')return false;
+  }
+  if(r.characterId&&['Initial equipment','Default possession','Carried when scouted · community report'].includes(r.method?.en)&&entry.recruitmentCarriers?.some(row=>row.characterId===r.characterId&&(r.part==null||r.part===row.part||row.prologue&&r.part===3)))return false;
+  // A selected positive Cai gathering record supersedes the lower-priority
+  // generic Cai exclusion. Keep the original row for private review/preservation;
+  // explicit chapters, quests and administrator access records remain untouched.
+  if(r.method==='gathering'&&r.sourceId?.startsWith('game8-')&&r.condition?.en==='Inaccessible in Cai’s route'&&r.part==null&&r.route==null&&r.chapter==null&&r.locationId&&records.some(n=>n.locationId===r.locationId&&n.supplyRecord==='gathering'&&(n.sourceId==='yuphas-location-supplies-20261029'&&n.part===1&&n.routeIds?.includes('cai')||n.gatheringScopes?.some(s=>s.part===1&&s.route==='cai'))))return false;
+  return true;
+ });
 }
 // Only these literal names in a capture-direction fact can become reference pins.
 // They are intentionally absent from acquisitionRecords and mapAcquisitions.

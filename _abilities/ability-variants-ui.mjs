@@ -1,0 +1,8 @@
+import {createTranslator} from '../locales/index.mjs';
+import {escapeHtml as esc} from '../core.mjs';
+import {combatArtVariants} from './combat-art-upgrades.mjs';
+export function abilityVariantComparison(row,rows,lang='ko',{effect=v=>esc(v),compact=false}={}){
+ const variants=combatArtVariants(row,rows);if(variants.length<2)return '';
+ const t=createTranslator(lang),fields=[['durabilityCost','내구 소모','Durability'],['might','위력 보정','Might'],['hit','명중 보정','Hit'],['crit','필살 보정','Crit'],['range','사거리','Range']].filter(([key])=>variants.some(r=>r.stats[key]!=null));
+ return `<section class="ability-variant-comparison${compact?' is-compact':''}"><h${compact?3:2}>${t('ability-variant.title')}</h${compact?3:2}><p class="ability-upgrade-method">${t('ability-variant.method')}</p><div class="ability-variant-scroll"><table class="ability-variant-stats"><thead><tr><th scope="col">${t('ability-variant.stage')}</th>${fields.map(([key])=>`<th scope="col">${t('ability-variant.'+key)}</th>`).join('')}</tr></thead><tbody>${variants.map((r,i)=>`<tr${i?` id="ability-upgrade-${r.id}" tabindex="-1"`:''}><th scope="row">${i?t('ability-variant.enhanced'):t('ability-variant.base')}</th>${fields.map(([key])=>`<td>${esc(r.stats[key]??'—')}</td>`).join('')}</tr>`).join('')}</tbody></table></div><table class="ability-variant-effects"><thead class="sr-only"><tr><th scope="col">${t('ability-variant.name')}</th><th scope="col">${t('ability-variant.effect')}</th></tr></thead><tbody>${variants.map(r=>`<tr><th scope="row">${esc(r.name[lang])}</th><td>${effect(r.effect[lang])}</td></tr>`).join('')}</tbody></table></section>`;
+}

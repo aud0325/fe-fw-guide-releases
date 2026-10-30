@@ -3,11 +3,13 @@ import {growthTabs,growthSortContext} from './growth-comparison.mjs';
 export function bindGrowthControls(root,{state,change}){
  const host=root.querySelector('[data-growth-comparison]');if(!host)return;
  host.querySelectorAll('[data-growth-tab]').forEach(tab=>{
-  const switchTab=kind=>change({growthTab:kind,growthGroup:'',growthSort:'default',growthDirection:'desc',growthFocus:''},`[data-growth-tab="${kind}"]`);
+  const switchTab=kind=>change({growthTab:kind,growthGroup:'',growthSort:'default',growthDirection:'desc',growthFocus:'',growthMode:'growth',growthQuery:''},`[data-growth-tab="${kind}"]`);
   tab.addEventListener('click',event=>{if(event.button||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();switchTab(tab.dataset.growthTab);});
   tab.addEventListener('keydown',event=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;event.preventDefault();const i=growthTabs.indexOf(state.growthTab),j=event.key==='Home'?0:event.key==='End'?2:(i+(event.key==='ArrowRight'?1:2))%3;switchTab(growthTabs[j]);});
  });
- for(const [id,key,value]of [['heat-enabled','growthHeat',e=>e.checked?'on':'off'],['personal-skill','growthSkill',e=>e.checked],['growth-group','growthGroup',e=>e.value]])host.querySelector('#'+id)?.addEventListener('change',event=>change({[key]:value(event.target)},'#'+id));
+ host.querySelectorAll('[data-growth-mode]').forEach(link=>link.addEventListener('click',event=>{if(event.button||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();change({growthMode:link.dataset.growthMode,growthSort:'default'},`[data-growth-mode="${link.dataset.growthMode}"]`);}));
+ const query=host.querySelector('#growth-query');if(query){let composing=false;query.addEventListener('compositionstart',()=>{composing=true;});query.addEventListener('compositionend',()=>{composing=false;change({growthQuery:query.value},'#growth-query',{replace:true});});query.addEventListener('input',()=>{if(!composing)change({growthQuery:query.value},'#growth-query',{replace:true});});}
+ for(const [id,key,value]of [['heat-enabled','growthHeat',e=>e.checked?'on':'off'],['personal-skill','growthSkill',e=>e.checked]])host.querySelector('#'+id)?.addEventListener('change',event=>change({[key]:value(event.target)},'#'+id));
  host.querySelectorAll('[data-growth-sort]').forEach(button=>button.addEventListener('click',()=>{const current=growthSortContext(state);change({growthSort:button.dataset.growthSort,growthDirection:current.sort===button.dataset.growthSort&&current.direction==='desc'?'asc':'desc'},`[data-growth-sort="${button.dataset.growthSort}"]`);}));
 }
 

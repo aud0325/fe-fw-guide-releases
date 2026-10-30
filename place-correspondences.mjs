@@ -18,7 +18,7 @@ export function acquisitionContext(record){
  const names=[record.whereKey,...(typeof record.where==='object'?Object.values(record.where):[record.where])].filter(Boolean).map(placeNameKey);
  if(names.some(n=>errors.has(n)))return 'source-error';
  const method=typeof record.method==='object'?record.method.en:record.method;
- if(record.containerId||record.characterId||['Initial equipment','Quest reward','Paralogue reward','Training reward','Traveling merchant purchase'].includes(method)||names.some(n=>methods.has(n)))return 'method';
+ if(record.containerId||record.characterId||['Initial equipment','Quest reward','Paralogue reward','Training reward','Traveling merchant purchase','Traveling merchant listing','Renown reward','Battlefield loot','Stable','Trial reward','Story event','Clear reward','Free update bonus'].includes(method)||names.some(n=>methods.has(n)))return 'method';
  return 'place';
 }
 export function applyPlaceCorrespondences(merged,sources){

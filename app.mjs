@@ -1,3 +1,8 @@
+import {bindRecruitmentEquipment,recruitmentDisclosureState,restoreRecruitmentDisclosures} from './recruitment-equipment-controls.mjs';
+import {bindReconstructionPlan} from './reconstruction-controls.mjs';
+import {bindForgingControls} from './forging-controls.mjs';
+import {bindDirectoryControls} from './catalog-overview-controls.mjs';
+import {setupEntityLinks} from './entity-links-client.mjs';
 import './_abilities/sample-interactions.mjs';
 import {abilityEntries,abilityEntry,characterAbilityTarget,legacyAbilityPath} from './_abilities/ability-navigation.mjs';
 import {bindAbilityControls} from './_abilities/ability-controls.mjs';
@@ -11,7 +16,7 @@ import {pageStructuredData,serializeStructuredData,siteNames} from './seo.mjs';
 import {setupSearch} from './search-ui.mjs';
 import {setupSourceTooltips} from './source-tooltips.mjs';
 import {renderPage} from './page-renderer.mjs';
-import {defaultState,pagePath,stateQuery,readRoute,rewriteLinks,preferredLanguage} from './routing.mjs';
+import {defaultState,pagePath,stateQuery,readRoute,rewriteLinks,preferredLanguage,entryLanguageAnchor} from './routing.mjs';
 import {createTranslator} from './locales/index.mjs';
 import {setupNavigationDrawer} from './drawer.mjs';
 import {normalizeItemFilters} from './item-types.mjs';
@@ -33,6 +38,8 @@ let t=createTranslator(lang);
 let headingObserver;
 let searchUI;
 let mapControls;
+let forgingControls;
+const entityLinks=setupEntityLinks(document,window,{context:()=>({lang,base:basePath})});
 function syncDetailHeading(){
  headingObserver?.disconnect();
  const header=document.querySelector('body>header'),heading=$('content').querySelector('.detail-heading');
@@ -52,14 +59,14 @@ function nav(){
  $('navigation').dataset.renderKey=key;
 }
 function renderFilters(){
- const controls=shellFilters(state,entries),routeVisible=controls.route;
- $('route-filter').hidden=!routeVisible;
+ const controls=shellFilters(state,entries);
  $('tips-filter').hidden=!controls.tips;
- document.querySelector('.page-filters').hidden=!routeVisible&&!controls.tips;
+ document.querySelector('.page-filters').hidden=!controls.visible;
  document.querySelector('.page-filters').setAttribute('aria-label',t('app.filters'));
- $('filter-toggle').textContent=t('app.filters')+(routeVisible&&state.route!=='all'?' · '+routes.find(r=>r[0]===state.route)[lang==='ko'?1:2]:'')+(controls.tips&&!state.includeTips?t('app.no-tips'):'');
+ $('filter-toggle').textContent=t('app.filters')+(controls.tips&&!state.includeTips?t('app.no-tips'):'');
 }
 function render(){
+ entityLinks.beforeNavigate();
  mapControls?.destroy();mapControls=null;
  updates.schedule();
  t=createTranslator(lang);nav();document.documentElement.lang=lang;$('language-value').textContent=t('app.language-switch-label');
@@ -82,16 +89,16 @@ function render(){
  document.querySelector('.brand-name').textContent=brandName;
  document.querySelector('.brand small').textContent=t('app.unofficial-fan-encyclopedia');
  document.querySelector('.intro .eyebrow').textContent='FAN ENCYCLOPEDIA';
- for(const [id,ko,en]of routes)$('route').querySelector(`[value="${id}"]`).textContent=t(ko,en);
  document.querySelector('.edition').textContent=t('app.unofficial-fan-encyclopedia');
  document.querySelector('.aside-title').textContent=t('app.fortune-s-weave-encyclopedia');
  $('navigation').setAttribute('aria-label',t('app.categories'));
  document.querySelector('.search-area').setAttribute('aria-label',t('app.search'));
  $('headline').textContent=brandName;$('intro-text').textContent=t('app.from-recruiting-allies-to-preparing-for-battle-find-your');
- $('search-label').textContent=t('app.search-the-archive');$('search').placeholder=t('app.search-names-items-places');$('route-label').textContent=t('app.your-route');$('route').options[0].textContent=t('app.all-routes');$('tips-label').textContent=t('app.include-community-tips');$('reset').textContent=t('app.reset');$('filter-toggle').textContent=t('app.filters')+(state.route!=='all'?' · '+routes.find(r=>r[0]===state.route)[lang==='ko'?1:2]:'')+(!state.includeTips?t('app.no-tips'):'');
+ $('search-label').textContent=t('app.search-the-archive');$('search').placeholder=t('app.search-names-items-places');$('tips-label').textContent=t('app.include-community-tips');$('reset').textContent=t('app.reset');$('filter-toggle').textContent=t('app.filters')+(state.route!=='all'?' · '+routes.find(r=>r[0]===state.route)[lang==='ko'?1:2]:'')+(!state.includeTips?t('app.no-tips'):'');
  $('footer').innerHTML=`<a href="${basePath}${lang}/directory/">${t('app.all-documents')}</a> · <a href="${esc(pagePath(state,lang==='ko'?'en':'ko',basePath)+stateQuery(state))}">${lang==='ko'?'English':'한국어'}</a><br>`+t('app.unofficial-fan-project-not-affiliated-with-nintendo-or-intelligent');
  const page=renderPage(state,lang,visibleLimit,basePath);
  hydrateContent($('content'),renderKey(state,lang,visibleLimit,basePath),page.html);
+ restoreRecruitmentDisclosures($('content'),history.state?.recruitmentDisclosures);
  const growthViewport=$('content').querySelector('.growth-scroll'),savedGrowth=history.state?.growthViewport;
  if(growthViewport&&savedGrowth){growthViewport.scrollLeft=savedGrowth.x;growthViewport.scrollTop=savedGrowth.y;}
  syncDetailHeading();
@@ -101,19 +108,30 @@ function render(){
  document.querySelectorAll('.brand,.sidebar-brand').forEach(link=>link.href=pagePath(defaultState(),lang,basePath));
  document.querySelector('.skip').href=location.pathname+location.search+'#main';
  renderFilters();
- bindCommunityControls($('content'));bindAbilityControls($('content'));
+ bindCommunityControls($('content'));bindAbilityControls($('content'));bindRecruitmentEquipment($('content'));bindReconstructionPlan($('content'),entries.find(e=>e.id===state.id),t);
+ forgingControls?.destroy();
+ forgingControls=bindForgingControls($('content'),{entry:entries.find(e=>e.id===state.id),change:(selection,focus)=>{
+  const scroll=$('content').querySelector('.forging-scroll'),left=scroll?.scrollLeft||0,open=$('content').querySelector('.forging-stage-costs')?.open;
+  remember();state.forgeFrom=String(selection.from);state.forgeTo=String(selection.to);
+  history.pushState({...history.state},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);render();
+  const table=$('content').querySelector('.forging-scroll');if(table)table.scrollLeft=left;
+  const costs=$('content').querySelector('.forging-stage-costs');if(costs&&open)costs.open=true;
+  $('content').querySelector('#'+focus)?.focus({preventScroll:true});
+ }});
+ bindDirectoryControls($('content'),{lang,change:query=>{state.catalogQuery=query;saveHash();updateMetadata(page);}});
  bindCharacterGrowthControls($('content'),{change:checked=>{
   remember();state.growthSkill=checked;
   history.pushState({...history.state},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);render();
   window.scrollTo(0,history.state?.scroll||0);
   $('content').querySelector('[data-character-growth-skill]')?.focus({preventScroll:true});
  }});
- bindGrowthControls($('content'),{state,change:(next,focus)=>{
+ bindGrowthControls($('content'),{state,change:(next,focus,{replace=false}={})=>{
+  const active=document.activeElement,selection=active?.id==='growth-query'?[active.selectionStart,active.selectionEnd]:null;
   const viewport=$('content').querySelector('.growth-scroll'),position=viewport?{x:viewport.scrollLeft,y:viewport.scrollTop}:null;
   const tabChanged=next.growthTab&&next.growthTab!==state.growthTab;remember();Object.assign(state,next);
-  history.pushState({scroll:scrollY,limit:visibleLimit,growthViewport:tabChanged?null:position},'',pagePath(state,lang,basePath)+stateQuery(state));render();
+  history[replace?'replaceState':'pushState']({scroll:scrollY,limit:visibleLimit,growthViewport:tabChanged?null:position},'',pagePath(state,lang,basePath)+stateQuery(state));render();
   const restored=$('content').querySelector('.growth-scroll');if(restored&&position&&!tabChanged){restored.scrollLeft=position.x;restored.scrollTop=position.y;}
-  $('content').querySelector(focus)?.focus({preventScroll:true});
+  const focusTarget=$('content').querySelector(focus);focusTarget?.focus({preventScroll:true});if(focusTarget?.id==='growth-query'&&focusTarget.type==='search')focusTarget.setSelectionRange?.(...(selection||[focusTarget.value.length,focusTarget.value.length]));
  }});
  mapControls=bindPart1Map($('content'),{state,view:history.state?.mapViewport,t,change:(next,{focus,caret,center}={})=>{
   const mapViewport=mapControls?.snapshot();remember();Object.assign(state,next);
@@ -125,17 +143,13 @@ function render(){
   if(target?.id==='map-search'&&caret!=null)target.setSelectionRange(caret,caret);
   if(center&&innerWidth<900)target?.scrollIntoView({block:'nearest'});
  }});
- $('content').querySelectorAll('[data-scout-route]').forEach(b=>b.addEventListener('click',()=>{state.scout=b.dataset.scoutRoute;state.route='all';state.group='';state.faction='';visibleLimit=36;$('route').value='all';saveHash();render();$('content').querySelector(`[data-scout-route="${state.scout}"]`)?.focus({preventScroll:true});}));
+ $('content').querySelectorAll('[data-scout-route]').forEach(b=>b.addEventListener('click',()=>{state.scout=b.dataset.scoutRoute;state.route='all';state.group='';state.faction='';visibleLimit=36;saveHash();render();$('content').querySelector(`[data-scout-route="${state.scout}"]`)?.focus({preventScroll:true});}));
  const updateItems=(next,focusSelector)=>{Object.assign(state,normalizeItemFilters(next));state.itemFlavor=normalizeItemFlavor(next.itemFlavor??state.itemFlavor);if(state.itemMajor==='equipment'||(state.itemMinor&&state.itemMinor!=='ingredients')||(state.itemKind&&!foodKinds[state.itemKind]))state.itemFlavor='';state.group='';visibleLimit=36;saveHash();render();if(focusSelector)$('content').querySelector(focusSelector)?.focus({preventScroll:true});};
  $('content').querySelectorAll('[data-item-major]').forEach(b=>b.addEventListener('click',()=>updateItems({itemMajor:b.dataset.itemMajor,itemFlavor:''},`[data-item-major="${b.dataset.itemMajor}"]`)));
  $('content').querySelectorAll('[data-item-minor]').forEach(b=>b.addEventListener('click',()=>updateItems({itemMajor:state.itemMajor,itemMinor:b.dataset.itemMinor},`[data-item-minor="${b.dataset.itemMinor}"]`)));
- $('item-kind')?.addEventListener('change',()=>updateItems({...state,itemKind:$('item-kind').value},'#item-kind'));
- $('item-flavor')?.addEventListener('change',()=>{state.itemFlavor=normalizeItemFlavor($('item-flavor').value);visibleLimit=36;saveHash();render();$('item-flavor')?.focus({preventScroll:true});});
  $('content').querySelector('[data-item-reset]')?.addEventListener('click',()=>updateItems({itemFlavor:''},'[data-item-major=""]'));
 
- $('content').querySelectorAll('[data-paralogue-route]').forEach(b=>b.addEventListener('click',()=>{state.route=b.dataset.paralogueRoute;$('route').value=state.route;saveHash();render();$('content').querySelector(`[data-paralogue-route="${state.route}"]`)?.focus({preventScroll:true})}));
- $('paralogue-order')?.addEventListener('change',()=>{state.order=$('paralogue-order').value;saveHash();render();$('paralogue-order')?.focus({preventScroll:true})});
- $('catalog-group')?.addEventListener('change',()=>{state.group=$('catalog-group').value;state.faction='';visibleLimit=36;saveHash();render();$('catalog-group')?.focus({preventScroll:true})});
+ $('content').querySelectorAll('[data-paralogue-route]').forEach(b=>b.addEventListener('click',()=>{state.route=b.dataset.paralogueRoute;saveHash();render();$('content').querySelector(`[data-paralogue-route="${state.route}"]`)?.focus({preventScroll:true})}));
  $('show-more')?.addEventListener('click',()=>{visibleLimit+=36;render()});
  $('content').querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{img.hidden=true;const note=document.createElement('p');note.className='result-label';note.textContent=t('app.image-unavailable-please-visit-the-source-link');img.after(note);},{once:true}));
 }
@@ -153,7 +167,7 @@ function updateMetadata(page){
  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link=>link.href=new URL(pagePath(state,link.hreflang==='en'?'en':'ko',basePath),origin||location.origin).href);
  document.querySelector('meta[name="robots"]')?.setAttribute('content',!origin||stateQuery(state)||page.missing||isNoindexState(state,entries)?'noindex,follow':'index,follow');
 }
-function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
+function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:recruitmentDisclosureState($('content')),...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
 function parseLocation(){
  const legacy=legacyAbilityPath(location.hash);if(legacy)history.replaceState(history.state,'',basePath+legacy.slice(1));
  const route=readRoute(new URL(location.href),basePath,lang);
@@ -163,13 +177,15 @@ function parseLocation(){
  if(characterTarget){history.replaceState(history.state,'',basePath+characterTarget.slice(1));return parseLocation();}
  visibleLimit=history.state?.limit||36;
  if(route.legacy||location.pathname===basePath||(state.id&&location.pathname!==pagePath(state,lang,basePath)))history.replaceState(history.state,'',pagePath(state,lang,basePath)+stateQuery(state)+(route.legacy?'':location.hash));
- searchUI?.sync(state.query);$('route').value=state.route;$('tips').checked=state.includeTips;render();
+ searchUI?.sync(state.query);$('tips').checked=state.includeTips;render();
 }
 function saveHash(){history.replaceState({...history.state,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state));}
 document.addEventListener('click',event=>{
  const a=event.target.closest('a[href]');
  if(!a||a.getAttribute('target')||a.hasAttribute('download')||a.classList.contains('skip')||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
  const url=new URL(a.getAttribute('href'),document.baseURI);if(url.origin!==location.origin)return;
+ const languageAnchor=entryLanguageAnchor(url,new URL(location.href),basePath,lang);
+ if(languageAnchor&&document.getElementById(decodeURIComponent(languageAnchor.slice(1))))url.hash=languageAnchor;
  if(a.classList.contains('growth-rank-link')){
   const route=readRoute(url,basePath,lang);if(route?.state.type==='growth'){
    event.preventDefault();navigateTo(url.pathname+url.search+url.hash);return;
@@ -212,9 +228,9 @@ function restoreScroll(){
 window.addEventListener('popstate',()=>{parseLocation();requestAnimationFrame(restoreScroll);});
 window.addEventListener('hashchange',()=>{if(/^#(?:(?:entry|category)\/|\?)/.test(location.hash))parseLocation();else revealAnchor(document,location.hash);});
 searchUI=setupSearch({input:$('search'),panel:$('search-panel'),clear:$('clear-search'),entries:[...entries,...abilityEntries],context:()=>({lang,base:basePath}),navigate:navigateTo});
- $('route').addEventListener('change',()=>{state.route=$('route').value;saveHash();render()});$('tips').addEventListener('change',()=>{state.includeTips=$('tips').checked;saveHash();render()});
- $('reset').addEventListener('click',()=>{state.route='all';state.includeTips=true;state.group='';state.faction='';Object.assign(state,normalizeItemFilters());state.itemFlavor='';state.order='start';visibleLimit=36;$('route').value='all';$('tips').checked=true;saveHash();render()});
- $('language').addEventListener('click',()=>{remember();lang=lang==='ko'?'en':'ko';try{localStorage.setItem('fw-language',lang)}catch{}history.pushState({scroll:scrollY,limit:visibleLimit,growthViewport:history.state?.growthViewport,...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',pagePath(state,lang,basePath)+stateQuery(state));render();searchUI.close()});
+ $('tips').addEventListener('change',()=>{state.includeTips=$('tips').checked;saveHash();render()});
+ $('reset').addEventListener('click',()=>{state.route='all';state.includeTips=true;state.group='';state.faction='';Object.assign(state,normalizeItemFilters());state.itemFlavor='';state.order='start';state.catalogQuery='';visibleLimit=36;$('tips').checked=true;saveHash();render()});
+ $('language').addEventListener('click',()=>{const anchor=location.hash;remember();lang=lang==='ko'?'en':'ko';try{localStorage.setItem('fw-language',lang)}catch{}history.pushState({scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:history.state?.recruitmentDisclosures,growthViewport:history.state?.growthViewport,...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',pagePath(state,lang,basePath)+stateQuery(state)+anchor);render();revealAnchor(document,anchor);searchUI.close()});
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){event.preventDefault();$('search').focus()}});
 setupNavigationDrawer();
 

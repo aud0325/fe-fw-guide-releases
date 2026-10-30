@@ -1,8 +1,9 @@
+import {isRetiredCharacter} from './character-visibility.mjs';
 import {localized} from './locales/index.mjs';
 import {isLegacySpellItem} from './item-types.mjs';
 
 // Keep archived reward and item-shaped spell records addressable without listing them.
-export const isDiscoverable=e=>e.type!=='quest'&&!isLegacySpellItem(e);
+export const isDiscoverable=e=>!!e&&!isRetiredCharacter(e)&&e.type!=='quest'&&!isLegacySpellItem(e);
 export const isArchivedState=(state,entries)=>state.type==='quest'||entries.some(e=>e.id===state.id&&!isDiscoverable(e));
 const locationTitles={
  'temple-of-balor-dungeon-chests-inside-the-temple':{ko:'발로르 신전 · 던전 보물상자',en:'Temple of Balor · Dungeon chests'},

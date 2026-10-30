@@ -2,14 +2,16 @@ export {itemMajors,itemMinors,itemKinds} from './locales/labels.mjs';
 import {itemMajors,itemMinors,itemKinds} from './locales/labels.mjs';
 import {foodKinds,ingredientFlavorId} from './food.mjs';
 // Presentation taxonomy. Source categories stay intact for provenance and search.
-const categories={sword:'sword',spear:'spear',axe:'axe',bow:'bow',gauntlet:'gauntlet',gauntlets:'gauntlet','black magic':'black-magic','white magic':'white-magic','dark magic':'dark-magic',consumable:'consumable','spell-learning item':'spell-learning','shield (equipment)':'shield','accessory (equipment)':'accessory','class-change item (licence)':'promotion','class-change item (unverified)':'promotion',gift:'gift',ingredient:'plant','fish (ingredient)':'fish','ore / smithing material':'ore',material:'material','quest item':'quest','other item':'other','?':'other'};
-const overrides={'dagdandi':'fish','giants-meat':'meat','mask-of-turmoil-report':'accessory','video-jade-steel':'ore','video-gold-dust':'ore','video-gold-dust-lump':'ore','video-ladon-carp':'fish','video-yunamei':'material','grady-goby':'fish','lir-fish':'fish','meltfish':'fish','queen-loach':'fish'};
+const categories={strike:'strike',sword:'sword',spear:'spear',axe:'axe',bow:'bow',gauntlet:'gauntlet',gauntlets:'gauntlet','black magic':'black-magic','white magic':'white-magic','dark magic':'dark-magic',consumable:'consumable','spell-learning item':'spell-learning','shield (equipment)':'shield','accessory (equipment)':'accessory','class-change item (licence)':'promotion','class-change item (unverified)':'promotion',gift:'gift',ingredient:'plant','fish (ingredient)':'fish','ore / smithing material':'ore',material:'material','key item':'key',map:'map-item','quest item':'quest','cash item':'cash','other item':'other','?':'other'};
+const overrides={'castalia-map':'map-item','elektra-map':'map-item','melias-map':'map-item','saveilon-map':'map-item','dagdandi':'fish','giants-meat':'meat','mask-of-turmoil-report':'accessory','video-jade-steel':'ore','video-gold-dust':'ore','video-gold-dust-lump':'ore','video-ladon-carp':'fish','video-yunamei':'material','grady-goby':'fish','lir-fish':'fish','meltfish':'fish','queen-loach':'fish'};
 // Retain old spell records for their stable URLs and provenance only.
 export const isLegacySpellItem=entry=>entry.type==='item'&&['black-magic','white-magic','dark-magic'].includes(categories[(entry.category||'').toLowerCase()]);
 export function classifyItem(entry){
  let kind=entry.observedFoodKind||overrides[entry.id]||categories[(entry.category||'').toLowerCase()]||'other';
+ if(entry.category==='Class-change item')kind='promotion';
  if(kind==='plant'&&/\bmeat\b/i.test(entry.name?.en||''))kind='meat';
- if(kind==='consumable'&&/\bmanual\b/i.test(entry.name?.en||''))kind='manual';
+ if(entry.crateContents?.length||entry.category==='Crate')kind='consumable';
+ if(kind==='consumable'&&!entry.crateContents?.length&&entry.category!=='Crate'&&/\bmanual\b|\btreatise\b/i.test(entry.name?.en||''))kind='manual';
  const minor=itemKinds[kind].minor,major=itemMinors[minor].major;
  const positive=value=>Number(value)>0;
  const cursed=minor==='weapons'&&((entry.facts||[]).some(f=>f.key==='curse'&&positive(f.value))||(entry.equipmentObservations||[]).some(o=>positive(o.stats?.curse)));

@@ -236,7 +236,8 @@ export const entrySlugCatalog={
   "map-phrygia-gate": "phyrgia-stronghold",
   "map-jore-pass": "djole-fort-ruins",
   "observed-driftwood-crate": "washed-up-crate",
-  "video-kokomini": "cocominj"
+  "video-kokomini": "cocominj",
+  "map-mars-s-temple": "marss-temple"
  },
  "aliases": {
   "adids-cave": "adids-cave",
@@ -473,6 +474,7 @@ export const entrySlugCatalog={
   "map-phrygia-gate": "map-phrygia-gate",
   "map-jore-pass": "map-jore-pass",
   "observed-driftwood-crate": "observed-driftwood-crate",
-  "video-kokomini": "video-kokomini"
+  "video-kokomini": "video-kokomini",
+  "map-mars-s-temple": "map-mars-s-temple"
  }
 };

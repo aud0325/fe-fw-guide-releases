@@ -44,7 +44,7 @@ export function acquisitionLevel(row,id){
 export function characterMatrix(rows,id){
  const preferred=specialties(id),nonPreferred=nonSpecialties(id),learned=rows.filter(r=>r.relations.some(x=>x.type==='character'&&x.id===id));
  const matrix=proficiencyOrder.map(proficiency=>({id:proficiency,preferred:preferred.includes(proficiency),nonPreferred:nonPreferred.includes(proficiency),cells:Object.fromEntries(learningRanks.map(rank=>[rank,[]]))}));
- const initial=[],unranked=[];
+ const initial=[],unranked=[],exclusive=[];
  for(const row of learned){
   const routes=row.relations.filter(x=>x.type==='character'&&x.id===id).flatMap(x=>x.routes||[x]);
   let placed=false;
@@ -55,10 +55,11 @@ export function characterMatrix(rows,id){
     placed=true;
    }
   }
+  if(routes.some(r=>r.method==='quest-reward'))exclusive.push(row);
   if(routes.some(r=>r.method==='initial-possession'))initial.push(row);
-  if(!placed&&!initial.includes(row))unranked.push(row);
+  if(!placed&&!initial.includes(row)&&!exclusive.includes(row))unranked.push(row);
  }
- return {lines:matrix.filter(x=>Object.values(x.cells).some(c=>c.length)),initial,unranked};
+ return {lines:matrix.filter(x=>Object.values(x.cells).some(c=>c.length)),initial,unranked,exclusive};
 }
 
 export function catalogEntryHref(entity,lang='ko'){

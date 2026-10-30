@@ -1,5 +1,9 @@
 // UI messages. Keep keys stable when editing translations.
 export default {
+ "catalog.unknown-acquisition": {"ko":"획득처 미확인","en":"Acquisition source unknown"},
+ "catalog.unknown-food": {"ko":"선호 먹이 미확인","en":"Food preference unknown"},
+ "catalog.unknown-recruitment": {"ko":"영입 조건 미확인","en":"Recruitment requirements unknown"},
+ "catalog.unknown-field": {"ko":"{field} 미확인","en":"{field} unknown"},
  "catalog.coverage-and-remaining-gaps": {
   "ko": "수록 범위와 미확인 정보",
   "en": "Coverage and remaining gaps"
@@ -70,7 +74,7 @@ export default {
  },
  "catalog.reported-acquisition": {
   "ko": "획득 방법",
-  "en": "Reported acquisition"
+  "en": "Acquisition"
  },
  "catalog.these-are-unverified-secondary-reports-an-absent-route-or": {
   "ko": "보조 자료의 획득 정보로, 게임 내 미검증입니다. 루트·장이 없는 항목은 공통 획득처를 뜻하지 않습니다.",

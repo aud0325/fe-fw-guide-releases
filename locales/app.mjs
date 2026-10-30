@@ -350,9 +350,9 @@ export default {
   "ko": "다른 이름이나 영문 이름으로 검색하거나 필터를 초기화해 보세요.",
   "en": "Try another name, English or Korean, or reset the filters."
  },
- "app.show-36-more": {
-  "ko": "36개 더 보기",
-  "en": "Show 36 more"
+ "app.show-more": {
+  "ko": "{count}개 더 보기",
+  "en": "Show {count} more"
  },
  "app.image-unavailable-please-visit-the-source-link": {
   "ko": "이미지를 불러올 수 없습니다. 출처 링크를 확인하세요.",

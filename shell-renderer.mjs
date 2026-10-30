@@ -15,7 +15,7 @@ export function navigationHtml(state,lang,base,entries,sources,expanded=new Map(
 }
 export function shellFilters(state,entries){
  const controls=filterContext(state,entries);
- const route=controls.route&&(Boolean(state.id)||state.type!=='paralogue');
+ const route=false;
  return {route,tips:controls.tips,visible:route||controls.tips};
 }
 export function hydrateContent(element,key,html){

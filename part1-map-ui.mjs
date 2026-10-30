@@ -1,3 +1,6 @@
+import {visibleMountRecords,mountCaptureAnchor,groupedCaptureRecords} from './mount-acquisition-ui.mjs';
+import {coveredGatheringRecord} from './gathering-model.mjs';
+import {gatheringConditionDetails} from './gathering-ui.mjs';
 import {mapProvinces,mapMeta,mapKinds,gatheringTypes,mapMarkerKind,filterMapNodes,mapPointForEntry,mapNodes} from './part1-map.mjs';
 import {mapTiles} from './part1-map-assets.mjs';
 import {mapIcons as baseMapIcons} from './part1-map-icons.generated.mjs';
@@ -8,7 +11,8 @@ const mapIcons={...baseMapIcons,...routeMapIcons};
 import {escapeHtml as esc} from './core.mjs';
 import {pagePath,stateQuery,defaultState} from './routing.mjs';
 import {informationHint} from './presentation.mjs';
-import {acquisitionPlaces} from './acquisition-map.mjs';
+import {acquisitionPlaces,uncoveredAcquisitionRecords} from './acquisition-map.mjs';
+import {tradeMaterials} from './item-economy-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {defaultHiddenMapKinds} from './map-visibility.mjs';
 export const mapName=(n,t)=>n.ko==='???'?t('map.unknown-name'):t(n.ko,n.en||n.ko);
@@ -28,25 +32,34 @@ function mapRoute(state,lang,base,changes){const next={...state,id:null,type:'ma
 function recordConditions(r,{t,routes}){
  const route=r.observedRoute||r.route;
  const routeName=routes.find(row=>row[0]===route);
- const routeText=routeName?t(routeName[1],routeName[2]):route&&typeof route==='object'?t(route.ko,route.en):route||'';
+ const routeText=routeName?t(routeName[1],routeName[2]):route&&typeof route==='object'?t(route.ko,route.en):route||(r.routeIds?.length&&r.routeIds.length!==routes.length?r.routeIds.map(id=>routes.find(r=>r[0]===id)).filter(Boolean).map(r=>t(r[1],r[2])).join(' · '):'');
  const part=r.part?t('map.part-record',{part:r.part}):'';
- const values=[part,routeText,r.gameDate?t('map.record-date',{date:r.gameDate}):'',r.chapter!=null?t('map.chapter',{chapter:r.chapter}):''];
+ const values=[part,routeText,r.gameDate?t('map.record-date',{date:r.gameDate}):'',r.chapter!=null&&r.fromChapter==null?t(r.supplyRecord||r.merchantVisit?'supply.chapter':'map.chapter',{chapter:r.chapter}):''];
  
+ if(r.merchantName)values.push(t(r.merchantName.ko,r.merchantName.en));
+ if(r.supplyRecord&&r.stock!=null&&r.fromChapter==null)values.push(t('economy.stock',{stock:r.stock==='unlimited'?t('economy.unlimited'):r.stock}));
+ if(r.stockUpdates)values.push(t('supply.stock-updates'));
  if(r.condition)values.push(typeof r.condition==='object'?t(r.condition.ko,r.condition.en):r.condition);
+ if(r.fromChapter!=null)values.push(t('economy.from-chapter',{chapter:r.fromChapter}));
+ if(r.fromChapter!=null&&r.stock!=null)values.push(t('economy.stock',{stock:r.stock==='unlimited'?t('economy.unlimited'):r.stock}));
+ if((r.containerId||r.dungeonChest||r.supplyRecord)&&r.upgrade)values.push('+'+r.upgrade);
+ if(r.dungeonChest&&r.chestCount>1)values.push(t('dungeon.multiple-chests',{count:r.chestCount}));
  return values.filter(Boolean).join(' · ');
 }
 function recordLine(r,ctx,item){
+ if(r.gatheringScopes)return gatheringConditionDetails(r.gatheringScopes,ctx);
+ if(r.mountSource==='stable'){
+  const link=id=>{const target=ctx.entries.find(e=>e.id===id);return `<a href="${esc(ctx.href(id))}">${esc(ctx.name(target))}</a>`;};
+  return esc([ctx.tx(r.method),recordConditions({...r,condition:null},ctx)].filter(Boolean).join(' · '))+' · '+ctx.t('mount.stable-condition',{mount:link(r.requiredMountId),character:link(r.requiredCharacterId)});
+ }
  const {t}=ctx;
- const method=r.label?ctx.tx(r.label):r.method==='gathering'?t('map.gathering-method'):r.method==='dungeon'?t('map.dungeon-record'):typeof r.method==='object'?ctx.tx(r.method):r.method&&r.method!=='acquisition'?ctx.text(r.method):t('map.acquisition');
+ const method=r.weaponNote&&r.where&&typeof r.method==='object'&&ctx.tx(r.where)===ctx.tx(r.method)?'':r.label?ctx.tx(r.label):r.method==='gathering'?t('map.gathering-method'):r.method==='dungeon'?t('map.dungeon-record'):typeof r.method==='object'?ctx.tx(r.method):r.method&&r.method!=='acquisition'?ctx.text(r.method):t('map.acquisition');
  const text=renderEntityText([method,recordConditions(r,ctx)].filter(Boolean).join(' · '),item,{entries:ctx.entries,lang:ctx.lang,href:ctx.href,format:ctx.text});
- const materials=(r.materials||[]).map(({itemId,quantity})=>{
-  const material=ctx.entries.find(e=>e.id===itemId);
-  return material?`<a href="${esc(ctx.href(itemId))}">${esc(ctx.name(material))}</a> ×${esc(quantity)}`:'';
- }).filter(Boolean);
- return text+(materials.length?' · '+t('item.trade-materials')+': '+materials.join(' + '):'');
+ const materials=tradeMaterials(r.materials||[],ctx);
+ return text+(materials?' · '+t('item.trade-materials')+': '+materials:'')+(r.materialsComplete===false?' · '+t('forge.unknown-materials'):'');
 }
 const caiDetailsFor=(node,entries)=>entries.find(e=>e.id===node.entryId)?.caiPlaceDetails;
-function caiPlaceContent(node,ctx,heading){
+function caiPlaceContent(node,ctx,heading,showMounts=true){
  const {t,name,href,entries}=ctx,cai=caiDetailsFor(node,entries);
  if(!cai)return '';
  const itemLink=id=>{
@@ -54,12 +67,12 @@ function caiPlaceContent(node,ctx,heading){
   return `<li><a href="${href(item.id)}">${esc(name(item))}</a></li>`;
  };
  const farming=cai.farming?`<p>${t('map.cai-farming')}</p>`:'';
- const animals=cai.mounts?.length?`<h${heading} class="place-content-heading">${t('map.cai-animals')}</h${heading}><ul class="place-content-list">${cai.mounts.map(m=>itemLink(m.id)).join('')}</ul>`:'';
+ const animals=showMounts&&cai.mounts?.length?`<h${heading} class="place-content-heading">${t('map.cai-animals')}</h${heading}><ul class="place-content-list">${cai.mounts.map(m=>itemLink(m.id)).join('')}</ul>`:'';
  return farming||animals?`<div class="cai-place-content">${farming}${animals}</div>`:'';
 }
-export function placeDetails(node,ctx,{description=true,heading=4,variant='all'}={}){
+export function placeDetails(node,ctx,{description=true,heading=4,variant='all',showResources=true,showMounts=true}={}){
  const {t,tx,href,name,entries}=ctx,d=node.details||{};
- const list=(rows,key)=>rows?.length?`<h${heading} class="place-content-heading">${t(key)}</h${heading}><ul class="place-content-list">${rows.map(row=>{
+ const list=(rows,key,show=showResources)=>show&&rows?.length?`<h${heading} class="place-content-heading">${t(key)}</h${heading}><ul class="place-content-list">${rows.map(row=>{
   const item=entries.find(e=>e.id===row.itemId);
   const label=item?(t.locale==='en'?name(item):row.ko):tx({ko:row.ko,en:row.en||row.ko});
   return `<li>${item?`<a href="${href(item.id)}">${esc(label)}</a>`:`<span${t.locale==='en'&&/[가-힣]/.test(label)?' lang="ko"':''}>${esc(label)}</span>`}</li>`;
@@ -69,13 +82,13 @@ export function placeDetails(node,ctx,{description=true,heading=4,variant='all'}
   const target=mapNodes.find(n=>n.id===id);
   return `<li><a href="${href(target.entryId)}"${t.locale==='en'&&/[가-힣]/.test(mapName(target,t))?' lang="ko"':''}>${esc(mapName(target,t))}</a></li>`;
  }).join('')}${d.unknownDestinations?`<li>${t('map.hidden-destinations',{count:d.unknownDestinations})}</li>`:''}</ul>`:'';
- return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${variant==='cai'&&caiChangedPlace(node.id)?`${caiPlaceContent(node,ctx,heading)}<details class="part1-linked-records"><summary>${t('map.other-route-materials')}</summary>${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}</details>`:`${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${caiPlaceContent(node,ctx,heading)}`}${destinations}${d.previousReports?.length?`<details class="part1-linked-records"><summary>${t('map.previous-report')}</summary>${d.previousReports.map(r=>`<p>${esc(recordConditions(r,ctx))}</p>${list(r.rows,r.key==='loot'?'map.loot':'map.materials')}`).join('')}</details>`:''}`;
+ return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${variant==='cai'&&caiChangedPlace(node.id)?`${caiPlaceContent(node,ctx,heading,showMounts)}<details class="part1-linked-records"><summary>${t('map.other-route-materials')}</summary>${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}</details>`:`${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${caiPlaceContent(node,ctx,heading,showMounts)}`}${destinations}${d.previousReports?.length?`<details class="part1-linked-records"><summary>${t('map.previous-report')}</summary>${d.previousReports.map(r=>`<p>${esc(recordConditions(r,ctx))}</p>${list(r.rows,r.key==='loot'?'map.loot':'map.materials',true)}`).join('')}</details>`:''}`;
 }
 function placeMetadata(node,ctx,variant='all',{showAccess=true}={}){
  const {t,tx}=ctx,access=showAccess?node.details?.access:null;
  const tag=access&&access.kind!=='route'?informationHint(tx(access.note),t('map.sea-area-help'),t('map.sea-area'),'sea-access-tag'):'';
  const cai=caiDetailsFor(node,ctx.entries),routeTags=[cai?.farming?t('map.cai-farming-tag'):'',cai?.mounts?.length?t('map.cai-animal-tag'):''].filter(Boolean);
- return `<p class="place-metadata"><span>${esc([provinceName(node.province,t),placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].join(' · '))}</span>${tag}</p>${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
+ return `<p class="place-metadata"><span>${esc([mapProvinces.some(p=>p.id===node.province)?provinceName(node.province,t):'',placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].filter(Boolean).join(' · '))}</span>${tag}</p>${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
 }
 function selectedDetails(node,ctx,variant='all'){
  const {t,href}=ctx;
@@ -124,25 +137,38 @@ function itemAcquisitionLine(record,place,ctx,item){
  if(['gathering','dungeon'].includes(record.method)&&!record.route&&record.chapter==null&&!record.condition){
   return place.point?'':ctx.t(record.method==='gathering'?'map.gathering-method':'map.dungeon');
  }
- if(record.method==='acquisition'&&['Found at','Acquisition location','Reported acquisition'].includes(record.label?.en))return '';
+ if(record.method==='acquisition'&&['Found at','Acquisition location','Reported acquisition','Purchase location','Trade location'].includes(record.label?.en))return '';
  return recordLine({...record,part:record.observedRoute||record.gameDate?null:record.part,observedRoute:null,gameDate:null},ctx,item);
 }
 function placeRows(places,entry,ctx){
  const {t,lang,base,href,name,entries,tx}=ctx;
  return `<ol class="entry-acquisition-list">${places.map((place,i)=>{
-  const variant=place.records.some(r=>r.sourceId==='administrator-cai-observations')&&mapVariantNodes('cai').some(n=>n.id===place.point?.id)?'cai':'all';
+  const variant=place.records.some(r=>r.sourceId==='administrator-cai-observations'||r.mountSource==='scoped-location'&&r.part===1&&r.route==='cai')&&mapVariantNodes('cai').some(n=>n.id===place.point?.id)?'cai':'all';
   const target=entries.find(e=>e.id===place.id),title=place.point?mapName(place.point,t):target?name(target):tx(place.where);
-  const lines=[...new Set(place.records.map(r=>entry.type==='item'||r.sourceId==='administrator-cai-observations'?itemAcquisitionLine(r,place,ctx,entry):recordLine(r,ctx,entry)).filter(Boolean))];
+  const region=target?.mapProvince?tx(target.mapProvince):[...new Set(place.records.map(r=>r.region?ctx.text(r.region):'').filter(Boolean))].join(' · ');
+  const gatheringScopes=place.records.flatMap(r=>r.gatheringScopes||[]),displayRecords=groupedCaptureRecords(place.records.filter(r=>!coveredGatheringRecord(r,gatheringScopes)));
+  const lines=[...new Set(displayRecords.map(r=>entry.type==='item'||r.sourceId==='administrator-cai-observations'?itemAcquisitionLine(r,place,ctx,entry):recordLine(r,ctx,entry)).filter(Boolean))];
   const shownLines=lines.filter(line=>line.includes(' · ')||!lines.some(other=>other!==line&&other.startsWith(line+' · '))).map(line=>`<small>${line}</small>`);
+  const supply=place.records.find(r=>r.supplyRecord),trade=place.records.some(r=>r.materials?.length)&&target?.locationSupplies?.shops.some(r=>r.itemId===entry.id),section=supply?(supply.supplyRecord==='gathering'?'gathering':'shop'):trade?'shop':null;
+  const promotion=place.records.some(r=>r.promotionItem)&&target?.promotionItems?.some(r=>r.itemId===entry.id);
+  const capture=place.records.find(r=>r.mountSource==='scoped-location');
+  const targetHref=target&&capture?pagePath({id:target.id},lang,base)+'#'+mountCaptureAnchor(entry.id,capture.part):target&&promotion?pagePath({id:target.id},lang,base)+'#section-promotion-items':target&&section?pagePath({id:target.id},lang,base)+'#section-'+section+'-supplies':target?href(target.id):'';
   const showAccess=!place.records.every(r=>r.part&&r.part!==1);
-  return `<li><div class="entry-acquisition-heading"><span class="entry-place-number" aria-hidden="true">${i+1}</span><h3>${target?`<a href="${href(target.id)}">${esc(title)}</a>`:esc(title)}</h3></div>${place.point?`${placeMetadata(place.point,ctx,variant,{showAccess})}<a class="entry-map-link" href="${esc(mapHref(place.point.id,entry.type==='item'?'':entry.id,lang,base,variant))}">${t('map.open')}</a>`:place.context==='method'?'':`<p class="entry-unmapped">${esc([...new Set(place.records.map(r=>r.region?ctx.text(r.region):'').filter(Boolean))].join(' · '))}${place.records.some(r=>r.region)?' · ':''}${t('map.map-unconfirmed')}</p>`}${shownLines.join('')}</li>`;
+  return `<li><div class="entry-acquisition-heading"><span class="entry-place-number" aria-hidden="true">${i+1}</span><h3>${target?`<a href="${esc(targetHref)}">${esc(title)}</a>`:esc(title)}</h3></div>${place.point?`${placeMetadata(place.point,ctx,variant,{showAccess})}<a class="entry-map-link" href="${esc(mapHref(place.point.id,entry.type==='item'?'':entry.id,lang,base,variant))}">${t('map.open')}</a>`:place.context==='method'||!region?'':`<p class="entry-unmapped">${esc(region)}</p>`}${shownLines.join('')}</li>`;
  }).join('')}</ol>`;
 }
 function mountPlaces(entry,ctx){
  const {t,href,name,entries}=ctx;
  const companion=(entry.links||[]).find(l=>l.label?.en==='Recruited with'&&entries.some(e=>e.id===l.to&&e.type==='character'));
  if(companion){const character=entries.find(e=>e.id===companion.to);return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.recruited-mount')}</h2><p>${t('map.recruited-mount-help')}</p><a class="entry-map-link" href="${href(character.id)}">${esc(name(character))}</a></section>`;}
- const places=acquisitionPlaces(entry,entries),mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method');
+ const places=acquisitionPlaces(entry,entries).map(place=>({...place,records:visibleMountRecords(place.records,entry)}));
+ if(entry.acquisition?.some(r=>r.mountSource)){
+  const scoped=part=>places.map(p=>({...p,records:p.records.filter(r=>part===3?r.part===3:r.part!==3)})).filter(p=>p.records.length);
+  const group=rows=>{const mapped=rows.filter(p=>p.point),other=rows.filter(p=>!p.point);return (mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:mapped.every(p=>p.records.every(r=>(r.route||r.observedRoute)==='cai'&&r.part===1))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:'')+(other.length?placeRows(other,entry,ctx):'');};
+  const current=group(scoped(1)),later=group(scoped(3));
+  return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${current}${later?`<details class="location-supply-later" id="mount-acquisition-part-3"><summary>${t('mount.acquisition.later')}</summary>${later}</details>`:''}${entry.acquisition.some(r=>r.mountSource==='scoped-location')?`<a class="entry-map-link" href="${href('game8-capture')}">${t('map.capture-guide')}</a>`:''}</section>`;
+ }
+ const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method');
  if(!places.length)return '';
  return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}<a class="entry-map-link" href="${href('game8-capture')}">${t('map.capture-guide')}</a></section>`;
 }
@@ -151,16 +177,17 @@ export function entryMapLinks(entry,ctx){
  if(entry.type==='location'){
   const point=mapPointForEntry(entry.id);
   if(!point){
-   if(!entry.videoGathering?.names?.length)return '';
+   const province=entry.mapProvince?`<p class="entry-place-region">${esc(ctx.tx(entry.mapProvince))}</p>`:'';
+   if(!entry.videoGathering?.names?.length)return province;
    const materials=entry.videoGathering.names.map(ko=>({ko,itemId:entries.find(e=>e.type==='item'&&(e.name.ko.replace(/\([^)]*\)$/,'').trim()===ko||e.aliases?.includes(ko)))?.id}));
    for(let i=0;i<(entry.videoGathering.unknownSlots||0);i++)materials.push({ko:'???'});
-   return `<section class="entry-location-content">${placeDetails({details:{materials}},ctx,{description:false,heading:2})}</section>`;
+   return province+`<section class="entry-location-content">${placeDetails({details:{materials}},ctx,{description:false,heading:2})}</section>`;
   }
-  return `<section class="entry-acquisition entry-map-location" id="entry-acquisition"><h2>${t('map.place-map')}</h2><div class="entry-location-layout">${inlineMap([point],entry,ctx)}<div>${placeMetadata(point,ctx)}<div class="entry-map-actions"><a class="entry-map-link" href="${esc(mapHref(point.id,'',lang,base))}">${t('map.open')}</a>${entry.caiPlaceDetails?`<a class="entry-map-link" href="${esc(mapHref(point.id,'',lang,base,'cai'))}">${t('map.open-cai')}</a>`:''}</div>${placeDetails(point,ctx,{description:false,heading:3})}</div></div></section>`;
+  return `<section class="entry-acquisition entry-map-location" id="entry-acquisition"><h2>${t('map.place-map')}</h2><div class="entry-location-layout">${inlineMap([point],entry,ctx)}<div>${placeMetadata(point,ctx)}<div class="entry-map-actions"><a class="entry-map-link" href="${esc(mapHref(point.id,'',lang,base))}">${t('map.open')}</a>${entry.caiPlaceDetails?`<a class="entry-map-link" href="${esc(mapHref(point.id,'',lang,base,'cai'))}">${t('map.open-cai')}</a>`:''}</div>${placeDetails(point,ctx,{description:false,heading:3,showResources:!entry.locationSupplies?.gathering.length,showMounts:!entry.mountCaptures?.length})}</div></div></section>`;
  }
  if(entry.type==='mount')return mountPlaces(entry,ctx);
  if(entry.type!=='item')return '';
- const places=acquisitionPlaces(entry,entries);if(!places.length)return '';
- const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method');
- return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}</section>`;
+ const places=acquisitionPlaces(entry,entries).map(place=>({...place,records:uncoveredAcquisitionRecords(entry,place.records)})).filter(place=>place.records.length);if(!places.length)return '';
+ const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method'),openUnmapped=unmapped.some(p=>p.records.some(r=>r.gatheringScopes?.some(s=>s.firstGatherGuaranteed)));
+ return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"${openUnmapped?' open':''}><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}</section>`;
 }

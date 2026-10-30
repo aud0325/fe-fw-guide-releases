@@ -14,7 +14,7 @@ export default {
  'feedback.label':{ko:'피드백/개선요청 (새 탭에서 열기)',en:'Feedback / Suggestions (opens in a new tab)'},
  'character.tutorial-report':{ko:'자동 합류 (튜토리얼)',en:'Automatic join (tutorial)'},
  'character.tutorial-explanation':{ko:'영입 조건 수치가 있지만 튜토리얼 과정에서 합류하므로 자동 합류로 분류합니다. 기록된 수치는 별도 스카우트를 준비해야 한다는 뜻이 아닙니다. 관리자 설명을 반영했으며 원래 출처의 수치는 기록으로 보존합니다.',en:'Recruitment thresholds exist, but this character joins through the tutorial and is classified as an automatic join. The recorded thresholds do not mean you need to prepare a separate scout. This reflects the administrator’s clarification; the original source values are retained.'},
- 'item.quantity':{ko:'{count}개',en:'{count} item(s)'},
+ 'item.quantity':{ko:'{count}개',en:'×{count}'},
  'item.magic-summary':{ko:'{kind} 계열 마법입니다.{requirements}',en:'A spell in the {kind} category.{requirements}'},
  'item.use-undocumented':{ko:'구체적인 용도와 효과는 아직 확인되지 않았습니다.',en:'Its specific use and effects have not yet been established.'},
  'browse.view-all':{ko:'전체 보기',en:'View all'},

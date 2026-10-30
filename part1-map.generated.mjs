@@ -128,13 +128,24 @@ export const mapNodes=[
  {
   "id": "collection-sunrise-pass",
   "ko": "해맞이 고개",
-  "en": null,
+  "en": "Sunwatch Pass",
   "province": "elektra",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-sunrise-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "해맞이 고개"
+   "해맞이 고개",
+   "Sunwatch Pass"
   ],
   "u": 0.5180914512922465,
   "v": 0.5192105263157895,
@@ -442,13 +453,24 @@ export const mapNodes=[
  {
   "id": "collection-aegina-mountain",
   "ko": "아이기나 산",
-  "en": null,
+  "en": "Mount Aegina",
   "province": "idyia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-aegina-mountain",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아이기나 산"
+   "아이기나 산",
+   "Mount Aegina"
   ],
   "u": 0.7184890656063618,
   "v": 0.3444736842105263,
@@ -1346,13 +1368,24 @@ export const mapNodes=[
  {
   "id": "collection-sonai-pass",
   "ko": "소나이 고개",
-  "en": null,
+  "en": "Sonai Pass",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-sonai-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "소나이 고개"
+   "소나이 고개",
+   "Sonai Pass"
   ],
   "u": 0.6023856858846919,
   "v": 0.30868421052631584,
@@ -1379,13 +1412,24 @@ export const mapNodes=[
  {
   "id": "collection-whispering-rock",
   "ko": "속삭임 바위",
-  "en": null,
+  "en": "Whispering Rock",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-whispering-rock",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "속삭임 바위"
+   "속삭임 바위",
+   "Whispering Rock"
   ],
   "u": 0.5801192842942345,
   "v": 0.1655263157894737,
@@ -1481,13 +1525,24 @@ export const mapNodes=[
  {
   "id": "collection-brigadier-pass",
   "ko": "브리거디어 고개",
-  "en": null,
+  "en": "Brigadier Pass",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-brigadier-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "브리거디어 고개"
+   "브리거디어 고개",
+   "Brigadier Pass"
   ],
   "u": 0.66441351888668,
   "v": 0.27710526315789474,
@@ -1572,13 +1627,24 @@ export const mapNodes=[
  {
   "id": "map-desert-entrance",
   "ko": "사막 입구",
-  "en": null,
+  "en": "Desert Entrance",
   "province": "nysiades",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "map-desert-entrance",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "사막 입구"
+   "사막 입구",
+   "Desert Entrance"
   ],
   "u": 0.3749502982107356,
   "v": 0.3718421052631579,
@@ -2494,13 +2560,24 @@ export const mapNodes=[
  {
   "id": "collection-insect-hole",
   "ko": "벌레 굴",
-  "en": null,
+  "en": "Bugs' Burrow",
   "province": "castalia",
   "kind": "gathering",
   "gatheringType": "ore",
   "entryId": "collection-insect-hole",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "벌레 굴"
+   "벌레 굴",
+   "Bugs' Burrow"
   ],
   "u": 0.610337972166998,
   "v": 0.2518421052631579,
@@ -3183,13 +3260,24 @@ export const mapNodes=[
  {
   "id": "collection-megaira-lighthouse",
   "ko": "메가에라의 등대",
-  "en": null,
+  "en": "Megaira Lighthouse",
   "province": "saveilon",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "collection-megaira-lighthouse",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "메가에라의 등대"
+   "메가에라의 등대",
+   "Megaira Lighthouse"
   ],
   "u": 0.4624254473161034,
   "v": 0.8371052631578948,
@@ -3328,13 +3416,24 @@ export const mapNodes=[
  {
   "id": "map-ada-fort-ruins",
   "ko": "아다 요새 옛터",
-  "en": null,
+  "en": "Ada Fort Ruins",
   "province": "lambus",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-ada-fort-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "아다 요새 옛터"
+   "아다 요새 옛터",
+   "Ada Fort Ruins"
   ],
   "u": 0.2111332007952286,
   "v": 0.43500000000000005,
@@ -3465,13 +3564,24 @@ export const mapNodes=[
  {
   "id": "map-la-mancha-fort-ruins",
   "ko": "라 만차 요새 옛터",
-  "en": null,
+  "en": "La Mancha Fort Ruins",
   "province": "braxithea",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-la-mancha-fort-ruins",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "라 만차 요새 옛터"
+   "라 만차 요새 옛터",
+   "La Mancha Fort Ruins"
   ],
   "u": 0.26520874751491047,
   "v": 0.6939473684210526,
@@ -3750,13 +3860,24 @@ export const mapNodes=[
  {
   "id": "map-unmanned-storehouse",
   "ko": "무인 창고",
-  "en": null,
+  "en": "Unmanned Storehouse",
   "province": "thalia",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-unmanned-storehouse",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "무인 창고"
+   "무인 창고",
+   "Unmanned Storehouse"
   ],
   "u": 0.34950298210735586,
   "v": 0.28131578947368424,
@@ -4213,13 +4334,24 @@ export const mapNodes=[
  {
   "id": "map-dragon-s-eye-tower",
   "ko": "용의 눈의 탑",
-  "en": null,
+  "en": "Dragon's Eye Tower",
   "province": "solomon",
   "kind": "gathering",
   "gatheringType": "loot",
   "entryId": "map-dragon-s-eye-tower",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "용의 눈의 탑"
+   "용의 눈의 탑",
+   "Dragon's Eye Tower"
   ],
   "u": 0.9634194831013917,
   "v": 0.7444736842105263,
@@ -8497,12 +8629,23 @@ export const mapNodes=[
  {
   "id": "map-mars-s-temple",
   "ko": "마스 신전 본전",
-  "en": null,
+  "en": "Mars's Temple",
   "province": "basithea",
   "kind": "temple",
   "entryId": "map-mars-s-temple",
+  "englishNameEvidence": {
+   "sourceId": "community-place-names-20261030",
+   "checked": "2026-10-30",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit?gid=1479318112#gid=1479318112",
+   "sourceTitle": {
+    "ko": "Community sheet · Place names",
+    "en": "Community sheet · Place names"
+   }
+  },
   "aliases": [
-   "마스 신전 본전"
+   "마스 신전 본전",
+   "Mars's Temple"
   ],
   "u": 0.07117296222664019,
   "v": 0.48763157894736847,
@@ -9071,13 +9214,24 @@ export const mapNodes=[
  {
   "id": "collection-enkeladus-bridge",
   "ko": "엔켈라두스 다리",
-  "en": null,
+  "en": "Enceladus Bridge",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "fish",
   "entryId": "collection-enkeladus-bridge",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "엔켈라두스 다리"
+   "엔켈라두스 다리",
+   "Enceladus Bridge"
   ],
   "u": 0.4974155069582506,
   "v": 0.40342105263157896,
@@ -10835,13 +10989,24 @@ export const mapNodes=[
  {
   "id": "collection-elisa-pass",
   "ko": "엘리사 고개",
-  "en": null,
+  "en": "Elissa Pass",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-elisa-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "엘리사 고개"
+   "엘리사 고개",
+   "Elissa Pass"
   ],
   "u": 0.5594433399602385,
   "v": 0.40342105263157896,
@@ -10912,14 +11077,27 @@ export const mapNodes=[
  {
   "id": "video-starwatch-mount-pass",
   "ko": "볕받이 고개",
-  "en": null,
+  "en": "Sunlit Pass",
   "province": "amalthea",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "video-starwatch-mount-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
    "별받이 고개",
-   "볕받이 고개"
+   "볕받이 고개",
+   "陽だまり峠",
+   "양지 고개",
+   "Sunlit Pass"
   ],
   "u": 0.4592445328031809,
   "v": 0.3571052631578947,
@@ -11180,13 +11358,24 @@ export const mapNodes=[
  {
   "id": "collection-dada-plain",
   "ko": "다다 평원",
-  "en": null,
+  "en": "Dada Plains",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-dada-plain",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "다다 평원"
+   "다다 평원",
+   "Dada Plains"
   ],
   "u": 0.45129224652087474,
   "v": 0.5255263157894736,
@@ -11255,13 +11444,24 @@ export const mapNodes=[
  {
   "id": "collection-stargazing-pass",
   "ko": "별맞이 고개",
-  "en": null,
+  "en": "Starwatch Pass",
   "province": "melias",
   "kind": "gathering",
   "gatheringType": "plant",
   "entryId": "collection-stargazing-pass",
+  "englishNameEvidence": {
+   "sourceId": "english-acquisition-places-20261029",
+   "checked": "2026-10-29",
+   "method": "reviewed-english-name-correspondence",
+   "sourceUrl": "https://yuphastemple.com/locations/",
+   "sourceTitle": {
+    "ko": "Yu Phas’ Temple · Locations",
+    "en": "Yu Phas’ Temple · Locations"
+   }
+  },
   "aliases": [
-   "별맞이 고개"
+   "별맞이 고개",
+   "Starwatch Pass"
   ],
   "u": 0.45129224652087474,
   "v": 0.6539473684210526,

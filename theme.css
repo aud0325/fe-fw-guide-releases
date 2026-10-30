@@ -763,3 +763,8 @@ html[lang="en"] .character-profile .proficiency-overview>div{grid-template-colum
 /* Profile labels share one hierarchy; values remain stronger than their labels. */
 .character-profile .profile-facts dt,.character-profile .proficiency-overview dt{font-family:inherit;font-size:12px;font-weight:500;line-height:1.5;color:var(--muted);letter-spacing:0}
 .character-profile .profile-facts dd{font-weight:600;color:var(--text);line-height:1.5}
+
+.icon-battalion{--icon:url("./assets/icons/battalion.svg")}
+.icon-gambit{--icon:url("./assets/icons/gambit.svg")}
+
+.recruitment-condition-line{display:block;line-height:1.65}.recruitment-condition-line+.recruitment-condition-line{margin-top:3px}

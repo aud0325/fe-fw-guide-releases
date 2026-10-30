@@ -1,4 +1,5 @@
 // Source-discovered images. See docs/IMAGES.md.
+import {yuphasImages} from './yuphas-images.generated.mjs';
 export const media = {
   "part1-map-icon-clearing": {
     "src": "./assets/part1-map/icons/clearing.png",
@@ -1171,19 +1172,6 @@ export const media = {
     "width": 123,
     "height": 123
   },
-  "martila": {
-    "src": "./assets/portraits/martila.webp",
-    "thumbnailSrc": "./assets/portraits/martila-list.webp",
-    "originalUrl": "https://cdn.fireemblemwiki.org/7/70/FEFW_Nintendo_Today_Maria_profile.webp",
-    "sourceUrl": "https://fireemblemwiki.org/wiki/File:FEFW_Nintendo_Today_Maria_profile.webp",
-    "credit": "Nintendo / INTELLIGENT SYSTEMS · Fire Emblem Wiki",
-    "checkedAt": "2026-09-26",
-    "rights": "Game artwork; no open redistribution licence verified.",
-    "width": 331,
-    "height": 500,
-    "originalWidth": 2875,
-    "originalHeight": 4347
-  },
   "sothis": {
     "src": "./assets/portraits/sothis.png",
     "thumbnailSrc": "./assets/portraits/sothis-list.webp",
@@ -1421,5 +1409,6 @@ export const media = {
     "height": 500,
     "originalWidth": 788,
     "originalHeight": 788
-  }
+  },
+  ...Object.fromEntries(Object.entries(yuphasImages).filter(([,image])=>image.src.startsWith('./assets/portraits/')))
 };
