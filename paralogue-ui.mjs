@@ -5,6 +5,7 @@ import {displayText} from './presentation.mjs';
 import {entries,routes} from './data.mjs';
 import {scheduleRows} from './paralogues.mjs';
 import {escapeHtml as esc} from './core.mjs';
+import {isRetiredCharacterId} from './character-visibility.mjs';
 const character=id=>entries.find(e=>e.id===id);
 const faction=(e,t)=>t(e.koreanNameEvidence?.section?.replace(/^\d+[.\d]*\s*/, '')||e.group||t('common.affiliation-unknown'),e.group||t('common.affiliation-unknown'));
 function windowsTable(e,route,t,overview=false){
@@ -12,7 +13,12 @@ function windowsTable(e,route,t,overview=false){
  if(overview&&route!=='all'&&rows.length){const v=rows[0][1];return `<dl class="paralogue-window"><div><dt>${t('paralogue.accept')}</dt><dd>${v.windows.map(([a,b])=>esc(a===b?a:`${a}–${b}`)).join('<br>')}</dd></div><div class="paralogue-deadline"><dt>${t('paralogue.finish-by')}</dt><dd><strong>${esc(v.deadline)}</strong></dd></div></dl>`;}
  return rows.length?`<table class="paralogue-dates"><thead><tr><th scope="col">${t('common.route')}</th><th scope="col">${t('paralogue.accept')}</th><th scope="col">${t('paralogue.finish-by')}</th></tr></thead><tbody>${rows.map(([id,v])=>`<tr><th scope="row">${esc(t(...routes.find(r=>r[0]===id).slice(1)))}</th><td>${v.windows.map(([a,b])=>a===b?a:`${a}–${b}`).join('<br>')}</td><td><strong>${v.deadline}</strong></td></tr>`).join('')}</tbody></table>`:`<p>${t('paralogue.unavailable-on-this-route')}</p>`;
 }
-function people(e,{t,name,href}){const s=e.schedule,owner=character(s.owner),giver=character(s.giver);return `<p class="paralogue-people"><a href="${href(owner.id)}">${esc(name(owner))}</a> · ${esc(faction(owner,t))}</p><p class="paralogue-giver">${t('paralogue.accept-from')} <a href="${href(giver.id)}">${esc(name(giver))}</a> · ${esc(displayText(s.place,t,entries))}</p>`;}
+function people(e,{t,tx,name,href}){
+ const s=e.schedule,owner=character(s.owner),giver=character(s.giver);
+ const giverLabel=esc(giver?name(giver):tx(s.giverName));
+ const giverHtml=giver&&!isRetiredCharacterId(giver.id)?`<a href="${href(giver.id)}">${giverLabel}</a>`:giverLabel;
+ return `<p class="paralogue-people"><a href="${href(owner.id)}">${esc(name(owner))}</a> · ${esc(faction(owner,t))}</p><p class="paralogue-giver">${t('paralogue.accept-from')} ${giverHtml} · ${esc(displayText(s.place,t,entries))}</p>`;
+}
 export function paralogueDetails(e,ctx){if(!e.schedule)return '';return `<section class="paralogue-detail"><h2>${ctx.t('paralogue.paralogue-schedule-part-i')}</h2>${people(e,ctx)}${windowsTable(e,ctx.route,ctx.t)}${e.schedule.note?`<p class="paralogue-note">${esc(ctx.tx(e.schedule.note))}</p>`:''}</section>`;}
 export function paralogueOverview(list,state,ctx){
  const {t,name,href,tx}=ctx;let rows=scheduleRows(list,state.route,state.order);
