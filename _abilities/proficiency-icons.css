@@ -6,9 +6,14 @@
 .proficiency-affinity{display:inline-flex;align-items:center;gap:5px}
 .proficiency-affinity .proficiency-glyph{width:24px;height:24px;flex-basis:24px}
 .proficiency-label+.rank{margin-left:5px}
-.sample-abilities .sample-rank-matrix tr>:first-child{width:116px}
-.sample-rank-matrix .proficiency-label{gap:6px}
-@media(max-width:600px){.sample-abilities .sample-rank-matrix tr>:first-child{width:102px}.proficiency-overview>div{align-items:center}.proficiency-affinity{padding:3px 6px}}
+.sample-abilities .sample-rank-matrix tr>:first-child{width:45px;padding:0;text-align:center;vertical-align:middle}
+.sample-abilities .sample-rank-matrix tr[data-affinity="preferred"]>th:first-child{background:#f7e6a3;color:#634c12}
+.sample-abilities .sample-rank-matrix tr[data-affinity="nonpreferred"]>th:first-child{background:#d9e9fa;color:#284f74}
+.sample-rank-matrix .matrix-proficiency-heading{height:44px;line-height:15px}
+.sample-rank-matrix .matrix-proficiency.information-hint{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;margin:0;padding:8px;border:0;border-radius:0;background:none;color:inherit;vertical-align:middle}
+.sample-rank-matrix .matrix-proficiency.information-hint:hover,.sample-rank-matrix .matrix-proficiency.information-hint[aria-expanded=true]{background:none}
+.sample-rank-matrix .matrix-proficiency:focus-visible{outline-offset:-3px}
+@media(max-width:600px){.proficiency-overview>div{align-items:center}.proficiency-affinity{padding:3px 6px}}
 
 /* Square game glyphs have a single source of size, unaffected by generic image rules. */
 .proficiency-glyph{display:inline-block!important;width:var(--proficiency-size,28px)!important;height:var(--proficiency-size,28px)!important;min-width:0!important;max-width:none!important;max-height:none!important;flex:0 0 var(--proficiency-size,28px)!important;aspect-ratio:1/1!important;object-fit:contain!important;padding:0!important;border:0!important;border-radius:0!important;box-sizing:border-box}.proficiency-affinity{padding:0!important;border:0!important;border-radius:0!important;background:none!important;color:inherit!important}.proficiency-affinity .proficiency-glyph{--proficiency-size:24px}

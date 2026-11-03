@@ -1,3 +1,5 @@
+import {reviewedClassAbility} from './class-ability-view.mjs';
+import {classDetails} from './class-ui.mjs';
 import {entries} from './data.mjs';
 import {entityPeekFrame,entityPeekStats} from './entity-peek-ui.mjs';
 import {abilityVariantComparison} from './_abilities/ability-variants-ui.mjs';
@@ -6,7 +8,6 @@ import {rows} from './_abilities/full-data.mjs';
 import {abilityHref} from './_abilities/sample-integration.mjs';
 import {abilityToken} from './_abilities/token-links.mjs';
 import {abilityIcon,characterIcon} from './_abilities/icon-model.mjs';
-import {classFact,certification,classSkills} from './catalog-overview-model.mjs';
 import {renderKeywordText,keywordCandidates} from './game-keywords.mjs';
 import {entryDisplayName} from './editorial-view.mjs';
 import {createTranslator} from './locales/index.mjs';
@@ -35,7 +36,7 @@ export function setupEntityLinks(doc,win,{context}){
   dialog.querySelector('button').addEventListener('click',()=>dialog.close());if(!dialog.open)dialog.showModal();dialog.querySelector('button').focus();
  }
  function peek(id,triggerLabel=''){
-  const {lang,base,t}=env(),row=rows.find(r=>r.id===combatArtBaseId(id)),entry=entries.find(e=>e.id===id);
+  const {lang,base,t}=env(),original=rows.find(r=>r.id===combatArtBaseId(id)),row=original?reviewedClassAbility(original):null,entry=entries.find(e=>e.id===id);
   const prose=value=>renderKeywordText(value,{entryId:id,lang,base});
   if(id.startsWith('keyword:')){const choices=keywordCandidates(id.slice(8));if(!choices.length)return false;show(triggerLabel||id.slice(8),`<p>${t('entity.choose-keyword')}</p>${choices.map(r=>`<div class="entity-peek-ability">${abilityToken(r,lang,{base})} <small>${t('entity.'+r.kind)}</small><p>${renderKeywordText(r.effect[lang],{entryId:r.id,lang,base})}</p></div>`).join('')}`,base+lang+'/?q='+encodeURIComponent(id.slice(8)));return true;}
   if(row){
@@ -49,9 +50,7 @@ export function setupEntityLinks(doc,win,{context}){
    show(row.name[lang],body,base.replace(/\/$/,'')+abilityHref(row,lang));return true;
   }
   if(entry?.type==='class'){
-   const mastery=classSkills(id,'class-mastery'),active=classSkills(id,'class-active'),condition=certification(entry,lang),unlock=classFact(entry,'unlock',lang);
-   const effects=list=>list.map(r=>`<div class="entity-peek-ability">${abilityToken(r,lang,{base})}<p>${renderKeywordText(r.effect[lang],{entryId:r.id,lang,base})}</p></div>`).join('');
-   show(entryDisplayName(entry,lang),`<p class="entity-peek-type">${t('entity.class')}</p>${condition?`<p>${prose(condition)}</p>`:''}${unlock?`<p>${prose(unlock)}</p>`:''}<h3>${t('overview.mastery')}</h3>${mastery.length?effects(mastery):`<p>${prose(classFact(entry,'mastery',lang)||'—')}</p>`}${active.length?`<h3>${t('overview.class-abilities')}</h3>${effects(active)}`:''}`,pagePath({id},lang,base));return true;
+   show(entryDisplayName(entry,lang),classDetails(entry,{t,base,compact:true}),pagePath({id},lang,base));return true;
   }
   return false;
  }

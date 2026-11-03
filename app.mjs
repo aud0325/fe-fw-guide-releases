@@ -6,6 +6,10 @@ import {setupEntityLinks} from './entity-links-client.mjs';
 import './_abilities/sample-interactions.mjs';
 import {abilityEntries,abilityEntry,characterAbilityTarget,legacyAbilityPath} from './_abilities/ability-navigation.mjs';
 import {bindAbilityControls} from './_abilities/ability-controls.mjs';
+import {resolveCalculatorState} from './growth-calculator-data.mjs';
+import {bindGrowthCalculator} from './growth-calculator-controls.mjs';
+let calculatorCleanup;
+import {calculatorStorageKey,parseCalculatorState,restorePrivateCalculatorName,readCalculatorDraft,writeCalculatorDraft} from './growth-calculator-state.mjs';
 import {bindGrowthControls,bindCharacterGrowthControls,revealGrowthFocus} from './growth-controls.mjs';
 import {navigationHtml,shellFilters,renderKey,hydrateContent,homeCategoriesHtml} from './shell-renderer.mjs';
 import {revealAnchor} from './anchors.mjs';
@@ -95,6 +99,16 @@ function render(){
  document.querySelector('.search-area').setAttribute('aria-label',t('app.search'));
  $('headline').textContent=brandName;$('intro-text').textContent=t('app.from-recruiting-allies-to-preparing-for-battle-find-your');
  $('search-label').textContent=t('app.search-the-archive');$('search').placeholder=t('app.search-names-items-places');$('tips-label').textContent=t('app.include-community-tips');$('reset').textContent=t('app.reset');$('filter-toggle').textContent=t('app.filters')+(state.route!=='all'?' · '+routes.find(r=>r[0]===state.route)[lang==='ko'?1:2]:'')+(!state.includeTips?t('app.no-tips'):'');
+ if(state.type==='calculator'&&!state.id&&!state.calculatorInvalid){
+  let session,migrated=false;try{session=sessionStorage;}catch{}
+  if(!state.calculator)state.calculator=readCalculatorDraft(session,state.calculatorCharacter,history.state?.calculator);
+  // Migrate the former persistent draft without changing named saved records.
+  if(!state.calculator)try{const old=parseCalculatorState(localStorage.getItem(calculatorStorageKey));if(old&&(!state.calculatorCharacter||old.characterId===state.calculatorCharacter)){state.calculator=old;migrated=true;}}catch{}
+  if(state.calculator){state.calculator=restorePrivateCalculatorName(state.calculator,history.state?.calculator);state.calculator=restorePrivateCalculatorName(state.calculator,readCalculatorDraft(session,state.calculator.characterId));}
+  state.calculator=resolveCalculatorState(state.calculator,state.calculatorCharacter);
+  if(writeCalculatorDraft(session,state.calculator)&&migrated)try{localStorage.removeItem(calculatorStorageKey);}catch{}
+  history.replaceState({...history.state,calculator:state.calculator},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);
+ }
  $('footer').innerHTML=`<a href="${basePath}${lang}/directory/">${t('app.all-documents')}</a> · <a href="${esc(pagePath(state,lang==='ko'?'en':'ko',basePath)+stateQuery(state))}">${lang==='ko'?'English':'한국어'}</a><br>`+t('app.unofficial-fan-project-not-affiliated-with-nintendo-or-intelligent');
  const page=renderPage(state,lang,visibleLimit,basePath);
  hydrateContent($('content'),renderKey(state,lang,visibleLimit,basePath),page.html);
@@ -124,6 +138,16 @@ function render(){
   history.pushState({...history.state},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);render();
   window.scrollTo(0,history.state?.scroll||0);
   $('content').querySelector('[data-character-growth-skill]')?.focus({preventScroll:true});
+ }});
+ calculatorCleanup?.();calculatorCleanup=bindGrowthCalculator($('content'),{state,t,change:(next,focus,{replace=true,render:shouldRender=true}={})=>{
+  if(!shouldRender){state.calculator=next;state.calculatorInvalid=false;history[replace?'replaceState':'pushState']({...history.state,calculator:next,scroll:scrollY,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state));$('footer').querySelector('a:last-of-type')?.setAttribute('href',pagePath(state,lang==='ko'?'en':'ko',basePath)+stateQuery(state));document.querySelector('.skip').href=location.pathname+location.search+'#main';return;}
+  const scroll=scrollY,active=document.activeElement,selection=active?.type==='search'?[active.selectionStart,active.selectionEnd]:null;
+  const disclosureKey=el=>el.dataset.calcDisclosure||'start-'+el.closest('[data-calc-build]')?.dataset.calcBuild;
+  const disclosures=new Map([...$('content').querySelectorAll('[data-calc-disclosure],.calc-start-details')].map(el=>[disclosureKey(el),el.open]));
+  remember();state.calculator=next;state.calculatorInvalid=false;
+  history[replace?'replaceState':'pushState']({scroll,limit:visibleLimit,calculator:next},'',pagePath(state,lang,basePath)+stateQuery(state));render();
+  $('content').querySelectorAll('[data-calc-disclosure],.calc-start-details').forEach((el,i)=>{el.open=disclosures.get(disclosureKey(el))??el.open;});
+  const target=focus&&$('content').querySelector(focus);target?.focus({preventScroll:true});if(selection&&target?.type==='search')target.setSelectionRange(...selection);window.scrollTo(0,scroll);
  }});
  bindGrowthControls($('content'),{state,change:(next,focus,{replace=false}={})=>{
   const active=document.activeElement,selection=active?.id==='growth-query'?[active.selectionStart,active.selectionEnd]:null;
@@ -167,12 +191,13 @@ function updateMetadata(page){
  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link=>link.href=new URL(pagePath(state,link.hreflang==='en'?'en':'ko',basePath),origin||location.origin).href);
  document.querySelector('meta[name="robots"]')?.setAttribute('content',!origin||stateQuery(state)||page.missing||isNoindexState(state,entries)?'noindex,follow':'index,follow');
 }
-function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:recruitmentDisclosureState($('content')),...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
+function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:recruitmentDisclosureState($('content')),...(state.type==='calculator'?{calculator:resolveCalculatorState(state.calculator,state.calculatorCharacter)}:{}),...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
 function parseLocation(){
  const legacy=legacyAbilityPath(location.hash);if(legacy)history.replaceState(history.state,'',basePath+legacy.slice(1));
  const route=readRoute(new URL(location.href),basePath,lang);
  if(!route){location.reload();return;}
  state=route.state;lang=route.lang;
+ if(state.type==='calculator'&&!state.calculator&&!state.calculatorInvalid)state.calculator=readCalculatorDraft(null,state.calculatorCharacter,history.state?.calculator);
  const characterTarget=state.id&&characterAbilityTarget(state.id,lang);
  if(characterTarget){history.replaceState(history.state,'',basePath+characterTarget.slice(1));return parseLocation();}
  visibleLimit=history.state?.limit||36;
@@ -206,11 +231,12 @@ document.addEventListener('click',event=>{
  event.preventDefault();remember();
  // Carry context only in explicit links (e.g. a selected scout route), not globally.
  const scope=a.dataset.scope;
- navigateTo(pagePath(route.state,route.lang,basePath)+stateQuery(route.state));
+ navigateTo(route.state.type==='calculator'?url.pathname+url.search:pagePath(route.state,route.lang,basePath)+stateQuery(route.state));
  if(scope)$('content').querySelector(`[data-scope="${CSS.escape(scope)}"]`)?.focus({preventScroll:true});
 });
 function navigateTo(href){
- remember();history.pushState({scroll:0,limit:36},'',href);parseLocation();window.scrollTo(0,0);
+ const target=readRoute(new URL(href,location.href),basePath,lang),calculator=state.type==='calculator'&&target?.state.type==='calculator'&&!target.state.calculator&&!target.state.calculatorInvalid?readCalculatorDraft(null,target.state.calculatorCharacter,state.calculator):null;
+ remember();history.pushState({scroll:0,limit:36,...(calculator?{calculator}:{})},'',href);parseLocation();window.scrollTo(0,0);
  const heading=$('entry-title')||$('content').querySelector('h1,h2');
  if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
  if(location.hash)requestAnimationFrame(()=>revealAnchor(document,location.hash));

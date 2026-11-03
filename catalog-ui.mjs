@@ -1,3 +1,5 @@
+import {classTierOrder,tierNames} from './class-tiers.mjs';
+import {classDetails} from './class-ui.mjs';
 import {sampleAbilitySections,sampleCharacters,sampleItemAbilities,sampleProfileProficiencies} from './_abilities/sample-integration.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
 import {renderEntityText} from './entity-text.mjs';
@@ -31,7 +33,7 @@ import {characterDetails,characterGuide} from './character-ui.mjs';
 import {ingredientFoodRow,mountFoodRow} from './food-ui.mjs';
 import {foodFactKeys} from './food.mjs';
 import {mountCategory,mountBonusDetails,mountSkillDetails} from './mount-ui.mjs';
-export const classTierOrder=['Unique','Beginner','Specialty','Advanced','Master','Divine'];
+export {classTierOrder} from './class-tiers.mjs';
 export const locationRegion=e=>e.mapProvince?.ko||e.region||'Unverified';
 export function locationRegions(list,t){
  const titles=new Map([['Capital',t('app.capital-dagsion')],['Southern Dagda',t('app.southern-dagda')],['Northwestern desert',t('app.northwestern-desert')],['Dagsion outskirts',t('app.dagsion-outskirts')],['Pasithea',t('app.pasithea')]]);
@@ -46,10 +48,11 @@ export function groupOptions(type){
  if(type==='location'){const ko=locationRegions(entries.filter(e=>e.type==='location'&&isDiscoverable(e)),createTranslator('ko')),en=locationRegions(entries.filter(e=>e.type==='location'&&isDiscoverable(e)),createTranslator('en'));return ko.map((g,i)=>[g.id,[g.title,en[i].title]]);}
  const categories=[...new Set(entries.filter(e=>e.type===type).map(e=>e.category).filter(Boolean))];
  const ordered=type==='class'?[...classTierOrder.filter(x=>categories.includes(x)),...categories.filter(x=>!classTierOrder.includes(x)).sort()]:categories.sort();
- return ordered.map(x=>[x,[displayText(x,createTranslator('ko'),entries),x]]);
+ return ordered.map(x=>[x,type==='class'&&tierNames[x]?tierNames[x]:[displayText(x,createTranslator('ko'),entries),x]]);
 }
 export function coveragePanel(t){const counts=['character','item','mount','class','location'].map(type=>entries.filter(e=>e.type===type).length);return `<details class="coverage"><summary>${t('catalog.coverage')} · ${entries.filter(isDiscoverable).length}</summary><p>${t('catalog.characters-items-mounts-classes-locations-quests',{characters:counts[0],items:counts[1],mounts:counts[2],classes:counts[3],locations:counts[4]})}</p></details>`;}
 export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acquisitionHtml='',base='/',growthSkill=false,forgeSelection={},profileProficiencies=sampleProfileProficiencies(e,t.locale,base),characterSkills=sampleCharacters.includes(e.id)?sampleAbilitySections(e,t.locale,base):null}){
+ if(e.type==='class')return classDetails(e,{t,base});
  const text=(x,literal,key)=>displayText(x,t,entries,literal,key);
  const table=(facts,extraRows='',head=true)=>{
   const rows=facts.map(f=>{

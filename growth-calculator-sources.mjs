@@ -1,0 +1,6 @@
+import {escapeHtml as esc} from './core.mjs';
+export function calculatorSources({t,lang}){
+ const en=lang==='en';
+ const links=[['https://docs.google.com/spreadsheets/d/1zVJni0i5ACA_MI4Z2OeG5CU7I2gyvDtNHEGdg0khBt8/edit',en?'Recruitment stats':'영입 스펙'],['https://docs.google.com/spreadsheets/d/1KUNxDxQTX-R7ARuYx324lcv7ABwJ810rmsR5_vM5Veg/edit',en?'Chapter observations':'장별 능력치 기록'],['https://docs.google.com/spreadsheets/d/15zbBzXHgxwM0mYc63nNz-VcgRVZJ0Qto1wF7u0Bbm44/edit',en?'Autolevel projections · Aggro Incarnate / Silly':'자동 성장 계산표 · Aggro Incarnate / Silly'],['https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit',en?'Community collection':'영문 커뮤니티 시트'],['https://docs.google.com/spreadsheets/d/1Yn8-kj1VhoFwGrsRlxGylatuy0KHj-BPYvLQ8FmVFUA/edit',en?'WIP data':'WIP 시트'],['https://game8.jp/fe-banshisenko/822587','Game8'],['https://gall.dcinside.com/mgallery/board/view/?id=fireemblem&no=753281',en?'Mount guide':'탈것 총정리']];
+ return `<details class="calc-details" data-calc-disclosure="sources"><summary>${t('calculator.sources')}</summary><p class="calc-help">${t('calculator.formula')}</p><ul>${links.map(([url,title])=>`<li><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a></li>`).join('')}</ul></details>`;
+}

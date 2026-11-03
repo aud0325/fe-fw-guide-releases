@@ -1,3 +1,4 @@
+import {classTierLabels} from '../class-tiers.mjs';
 // Display translations; provisional names do not establish canonical English mappings.
 export const displayTerms={
   "black horse": {"ko":"흑마","en":"Black Horse"},
@@ -319,30 +320,12 @@ export const displayTerms={
     "ko": "흑마법",
     "en": "Black Magic"
   },
-  "Unique": {
-    "ko": "기본직",
-    "en": "Base class"
-  },
-  "Beginner": {
-    "ko": "초급직",
-    "en": "Beginner class"
-  },
-  "Specialty": {
-    "ko": "중급직",
-    "en": "Intermediate class"
-  },
-  "Advanced": {
-    "ko": "상급직",
-    "en": "Advanced class"
-  },
-  "Master": {
-    "ko": "최상급직",
-    "en": "Master class"
-  },
-  "Divine": {
-    "ko": "신장직",
-    "en": "Divine class"
-  },
+  "Unique": classTierLabels.Unique,
+  "Beginner": classTierLabels.Beginner,
+  "Specialty": classTierLabels.Specialty,
+  "Advanced": classTierLabels.Advanced,
+  "Master": classTierLabels.Master,
+  "Divine": classTierLabels.Divine,
   "Recruitment requirement": {
     "ko": "영입 요구품",
     "en": "Recruitment requirement"
@@ -841,7 +824,8 @@ export const displayTerms={
   "드래곤": {"ko": "드래곤", "en": "Dragons"},
   "코끼리": {"ko": "코끼리", "en": "Elephants"},
   "기본직": {"ko": "기본직", "en": "Base tier"},
-  "초급직": {"ko": "초급직", "en": "Beginner tier"},
+  "초급직": classTierLabels.Beginner,
+  "하급직": classTierLabels.Beginner,
   "중급직": {"ko": "중급직", "en": "Intermediate tier"},
   "상급직": {"ko": "상급직", "en": "Advanced tier"}
 };

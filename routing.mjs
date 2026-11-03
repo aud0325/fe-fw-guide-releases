@@ -1,5 +1,6 @@
 import {isRetiredCharacterId} from './character-visibility.mjs';
 import {locationRedirects} from './location-review.mjs';
+import {parseCalculatorState,serializeCalculatorShare,parseCalculatorShare} from './growth-calculator-state.mjs';
 import {normalizeGrowthState} from './growth-comparison.mjs';
 import {types} from './locales/labels.mjs';
 import {routes} from './data.mjs';
@@ -19,12 +20,16 @@ export function preferredLanguage(saved,browserLanguage){
 // The header search starts a fresh, global query, independent of page filters.
 export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
+ if(!state.id&&state.type==='calculator')return base+lang+'/tools/growth-calculator/';
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
  return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(entrySlug(canonicalMountId(canonicalItemId(state.id)))))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
-export function stateQuery(state){
+export function stateQuery(state,{share=false}={}){
  const p=new URLSearchParams();
+ if(!state.id&&state.type==='calculator'){
+  const encoded=share&&serializeCalculatorShare(state.calculator),characterId=state.calculator?.characterId||state.calculatorCharacter;if(encoded)p.set('b',encoded);else if(/^[a-z0-9-]+$/.test(characterId||''))p.set('unit',characterId);return p.size?'?'+p:'';
+ }
  if(!state.id&&state.type==='growth'){
   const next=normalizeGrowthState(state);
   for(const [key,value]of Object.entries({mode:next.growthMode==='stats'?'stats':'',find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
@@ -48,10 +53,12 @@ export function readRoute(url,base='/',fallback='ko'){
  if(relative===null)return null;
  let parts=relative.replace(/index\.html$/,'').split('/').filter(Boolean),lang=['ko','en'].includes(parts[0])?parts.shift():fallback;
  if(legacy)parts=url.hash.slice(1).split('?')[0].split('/').filter(Boolean);
+ const calculatorPath=parts.length===2&&parts[0]==='tools'&&parts[1]==='growth-calculator';
  const growthPath=parts[0]==='category'&&parts[1]==='growth'&&parts.length===3&&['class','mount'].includes(parts[2]);
  const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
- if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath)return null;
+ if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath&&!calculatorPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
+ if(calculatorPath){state.type='calculator';state.calculator=params.has('b')?parseCalculatorShare(params.get('b')):params.has('build')?parseCalculatorState(params.get('build')):null;state.calculatorInvalid=(params.has('b')||params.has('build'))&&!state.calculator;state.calculatorCharacter=params.get('unit')||'';}
  if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalMountId(canonicalItemId(canonicalEntryId(decodeURIComponent(parts[1])))));}catch{return null;}}
  if(state.id&&isRetiredCharacterId(state.id))Object.assign(state,{type:'character',id:null});
  if(state.id&&locationRedirects[state.id])Object.assign(state,locationRedirects[state.id],{id:locationRedirects[state.id].id||null});

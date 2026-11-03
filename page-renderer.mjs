@@ -1,3 +1,4 @@
+import {classReference} from './class-reference.generated.mjs';
 import {isRetiredCharacterId} from './character-visibility.mjs';
 import {directoryPage} from './catalog-overview.mjs';
 import {battalionDirectory,battalionDetails,placeBattalions} from './battalion-ui.mjs';
@@ -6,6 +7,7 @@ import {sourceOverviewGroups,sourceOverview} from './source-overview.mjs';
 import {renderAbilityPage} from './_abilities/ability-page.mjs';
 import {abilityEntries} from './_abilities/ability-navigation.mjs';
 import {abilityReferences} from './_abilities/sample-integration.mjs';
+import {growthCalculator} from './growth-calculator-ui.mjs';
 import {growthComparison} from './growth-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {guideTopics,guideTopic} from './browse-topics.mjs';
@@ -47,6 +49,7 @@ export function renderPage(state,lang='ko',visibleLimit=36,base='/',{keywordAudi
  const mapContext={t,lang,base,entries,sources,routes,name,href,tx,text,factText:(value,key)=>displayText(value,t,entries,false,key)};
  const browseEntries=[...entries,...abilityEntries].filter(isDiscoverable);
  const brandName=t('app.fire-emblem-fortune-s-weave-encyclopedia');
+ if(!state.id&&state.type==='calculator')return {html:rewriteLinks(growthCalculator(state,{t,lang,base}),lang,base),title:t('calculator.title')+' · '+t('app.fortune-s-weave-encyclopedia'),description:t('calculator.description')};
  const breadcrumbRow=(crumbs,extraClass='')=>`<div class="breadcrumb-row${extraClass?' '+extraClass:''}"><div class="breadcrumbs">${crumbs}</div>${feedbackLink(lang)}</div>`;
 function portrait(e,full=false){const m=media[e.id]||e.portrait;return e.type==='character'&&m?`<img class="portrait" src="${esc(full?m.src:(m.thumbnailSrc||m.src))}" alt="${esc(name(e))}" loading="${full?'eager':'lazy'}" decoding="async" width="${m.width||240}" height="${m.height||240}">`:'';}
 function mediaHint(m){return m?.sourceUrl?sourceHint({href:m.sourceUrl,tooltip:`${t('presentation.image-credit')} · ${m.credit||referenceSite(m.sourceUrl)}`,className:'source-hint image-source-hint',external:true}):'';}
@@ -111,17 +114,17 @@ function detail(e){
  const titleMedia=entryIconMedia(e)||(e.type==='item'?itemMedia[classifyItem(e).icon]:null);
  const titleImage=entryIcon(e,'entity-detail-icon')||(e.type==='item'?itemIcon(e,{t},'item-detail-icon'):'');
  const prose=value=>renderEntityText(localized(value,lang),e,{entries,lang,href,format:tx});
- let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}${e.crateContents||e.forging||e.equipmentVariants||e.battalion||e.gambit?'':`<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`}`;
+ let body=`<article class="detail detail-top"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/${e.type}${e.type==='character'&&state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}<div class="detail-title"><div><span class="eyebrow">${label(e.type)} / ${t('app.encyclopedia')}</span><h1 tabindex="-1" id="entry-title">${titleImage?`<span class="detail-icon-frame">${titleMedia?.sourceUrl?`<button type="button" class="detail-icon-source" data-source-tip="${esc(`${t('presentation.image-credit')} · ${tx(titleMedia.credit)||referenceSite(titleMedia.sourceUrl)}`)}" data-source-href="${esc(titleMedia.sourceUrl)}" data-source-action="${esc(t('presentation.open-image-source'))}" aria-label="${esc(t('presentation.image-credit'))}" aria-haspopup="dialog" aria-controls="source-tooltip" aria-expanded="false">${titleImage}</button>`:titleImage}</span>`:''}${esc(name(e))}</h1></div></div></div>${e.type==='item'?`<p class="item-classification">${esc(itemTypeLabel(e,{t}))}</p>`:''}${e.type==='class'||e.crateContents||e.forging||e.equipmentVariants||e.battalion||e.gambit?'':`<div class="detail-intro"><p class="body">${prose(metadata.summary)}</p></div>`}`;
  if(e.type==='character')body=`<article class="detail detail-top character-detail"><div class="detail-heading">${breadcrumbRow(`<a href="#">${t('app.archive')}</a> / <a href="#category/character${state.route!=='all'?'?scout='+state.route:''}">${label(e.type)}</a>`)}</div>`;
  let portraitHtml='';
  if(e.type==='character'&&(media[e.id]||e.portrait)){const m=media[e.id]||e.portrait;portraitHtml=`<figure class="character-figure"><span class="image-credit-frame portrait-credit-frame">${portrait(e,true)}${mediaHint(m)}</span></figure>`;}
  if(lang==='ko'&&e.translation==='provisional'&&e.type!=='item')body+=`<p class="original-name" lang="en">${esc(e.name.en)}</p>`;
  if(lang==='ko'&&e.translation==='provisional')body+=`<p class="result-label">${t('app.korean-provisional')}</p>`;
  if(e.type==='quest')body+=`<p class="notice">${t('editorial.the-quest-listing-has-been-retired-this-address-retains-reward-and-location-notes')} <a href="#category/paralogue">${t('editorial.view-paralogue-schedules')}</a></p>`;
- if(e.body&&e.type!=='mount')body+=`<p class="body">${prose(e.body)}</p>`;
+ if(e.body&&!['mount','class'].includes(e.type))body+=`<p class="body">${prose(e.body)}</p>`;
  // The scoped class report is shown beside the recruitment-level condition.
  const consolidatedRecruitmentNote=e.id==='ursas-right-claw'&&e.recruitmentCarriers?.some(row=>row.additionalSourceId==='user-ursa-claw-condition-20260930');
- if(e.note&&e.type!=='mount'&&!consolidatedRecruitmentNote)body+=`<p class="notice">${prose(e.note)}</p>`;
+ if(e.note&&!['mount','class'].includes(e.type)&&!consolidatedRecruitmentNote)body+=`<p class="notice">${prose(e.note)}</p>`;
  body+=tipGuide(e,{t,tx,prose,locationMap:places=>guideLocationMap(places,mapContext),sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,afterSection:i=>i===2?reconstructionGuideSection(e,{t,name,entries,base,query:stateQuery(state)}):'',contentsAfter:i=>i===2?(e.reconstructionProjects?`<li><a href="${esc(pagePath(state,lang,base)+stateQuery(state)+'#section-reconstruction')}">${t('reconstruction.title')} · ${t('tip.spoiler')}</a></li>`:''):''});
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
@@ -132,7 +135,7 @@ function detail(e){
  if(outgoing.length)body+=`<h2>${t('app.follow-the-trail')}</h2><div class="relations">${outgoing.map(relation).join('')}</div>`;
  if(incoming.length)body+=`<details class="backlinks"><summary>${t('app.linked-from')} (${incoming.length})</summary><div class="relations">${incoming.map(x=>relation({to:x.id,label:{ko:label(x.type),en:label(x.type)}})).join('')}</div></details>`;
  const abilitySources=abilityReferences(e,lang);
- body+=references([e,abilitySources,{sourceIds:itemUses(e,entries).sourceIds}],[...(e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait]),...abilitySources.imageCredits])+'</article>';
+ body+=references([e,abilitySources,...(e.type==='class'?[classReference[e.id]]:[]),{sourceIds:itemUses(e,entries).sourceIds}],[...(e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait]),...abilitySources.imageCredits])+'</article>';
  return body;
 }
 const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,images});
@@ -149,7 +152,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  else{
   const matches=searchEntries(browseEntries,listingState(state,browseEntries));const list=state.type==='character'?sortScouts(matches,scoutRoute(state)):matches;const home=state.type==='all'&&!state.query;
   const shortcuts=state.type==='all'?searchShortcuts(state.query):[];
-  if(shortcuts.length)html+=`<div class="search-shortcuts">${shortcuts.map(s=>`<a class="card compact-card search-shortcut" href="#category/${s.category}">${icon(s.category==='growth'?'class':s.category)}<div class="card-copy"><h3>${t(s.titleKey)}</h3><p class="card-meta">${t(s.descriptionKey)}</p></div>${icon('arrow')}</a>`).join('')}</div>`;
+  if(shortcuts.length)html+=`<div class="search-shortcuts">${shortcuts.map(s=>`<a class="card compact-card search-shortcut" href="#category/${s.category}">${icon(['growth','calculator'].includes(s.category)?'class':s.category)}<div class="card-copy"><h3>${t(s.titleKey)}</h3><p class="card-meta">${t(s.descriptionKey)}</p></div>${icon('arrow')}</a>`).join('')}</div>`;
   html+=`<div class="section-head"><h2>${state.query?t('app.search-results'):label(state.type)}</h2><small role="status" aria-live="polite">${state.type==='item'?esc(t('item.result-count',{scope:itemScopeLabel(state,{t}),count:list.length})):state.type==='map'&&!state.query?t('browse.map-scope'):t(list.length===1?'browse.entry-one':'browse.entry-count',{count:list.length})}</small></div>`;
   if(home)html+=homeDirectory(list);
   if(state.type==='character')html+=scoutToolbar(state,t);

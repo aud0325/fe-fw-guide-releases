@@ -1,4 +1,5 @@
 https://fire-emblem-fortunes-weave.turam.dev/ko/
+https://fire-emblem-fortunes-weave.turam.dev/ko/tools/growth-calculator/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/growth/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/character/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/skill/
@@ -1056,6 +1057,7 @@ https://fire-emblem-fortunes-weave.turam.dev/ko/entry/skill-vanguard-plus/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/skill-cavalry-move-plus/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/skill-airfighter-plus/
 https://fire-emblem-fortunes-weave.turam.dev/en/
+https://fire-emblem-fortunes-weave.turam.dev/en/tools/growth-calculator/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/growth/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/character/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/skill/

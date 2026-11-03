@@ -17,7 +17,7 @@ const specificEnglish=new Set(['Aegis','Astra','Airfighter','Arrowcrack','Axefai
 for(const row of rows)if(/^[A-Za-z]+$/.test(row.name.en)&&!specificEnglish.has(row.name.en))ordinaryTerms.add(row.name.en.toLowerCase());
 const specificEnglishKeys=new Set([...specificEnglish].map(s=>s.toLocaleLowerCase()));
 const contextRequired=term=>ordinaryTerms.has(term.toLocaleLowerCase())||(/^[a-z]+$/i.test(term)&&!specificEnglishKeys.has(term.toLocaleLowerCase()))||term.length===1||/^(?:HP|힘|마력|속도|기술|수비|마방|행운|매력|체격|이동(?:력)?|명중|회피|필살|Strength|Magic|Speed|Dexterity|Defense|Resistance|Luck|Charm|Move|Hit|Avo|Crit)\s*[+-]\s*\d+$/i.test(term);
-const classCategoryTerms=/^(?:Unique|Beginner|Specialty|Intermediate|Advanced|Master|Divine|기본직|초급직|중급직|상급직|최상급직|신장직)$/i;
+const classCategoryTerms=/^(?:Unique|Beginner|Specialty|Intermediate|Advanced|Master|Divine|기본직|초급직|하급직|중급직|상급직|최상급직|신장직)$/i;
 const index=new Map();
 for(const entry of keywordRecords){
  const aliases=entry.kind==='class'?[...(entry.textAliases||[]),...(entry.aliases||[]).filter(term=>!classCategoryTerms.test(term))]:Object.values(entry.aliases||{}).flat();

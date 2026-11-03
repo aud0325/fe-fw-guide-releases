@@ -1,3 +1,5 @@
+import {classOrder} from '../class-order.mjs';
+import {reviewedClassAbility} from '../class-ability-view.mjs';
 import {proficiencySupplement} from './integration-data.mjs';
 import {observedNonSpecialties} from './proficiency-observations.mjs';
 import {groupFamilies} from './scale-model.mjs';
@@ -10,6 +12,7 @@ export function orderedCharacters(rows){const ids=new Set(rows.flatMap(r=>r.rela
 export function characterSkills(rows){return orderedCharacters(rows).map(c=>({...c,personal:rows.filter(r=>r.kind==='skill'&&r.category==='personal'&&r.relations.some(x=>x.type==='character'&&x.id===c.id)),unique:rows.filter(r=>r.kind==='skill'&&r.category==='unique'&&r.relations.some(x=>x.type==='character'&&x.id===c.id))})).filter(c=>c.personal.length||c.unique.length);}
 export function proficiencies(row){return [...new Set(row.relations.flatMap(x=>(x.routes||[x]).map(r=>r.proficiency)).filter(Boolean))];}
 export function providerGroups(rows,section){
+ rows=rows.map(reviewedClassAbility);
  section=normalizeSection('skill',section);
  const selected=rows.filter(r=>r.kind==='skill'&&normalizeSection('skill',r.category)===normalizeSection('skill',section)),groups=new Map();
  for(const category of [...new Set(selected.map(r=>r.category))])for(const family of groupFamilies(selected.filter(r=>r.category===category))){
@@ -17,7 +20,7 @@ export function providerGroups(rows,section){
   if(!providers.length)providers.push({id:'unknown',name:{ko:'미확인',en:'Unknown'}});
   for(const owner of providers){if(!groups.has(owner.id))groups.set(owner.id,{owner:{...owner,icon:entities.find(e=>e.id===owner.id)?.icon},families:[]});groups.get(owner.id).families.push(family);}
  }
- const order=section==='training'?proficiencyOrder:entities.map(e=>e.id);const rank=id=>order.includes(id)?order.indexOf(id):9999;
+ const order=section==='training'?proficiencyOrder:section==='class'?classOrder:entities.map(e=>e.id);const rank=id=>order.includes(id)?order.indexOf(id):9999;
  return [...groups.values()].sort((a,b)=>rank(a.owner.id)-rank(b.owner.id));
 }
 const preferenceMap={'Sword':'sword','Spear':'spear','Axe':'axe','Bow':'bow','Brawl':'gauntlet','Brawling':'gauntlet','Gauntlet':'gauntlet','Black Magic':'black-magic','White Magic':'white-magic','Authority':'authority','Leadership':'authority','Infantry':'infantry','Armor':'armor','Heavy Armor':'armor','Riding':'cavalry','Flying':'flying'};

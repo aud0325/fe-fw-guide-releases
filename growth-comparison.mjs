@@ -1,3 +1,5 @@
+import {classOrderRank} from './class-order.mjs';
+import {classReference} from './class-reference.generated.mjs';
 import {mountGrowthReports,mountGrowthSource} from './mount-growth.generated.mjs';
 import {entryDisplayName} from './editorial-view.mjs';
 import {characterFaction} from './presentation.mjs';
@@ -19,7 +21,7 @@ export function growthRows(entries){
  const ko=createTranslator('ko'),en=createTranslator('en');
  const rows=entries.filter(e=>e.type==='class'||e.type==='character'&&e.roles?.includes('playable')&&e.growthRates).map(e=>{
   const growth=e.type==='class'?e.classStats?.growth:e.growthRates,m=e.type==='character'?media[e.id]:entryIconMedia(e);
-  return {id:e.id,type:e.type,name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:e.type==='class'?{ko:e.category,en:e.category}:{ko:characterFaction(e,ko,entries),en:characterFaction(e,en,entries)},values:growth?.values||{},statModifiers:e.classStats?.modifiers?.values||{},statSourceId:e.classStats?.modifiers?.sourceId,modified:e.modifiedGrowthRates?.values,sourceId:growth?.sourceId,status:growth?.status,image:m?.thumbnailSrc||m?.src||'',imageSource:m?.sourceUrl||'',imageCredit:m?.credit||'',hasDetail:true};
+  return {id:e.id,type:e.type,name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:e.type==='class'?{ko:e.category,en:e.category}:{ko:characterFaction(e,ko,entries),en:characterFaction(e,en,entries)},values:growth?.values||{},growthLevelRange:e.type==='class'&&classReference[e.id]?.growth.length>1?classReference[e.id].growth[0].level:undefined,statModifiers:e.classStats?.modifiers?.values||{},statSourceId:e.classStats?.modifiers?.sourceId,modified:e.modifiedGrowthRates?.values,sourceId:growth?.sourceId,status:growth?.status,image:m?.thumbnailSrc||m?.src||'',imageSource:m?.sourceUrl||'',imageCredit:m?.credit||'',hasDetail:true};
  });
  for(const report of mountGrowthReports){
   const id=canonicalMountId(report.id),e=entries.find(e=>e.id===id);
@@ -45,7 +47,7 @@ export const growthSortContext=state=>({sort:state.growthSort==='default'&&state
 export function sortGrowthRows(rows,state,lang){
  const {sort,direction}=growthSortContext(state),sign=direction==='asc'?1:-1;
  return [...rows].sort((a,b)=>{
-  if(sort==='default')return state.growthTab==='class'?(growthTiers[a.group.en]??99)-(growthTiers[b.group.en]??99):0;
+  if(sort==='default')return state.growthTab==='class'?classOrderRank(a.id)-classOrderRank(b.id):0;
   if(sort==='name')return a.name[lang].localeCompare(b.name[lang],lang)*sign;
   const value=r=>sort==='total'?growthTotal(r,state):sort==='effective'?growthEffectiveTotal(r,state):growthValues(r,state)[sort];
   const av=value(a),bv=value(b);

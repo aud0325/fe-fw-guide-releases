@@ -1,0 +1,1 @@
+export const proficiencyNames={sword:['검술','Sword'],spear:['창술','Spear'],axe:['도끼술','Axe'],bow:['궁술','Bow'],gauntlet:['격투술','Gauntlet'],'black-magic':['흑마술','Black magic'],'white-magic':['백마술','White magic'],authority:['지휘','Authority'],infantry:['보병','Infantry'],armor:['중장','Armor'],cavalry:['기마','Riding'],flying:['비행','Flying']};

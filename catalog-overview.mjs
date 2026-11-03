@@ -1,3 +1,6 @@
+import {sortClasses} from './class-order.mjs';
+import {classTierSearchNames} from './class-tiers.mjs';
+import {classListCertification} from './class-ui.mjs';
 import {entries} from './data.mjs';
 import {searchEntries,escapeHtml as esc} from './core.mjs';
 import {entryDisplayName,isDiscoverable} from './editorial-view.mjs';
@@ -19,13 +22,13 @@ import {entryIconMedia} from './entity-media.mjs';
 import {mountCategory} from './mount-ui.mjs';
 import {tierNames,proficiencyNames,classFact,certification,classSkills,characterSkills,mountSkills} from './catalog-overview-model.mjs';
 const empty=()=>'<span class="overview-empty" aria-label="—">—</span>';
-export function classToken(e,lang,base='/'){const media=entryIconMedia(e);return entityToken({id:e.id,label:entryDisplayName(e,lang),kind:'class',href:pagePath({id:e.id},lang,base),icon:media?{...media,src:base+media.src.slice(2)}:null});}
+export function classToken(e,lang,base='/',direct=false){const media=entryIconMedia(e);return entityToken({id:e.id,label:entryDisplayName(e,lang),kind:'class',direct,href:pagePath({id:e.id},lang,base),icon:media?{...media,src:base+media.src.slice(2)}:null});}
 function tokenList(abilities,lang,fallback='',base='/',stacked=false){return abilities.length?`<div class="entity-token-stack${stacked?' overview-stacked-skills':''}">${abilities.map(r=>abilityToken(r,lang,{base})).join(stacked?'':', ')}</div>`:fallback?`<span class="entity-token-static">${esc(fallback)}</span>`:empty();}
 const cell=(key,label,content,shortLabel=label)=>`<td role="cell" class="overview-${key}"><span class="overview-mobile-label" aria-hidden="true">${esc(shortLabel)}</span><div class="overview-cell-content">${content}</div></td>`;
 function tableFrame({kind,caption,headings,body}){return `<div class="overview-scroll" role="region" tabindex="0" aria-label="${esc(caption)}"><table role="table" class="overview-table ${kind}-overview-table"><caption class="sr-only">${esc(caption)}</caption><thead role="rowgroup"><tr role="row">${headings.map(h=>`<th scope="col" role="columnheader">${esc(h)}</th>`).join('')}</tr></thead><tbody role="rowgroup">${body}</tbody></table></div>`;}
 function personName(e,lang,base,route){const media=characterIcon(e.id);return `<a class="overview-person" href="${pagePath({id:e.id},lang,base)}${route!=='all'?'?route='+route:''}">${media?`<img src="${esc(base+'_abilities/'+media.src.replace(/^\.\//,''))}" alt="" width="24" height="26" loading="lazy" decoding="async">`:''}<span>${esc(entryDisplayName(e,lang))}</span></a>`;}
 export function directorySearchText(e){
- if(e.type==='class')return [e.name.ko,e.name.en,certification(e,'ko'),certification(e,'en'),tierNames[e.category]?.join(' '),...['class-mastery','class-active'].flatMap(method=>classSkills(e.id,method).flatMap(r=>Object.values(r.name)))].join(' ').toLocaleLowerCase();
+ if(e.type==='class')return [e.name.ko,e.name.en,certification(e,'ko'),certification(e,'en'),...classTierSearchNames(e.category),...['class-mastery','class-active'].flatMap(method=>classSkills(e.id,method).flatMap(r=>Object.values(r.name)))].join(' ').toLocaleLowerCase();
  if(e.type==='mount')return [e.name.ko,e.name.en,...(e.aliases||[]),...['ko','en'].map(lang=>mountCategory(e,createTranslator(lang))),e.category,...mountSkills(e).flatMap(r=>Object.values(r.name)),...(e.mountSkills||[]).flatMap(r=>Object.values(r.name))].join(' ').toLocaleLowerCase();
  return [e.name.ko,e.name.en,...(e.aliases||[]),...(e.roles||[]).flatMap(role=>roleNames[role]||[]),...['ko','en'].map(lang=>characterFaction(e,createTranslator(lang),entries)),...specialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...nonSpecialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...['personal','unique'].flatMap(category=>characterSkills(e.id,category).flatMap(r=>Object.values(r.name)))].join(' ').toLocaleLowerCase();
 }
@@ -61,10 +64,12 @@ export function characterOverviewTable(list,{lang='ko',state={},route='all',capt
  return tableFrame({kind:scout?'scout':'character',caption:caption||t('overview.character-directory'),headings:scout?[t('overview.name'),t('directory.support-level'),t('catalog.renown'),t('catalog.requirement')]:[t('overview.name'),t('overview.faction'),t('overview.personal-skill'),t('overview.unique-skill')],body:list.map(e=>characterRow(e,{lang,t,state,route,base,query})).join('')});
 }
 export function classOverviewTable(list,lang='ko',base='/',query=''){
- const t=createTranslator(lang);
+ const t=createTranslator(lang);let previousTier=null;
  return tableFrame({kind:'class',caption:t('overview.class-directory'),headings:[t('overview.class'),t('overview.tier'),t('overview.certification'),t('overview.mastery'),t('overview.class-abilities')],body:list.map(e=>{
-  const condition=certification(e,lang),unlock=classFact(e,'unlock',lang);
-  return rowStart(e,query)+`<th scope="row" role="rowheader" class="overview-name">${classToken(e,lang,base)}</th>`+cell('tier',t('overview.tier'),esc(tierNames[e.category]?.[lang==='ko'?0:1]||e.category))+cell('condition',t('overview.certification'),(condition?esc(condition):empty())+(unlock?`<details class="overview-unlock"><summary>${t('overview.unlock-condition')}</summary><p>${esc(unlock)}</p></details>`:''))+cell('mastery',t('overview.mastery'),tokenList(classSkills(e.id,'class-mastery'),lang,classFact(e,'mastery',lang),base))+cell('active',t('overview.class-abilities'),tokenList(classSkills(e.id,'class-active'),lang,classFact(e,'skills',lang),base))+'</tr>';
+  const condition=classListCertification(e,{t,base});
+  const visible=matchesQuery(e,query),first=visible&&e.category!==previousTier;if(visible)previousTier=e.category;
+  const start=rowStart(e,query).replace('<tr ',`<tr data-class-tier="${esc(e.category)}"${first?' data-tier-start="true"':''} `);
+  return start+`<th scope="row" role="rowheader" class="overview-name">${classToken(e,lang,base,true)}</th>`+cell('tier',t('overview.tier'),`<span class="class-tier">${esc(tierNames[e.category]?.[lang==='ko'?0:1]||e.category)}</span>`)+cell('condition',t('overview.certification'),condition||empty())+cell('mastery',t('overview.mastery'),tokenList(classSkills(e.id,'class-mastery'),lang,classFact(e,'mastery',lang),base))+cell('active',t('overview.class-abilities'),tokenList(classSkills(e.id,'class-active'),lang,classFact(e,'skills',lang),base,true))+'</tr>';
  }).join('')});
 }
 export function mountOverviewTable(list,lang='ko',base='/',query=''){
@@ -78,11 +83,11 @@ export function mountOverviewTable(list,lang='ko',base='/',query=''){
 export function directoryPage(state,lang,base='/'){
  state={...state,route:state.type==='character'?'all':state.route};
  const t=createTranslator(lang),type=state.type,query=state.catalogQuery||'',route=scoutRoute(state),matches=searchEntries(entries.filter(isDiscoverable),listingState(state,entries));
- const list=type==='character'?sortScouts(matches,route):type==='class'?[...matches].sort((a,b)=>Object.keys(tierNames).indexOf(a.category)-Object.keys(tierNames).indexOf(b.category)):matches;
+ const list=type==='character'?sortScouts(matches,route):type==='class'?sortClasses(matches):matches;
  const title=t(type==='character'?'overview.characters':type==='class'?'overview.classes':'directory.mounts');
  const queryPlaceholder=t(type==='character'?'overview.find-a-name-faction-or-ability':type==='class'?'overview.find-a-class-or-ability':'directory.find-mount');
  const growth=pagePath({type:'growth',growthTab:type},lang,base),allHref=pagePath({type},lang,base);
- const filters=`${type==='character'?scoutToolbar(state,t):''}<div class="overview-toolbar"><label class="overview-query"><span class="sr-only">${esc(queryPlaceholder)}</span><input type="search" data-overview-query value="${esc(query)}" placeholder="${esc(queryPlaceholder)}"></label>${state.group||state.faction?`<a class="overview-clear-filter" href="${allHref}">${t('overview.show-all')}</a>`:''}</div>`;
+ const filters=`${type==='character'?scoutToolbar(state,t):''}<div class="overview-toolbar"><label class="overview-query"><span class="sr-only">${esc(queryPlaceholder)}</span><input type="search" data-overview-query value="${esc(query)}" placeholder="${esc(queryPlaceholder)}"></label>${type==='class'?`<div class="class-scroll-controls" hidden><span>${t('class.scroll-table')}</span><button type="button" data-overview-scroll="-1" aria-label="${t('class.scroll-left')}" title="${t('class.scroll-left')}">←</button><button type="button" data-overview-scroll="1" aria-label="${t('class.scroll-right')}" title="${t('class.scroll-right')}">→</button></div>`:''}${state.group||state.faction?`<a class="overview-clear-filter" href="${allHref}">${t('overview.show-all')}</a>`:''}</div>`;
  let body='';
  if(type==='class')body=classOverviewTable(list,lang,base,query);
  else if(type==='mount')body=mountOverviewTable(list,lang,base,query);

@@ -28,7 +28,7 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
   return `<div class="character-stats character-growth"><div class="table-wrap stats-wide"><table><thead><tr><th scope="col">${t('character.context')}</th>${headings()}</tr></thead><tbody>${rows.map(r=>`<tr><th scope="row">${label(r)}</th>${values(r)}</tr>`).join('')}</tbody></table></div><div class="stats-narrow">${rows.map(r=>`<table><caption>${label(r)}</caption><thead><tr>${headings()}</tr></thead><tbody><tr>${values(r)}</tr></tbody></table>`).join('')}</div></div>`;
  };
  let out='';
- out+=`<div class="character-growth-heading"><h2>${t('character.personal-growth-rates')}</h2>${e.growthRates?summary(context):''}</div>`;
+ out+=`<div class="character-growth-heading"><h2>${t('character.personal-growth-rates')}</h2><a class="character-calculator-link" href="${base}${t.locale}/tools/growth-calculator/?unit=${esc(e.id)}">${t('calculator.link')}</a>${e.growthRates?summary(context):''}</div>`;
  if(e.growthRates){out+=`<div class="character-growth-options"><p class="result-label">${t('growth.unitCharacter')}</p>${e.modifiedGrowthRates?`<label title="${esc(tx(e.modifiedGrowthRates.condition))}"><input id="character-growth-skill" type="checkbox" data-character-growth-skill disabled${skillApplied?' checked':''}><span>${t(e.id==='mu'?'character.signs-of-growth-toggle':'growth.compactSkill')}</span></label>`:''}</div>`;const row=skillApplied?{...e.modifiedGrowthRates,label:t('growth.corrected')}:{...e.growthRates,label:t('character.personal-base')};out+=grid([row])+`<p class="character-growth-legend" title="${esc(t('character.growth-help'))}"><span>${t('growth.low')}</span><span class="legend-scale" aria-hidden="true"></span><span>${t('growth.high')}</span></p>`;
  }else out+=`<p class="result-label">${t('character.personal-growth-rates-not-documented')}</p>`;
  const growth=out;out='';
@@ -37,7 +37,7 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
 }
 
 
-export function characterGuide(e,{t,tx,name,href,entries,sources}){
- if(e.beginnerGuide)return beginnerGuide(e,{t,tx,name,href,entries});
- return importedCharacterGuide(e,{t,tx,name,href,entries,sources});
+export function characterGuide(e,{t,tx,name,href,entries,sources,base='/'}){
+ if(e.beginnerGuide)return beginnerGuide(e,{t,tx,name,href,entries,base});
+ return importedCharacterGuide(e,{t,tx,name,href,entries,sources,base});
 }
