@@ -1,3 +1,7 @@
+import {defaultState} from './routing.mjs';
+import {homePage} from './home-ui.mjs';
+import {retiredTipState} from './tip-retirement.mjs';
+import {reconstructionPlan} from './reconstruction-plan.generated.mjs';
 import {classReference} from './class-reference.generated.mjs';
 import {isRetiredCharacterId} from './character-visibility.mjs';
 import {directoryPage} from './catalog-overview.mjs';
@@ -10,9 +14,7 @@ import {abilityReferences} from './_abilities/sample-integration.mjs';
 import {growthCalculator} from './growth-calculator-ui.mjs';
 import {growthComparison} from './growth-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
-import {guideTopics,guideTopic} from './browse-topics.mjs';
-import {tipGuide} from './tip-ui.mjs';
-import {reconstructionGuideSection} from './reconstruction-ui.mjs';
+import {reconstructionGuide} from './reconstruction-ui.mjs';
 import {templeServicePreferences} from './activity-preferences-ui.mjs';
 import {feedbackLink} from './feedback.mjs';
 import {isPublicSource,referencedSources,publicSourceRecord} from './source-visibility.mjs';
@@ -41,6 +43,7 @@ import {foodKinds,flavors,preferredMountFood,mountFoodReports} from './food.mjs'
 import {ingredientFlavorLabel} from './food-ui.mjs';
 import {scoutRoute,sortScouts,scoutConditions,scoutToolbar,scoutGroupedList} from './character-list.mjs';
 export function renderPage(state,lang='ko',visibleLimit=36,base='/',{keywordAudit}={}){
+ const retired=retiredTipState(state);if(retired)return renderPage({...defaultState(),...retired},lang,visibleLimit,base,{keywordAudit});
  if(isRetiredCharacterId(state.id))return renderPage({...state,type:'character',id:null},lang,visibleLimit,base,{keywordAudit});
  const abilityPage=renderAbilityPage(state,lang,base);if(abilityPage)return {...abilityPage,html:linkContentKeywords(abilityPage.html,{entryId:state.id,lang,base,onDecision:keywordAudit})};
  const isDirectory=!state.id&&['character','class','mount','battalion','gambit'].includes(state.type);
@@ -50,6 +53,8 @@ export function renderPage(state,lang='ko',visibleLimit=36,base='/',{keywordAudi
  const browseEntries=[...entries,...abilityEntries].filter(isDiscoverable);
  const brandName=t('app.fire-emblem-fortune-s-weave-encyclopedia');
  if(!state.id&&state.type==='calculator')return {html:rewriteLinks(growthCalculator(state,{t,lang,base}),lang,base),title:t('calculator.title')+' · '+t('app.fortune-s-weave-encyclopedia'),description:t('calculator.description')};
+ if(!state.id&&state.type==='all'&&!state.query)return {missing:false,html:homePage({t,lang,base}),title:brandName,description:t('app.description')};
+ if(!state.id&&state.type==='reconstruction')return {missing:false,html:`<article class="detail reconstruction-page"><div class="breadcrumb-row page-breadcrumb-row"><div class="breadcrumbs"><a href="${base}${lang}/">${t('app.archive')}</a> / ${t('home.reconstruction-title')}</div>${feedbackLink(lang)}</div><h1 id="entry-title">${t('home.reconstruction-title')}</h1><p class="result-label">${t('home.reconstruction-description')}</p>${reconstructionGuide(reconstructionPlan,{t,name,entries,base,headingLevel:2})}${referenceSection([reconstructionPlan],{sources,t,tx,updated})}</article>`,title:t('home.reconstruction-title')+' · '+t('app.fortune-s-weave-encyclopedia'),description:t('home.reconstruction-description')};
  const breadcrumbRow=(crumbs,extraClass='')=>`<div class="breadcrumb-row${extraClass?' '+extraClass:''}"><div class="breadcrumbs">${crumbs}</div>${feedbackLink(lang)}</div>`;
 function portrait(e,full=false){const m=media[e.id]||e.portrait;return e.type==='character'&&m?`<img class="portrait" src="${esc(full?m.src:(m.thumbnailSrc||m.src))}" alt="${esc(name(e))}" loading="${full?'eager':'lazy'}" decoding="async" width="${m.width||240}" height="${m.height||240}">`:'';}
 function mediaHint(m){return m?.sourceUrl?sourceHint({href:m.sourceUrl,tooltip:`${t('presentation.image-credit')} · ${m.credit||referenceSite(m.sourceUrl)}`,className:'source-hint image-source-hint',external:true}):'';}
@@ -76,12 +81,6 @@ function mountGroups(list){
 }
 function locationGroups(list){
  return `<div class="location-groups">${locationRegions(list,t).map(g=>{const url='#category/location?group='+encodeURIComponent(g.id)+(state.route!=='all'?'&route='+encodeURIComponent(state.route):'');return `<section class="location-group"><div class="browse-group-heading"><h2>${esc(g.title)}</h2><small>${t(g.entries.length===1?'browse.entry-one':'browse.entry-count',{count:g.entries.length})}</small>${g.entries.length>6?`<a class="group-more" href="${url}" aria-label="${esc(t('browse.view-group',{name:g.title,count:g.entries.length}))}">${t('browse.view-all')}</a>`:''}</div><div class="cards location-list">${g.entries.slice(0,6).map(card).join('')}</div></section>`;}).join('')}</div>`;
-}
-function guideGroups(list){
- return `<div class="guide-topics">${guideTopics.map(g=>{const rows=list.filter(e=>guideTopic(e).id===g.id);if(!rows.length)return '';const title=t(g.key),url='#category/tip?group='+g.id+(state.route!=='all'?'&route='+encodeURIComponent(state.route):'');return `<section class="guide-topic"><div class="browse-group-heading"><h2>${esc(title)}</h2><small>${t(rows.length===1?'browse.entry-one':'browse.entry-count',{count:rows.length})}</small>${rows.length>3?`<a class="group-more" href="${url}" aria-label="${esc(t('browse.view-group',{name:title,count:rows.length}))}">${t('browse.view-all')}</a>`:''}</div><div class="cards guide-list">${rows.slice(0,3).map(card).join('')}</div></section>`;}).join('')}</div>`;
-}
-function homeDirectory(list){
- return `<nav class="home-directory" aria-label="${t('browse.home-directory')}">${navigationGroups.flatMap(g=>g.types).map(type=>{const rows=list.filter(e=>e.type===type);if(type==='growth')return `<a href="#category/growth">${icon('class')}<div><div class="home-category-heading"><strong>${esc(label(type))}</strong></div><p>${t('growth.homeDescription')}</p></div>${icon('arrow')}</a>`;if(!rows.length&&type!=='map')return '';const url='#category/'+type+(state.route!=='all'&&type!=='character'?'?route='+encodeURIComponent(state.route):'');return `<a href="${url}">${icon(type)}<div><div class="home-category-heading"><strong>${esc(label(type))}${['skill','battalion','gambit'].includes(type)?`<span class="home-new-badge" aria-label="${t('새 메뉴','New menu')}">NEW</span>`:''}</strong>${type==='map'?'':`<small>${t(rows.length===1?'browse.entry-one':'browse.entry-count',{count:rows.length})}</small>`}</div><p>${['skill','combat-art','spell'].includes(type)?t('효과와 습득 조건을 확인합니다.','Check effects and learning requirements.'):t('browse.home-'+type)}</p></div>${icon('arrow')}</a>`;}).join('')}</nav><h2 class="home-records-heading">${t('browse.home-records')}</h2>`;
 }
 function classComparison(list){
  return `<div class="cards class-cards icon-cards">${list.map(e=>{const image=entryIcon(e)||icon('class');return `<a class="card class-card" href="${href(e.id)}"><span class="card-media">${image}</span><div class="card-copy"><h3>${esc(name(e))}</h3><p class="class-tier">${esc(text(e.category||''))}</p></div></a>`;}).join('')}</div>`;
@@ -125,7 +124,6 @@ function detail(e){
  // The scoped class report is shown beside the recruitment-level condition.
  const consolidatedRecruitmentNote=e.id==='ursas-right-claw'&&e.recruitmentCarriers?.some(row=>row.additionalSourceId==='user-ursa-claw-condition-20260930');
  if(e.note&&!['mount','class'].includes(e.type)&&!consolidatedRecruitmentNote)body+=`<p class="notice">${prose(e.note)}</p>`;
- body+=tipGuide(e,{t,tx,prose,locationMap:places=>guideLocationMap(places,mapContext),sectionHref:id=>pagePath(state,lang,base)+stateQuery(state)+'#'+id,afterSection:i=>i===2?reconstructionGuideSection(e,{t,name,entries,base,query:stateQuery(state)}):'',contentsAfter:i=>i===2?(e.reconstructionProjects?`<li><a href="${esc(pagePath(state,lang,base)+stateQuery(state)+'#section-reconstruction')}">${t('reconstruction.title')} · ${t('tip.spoiler')}</a></li>`:''):''});
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
  body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill,forgeSelection:{from:state.forgeFrom,to:state.forgeTo}});
@@ -145,7 +143,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  else if(isDirectory){html=(['battalion','gambit'].includes(state.type)?battalionDirectory(state,lang,entries,base):directoryPage(state,lang,base)).html;}
  else if(state.type==='quest'){html=`<h1>${t('editorial.quest-notes')}</h1><p>${t('editorial.the-standalone-quest-listing-has-been-retired-find-schedules-and-rewards-under-paralogues-and-acquisition-notes-under-items')}</p><div class="archive-links"><a href="#category/paralogue">${label('paralogue')}</a><a href="#category/item">${label('item')}</a></div>`;}
  else if(state.type==='sources'){
-  const records=Object.entries(referencedSources(entries,sources)).filter(([id,source])=>isPublicSource(id,source)).map(([id,source])=>({id,...publicSourceRecord(id,source)})),groups=sourceOverviewGroups(records);
+  const records=Object.entries(referencedSources(entries.filter(e=>e.type!=='tip'),sources)).filter(([id,source])=>isPublicSource(id,source)).map(([id,source])=>({id,...publicSourceRecord(id,source)})),groups=sourceOverviewGroups(records);
   html=`<div class="section-head"><h2>${t('app.source-register')}</h2></div><section class="sources-index" aria-label="${t('browse.source-sites')}">${sourceOverview(groups,lang)}</section>`;
  }
  else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href,lang,base});}
@@ -154,7 +152,6 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   const shortcuts=state.type==='all'?searchShortcuts(state.query):[];
   if(shortcuts.length)html+=`<div class="search-shortcuts">${shortcuts.map(s=>`<a class="card compact-card search-shortcut" href="#category/${s.category}">${icon(['growth','calculator'].includes(s.category)?'class':s.category)}<div class="card-copy"><h3>${t(s.titleKey)}</h3><p class="card-meta">${t(s.descriptionKey)}</p></div>${icon('arrow')}</a>`).join('')}</div>`;
   html+=`<div class="section-head"><h2>${state.query?t('app.search-results'):label(state.type)}</h2><small role="status" aria-live="polite">${state.type==='item'?esc(t('item.result-count',{scope:itemScopeLabel(state,{t}),count:list.length})):state.type==='map'&&!state.query?t('browse.map-scope'):t(list.length===1?'browse.entry-one':'browse.entry-count',{count:list.length})}</small></div>`;
-  if(home)html+=homeDirectory(list);
   if(state.type==='character')html+=scoutToolbar(state,t);
   if(state.type==='location')html+=`<p class="location-atlas-link"><a href="#category/map">${t('browse.open-atlas')}</a></p>`;
   if(state.type==='item'&&state.itemFlavor&&!list.length)html+="<p class=\"notice\">"+t('item.flavor-empty')+'</p>';
@@ -163,8 +160,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   const grouped=!state.query&&((state.type==='tip'&&!state.group)||(state.type==='location'&&!state.group)||(state.type==='character'&&scoutRoute(state)==='all'&&!state.faction&&!state.group)||(state.type==='item'&&!state.itemMinor&&!state.itemKind&&!state.itemFlavor)||(state.type==='class'&&!state.group));
   if((state.type==='tip'&&state.group)||(state.type==='location'&&state.group)||(state.type==='character'&&(state.faction||state.group))||(state.type==='item'&&state.query&&(state.itemMinor||state.itemKind))||(state.type==='class'&&state.group))html+=`<p class="browse-overview-link"><a class="group-more" href="#category/${state.type}">${t('browse.back-overview')}</a></p>`;
   const routeGrouped=state.type==='character'&&scoutRoute(state)!=='all'&&list.length>0;
-  if(state.type==='tip'&&!state.query&&!state.group)html+=guideGroups(list);
-  else if(state.type==='location'&&!state.query&&!state.group)html+=locationGroups(list);
+  if(state.type==='location'&&!state.query&&!state.group)html+=locationGroups(list);
   else if(state.type==='map'&&!state.query){/* The interactive place map is the complete overview. */}
   else if(state.type==='mount'&&!state.query&&!state.group)html+=mountGroups(list);
   else if(routeGrouped)html+=scoutGroupedList(list,scoutRoute(state),{t,card});
@@ -172,7 +168,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   else html+=list.length?`${state.type==='class'?classComparison(list.slice(0,visibleLimit)):`<div class="cards ${state.type==='tip'?'guide-list':state.type==='location'?'location-list':state.type==='mount'?'mount-list icon-cards':state.type==='item'?'icon-cards':''}">${list.slice(0,visibleLimit).map(card).join('')}</div>`}`:shortcuts.length?'':`<div class="empty"><h3>${t('app.no-matching-entries')}</h3><p>${t('app.try-another-name-english-or-korean-or-reset-the')}</p></div>`;
   if(!grouped&&!routeGrouped&&list.length>visibleLimit)html+=`<button id="show-more" class="load-more">${t('app.show-more',{count:Math.min(36,list.length-visibleLimit)})} (${visibleLimit} / ${list.length})</button>`;
  }
- if(!e&&!isDirectory){
+ if(!e&&!isDirectory&&state.type!=='growth'){
   const current=state.id?t('app.not-found'):state.query?t('app.search-results'):state.type!=='all'?label(state.type):t('app.archive');
   html=breadcrumbRow(state.id||state.query||state.type!=='all'?`<a href="#">${t('app.archive')}</a> / <span aria-current="page">${esc(current)}</span>`:`<span aria-current="page">${esc(current)}</span>`,'page-breadcrumb-row')+html;
  }
@@ -186,7 +182,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  if(!e&&state.type==='mount')html='<div class="mount-listing">'+html+'</div>';
  if(!e&&!isDirectory&&state.type==='character')html='<div class="character-listing">'+html+'</div>';
  if(!e&&state.type==='item')html='<div class="item-listing">'+html+'</div>';
- const pageTitle=state.id?(e?name(e):t('app.not-found')):state.query?t('app.search-results'):state.type==='map'&&state.mapVariant==='cai'?t('map.cai-title'):state.type==='growth'?t('growth.title')+' · '+t('growth.'+(state.growthTab||'character')):state.type!=='all'?label(state.type):'';
+ const pageTitle=state.id?(e?name(e):t('app.not-found')):state.query?t('app.search-results'):state.type==='map'&&state.mapVariant==='cai'?t('map.cai-title'):state.type==='growth'?t('growth.'+(state.growthTab||'character'))+' · '+t(state.growthMode==='stats'?'능력치':'성장률',state.growthMode==='stats'?'Stats':'Growth rates'):state.type!=='all'?label(state.type):'';
  const metadata=e?entryMetadata(e,{t,tx,name,entries,sources}):null;
  const title=metadata?.title||(pageTitle?`${pageTitle} · ${t('app.fortune-s-weave-encyclopedia')}`:brandName);
  const description=(state.type==='growth'&&!state.id?t('growth.homeDescription'):'')||metadata?.description||(pageTitle?pageTitle+' · '+t('app.description'):t('app.description'));

@@ -1,4 +1,5 @@
 import {mapNodes,filterMapNodes,mapMeta,mapMarkerKind} from './part1-map.mjs';
+import {viewportQueries} from './responsive.mjs';
 import {switchMapVariant} from './map-variants.mjs';
 import {bindMapGestures,clampMapZoom} from './map-gestures.mjs';
 import {createMapCamera,mapFrameRenderer} from './map-camera.mjs';
@@ -34,7 +35,7 @@ export function bindPart1Map(root,{state,view,t,change}){
  const host=root.querySelector('[data-part1-map]');if(!host)return null;
  const viewport=host.querySelector('.part1-viewport'),canvas=host.querySelector('.part1-canvas');
  const legend=host.querySelector('.part1-legend');
- if(legend)legend.open=view?.legendOpen??!matchMedia('(max-width:600px)').matches;
+ if(legend)legend.open=view?.legendOpen??!host.ownerDocument.defaultView.matchMedia(viewportQueries.compact).matches;
  const gatheringLegend=host.querySelector('[data-map-gathering]');
  if(gatheringLegend)gatheringLegend.open=view?.gatheringOpen??false;
  const visibility=bindMapLegend(host,{hiddenKinds:view?.hiddenKinds});
@@ -85,9 +86,9 @@ export function bindPart1Map(root,{state,view,t,change}){
   camera.zoomAt(value,{x:anchor.x-left,y:anchor.y-top},{x:from.x-left,y:from.y-top});frames.request();
  }
  if(!view&&host.dataset.place){camera.zoomAt(1.5,{x:0,y:0});center();}
- labels=bindMapLabels(host,{camera:camera.snapshot,showNames:view?.namesPreference??(view?.showNames===false?false:null),compact:win.matchMedia('(max-width:600px)').matches});
+ labels=bindMapLabels(host,{camera:camera.snapshot,showNames:view?.namesPreference??(view?.showNames===false?false:null),compact:win.matchMedia(viewportQueries.compact).matches});
  render();
- const observer=new ResizeObserver(()=>{camera.resize(viewport.clientWidth,viewport.clientHeight);labels.responsive(win.matchMedia('(max-width:600px)').matches);win.clearTimeout(zoomTimer);commitWidth=true;frames.request();});
+ const observer=new ResizeObserver(()=>{camera.resize(viewport.clientWidth,viewport.clientHeight);labels.responsive(win.matchMedia(viewportQueries.compact).matches);win.clearTimeout(zoomTimer);commitWidth=true;frames.request();});
  observer.observe(viewport);
  const gestures=bindMapGestures(viewport,{getZoom:()=>camera.snapshot().zoom,zoomAt,panBy:(x,y)=>{camera.panBy(x,y);frames.request();}});
  host.querySelectorAll('[data-part1-zoom]').forEach(button=>button.addEventListener('click',()=>{

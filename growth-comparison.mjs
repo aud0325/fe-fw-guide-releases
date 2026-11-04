@@ -15,9 +15,9 @@ export {mountGrowthSource};
 export function normalizeGrowthState(state={}){
  const tab=growthTabs.includes(state.growthTab)?state.growthTab:'character';
  const sorts=['default','name','total',...(tab==='character'?['effective']:[]),...growthKeys];
- return {growthTab:tab,growthMode:tab==='class'&&state.growthMode==='stats'?'stats':'growth',growthQuery:String(state.growthQuery||''),growthHeat:state.growthHeat!=='off'?'on':'off',growthSkill:state.growthSkill===true,growthGroup:tab==='character'?'':String(state.growthGroup||''),growthSort:sorts.includes(state.growthSort)?state.growthSort:'default',growthDirection:state.growthDirection==='asc'?'asc':'desc',growthFocus:tab==='character'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(state.growthFocus||'')?state.growthFocus:''};
+ return {growthTab:tab,growthMode:tab!=='character'&&state.growthMode==='stats'?'stats':'growth',growthQuery:String(state.growthQuery||''),growthHeat:state.growthHeat!=='off'?'on':'off',growthSkill:state.growthSkill===true,growthGroup:tab==='character'?'':String(state.growthGroup||''),growthSort:sorts.includes(state.growthSort)?state.growthSort:'default',growthDirection:state.growthDirection==='asc'?'asc':'desc',growthFocus:tab==='character'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(state.growthFocus||'')?state.growthFocus:''};
 }
-export function growthRows(entries){
+export function growthRows(entries,{mode='growth'}={}){
  const ko=createTranslator('ko'),en=createTranslator('en');
  const rows=entries.filter(e=>e.type==='class'||e.type==='character'&&e.roles?.includes('playable')&&e.growthRates).map(e=>{
   const growth=e.type==='class'?e.classStats?.growth:e.growthRates,m=e.type==='character'?media[e.id]:entryIconMedia(e);
@@ -33,9 +33,16 @@ export function growthRows(entries){
   if(!group)continue;
   rows.push({id:e.id,type:'mount',name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:{en:group,ko:mountGrowthGroups[group].ko},values:growth.values,sourceId:growth.sourceId,hasDetail:true,image:''});
  }
+ if(mode==='stats'){
+  const mounts=entries.filter(e=>e.type==='mount').map(e=>{
+   const existing=rows.find(r=>r.type==='mount'&&r.id===e.id),m=e.mountDetails?.modifiers;
+   return {...existing,id:e.id,type:'mount',name:{ko:entryDisplayName(e,'ko'),en:entryDisplayName(e,'en')},group:existing?.group||{ko:e.category||'',en:e.category||''},values:existing?.values||{},statModifiers:m?.values||{},statSourceId:m?.sourceId,statSourceIds:m?.sourceIds||[],statCondition:m?.condition,statLevel:m?.level,hasDetail:true,image:''};
+  });
+  return [...rows.filter(r=>r.type!=='mount'),...mounts];
+ }
  return rows;
 }
-export const growthValues=(row,state)=>row.type==='class'&&state.growthMode==='stats'?row.statModifiers||{}:row.type==='character'&&state.growthSkill&&row.modified?row.modified:row.values;
+export const growthValues=(row,state)=>row.type!=='character'&&state.growthMode==='stats'?row.statModifiers||{}:row.type==='character'&&state.growthSkill&&row.modified?row.modified:row.values;
 export function growthTotal(row,state){const values=growthValues(row,state);return growthKeys.every(k=>Number.isFinite(values[k]))?growthKeys.reduce((sum,k)=>sum+values[k],0):null;}
 export function growthRank(row,rows,state){
  const total=growthTotal(row,state),totals=rows.map(r=>growthTotal(r,state)).filter(Number.isFinite);
@@ -60,7 +67,7 @@ export function growthBaseline(rows,state){
 }
 export function growthCellStyle(value,key,stats,state){
  if(!Number.isFinite(value)||state.growthHeat==='off')return '';
- const z=state.growthTab==='character'?(stats[key].sd?(value-stats[key].mean)/(2*stats[key].sd):0):value/(state.growthTab==='class'&&state.growthMode==='stats'?10:30),amount=Math.min(1,Math.abs(z)),end=z<0?[56,103,212]:[221,78,78],color=[255,255,255].map((v,i)=>Math.round(v+(end[i]-v)*amount));
+ const z=state.growthTab==='character'?(stats[key].sd?(value-stats[key].mean)/(2*stats[key].sd):0):value/(state.growthTab!=='character'&&state.growthMode==='stats'?10:30),amount=Math.min(1,Math.abs(z)),end=z<0?[56,103,212]:[221,78,78],color=[255,255,255].map((v,i)=>Math.round(v+(end[i]-v)*amount));
  const rgb=color.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4),lum=rgb.reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
  return `background:rgb(${color});color:${lum<=.179?'#fff':'#000'}`;
 }

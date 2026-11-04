@@ -1,4 +1,4 @@
-import {cleanCalculatorState,calculatorKeys as keys} from './growth-calculator-state.mjs';
+import {cleanCalculatorState,cleanCalculatorContext,calculatorKeys as keys} from './growth-calculator-state.mjs';
 export const calculatorSavesKey='fw-growth-calculator-saves-v1';
 export const calculatorSaveLimit=30;
 export function cleanSavedCalculations(value){
@@ -9,9 +9,9 @@ export function cleanSavedCalculations(value){
   if(s.kind==='manual'){
    const characterId=s.characterId||s.state?.characterId,level=s.level??s.state?.target;
    if(typeof characterId!=='string'||!/^[-a-z0-9]{1,100}$/.test(characterId)||!Number.isInteger(level)||level<1||level>99||!keys.every(k=>s.values[k]>=0&&s.values[k]<=999))return [];
-   return [{...common,kind:'manual',characterId,level}];
+   return [{...common,kind:'manual',characterId,level,...(s.basis==='total'?{basis:'total',context:cleanCalculatorContext(s.context)}:{})}];
   }
-  const state=cleanCalculatorState(s.state);return state?[{id:s.id,name:s.name,created:s.created,state,values:common.values}]:[];
+  const state=cleanCalculatorState(s.state);return state?[{id:s.id,name:s.name,created:s.created,state,values:common.values,...(s.basis==='total'?{basis:'total'}:{})}]:[];
  });
 }
 export function readSavedCalculations(storage){try{const raw=storage.getItem(calculatorSavesKey);return raw&&raw.length<=500000?cleanSavedCalculations(JSON.parse(raw)):[];}catch{return [];}}

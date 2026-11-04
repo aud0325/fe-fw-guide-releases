@@ -1,3 +1,4 @@
+import {retiredTipState} from './tip-retirement.mjs';
 import {isRetiredCharacterId} from './character-visibility.mjs';
 import {locationRedirects} from './location-review.mjs';
 import {parseCalculatorState,serializeCalculatorShare,parseCalculatorShare} from './growth-calculator-state.mjs';
@@ -12,7 +13,7 @@ import {canonicalMountId} from './mount-review.mjs';
 import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -20,9 +21,11 @@ export function preferredLanguage(saved,browserLanguage){
 // The header search starts a fresh, global query, independent of page filters.
 export const globalSearchState=query=>({...defaultState(),query});
 export function pagePath(state,lang='ko',base='/'){
+ if(!state.id&&state.type==='reconstruction')return base+lang+'/tools/reconstruction/';
  if(!state.id&&state.type==='calculator')return base+lang+'/tools/growth-calculator/';
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
- if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/':'');
+ if(!state.id&&state.type==='character'&&state.directoryView==='scout')return base+lang+'/category/character/scout/';
+ if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/'+(state.growthMode==='stats'?'stats/':''):'');
  return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(entrySlug(canonicalMountId(canonicalItemId(state.id)))))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
 export function stateQuery(state,{share=false}={}){
@@ -32,14 +35,14 @@ export function stateQuery(state,{share=false}={}){
  }
  if(!state.id&&state.type==='growth'){
   const next=normalizeGrowthState(state);
-  for(const [key,value]of Object.entries({mode:next.growthMode==='stats'?'stats':'',find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
+  for(const [key,value]of Object.entries({find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
   return p.size?'?'+p:'';
  }
  if(!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
  if(state.id&&state.growthSkill)p.set('skill','1');
  if(state.id)for(const [key,value]of [['forge-from',state.forgeFrom],['forge-to',state.forgeTo]])if(/^\d+$/.test(String(value??'')))p.set(key,String(value));
  if(state.type==='character'&&!state.id&&state.faction)p.set('faction',state.faction);
- if(state.type==='character'&&!state.id&&routes.some(([id])=>id===state.scout))p.set('scout',state.scout);
+ if(state.type==='character'&&!state.id&&routes.some(([id])=>id===state.scout)&&!(state.directoryView==='scout'&&state.scout==='cai'))p.set('scout',state.scout);
  if(state.type==='item'&&normalizeItemFlavor(state.itemFlavor))p.set('flavor',state.itemFlavor);
  if(state.type==='map'&&!state.id){
   for(const [key,value]of Object.entries({place:state.mapPlace,item:state.mapItem,province:state.mapProvince,'map-kind':state.mapKind,mq:state.mapQuery}))if(value)p.set(key,value);
@@ -53,11 +56,14 @@ export function readRoute(url,base='/',fallback='ko'){
  if(relative===null)return null;
  let parts=relative.replace(/index\.html$/,'').split('/').filter(Boolean),lang=['ko','en'].includes(parts[0])?parts.shift():fallback;
  if(legacy)parts=url.hash.slice(1).split('?')[0].split('/').filter(Boolean);
+ const reconstructionPath=parts.join('/')==='tools/reconstruction';
  const calculatorPath=parts.length===2&&parts[0]==='tools'&&parts[1]==='growth-calculator';
- const growthPath=parts[0]==='category'&&parts[1]==='growth'&&parts.length===3&&['class','mount'].includes(parts[2]);
+ const growthPath=parts[0]==='category'&&parts[1]==='growth'&&['class','mount'].includes(parts[2])&&(parts.length===3||parts.length===4&&parts[3]==='stats');
+ const scoutPath=parts.join('/')==='category/character/scout';
  const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
- if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!caiMapPath&&!calculatorPath)return null;
+ if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!scoutPath&&!caiMapPath&&!calculatorPath&&!reconstructionPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
+ if(reconstructionPath)state.type='reconstruction';
  if(calculatorPath){state.type='calculator';state.calculator=params.has('b')?parseCalculatorShare(params.get('b')):params.has('build')?parseCalculatorState(params.get('build')):null;state.calculatorInvalid=(params.has('b')||params.has('build'))&&!state.calculator;state.calculatorCharacter=params.get('unit')||'';}
  if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalMountId(canonicalItemId(canonicalEntryId(decodeURIComponent(parts[1])))));}catch{return null;}}
  if(state.id&&isRetiredCharacterId(state.id))Object.assign(state,{type:'character',id:null});
@@ -66,7 +72,7 @@ export function readRoute(url,base='/',fallback='ko'){
   if(!Object.hasOwn(types,parts[1]))return null;
   state.type=parts[1];
  }
- if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthMode:params.get('mode'),growthQuery:params.get('find'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
+ if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthMode:parts[3]==='stats'?'stats':params.get('mode'),growthQuery:params.get('find'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
  if(state.id){state.growthSkill=params.get('skill')==='1';for(const [key,param]of [['forgeFrom','forge-from'],['forgeTo','forge-to']])state[key]=/^\d+$/.test(params.get(param)||'')?params.get(param):'';}
  state.catalogQuery=!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)?params.get('find')||'':'';
  state.query=params.get('q')||'';state.group=params.get('group')||'';
@@ -75,6 +81,7 @@ export function readRoute(url,base='/',fallback='ko'){
  if(state.type==='spell'&&['dark','unknown'].includes(state.group))state.group='black';
  state.faction=state.type==='character'?params.get('faction')||'':'';
  state.scout=state.type==='character'&&!state.id&&routes.some(([id])=>id===params.get('scout'))?params.get('scout'):'all';
+ if(scoutPath){state.directoryView='scout';if(state.scout==='all')state.scout='cai';}
  state.route=routes.some(r=>r[0]===params.get('route'))?params.get('route'):'all';state.includeTips=params.get('tips')!=='0';
  state.order=['start','deadline','owner'].includes(params.get('sort'))?params.get('sort'):'start';
  Object.assign(state,normalizeItemFilters({itemMajor:params.get('main')||'',itemMinor:params.get('sub')||'',itemKind:params.get('kind')||''}));
@@ -95,7 +102,7 @@ export function readRoute(url,base='/',fallback='ko'){
   const kind=(params.get('kind')||params.get('group')||'').toLowerCase();
   if(params.get('sub')==='magic'||Object.hasOwn(groups,kind))Object.assign(state,{type:'spell',group:groups[kind]||'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''});
  }
- return {state,lang,legacy};
+ const retired=retiredTipState(state);return {state:retired?{...defaultState(),...retired}:state,lang,legacy};
 }
 export function entryLanguageAnchor(target,current,base='/',lang='ko'){
  if(target.origin!==current.origin||target.hash||!current.hash)return '';

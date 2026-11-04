@@ -13,8 +13,8 @@ export default {
   "en": "2026.09.26 · Catalog sources"
  },
  "shell.footer": {
-  "ko": "비공식 팬 프로젝트 · Nintendo / INTELLIGENT SYSTEMS와 무관합니다.<br>공략은 출처 확인일 기준이며, 한국어 임시 표기는 문서에 별도로 표시합니다.",
-  "en": "Unofficial fan project. Not affiliated with Nintendo / INTELLIGENT SYSTEMS.<br>Guides reflect their source dates. Provisional Korean names are marked separately."
+  "ko": "비공식 팬 프로젝트 · Nintendo / INTELLIGENT SYSTEMS와 무관합니다.<br>한국어 임시 표기는 문서에 별도로 표시합니다.",
+  "en": "Unofficial fan project. Not affiliated with Nintendo / INTELLIGENT SYSTEMS.<br>Provisional Korean names are marked separately."
  },
  "shell.route-cai": {
   "ko": "카이",

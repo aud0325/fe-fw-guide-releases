@@ -204,8 +204,8 @@ export default {
   "en": "Class stat modifiers"
  },
  "growth.stat-method": {
-  "ko": "병종 능력치 보정의 히트맵은 −10~+10 척도를 사용합니다. 성장률 보정과 별개의 값입니다.",
-  "en": "Class stat modifiers use a fixed −10 to +10 heatmap scale. These are separate from growth modifiers."
+  "ko": "능력치 보정의 히트맵은 −10~+10 척도를 사용합니다. 성장률 보정과 별개의 값입니다.",
+  "en": "Stat bonuses use a fixed −10 to +10 heatmap scale. These are separate from growth modifiers."
  },
  "growth.directory": {
   "ko": "병종 목록",

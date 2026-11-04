@@ -2,6 +2,7 @@
 import {classTierName} from '../class-tiers.mjs';
 const tierLabel=tier=>({ko:classTierName(tier,'ko',{compact:true}),en:classTierName(tier,'en',{compact:true})});
 export default {
+ "character.origin":{"ko":"원천","en":"Origin"},
  "character.training-growth": {"ko":"캐릭터 + 병종 성장률 비교","en":"Compare character + class growth"},
  "character.training-growth-basis": {"ko":"개인 성장률에 병종 보정을 더한 값입니다. 탈것 보정은 제외했습니다.","en":"Personal growth rates plus class growth modifiers, excluding mounts."},
  "character.training-growth-skill": {"ko":"성장의 징조를 포함했습니다.","en":"Includes Signs of Growth."},

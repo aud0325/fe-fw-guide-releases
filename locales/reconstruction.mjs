@@ -8,5 +8,5 @@ export default {
  'reconstruction.storage-help':{ko:'완료 표시는 이 기기에 저장됩니다. 장소 검색은 합계에 영향을 주지 않습니다.',en:'Completed marks are saved on this device. Filtering locations does not change totals.'},
  'reconstruction.complete':{ko:'{name} 복구 완료',en:'{name} repaired'},'reconstruction.complete-short':{ko:'복구 완료',en:'Repaired'},
  'reconstruction.finished':{ko:'표시된 장소의 복구를 모두 완료했습니다.',en:'All listed locations are marked repaired.'},'reconstruction.no-results':{ko:'일치하는 장소가 없습니다.',en:'No matching locations.'},
- 'reconstruction.uses':{ko:'복구에 필요한 장소',en:'Required for repairs'},'reconstruction.plan-link':{ko:'지역 복구 계획·전체 재료',en:'Regional repair plan and all materials'},
+ 'reconstruction.uses':{ko:'복구에 필요한 장소',en:'Required for repairs'},'reconstruction.plan-link':{ko:'(3부)복구 필요재화 계산기',en:'Restoration materials calculator (Part III)'},
 };

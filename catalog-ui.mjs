@@ -1,3 +1,4 @@
+import {characterOriginDetails} from './character-origin-ui.mjs';
 import {classTierOrder,tierNames} from './class-tiers.mjs';
 import {classDetails} from './class-ui.mjs';
 import {sampleAbilitySections,sampleCharacters,sampleItemAbilities,sampleProfileProficiencies} from './_abilities/sample-integration.mjs';
@@ -100,15 +101,15 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   const definitions=(facts,className)=>`<dl class="${className}">${[...table(facts,'',false).matchAll(/<tr><th[^>]*>([\s\S]*?)<\/th><td>([\s\S]*?)<\/td><\/tr>/g)].map(([,label,value],index)=>`<div><dt>${label}</dt><dd>${className==='proficiency-overview'?`<span class="proficiency-affinity affinity-${facts[index].key==='pref_skills'?'preferred':'nonpreferred'}">${value}</span>`:value}</dd></div>`).join('')}</dl>`;
   const proficiencies=profileProficiencies??(proficiencyFacts.length?definitions(proficiencyFacts,'proficiency-overview'):'');
   const skills=characterSkills??(skillFacts.length?`<section id="section-abilities" tabindex="-1"><h2>${t('character.skills')}</h2>${table(skillFacts,'',false)}</section>`:'');
-  const biography=basic.filter(f=>!identityKeys.includes(f.key)&&!capabilityKeys.includes(f.key)&&visibleProfileFact(f));
-  const sections=['profile',...(e.recruitment||e.recruitmentAvailability?['recruitment']:[]),...(growth?['training']:[]),...(e.recruitmentEquipment?.length?['recruitment-equipment']:[]),...(skills?['abilities']:[]),...(e.trainingGuide?['guide']:[]),...(support?['supports']:[]),...(activities?['activities']:[]),...(biography.length?['biography']:[]),...(e.gifts?.length?['gifts']:[]),...(e.birdConversations?.length?['bird-dialogue']:[])];
+  const biography=basic.filter(f=>!(e.origin&&f.key==='unique-possession')&&!identityKeys.includes(f.key)&&!capabilityKeys.includes(f.key)&&visibleProfileFact(f));
+  const sections=['profile',...(e.recruitment||e.recruitmentAvailability?['recruitment']:[]),...(growth?['training']:[]),...(e.recruitmentEquipment?.length?['recruitment-equipment']:[]),...(skills?['abilities']:[]),...(e.origin?['origin']:[]),...(e.trainingGuide?['guide']:[]),...(support?['supports']:[]),...(activities?['activities']:[]),...(biography.length?['biography']:[]),...(e.gifts?.length?['gifts']:[]),...(e.birdConversations?.length?['bird-dialogue']:[])];
   const sectionPath=pagePath({id:e.id},t.locale,base)+stateQuery({...defaultState(),id:e.id,route,growthSkill});
   out+=`<nav class="character-sections" aria-label="${t('character.sections')}">${sections.map(id=>`<a href="${esc(sectionPath)}#section-${id}">${id==='recruitment-equipment'?t('equipment.nav'):id==='supports'?t('support.title'):id==='meals'?t('social.meals'):id==='bird-dialogue'?t('social.bird-title'):id==='activities'?t('activity.nav'):t('character.'+id)}</a>`).join('')}</nav>`;
   out+=`<div class="character-overview-layout"><div class="character-identity"><section id="section-profile" class="character-profile${portraitHtml?' has-portrait':''}" aria-label="${t('character.profile-proficiencies')}" tabindex="-1"><div class="profile-top">${portraitHtml}<div class="profile-info"><h1 tabindex="-1" id="entry-title">${esc(name(e))}</h1>${profileFacts.length?definitions(profileFacts,'profile-facts'):''}</div>${proficiencies}</div></section>`;
   out+=growth+'</div>';
   out+=recruitmentDetails(e,{t,tx,name,href,entries,routes,sources,route,text})+'</div>';
   out+=recruitmentEquipment(e,{t,name,href,entries,routes,route,base});
-  out+=skills;
+  out+=skills+characterOriginDetails(e,{t});
   out+=characterGuide(e,{t,tx,name,href,entries,sources});
   out+=support+activities;
   if(biography.length)out+=`<section id="section-biography" tabindex="-1"><h2>${t('character.biography')}</h2>${table(biography,'',false)}</section>`;

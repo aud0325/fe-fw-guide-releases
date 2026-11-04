@@ -16,6 +16,14 @@ export function sortScouts(list,route){
  const rank=e=>{const r=e.recruitment[route];return [r.mode==='automatic'?0:r.mode==='scout'&&r.renown!=null&&r.support!=null?1:2,r.renown??Infinity,r.support??Infinity,r.item||r.gold||r.requirement&&!['N/A','Automatic',''].includes(r.requirement)?1:0];};
  return eligible.sort((a,b)=>{if(a.recruitment[route].mode==='automatic'&&b.recruitment[route].mode==='automatic'){const x=automaticRank(a.id,route),y=automaticRank(b.id,route);if(x!==y)return x<y?-1:1;}const x=rank(a),y=rank(b);for(let i=0;i<x.length;i++)if(x[i]!==y[i])return x[i]<y[i]?-1:1;return a.name.en.localeCompare(b.name.en);});
 }
+export function scoutRenownKey(e,route){
+ const r=e.recruitment?.[route];
+ return r?.mode==='automatic'?'automatic':Number.isFinite(r?.renown)?String(r.renown):'unknown';
+}
+export function scoutRenownBoundaries(rows){
+ let previous;
+ return rows.map(({key,visible=true})=>{if(!visible)return false;const start=previous!==undefined&&previous!==key;previous=key;return start;});
+}
 export function scoutConditions(e,route,t){
  const r=e.recruitment?.[route];if(!r)return t('scout.unknown');
  const comparison=recruitmentComparison(e,route),flag=comparison?' · '+t('character.'+comparison.kind):'';
@@ -24,9 +32,9 @@ export function scoutConditions(e,route,t){
  if(r.mode==='unknown')return t('scout.unknown')+flag;
  return t('scout.conditions',{renown:recruitmentValue(e,route,'renown'),support:recruitmentValue(e,route,'support')})+(r.item||r.gold||r.requirement&&!['N/A','Automatic',''].includes(r.requirement)?' · '+t('scout.additional'):'')+flag;
 }
-export function scoutToolbar(state,t){
+export function scoutToolbar(state,t,{onlyRoutes=false}={}){
  const selected=scoutRoute(state),route=routes.find(([id])=>id===selected);
- return `<section class="scout-toolbar" aria-label="${t('scout.label')}"><div class="scout-routes">${[['all',t('scout.default')],...routes.map(([id,ko,en])=>[id,t(ko,en)])].map(([id,name])=>`<button type="button" data-scout-route="${id}" aria-pressed="${selected===id}">${esc(name)}</button>`).join('')}</div><p class="scout-caption" role="status">${route?t('scout.group-help'):t('scout.factions')}</p>${route?`<details class="sort-help"><summary>${t('editorial.sort-order-and-caveats')}</summary><p class="result-label">${t('scout.order')} ${t('character.sort-basis')}</p></details>`:''}</section>`;
+ return `<section class="scout-toolbar" aria-label="${t('scout.label')}"><div class="scout-routes">${[...(!onlyRoutes?[['all',t('scout.default')]]:[]),...routes.map(([id,ko,en])=>[id,t(ko,en)])].map(([id,name])=>`<button type="button" data-scout-route="${id}" aria-pressed="${selected===id}">${esc(name)}</button>`).join('')}</div><p class="scout-caption" role="status">${route?t('scout.group-help'):t('scout.factions')}</p>${route?`<details class="sort-help"><summary>${t('editorial.sort-order-and-caveats')}</summary><p class="result-label">${t('scout.order')} ${t('character.sort-basis')}</p></details>`:''}</section>`;
 }
 
 export function scoutGroups(list,route){

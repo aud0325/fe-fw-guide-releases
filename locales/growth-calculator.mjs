@@ -35,7 +35,7 @@ export default {
  'calculator.bond':{ko:'친밀도',en:'Bond'},
  'calculator.none':{ko:'탈것 없음',en:'No mount'},
  'calculator.skill':{ko:'성장의 징조 적용',en:'Apply Signs of Growth'},
- 'calculator.add':{ko:'구간 추가',en:'Add stage'},
+ 'calculator.add':{ko:'병종 경로 추가',en:'Add class stage'},
  'calculator.remove':{ko:'구간 삭제',en:'Remove stage'},
  'calculator.stageLabel':{ko:'{path}의 {stage}번째 구간',en:'Path {path}, stage {stage}'},
  'calculator.result':{ko:'Lv{level}의 기본 기대 능력치',en:'Expected base stats at Lv{level}'},

@@ -1,5 +1,5 @@
 import {visibleMountRecords,mountCaptureAnchor,groupedCaptureRecords} from './mount-acquisition-ui.mjs';
-import {coveredGatheringRecord} from './gathering-model.mjs';
+import {coveredGatheringRecord,gatheringSupplyRows} from './gathering-model.mjs';
 import {gatheringConditionDetails} from './gathering-ui.mjs';
 import {mapProvinces,mapMeta,mapKinds,gatheringTypes,mapMarkerKind,filterMapNodes,mapPointForEntry,mapNodes} from './part1-map.mjs';
 import {mapTiles} from './part1-map-assets.mjs';
@@ -11,6 +11,7 @@ const mapIcons={...baseMapIcons,...routeMapIcons};
 import {escapeHtml as esc} from './core.mjs';
 import {pagePath,stateQuery,defaultState} from './routing.mjs';
 import {informationHint} from './presentation.mjs';
+import {icon} from './icons.mjs';
 import {acquisitionPlaces,uncoveredAcquisitionRecords} from './acquisition-map.mjs';
 import {tradeMaterials} from './item-economy-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
@@ -47,7 +48,7 @@ function recordConditions(r,{t,routes}){
  return values.filter(Boolean).join(' · ');
 }
 function recordLine(r,ctx,item){
- if(r.gatheringScopes)return gatheringConditionDetails(r.gatheringScopes,ctx);
+ if(r.gatheringScopes)return gatheringConditionDetails(r.gatheringScopes,ctx,{method:r.gatheringMethod,compact:ctx.compactGathering});
  if(r.mountSource==='stable'){
   const link=id=>{const target=ctx.entries.find(e=>e.id===id);return `<a href="${esc(ctx.href(id))}">${esc(ctx.name(target))}</a>`;};
   return esc([ctx.tx(r.method),recordConditions({...r,condition:null},ctx)].filter(Boolean).join(' · '))+' · '+ctx.t('mount.stable-condition',{mount:link(r.requiredMountId),character:link(r.requiredCharacterId)});
@@ -72,22 +73,31 @@ function caiPlaceContent(node,ctx,heading,showMounts=true){
 }
 export function placeDetails(node,ctx,{description=true,heading=4,variant='all',showResources=true,showMounts=true}={}){
  const {t,tx,href,name,entries}=ctx,d=node.details||{};
- const list=(rows,key,show=showResources)=>show&&rows?.length?`<h${heading} class="place-content-heading">${t(key)}</h${heading}><ul class="place-content-list">${rows.map(row=>{
+ const place=entries.find(e=>e.id===node.entryId);
+ const gatheringRows=showResources&&place?gatheringSupplyRows(place).map(row=>({...row,gatheringScopes:(row.gatheringScopes||[]).filter(s=>s.part===1&&(variant!=='cai'||caiChangedPlace(node.id)||s.route==='cai')),availability:(row.availability||[]).filter(s=>s.part===1&&(variant!=='cai'||caiChangedPlace(node.id)||s.route==='cai'||s.routeIds?.includes('cai')))})).filter(row=>row.gatheringScopes.length||row.availability.length):[];
+ const gathering=gatheringRows.length?`<h${heading} class="place-content-heading">${t('supply.gathering')}</h${heading}><ul class="place-content-list map-gathering-list">${gatheringRows.map(row=>{
+  const item=entries.find(e=>e.id===row.itemId),label=item?name(item):tx(row.name);
+  const conditions=gatheringConditionDetails(row.gatheringScopes,ctx,{method:row.sheet?.method})+row.availability.map(r=>`<span class="gathering-scope">${esc(recordConditions(r,ctx))}</span>`).join('');
+  return `<li>${item?`<a href="${esc(href(item.id))}">${esc(label)}</a>`:`<span lang="en">${esc(label)}</span>`}${conditions}</li>`;
+ }).join('')}</ul>`:'';
+ const gatheringIds=new Set(gatheringRows.map(r=>r.itemId).filter(Boolean));
+ const list=(rows,key,show=showResources,dedupe=true)=>{rows=dedupe?rows?.filter(row=>!gatheringIds.has(row.itemId)):rows;return show&&rows?.length?`<h${heading} class="place-content-heading">${t(key)}</h${heading}><ul class="place-content-list">${rows.map(row=>{
   const item=entries.find(e=>e.id===row.itemId);
   const label=item?(t.locale==='en'?name(item):row.ko):tx({ko:row.ko,en:row.en||row.ko});
   return `<li>${item?`<a href="${href(item.id)}">${esc(label)}</a>`:`<span${t.locale==='en'&&/[가-힣]/.test(label)?' lang="ko"':''}>${esc(label)}</span>`}</li>`;
- }).join('')}</ul>`:'';
+ }).join('')}</ul>`:'';};
  const facilities=d.facilities?.length?`<h${heading} class="place-content-heading">${t('map.facilities')}</h${heading}><ul class="place-content-list">${d.facilities.map(row=>`<li>${t('map.facility-'+row.kind)}${row.count>1?' · '+t('map.facility-count',{count:row.count}):''}</li>`).join('')}</ul>`:'';
  const destinations=d.destinations?.length?`<h${heading} class="place-content-heading">${t('map.destinations')}</h${heading}><ul class="place-content-list">${d.destinations.map(id=>{
   const target=mapNodes.find(n=>n.id===id);
   return `<li><a href="${href(target.entryId)}"${t.locale==='en'&&/[가-힣]/.test(mapName(target,t))?' lang="ko"':''}>${esc(mapName(target,t))}</a></li>`;
  }).join('')}${d.unknownDestinations?`<li>${t('map.hidden-destinations',{count:d.unknownDestinations})}</li>`:''}</ul>`:'';
- return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${variant==='cai'&&caiChangedPlace(node.id)?`${caiPlaceContent(node,ctx,heading,showMounts)}<details class="part1-linked-records"><summary>${t('map.other-route-materials')}</summary>${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}</details>`:`${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${caiPlaceContent(node,ctx,heading,showMounts)}`}${destinations}${d.previousReports?.length?`<details class="part1-linked-records"><summary>${t('map.previous-report')}</summary>${d.previousReports.map(r=>`<p>${esc(recordConditions(r,ctx))}</p>${list(r.rows,r.key==='loot'?'map.loot':'map.materials',true)}`).join('')}</details>`:''}`;
+ return `${description&&d.description?`<p>${esc(tx(d.description))}</p>`:''}${facilities}${variant==='cai'&&caiChangedPlace(node.id)?`${caiPlaceContent(node,ctx,heading,showMounts)}<details class="part1-linked-records"><summary>${t('map.other-route-materials')}</summary>${gathering}${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}</details>`:`${gathering}${list(d.materials,'map.materials')}${list(d.loot,'map.loot')}${caiPlaceContent(node,ctx,heading,showMounts)}`}${destinations}${d.previousReports?.length?`<details class="part1-linked-records"><summary>${t('map.previous-report')}</summary>${d.previousReports.map(r=>`<p>${esc(recordConditions(r,ctx))}</p>${list(r.rows,r.key==='loot'?'map.loot':'map.materials',true,false)}`).join('')}</details>`:''}`;
 }
-function placeMetadata(node,ctx,variant='all',{showAccess=true}={}){
+function placeMetadata(node,ctx,variant='all',{showAccess=true,compact=false}={}){
  const {t,tx}=ctx,access=showAccess?node.details?.access:null;
  const tag=access&&access.kind!=='route'?informationHint(tx(access.note),t('map.sea-area-help'),t('map.sea-area'),'sea-access-tag'):'';
  const cai=caiDetailsFor(node,ctx.entries),routeTags=[cai?.farming?t('map.cai-farming-tag'):'',cai?.mounts?.length?t('map.cai-animal-tag'):''].filter(Boolean);
+ if(compact)return `${tag?`<p class="place-metadata">${tag}</p>`:''}${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
  return `<p class="place-metadata"><span>${esc([mapProvinces.some(p=>p.id===node.province)?provinceName(node.province,t):'',placeKindName(node,t,variant),...(variant==='cai'?[]:routeTags)].filter(Boolean).join(' · '))}</span>${tag}</p>${access?.kind==='route'?`<p class="place-access">${esc(tx(access.note))}</p>`:access?`<noscript><p>${esc(tx(access.note))}</p></noscript>`:''}`;
 }
 function selectedDetails(node,ctx,variant='all'){
@@ -101,6 +111,7 @@ export function part1Map(state,ctx){
  const matching=!!(state.mapQuery?.trim()||state.mapProvince||state.mapKind);
  const hiddenKinds=defaultHiddenMapKinds.filter(kind=>kind!==selected?.kind);
  const placeHref=n=>mapRoute(state,lang,base,{mapPlace:n.id});
+ const gatheringReferences=[...new Set(ctx.entries.filter(e=>e.type==='location').flatMap(e=>[...(e.gatheringSheet||[]).map(r=>r.sourceId),...(e.gatheringConditions||[]).flatMap(r=>r.scopes.filter(s=>s.part===1).map(s=>s.sourceId))]))].filter(id=>ctx.sources?.[id]).map(id=>{const source=ctx.sources[id];return `<p id="source-${esc(id)}"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(ctx.tx(source.title))}</a></p>`;}).join('');
  return `<section class="part1-map" data-part1-map data-variant="${variant}" data-place="${esc(selected?.id||'')}">
  <nav class="part1-variants" aria-label="${t('map.variant-label')}">${['all','cai'].map(id=>`<a href="${esc(mapRoute(state,lang,base,switchMapVariant(state,id)))}" data-map-variant="${id}"${variant===id?' aria-current="page"':''}>${t('map.variant-'+id)}</a>`).join('')}</nav>
  <noscript><p>${t('map.static-help')} <a href="${esc(pagePath({type:'location'},lang,base))}">${t('map.browse-places')}</a></p></noscript>
@@ -116,7 +127,7 @@ export function part1Map(state,ctx){
  </div></div><details class="part1-legend" open><summary>${t('map.legend-title')}</summary><ul>${mapLegend(hiddenKinds,t,variant)}</ul><div class="part1-name-toggle"><label title="${t('map.show-names-help')}"><input type="checkbox" data-map-toggle-names checked disabled><span>${t('map.show-names')}</span></label></div></details></div><p class="part1-pan">${t('map.pan')}<span class="part1-route-limits">${t(variant==='cai'?'map.cai-route-limits':'map.route-limits')}</span><span class="part1-mobile-names-help">${t('map.mobile-names-help')}</span></p>
  </div><div class="part1-sidebar"><section class="part1-selection" id="map-selection" tabindex="-1" aria-live="polite">${selectedDetails(selected,ctx,variant)}</section>
  </div></div>
- <footer class="part1-credit"><details class="page-references"><summary>${t('presentation.references')}</summary><div id="map-source"><p>${t('map.credit')}</p>${variant==='all'?`<p>${t('map.composite-reference')}</p>`:''}</div></details></footer>
+ <footer class="part1-credit"><details class="page-references"><summary>${t('presentation.references')}</summary><div id="map-source"><p>${t('map.credit')}</p>${variant==='all'?`<p>${t('map.composite-reference')}</p>`:''}${gatheringReferences}</div></details></footer>
  </section>`;
 }
 function inlineMap(points,entry,ctx,{reference=false,variant='all'}={}){
@@ -132,30 +143,39 @@ export function guideLocationMap(places,ctx){
  });
  return `<div class="guide-location-layout"><figure class="guide-location-map"><div class="guide-location-canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${mapMeta.width} ${mapMeta.height}" role="img" aria-label="${esc(t('tip.location-map',{count:rows.length}))}">${mapTiles.map(tile=>`<image href="${esc(tile.src)}" x="${tile.x}" y="${tile.y}" width="${tile.width}" height="${tile.height}" aria-hidden="true"/>`).join('')}</svg>${rows.map((row,i)=>`<a class="guide-location-pin" style="left:${row.point.u*100}%;top:${row.point.v*100}%" href="${esc(mapHref(row.point.id,'',lang,base))}" aria-label="${esc(t('tip.location-open',{number:i+1,label:tx(row.label),place:mapName(row.point,t)}))}"><span aria-hidden="true">${i+1}</span></a>`).join('')}</div><figcaption>${t('tip.location-map-help')}</figcaption></figure><ol class="guide-location-list">${rows.map((row,i)=>`<li><span class="entry-place-number" aria-hidden="true">${i+1}</span><div><small>${esc(tx(row.clue))}</small><h3>${esc(tx(row.label))}</h3><a href="${esc(href(row.entryId))}">${esc(mapName(row.point,t))}</a></div></li>`).join('')}</ol></div>`;
 }
-function itemAcquisitionLine(record,place,ctx,item){
+function itemAcquisitionLine(record,place,ctx,item,{compact=false}={}){
  // Generic guide/observation scopes are evidence, not availability conditions.
  if(['gathering','dungeon'].includes(record.method)&&!record.route&&record.chapter==null&&!record.condition){
-  return place.point?'':ctx.t(record.method==='gathering'?'map.gathering-method':'map.dungeon');
+  return place.point&&!compact?'':ctx.t(record.method==='gathering'?'map.gathering-method':'map.dungeon');
  }
  if(record.method==='acquisition'&&['Found at','Acquisition location','Reported acquisition','Purchase location','Trade location'].includes(record.label?.en))return '';
  return recordLine({...record,part:record.observedRoute||record.gameDate?null:record.part,observedRoute:null,gameDate:null},ctx,item);
 }
-function placeRows(places,entry,ctx){
+function placeRows(places,entry,ctx,{table=false}={}){
  const {t,lang,base,href,name,entries,tx}=ctx;
- return `<ol class="entry-acquisition-list">${places.map((place,i)=>{
+ const rowContext=table?{...ctx,compactGathering:true}:ctx;
+ const rows=places.map((place,i)=>{
   const variant=place.records.some(r=>r.sourceId==='administrator-cai-observations'||r.mountSource==='scoped-location'&&r.part===1&&r.route==='cai')&&mapVariantNodes('cai').some(n=>n.id===place.point?.id)?'cai':'all';
   const target=entries.find(e=>e.id===place.id),title=place.point?mapName(place.point,t):target?name(target):tx(place.where);
   const region=target?.mapProvince?tx(target.mapProvince):[...new Set(place.records.map(r=>r.region?ctx.text(r.region):'').filter(Boolean))].join(' · ');
   const gatheringScopes=place.records.flatMap(r=>r.gatheringScopes||[]),displayRecords=groupedCaptureRecords(place.records.filter(r=>!coveredGatheringRecord(r,gatheringScopes)));
-  const lines=[...new Set(displayRecords.map(r=>entry.type==='item'||r.sourceId==='administrator-cai-observations'?itemAcquisitionLine(r,place,ctx,entry):recordLine(r,ctx,entry)).filter(Boolean))];
+  const lines=[...new Set(displayRecords.map(r=>entry.type==='item'||r.sourceId==='administrator-cai-observations'?itemAcquisitionLine(r,place,rowContext,entry):recordLine(r,rowContext,entry)).filter(Boolean))];
+  if(table&&!lines.length)lines.push(...new Set(displayRecords.map(r=>itemAcquisitionLine(r,place,rowContext,entry,{compact:true})).filter(Boolean)));
   const shownLines=lines.filter(line=>line.includes(' · ')||!lines.some(other=>other!==line&&other.startsWith(line+' · '))).map(line=>`<small>${line}</small>`);
   const supply=place.records.find(r=>r.supplyRecord),trade=place.records.some(r=>r.materials?.length)&&target?.locationSupplies?.shops.some(r=>r.itemId===entry.id),section=supply?(supply.supplyRecord==='gathering'?'gathering':'shop'):trade?'shop':null;
   const promotion=place.records.some(r=>r.promotionItem)&&target?.promotionItems?.some(r=>r.itemId===entry.id);
   const capture=place.records.find(r=>r.mountSource==='scoped-location');
   const targetHref=target&&capture?pagePath({id:target.id},lang,base)+'#'+mountCaptureAnchor(entry.id,capture.part):target&&promotion?pagePath({id:target.id},lang,base)+'#section-promotion-items':target&&section?pagePath({id:target.id},lang,base)+'#section-'+section+'-supplies':target?href(target.id):'';
   const showAccess=!place.records.every(r=>r.part&&r.part!==1);
+  if(table){
+   const mapLink=place.point?`<a class="item-acquisition-map-link" href="${esc(mapHref(place.point.id,'',lang,base,variant))}" aria-label="${esc(t('item.acquisition.map-link',{place:title}))}" title="${esc(t('map.open'))}">${icon('map')}</a>`:'';
+   const label=target?`<a href="${esc(targetHref)}">${esc(title)}</a>`:esc(title);
+   const access=place.point?placeMetadata(place.point,ctx,variant,{showAccess,compact:true}):'';
+   return `<tr><th scope="row"><div class="item-acquisition-place">${place.point?`<span class="entry-place-number" aria-hidden="true">${i+1}</span>`:''}<span class="item-acquisition-name">${label}</span>${mapLink}</div></th><td>${access}${shownLines.join('')}</td></tr>`;
+  }
   return `<li><div class="entry-acquisition-heading"><span class="entry-place-number" aria-hidden="true">${i+1}</span><h3>${target?`<a href="${esc(targetHref)}">${esc(title)}</a>`:esc(title)}</h3></div>${place.point?`${placeMetadata(place.point,ctx,variant,{showAccess})}<a class="entry-map-link" href="${esc(mapHref(place.point.id,entry.type==='item'?'':entry.id,lang,base,variant))}">${t('map.open')}</a>`:place.context==='method'||!region?'':`<p class="entry-unmapped">${esc(region)}</p>`}${shownLines.join('')}</li>`;
- }).join('')}</ol>`;
+ }).join('');
+ return table?`<div class="table-wrap item-acquisition-table"><table><caption class="sr-only">${t('map.where-to-find')}</caption><colgroup><col class="item-acquisition-place-column"><col></colgroup><thead><tr><th scope="col">${t('item.acquisition.place')}</th><th scope="col">${t('item.acquisition.conditions')}</th></tr></thead><tbody>${rows}</tbody></table></div>`:`<ol class="entry-acquisition-list">${rows}</ol>`;
 }
 function mountPlaces(entry,ctx){
  const {t,href,name,entries}=ctx;
@@ -166,11 +186,11 @@ function mountPlaces(entry,ctx){
   const scoped=part=>places.map(p=>({...p,records:p.records.filter(r=>part===3?r.part===3:r.part!==3)})).filter(p=>p.records.length);
   const group=rows=>{const mapped=rows.filter(p=>p.point),other=rows.filter(p=>!p.point);return (mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:mapped.every(p=>p.records.every(r=>(r.route||r.observedRoute)==='cai'&&r.part===1))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:'')+(other.length?placeRows(other,entry,ctx):'');};
   const current=group(scoped(1)),later=group(scoped(3));
-  return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${current}${later?`<details class="location-supply-later" id="mount-acquisition-part-3"><summary>${t('mount.acquisition.later')}</summary>${later}</details>`:''}${entry.acquisition.some(r=>r.mountSource==='scoped-location')?`<a class="entry-map-link" href="${href('game8-capture')}">${t('map.capture-guide')}</a>`:''}</section>`;
+  return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${current}${later?`<details class="location-supply-later" id="mount-acquisition-part-3"><summary>${t('mount.acquisition.later')}</summary>${later}</details>`:''}</section>`;
  }
  const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method');
  if(!places.length)return '';
- return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}<a class="entry-map-link" href="${href('game8-capture')}">${t('map.capture-guide')}</a></section>`;
+ return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}</section>`;
 }
 export function entryMapLinks(entry,ctx){
  const {t,lang,base,entries}=ctx;
@@ -189,5 +209,5 @@ export function entryMapLinks(entry,ctx){
  if(entry.type!=='item')return '';
  const places=acquisitionPlaces(entry,entries).map(place=>({...place,records:uncoveredAcquisitionRecords(entry,place.records)})).filter(place=>place.records.length);if(!places.length)return '';
  const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method'),openUnmapped=unmapped.some(p=>p.records.some(r=>r.gatheringScopes?.some(s=>s.firstGatherGuaranteed)));
- return `<section class="entry-acquisition" id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${entry.type==='mount'&&entry.body?`<p>${esc(ctx.tx(entry.body))}</p>`:''}${mapped.length?`<div class="entry-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx,{variant:entry.type==='mount'&&mapped.every(p=>p.records.some(r=>r.sourceId==='administrator-cai-observations'))?'cai':'all'})}${placeRows(mapped,entry,ctx)}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"${openUnmapped?' open':''}><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx)}</details>`:placeRows(unmapped,entry,ctx):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx)}`:''}</section>`;
+ return `<section class="entry-acquisition" data-item-acquisition id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${mapped.length?`<div class="entry-acquisition-layout item-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx)}${placeRows(mapped,entry,ctx,{table:true})}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"${openUnmapped?' open':''}><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx,{table:true})}</details>`:placeRows(unmapped,entry,ctx,{table:true}):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx,{table:true})}`:''}</section>`;
 }

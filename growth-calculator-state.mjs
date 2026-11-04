@@ -3,13 +3,18 @@ export const calculatorSessionKey='fw-growth-calculator-session-v1';
 export const calculatorKeys=['hp','str','mag','spd','dex','def','res','lck','cha'];
 const id=value=>typeof value==='string'&&/^[a-z0-9][a-z0-9:-]{0,100}$/.test(value)?value:'';
 const number=value=>typeof value==='number'&&Number.isFinite(value)?value:'';
+export const calculatorWeapons=['none','sword','spear','axe','bow','gauntlet'];
+export function cleanCalculatorContext(value){
+ if(!value||!id(value.classId))return null;
+ return {classId:id(value.classId),mountId:id(value.mountId),bond:5,weapon:calculatorWeapons.includes(value.weapon)?value.weapon:'none',...(id(value.battalionId)?{battalionId:id(value.battalionId)}:{})};
+}
 const vector=value=>Object.fromEntries(calculatorKeys.map(k=>[k,number(value?.[k])]));
 export function cleanCalculatorState(value){
  if(!value||value.v!==1||!Array.isArray(value.builds)||value.builds.length<1||value.builds.length>2)return null;
  if(value.builds.some(b=>!b||!Array.isArray(b.stages)||b.stages.length>12||b.stages.some(s=>!s||typeof s!=='object'||Array.isArray(s))))return null;
- return {v:1,recruitmentRoute:['cai','dietrich','theodora','leda'].includes(value.recruitmentRoute)?value.recruitmentRoute:'',characterId:id(value.characterId),target:number(value.target),compare:value.compare===true,comparison:{mode:value.comparison?.mode==='saved'?'saved':'manual',savedId:id(value.comparison?.savedId),leftMode:value.comparison?.leftMode==='saved'?'saved':'current',leftSavedId:id(value.comparison?.leftSavedId),manualName:typeof value.comparison?.manualName==='string'?value.comparison.manualName.slice(0,160):null,manualCharacterId:id(value.comparison?.manualCharacterId),manualLevel:number(value.comparison?.manualLevel),manualLocked:value.comparison?.manualLocked===true,manualSavedId:id(value.comparison?.manualSavedId),stats:vector(value.comparison?.stats)},builds:value.builds.map(b=>({
+ return {v:1,battalionAdded:value.battalionAdded===true||!!id(value.battalionId),battalionId:id(value.battalionId),weapon:calculatorWeapons.includes(value.weapon)?value.weapon:'none',recruitmentRoute:['cai','dietrich','theodora','leda'].includes(value.recruitmentRoute)?value.recruitmentRoute:'',characterId:id(value.characterId),target:number(value.target),compare:value.compare===true,comparison:{purpose:value.comparison?.purpose==='records'||value.comparison?.purpose==null&&value.comparison?.leftMode==='saved'?'records':'evaluation',context:cleanCalculatorContext(value.comparison?.context),valueBasis:value.comparison?.valueBasis==='total'||value.comparison?.context||!calculatorKeys.some(k=>Number.isFinite(value.comparison?.stats?.[k]))?'total':'base',mode:value.comparison?.mode==='saved'?'saved':'manual',savedId:id(value.comparison?.savedId),leftMode:value.comparison?.leftMode==='saved'?'saved':'current',leftSavedId:id(value.comparison?.leftSavedId),manualName:typeof value.comparison?.manualName==='string'?value.comparison.manualName.slice(0,160):null,manualCharacterId:id(value.comparison?.manualCharacterId),manualLevel:number(value.comparison?.manualLevel),manualLocked:value.comparison?.manualLocked===true,manualSavedId:id(value.comparison?.manualSavedId),stats:vector(value.comparison?.stats)},builds:value.builds.map(b=>({
   mode:b.mode==='manual'?'manual':'recruit',route:id(b.route),presetId:id(b.presetId),level:number(b.level),classId:id(b.classId),stats:vector(b.stats),
-  stages:b.stages.map(s=>({level:number(s.level),classId:id(s.classId),mountId:id(s.mountId),bond:number(s.bond),skill:s.skill===true})),
+  stages:b.stages.map(s=>({level:number(s.level),classId:id(s.classId),mountId:id(s.mountId),bond:number(s.bond),skill:value.characterId==='mu'||s.skill===true})),
   startBonus:vector(b.startBonus),endBonus:vector(b.endBonus)
  }))};
 }
@@ -32,14 +37,14 @@ const fullClass=id=>typeof id==='string'&&id?'class-'+id:'';
 export function serializeCalculatorShare(value){
  const c=cleanCalculatorState(value);if(!c)return '';
  const comp=c.comparison,builds=c.builds.map(b=>[b.presetId,b.route,b.level,shortClass(b.classId),packedVector(b.stats),b.stages.map(s=>[s.level,shortClass(s.classId),s.mountId,s.bond,s.skill?1:0]),packedVector(b.startBonus),packedVector(b.endBonus),b.mode==='manual'?1:0]);
- const packed=[2,c.characterId,c.target,c.recruitmentRoute,c.compare?1:0,builds,[comp.mode==='saved'?1:0,comp.savedId,comp.leftMode==='saved'?1:0,comp.leftSavedId,comp.manualCharacterId,comp.manualLevel,comp.manualSavedId,packedVector(comp.stats)]];
+ const packed=[2,c.characterId,c.target,c.recruitmentRoute,c.compare?1:0,builds,[comp.mode==='saved'?1:0,comp.savedId,comp.leftMode==='saved'?1:0,comp.leftSavedId,comp.manualCharacterId,comp.manualLevel,comp.manualSavedId,packedVector(comp.stats),comp.purpose==='records'?1:0,comp.context?[shortClass(comp.context.classId),comp.context.mountId,comp.context.weapon,comp.context.battalionId||'']:null,comp.valueBasis==='total'?1:0],c.weapon,c.battalionId,c.battalionAdded?1:0];
  return btoa(JSON.stringify(packed)).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
 }
 export function parseCalculatorShare(text){
  if(typeof text!=='string'||text.length>12000||!/^[A-Za-z0-9_-]+$/.test(text))return null;
- try{const [version,characterId,target,recruitmentRoute,compare,rows,p]=JSON.parse(atob(text.replaceAll('-','+').replaceAll('_','/')));if(version!==2||!Array.isArray(rows)||!Array.isArray(p))return null;
+ try{const [version,characterId,target,recruitmentRoute,compare,rows,p,weapon,battalionId,battalionAdded]=JSON.parse(atob(text.replaceAll('-','+').replaceAll('_','/')));if(version!==2||!Array.isArray(rows)||!Array.isArray(p))return null;
   const builds=rows.map(b=>({presetId:b[0],route:b[1],level:b[2],classId:fullClass(b[3]),stats:unpackedVector(b[4]),stages:b[5].map(s=>({level:s[0],classId:fullClass(s[1]),mountId:s[2],bond:s[3],skill:s[4]===1})),startBonus:unpackedVector(b[6]),endBonus:unpackedVector(b[7]),mode:b[8]===1?'manual':'recruit'}));
-  return cleanCalculatorState({v:1,characterId,target,recruitmentRoute,compare:compare===1,builds,comparison:{mode:p[0]===1?'saved':'manual',savedId:p[1],leftMode:p[2]===1?'saved':'current',leftSavedId:p[3],manualCharacterId:p[4],manualLevel:p[5],manualSavedId:p[6],stats:unpackedVector(p[7])}});
+  return cleanCalculatorState({v:1,characterId,target,recruitmentRoute,weapon,battalionId,battalionAdded:battalionAdded===1,compare:compare===1,builds,comparison:{valueBasis:p[10]===1?'total':'base',purpose:p[8]===1||p[8]===undefined&&p[2]===1?'records':'evaluation',context:p[9]?{classId:fullClass(p[9][0]),mountId:p[9][1],weapon:p[9][2],battalionId:p[9][3]}:null,mode:p[0]===1?'saved':'manual',savedId:p[1],leftMode:p[2]===1?'saved':'current',leftSavedId:p[3],manualCharacterId:p[4],manualLevel:p[5],manualSavedId:p[6],stats:unpackedVector(p[7])}});
  }catch{return null;}
 }
 // Restore a private draft name only when every public calculator field matches.

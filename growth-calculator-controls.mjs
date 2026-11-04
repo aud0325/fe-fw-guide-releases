@@ -3,11 +3,15 @@ import {stateQuery} from './routing.mjs';
 import {calculatorData,calculatorCharacters,calculatorClasses,startsFor,buildFromPreset,initialCalculatorState,resolveCalculatorState} from './growth-calculator-data.mjs';
 import {recommendedStages,compatibleMounts,sortStages,activeBuild,integerStat} from './growth-calculator-plans.mjs';
 import {calculatorResultsHtml,calculatorLevelRows,calculatorTargetValid,canAddCalculatorStage} from './growth-calculator-ui.mjs';
+import {finalClassBonusHtml,finalEffectHtml,warriorBloodTitle,warriorBloodLevel,warriorBloodThresholds,battalionConditionText} from './growth-calculator-final-ui.mjs';
 import {calculateBuild} from './growth-calculator-model.mjs';
 import {bindCalculatorPickers} from './growth-calculator-picker.mjs';
 import {readSavedCalculations,writeSavedCalculations,calculatorSaveLimit,renamedSavedCalculations} from './growth-calculator-saves.mjs';
 import {savedCalculationsHtml,comparisonHtml,refreshComparisonMetrics} from './growth-calculator-comparison-ui.mjs';
-import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,recordLevel} from './growth-calculator-records.mjs';
+import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,recordLevel,manualEquipmentContext} from './growth-calculator-records.mjs';
+import {comparisonView} from './growth-calculator-evaluation.mjs';
+import {recordDisplayValues,currentEquipment} from './growth-calculator-equipment.mjs';
+import {contextMountOptions} from './growth-calculator-context-ui.mjs';
 import {bindStatBreakdowns} from './growth-calculator-stat-ui.mjs';
 import {bindStageGrowthTips} from './growth-calculator-stage-ui.mjs';
 export function bindGrowthCalculator(root,{state:input,t,change}){
@@ -55,6 +59,7 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
  const cleanupTips=bindStageGrowthTips(host),cleanupStats=bindStatBreakdowns(host,{t,lang});
  const cleanup=bindCalculatorPickers(host,(id,value,route)=>{
   if(id==='calc-character'){commit(initialCalculatorState(value,route),'#calc-character',false);return;}
+  if(id==='calc-battalion'){const next=clone();next.battalionAdded=true;next.battalionId=value;commit(next,'#calc-battalion',false);return;}
   if(id==='calc-start-level'){const next=clone(),p=startsFor(next.characterId).find(p=>p.id===value);if(!p)return;next.builds[0]=buildFromPreset(p);if(Number.isInteger(next.target)&&next.target<p.level)next.target=p.level;commit(next,'#calc-start-level',false);return;}
   const match=id.match(/^calc-stage-(\d+)-(class|mount)$/);if(!match)return;
   const next=clone(),stage=next.builds[0].stages[Number(match[1])];
@@ -64,11 +69,16 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
  },{onRoute:(_id,route)=>{const next=clone();next.recruitmentRoute=route;commitInput(next);}});
  host.querySelector('#calc-target').addEventListener('input',event=>{
   const next=clone();next.target=numeric(event.target);commitInput(next);const out=result(),valid=calculatorTargetValid(state);
-  host.querySelector('.calc-results').innerHTML=calculatorResultsHtml(state,out,{t,lang});host.querySelector('[data-calc-disclosure="levels"] tbody').innerHTML=calculatorLevelRows(out);
+  host.querySelector('.calc-results').innerHTML=calculatorResultsHtml(state,out,{t,lang});host.querySelector('[data-calc-disclosure="levels"] tbody').innerHTML=calculatorLevelRows(out,state);
   host.querySelector('[data-calc-level-ups]').textContent=valid?t('calculator.levelUps',{count:state.target-state.builds[0].level}):'—';
   host.querySelector('[data-calc-autofill]').disabled=!valid;host.querySelector('[data-calc-add]').disabled=!canAddCalculatorStage(state);event.target.setAttribute('aria-invalid',String(!valid));
   host.querySelectorAll('[data-calc-stage]').forEach(row=>row.closest('.calc-stage-group').classList.toggle('calc-stage-future',state.builds[0].stages[Number(row.dataset.calcStage)].level>state.target));
-  host.querySelector('[data-calc-future-stages]').hidden=!state.builds[0].stages.some(s=>s.level>state.target);showComparison(out);
+  host.querySelector('[data-calc-future-stages]').hidden=!state.builds[0].stages.some(s=>s.level>state.target);
+  host.querySelectorAll('[data-calc-final-stage]').forEach(el=>el.innerHTML=finalClassBonusHtml(state,Number(el.dataset.calcFinalStage),{t,lang}));
+  host.querySelectorAll('[data-calc-final-effect]').forEach(el=>el.innerHTML=finalEffectHtml(state,el.dataset.calcFinalEffect,{t,lang}));
+  const armyCondition=host.querySelector('[data-calc-battalion-condition]');if(armyCondition)armyCondition.textContent=battalionConditionText(state,{t});
+  const bloodTitle=host.querySelector('[data-calc-blood-title]');if(bloodTitle){bloodTitle.textContent=warriorBloodTitle(state,{t});host.querySelector('[data-calc-blood-level]').textContent=warriorBloodLevel(state,{t});host.querySelector('[data-calc-blood-thresholds]').innerHTML=warriorBloodThresholds(state,{t,lang});}
+  showComparison(out);
  });
  host.querySelector('[data-calc-autofill]').addEventListener('click',()=>{
   const next=clone();next.builds[0].stages=recommendedStages(next.characterId,next.builds[0],next.target);commit(next,'[data-calc-autofill]',false,'calculator.autofilled');
@@ -90,7 +100,21 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   });
 
  });
- host.querySelectorAll('[data-calc-stage-skill]').forEach(control=>control.addEventListener('change',()=>{const next=clone(),index=Number(control.dataset.calcStageSkill);next.builds[0].stages[index].skill=control.checked;commit(next,'#'+control.id,false);}));
+ const applyContext=()=>{
+  const next=clone(),before=next.comparison,meta=manualMetadata(state),classId=host.querySelector('#calc-context-class')?.value;
+  if(!classId)return;
+  const mountId=host.querySelector('#calc-context-mount')?.value||'',weapon=host.querySelector('#calc-context-weapon')?.value||'none';
+  const battalionId=host.querySelector('#calc-context-battalion')?.value||'';
+  const context={...(battalionId?{battalionId}:{}),classId,mountId:compatibleMounts(meta.characterId,classId).some(m=>m.id===mountId)?mountId:'',bond:5,weapon};
+  if(before.valueBasis!=='total')before.stats=recordDisplayValues({kind:'manual',...meta,values:before.stats,context});
+  before.context=context;before.valueBasis='total';commitInput(next);
+  for(const key of keys){const field=host.querySelector('#calc-comp-'+key);if(field)field.value=next.comparison.stats[key];}
+  const mount=host.querySelector('#calc-context-mount');if(mount)mount.innerHTML=contextMountOptions(context,meta.characterId,{t,lang});
+ };
+ host.addEventListener('change',event=>{
+  if(event.target.id==='calc-mu-weapon'){const next=clone();next.weapon=event.target.value;commit(next,'#calc-mu-weapon',false);return;}
+  if(event.target.hasAttribute('data-calc-context'))applyContext();
+ });
  const saveRecord=manual=>{
   const out=result(),meta=manualMetadata(state,lang),values=manual?state.comparison.stats:out.values,message=host.querySelector(manual?'#calc-right-status':'#calc-status');
   if(manual&&!keys.every(k=>Number.isInteger(values[k])&&values[k]>=0&&values[k]<=999)){message.textContent=t('calculator.fillAllStats');host.querySelector('#calc-comp-'+keys.find(k=>!Number.isInteger(values[k])||values[k]<0||values[k]>999))?.focus();return;}
@@ -126,24 +150,29 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
  host.addEventListener('mouseup',event=>{if(event.target.matches('[data-calc-stat-input]')&&event.target.dataset.calcSelectOnMouseup){event.preventDefault();event.target.select();delete event.target.dataset.calcSelectOnMouseup;}});
  host.addEventListener('pointerdown',event=>{if(event.target.matches('[data-calc-stat-input]')&&event.pointerType==='mouse')event.target.dataset.calcSelectOnMouseup='true';});
  host.addEventListener('input',event=>{
-  const match=event.target.id.match(/^calc-comp-(hp|str|mag|spd|dex|def|res|lck|cha)$/),next=clone();
-  if(match)next.comparison.stats[match[1]]=numeric(event.target);
+  const match=event.target.id.match(/^calc-comp-(hp|str|mag|spd|dex|def|res|lck|cha)$/),next=clone(),legacy=state.comparison.valueBasis!=='total';
+  if(match){if(!next.comparison.context)next.comparison.context=manualEquipmentContext(state);if(next.comparison.valueBasis!=='total'){const meta=manualMetadata(state);next.comparison.stats=recordDisplayValues({kind:'manual',...meta,context:next.comparison.context,values:state.comparison.stats});}next.comparison.valueBasis='total';next.comparison.stats[match[1]]=numeric(event.target);}
   else if(event.target.id==='calc-manual-name')next.comparison.manualName=event.target.value;
   else return;
   commitInput(next);
+  if(match&&legacy)for(const key of keys){const field=host.querySelector('#calc-comp-'+key);if(field&&field!==event.target)field.value=next.comparison.stats[key];}
  });
- host.addEventListener('keydown',event=>{const tab=event.target.closest('[data-calc-tab]');if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const tabs=[...tab.parentElement.querySelectorAll('[data-calc-tab]')],index=tabs.indexOf(tab),next=event.key==='Home'?tabs[0]:event.key==='End'?tabs.at(-1):tabs[(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length];const [side,mode]=next.dataset.calcTab.split(':');setSource(side,mode);});
+ host.addEventListener('keydown',event=>{const purpose=event.target.closest('[data-calc-purpose]');if(purpose&&['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();const next=clone(),mode=event.key==='Home'?'evaluation':event.key==='End'?'records':purpose.dataset.calcPurpose==='records'?'evaluation':'records';next.comparison.purpose=mode;commit(next,'#calc-purpose-'+mode,false);return;}const tab=event.target.closest('[data-calc-tab]');if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const tabs=[...tab.parentElement.querySelectorAll('[data-calc-tab]')],index=tabs.indexOf(tab),next=event.key==='Home'?tabs[0]:event.key==='End'?tabs.at(-1):tabs[(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length];const [side,mode]=next.dataset.calcTab.split(':');setSource(side,mode);});
  host.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
+  if(button.dataset.calcPurpose){const next=clone();next.comparison.purpose=button.dataset.calcPurpose;commit(next,'#calc-purpose-'+button.dataset.calcPurpose,false);return;}
+  if(button.hasAttribute('data-calc-add-battalion')){const next=clone();next.battalionAdded=true;commit(next,'#calc-battalion',false);root.querySelector('#calc-battalion')?.click();return;}
+  if(button.hasAttribute('data-calc-clear-battalion')){const next=clone();next.battalionId='';next.battalionAdded=false;commit(next,'[data-calc-add-battalion]',false);return;}
+  if(button.hasAttribute('data-calc-confirm-context')){applyContext();return;}
   if(button.dataset.calcRename){editingId=button.dataset.calcRename;refreshSaves();const field=host.querySelector('#calc-rename-'+editingId);field?.focus();field?.select();return;}
   if(button.dataset.calcRenameCancel){cancelRename();return;}
   if(button.dataset.calcTab){const [side,mode]=button.dataset.calcTab.split(':');setSource(side,mode);return;}
   if(button.hasAttribute('data-calc-open-records')){openRecords(button.dataset.calcOpenRecords);return;}
   if(button.hasAttribute('data-calc-save-current')){saveRecord(false);return;}
   if(button.hasAttribute('data-calc-save-manual')){saveRecord(true);return;}
-  if(button.dataset.calcEditRecord){const saved=saves.find(s=>s.id===button.dataset.calcEditRecord&&s.kind==='manual');if(!saved)return;const next=clone();Object.assign(next.comparison,{mode:'manual',stats:{...saved.values},manualName:saved.name,manualCharacterId:saved.characterId,manualLevel:saved.level,manualSavedId:saved.id,manualLocked:false});commit(next,'#calc-manual-name',false);return;}
-  if(button.hasAttribute('data-calc-fill-expected')){const source=comparisonSides(state,result(),saves).left;if(!source?.values||!keys.every(k=>Number.isFinite(source.values[k])))return;const next=clone(),id=recordCharacterId(source),level=recordLevel(source);if(manualMetadata(state).characterId!==id||manualMetadata(state).level!==level)next.comparison.manualSavedId='';Object.assign(next.comparison,{stats:Object.fromEntries(keys.map(k=>[k,integerStat(source.values[k])])),manualCharacterId:id,manualLevel:level});commit(next,'#calc-comp-hp',false);return;}
-  if(button.dataset.calcChoose){const [side,id]=button.dataset.calcChoose.split(':'),next=clone();if(side==='left'){next.comparison.leftMode='saved';next.comparison.leftSavedId=id;}else{next.comparison.mode='saved';next.comparison.savedId=id;}closeRecords();commit(next,`#calc-${side}-tab-saved`,false);root.querySelector('#calc-comparison-title')?.scrollIntoView({block:'start'});return;}
+  if(button.dataset.calcEditRecord){const saved=saves.find(s=>s.id===button.dataset.calcEditRecord&&s.kind==='manual');if(!saved)return;const next=clone();Object.assign(next.comparison,{mode:'manual',stats:{...saved.values},manualName:saved.name,manualCharacterId:saved.characterId,manualLevel:saved.level,manualSavedId:saved.id,manualLocked:false,context:saved.context||null,valueBasis:saved.basis==='total'?'total':'base'});commit(next,'#calc-manual-name',false);return;}
+  if(button.hasAttribute('data-calc-fill-expected')){const source=comparisonView(state,result(),saves).left;if(!source?.values||!keys.every(k=>Number.isFinite(source.values[k])))return;const next=clone(),id=recordCharacterId(source),level=recordLevel(source);if(manualMetadata(state).characterId!==id||manualMetadata(state).level!==level)next.comparison.manualSavedId='';Object.assign(next.comparison,{stats:recordDisplayValues(source),manualCharacterId:id,manualLevel:level,context:source.state?currentEquipment(source.state):source.context,valueBasis:'total'});commit(next,'#calc-comp-hp',false);return;}
+  if(button.dataset.calcChoose){const [side,id]=button.dataset.calcChoose.split(':'),next=clone();if(side==='left'){next.comparison.purpose='records';next.comparison.leftMode='saved';next.comparison.leftSavedId=id;}else{next.comparison.mode='saved';next.comparison.savedId=id;}closeRecords();commit(next,`#calc-${side}-tab-saved`,false);root.querySelector('#calc-comparison-title')?.scrollIntoView({block:'start'});return;}
   if(button.dataset.calcLoad){const saved=saves.find(s=>s.id===button.dataset.calcLoad);if(!saved||saved.kind==='manual')return;closeRecords();commit(resolveCalculatorState(saved.state),'#calc-character',false,'calculator.loaded');root.querySelector('.growth-calculator')?.scrollIntoView({block:'start'});return;}
   if(button.dataset.calcDelete){try{const id=button.dataset.calcDelete,record=saves.find(s=>s.id===id);writeSavedCalculations(storage,saves.filter(s=>s.id!==id));saves=readSavedCalculations(storage);if(state.comparison.manualSavedId===id){const next=clone();next.comparison.manualName??=record?.name;next.comparison.manualSavedId='';commitInput(next);}if(editingId===id)editingId='';refreshSaves();host.querySelector('#calc-records-status').textContent=t('calculator.deleted');host.querySelector('[data-calc-dialog-close]').focus();}catch{host.querySelector('#calc-records-status').textContent=t('calculator.storageFailed');}}
  });

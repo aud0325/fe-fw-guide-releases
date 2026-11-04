@@ -27,16 +27,18 @@ export function gatheringSupplyRows(place){
  const rows=(place.locationSupplies?.gathering||[]).map(old=>{
   const record=pending.get(identity(old));if(!record)return old;pending.delete(identity(old));
   const gatheringScopes=enrichedGatheringScopes(record,old.availability);
-  return {...old,gatheringScopes,availability:remainingAvailability(old.availability,gatheringScopes)};
+  const sheet=place.gatheringSheet?.find(r=>identity(r)===identity(record));
+  return {...old,...(sheet?{sheet}:{}),gatheringScopes,availability:remainingAvailability(old.availability,gatheringScopes)};
  });
- for(const record of pending.values())rows.push({...record,gatheringScopes:enrichedGatheringScopes(record),availability:[]});
+ for(const record of pending.values()){const sheet=place.gatheringSheet?.find(r=>identity(r)===identity(record));rows.push({...record,...(sheet?{sheet}:{}),gatheringScopes:enrichedGatheringScopes(record),availability:[]});}
  return rows;
 }
 export function gatheringAcquisitionRecords(entry,entries){
  if(entry.type!=='item')return [];
  return (entry.gatheringConditions||[]).map(record=>{
   const place=entries.find(e=>e.id===record.locationId),prior=place?.locationSupplies?.gathering.find(r=>r.itemId===entry.id),gatheringScopes=enrichedGatheringScopes(record,prior?.availability),parts=[...new Set(gatheringScopes.map(s=>s.part))];
-  return {locationId:record.locationId,method:{ko:'채집',en:'Gathering'},supplyRecord:'gathering',gatheringScopes,sourceId:gatheringScopes[0].sourceId,...(parts.length===1?{part:parts[0]}:{})};
+  const sheet=entry.gatheringSheet?.find(r=>r.locationId===record.locationId);
+  return {locationId:record.locationId,method:{ko:'채집',en:'Gathering'},supplyRecord:'gathering',gatheringScopes,...(sheet?{gatheringMethod:sheet.method}:{}),sourceId:gatheringScopes[0].sourceId,...(parts.length===1?{part:parts[0]}:{})};
  });
 }
 export function coveredGatheringRecord(record,scopes){

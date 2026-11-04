@@ -1,3 +1,5 @@
+import home from './home.mjs';
+import directory from './directory.mjs';
 import classes from './classes.mjs';
 import activities from './activities.mjs';
 import abilityVariants from './ability-variants.mjs';
@@ -24,5 +26,5 @@ import group7 from './presentation.mjs';
 import shell from './shell.mjs';
 import map from './map.mjs';
 import mount from './mount.mjs';
-export const messageGroups=[classes,growthCalculator,abilityVariants,activities,battalions,reconstruction,social,supports,forging,equipmentVariants,recruitmentEquipment,contentLinks,growth,mount,map,improvements,editorial,shell,group0,group1,group2,group3,group4,group5,group6,group7];
+export const messageGroups=[home,directory,classes,growthCalculator,abilityVariants,activities,battalions,reconstruction,social,supports,forging,equipmentVariants,recruitmentEquipment,contentLinks,growth,mount,map,improvements,editorial,shell,group0,group1,group2,group3,group4,group5,group6,group7];
 export const messages=Object.assign({},...messageGroups);

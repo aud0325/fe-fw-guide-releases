@@ -3,7 +3,7 @@ const integer=(v,min,max)=>Number.isInteger(v)&&v>=min&&v<=max;
 const complete=v=>keys.every(k=>Number.isFinite(v?.[k]));
 export function growthAt(data,character,stage,level){
  const cls=data.classes.find(c=>c.id===stage.classId),mount=stage.mountId?data.mounts.find(m=>m.id===stage.mountId):null;
- const base=stage.skill&&character.modifiedGrowthRates?character.modifiedGrowthRates.values:character.growthRates.values;
+ const base=(character.id==='mu'||stage.skill)&&character.modifiedGrowthRates?character.modifiedGrowthRates.values:character.growthRates.values;
  const variant=data.variants.filter(v=>v.classId===cls?.id&&v.level<=level).sort((a,b)=>b.level-a.level)[0];
  const classGrowth=variant?.growth||cls?.growth;
  const mountGrowth=mount?.growthByBond[stage.bond];

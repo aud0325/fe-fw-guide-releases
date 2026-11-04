@@ -127,8 +127,8 @@ export default {
   "en": "Region unverified"
  },
  "app.archive": {
-  "ko": "전체 기록",
-  "en": "Archive"
+  "ko": "홈",
+  "en": "Home"
  },
  "app.encyclopedia": {
   "ko": "만자천홍 도감",

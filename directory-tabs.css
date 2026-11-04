@@ -1,0 +1,118 @@
+/* Directory modes share the archive's existing palette and table typography. */
+.directory-tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin:0 0 14px;max-width:100%}
+.directory-tabs [role=tab]{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;color:var(--muted);font-size:14px;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;white-space:nowrap}
+.directory-tabs [aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.directory-tabs [role=tab]:hover{color:var(--accent)}.directory-tabs [role=tab]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.directory-page{--directory-font-size:13px;--directory-header-size:12px;--directory-row-height:40px}
+.directory-page .overview-table,.directory-page #growth-table{font-size:var(--directory-font-size);line-height:1.5}
+.directory-page .overview-table th,.directory-page .overview-table td{padding:7px 8px;vertical-align:middle}
+.directory-page .overview-table thead th,.directory-page #growth-table thead th{font-size:var(--directory-header-size);background:var(--panel2);height:38px;color:var(--muted)}
+.directory-page .overview-table .overview-person,.directory-page .overview-table .overview-mount{min-height:26px}
+.directory-page .overview-scroll,.directory-page .growth-scroll{border-radius:3px}
+.directory-page .growth-workspace{display:block;margin:10px 0 14px}.directory-page .growth-toolbar{justify-content:flex-start;flex-wrap:wrap;gap:8px 18px}
+.directory-page .growth-toolbar .growth-name-search{margin-right:auto}.directory-page .growth-name-search input{width:280px!important;max-width:100%;height:36px!important;font-size:13px!important;background:#fffdf8!important;border:1px solid #c9bdb1!important;border-radius:3px!important}
+.directory-page .growth-calculator-link{order:3;font-size:12px;white-space:nowrap;margin:0}
+.directory-page #growth-table th,.directory-page #growth-table td{height:var(--directory-row-height)}
+.directory-page #growth-table thead th button{font-family:inherit;font-size:var(--directory-header-size)}
+.directory-page #growth-table .row-name{min-height:39px;padding:4px 8px}.directory-page #growth-table .row-name a{font-weight:600;text-decoration:none;font-size:13px}.directory-page #growth-table .row-name a:hover{text-decoration:underline}
+.directory-page #growth-table .row-name img{width:24px;height:26px;object-fit:cover;object-position:top}.directory-page #growth-table .row-label{flex-direction:column;align-items:flex-start;gap:1px}.directory-page #growth-table .row-name small{margin-left:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.directory-page #growth-table tbody tr:hover>th{background:#faf5ec}.directory-page #growth-table .average>*{height:32px}
+.directory-page .scout-toolbar{margin-top:0}.directory-page .scout-routes{gap:22px}.directory-page .scout-routes button{min-height:36px}
+.directory-page .growth-context strong{display:inline}.directory-page .growth-sheet-meta{gap:6px 12px}
+@media (width <= 800px){.directory-page .growth-sheet-meta{flex-wrap:wrap}.directory-page .growth-toolbar{justify-content:flex-start;gap:4px 16px}.directory-page .growth-toolbar .growth-name-search{width:100%;flex-basis:100%}.directory-page .growth-name-search input{width:100%!important}.directory-page .growth-context{width:100%;flex:none}.directory-page #growth-table .row-name small{font-size:10px}}
+@media (width <= 800px){.directory-tabs{gap:22px}.directory-tabs [role=tab]{font-size:13px}.directory-page .scout-overview-table tbody>tr>*{padding:0}.directory-page .scout-overview-table tbody>tr{padding:8px 4px}.directory-page .growth-toolbar label{min-height:36px}.directory-page #growth-table{font-size:13px}.directory-page #growth-table th:first-child{width:155px;min-width:155px}.directory-page #growth-table .row-name a{font-size:13px}.directory-page .growth-sheet-meta .growth-meta-right{flex-wrap:wrap;gap:6px}.directory-page .growth-legend{flex-wrap:wrap;font-size:10px}.directory-page .growth-calculator-link{min-height:36px;display:inline-flex;align-items:center}.directory-page .scout-routes{gap:18px}}
+
+.directory-page .overview-table tbody th{background:var(--panel)}
+
+@media (width > 800px){.directory-page #growth-table.character-table{min-width:940px}}
+
+.directory-page .growth-comparison #growth-table tbody td,.directory-page .growth-comparison #growth-table tbody th{height:var(--directory-row-height)}
+.directory-page .class-numeric-comparison #growth-table .entity-token{font-size:var(--directory-font-size);min-height:26px}
+.directory-page .growth-comparison #growth-table th:first-child{width:205px;min-width:205px}
+.directory-page .class-numeric-comparison #growth-table{min-width:880px}
+.directory-page .class-numeric-comparison .growth-name-search{order:0;flex:0 1 280px;max-width:280px}
+@media (width <= 800px){.directory-page .class-numeric-comparison .growth-name-search{flex-basis:100%;max-width:none}.directory-page .growth-comparison #growth-table th:first-child{width:155px;min-width:155px}}
+@media (width <= 800px){.directory-page .class-numeric-comparison #growth-table{min-width:760px}}
+
+.directory-page .character-overview-table .overview-personal,.directory-page .character-overview-table .overview-unique{vertical-align:top}
+/* Renown thresholds stay visible after search and in mobile records. */
+@media (width > 800px){.scout-overview-table tbody>tr[data-renown-start=true]>*{border-top:2px solid #b8a58c}.scout-overview-table thead th:nth-child(2){width:11%}.scout-overview-table thead th:nth-child(3){width:13%}}
+@media (width <= 800px){.scout-overview-table tbody>tr[data-renown-start=true]{border-top:2px solid #b8a58c}}
+
+/* Page structure follows the viewport so closing the sidebar cannot reverse a layout. */
+.directory-page{container:directory / inline-size}
+.overview-basic-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.directory-page .overview-basic-scroll .overview-table{min-width:calc(var(--breakpoint-minimum) - 22px)}
+.directory-page .overview-basic-scroll .overview-table th,.directory-page .overview-basic-scroll .overview-table td{vertical-align:top;padding:8px 10px;overflow-wrap:normal;word-break:normal}
+.directory-page .overview-basic-scroll .character-overview-table{min-width:var(--breakpoint-minimum)}
+.overview-basic-scroll .entity-token-label{text-wrap:balance;hyphens:auto}
+.overview-basic-scroll .entity-token-label,.overview-basic-scroll .overview-person>span,.overview-basic-scroll .overview-mount>span{word-break:keep-all;overflow-wrap:anywhere}
+.overview-table .overview-name-meta{display:block;margin:2px 0 0;color:var(--muted);font-size:11px;font-weight:400;line-height:1.4;word-break:keep-all;overflow-wrap:anywhere}
+.overview-table .overview-name-meta a{color:inherit;text-decoration:none}.overview-table .overview-name-meta a:hover{text-decoration:underline}
+.overview-table .overview-mobile-meta,.overview-mobile-heading,.class-mobile-certification,.class-compact-skills{display:none}
+.overview-table .overview-meta-with-icon{margin-left:28px}
+.mount-overview-table .overview-meta-with-icon{margin-left:31px}
+.directory-page .mount-overview-table thead th:first-child{width:30%}
+.directory-page .mount-overview-table thead th:nth-child(2){width:16%}
+.directory-page .mount-overview-table thead th:nth-child(3){width:54%}
+.directory-page .class-overview-table thead th:first-child{width:18%}
+.directory-page .class-overview-table thead th:nth-child(2){width:12%}
+.directory-page .class-overview-table thead th:nth-child(3){width:28%}
+.directory-page .class-overview-table thead th:nth-child(4){width:18%}
+.directory-page .class-overview-table thead th:nth-child(5){width:24%}
+.class-overview-table .class-rank-values{display:flex;flex-wrap:wrap;gap:3px 12px}
+.class-overview-table .class-list-ranks{margin:0 0 4px;grid-template-columns:60px minmax(0,1fr);gap:8px}
+.class-overview-table .class-proficiency{white-space:nowrap}
+.class-list-skill-group{min-width:0}
+.class-list-skill-label{display:block;font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 3px;font-weight:400}
+.class-list-skills{display:grid;gap:12px}
+.class-list-skill-group[data-empty=true]{display:flex;align-items:baseline;gap:6px}
+.class-list-skill-group[data-empty=true]>.class-list-skill-label{margin-bottom:0}
+@media (width <= 800px){
+ .class-overview-table .overview-mobile-meta{display:block}
+ .class-overview-table .overview-desktop-heading{display:none}.class-overview-table .overview-mobile-heading{display:inline}
+ .directory-page .class-overview-table thead th:first-child{width:46%}
+ .directory-page .class-overview-table thead th:nth-child(2),.class-overview-table .overview-tier,
+ .directory-page .class-overview-table thead th:nth-child(3),.directory-page .class-overview-table thead th:nth-child(4),.class-overview-table .overview-condition,.class-overview-table .overview-mastery,.class-wide-skills{display:none}
+ .directory-page .class-overview-table thead th:nth-child(5){width:54%}
+ .class-compact-skills{display:block}
+ .class-mobile-certification{display:block;margin-top:10px;font-size:13px;font-weight:400}
+ .class-mobile-certification .class-list-ranks{grid-template-columns:60px minmax(0,1fr);gap:6px}
+ .class-mobile-certification .class-list-unlock{grid-template-columns:60px minmax(0,1fr);gap:6px}
+ .class-mobile-certification .class-rank-values{display:grid;gap:2px}
+ .class-mobile-certification .class-proficiency{white-space:normal;align-items:flex-start}
+ .class-mobile-certification .class-proficiency>span{min-width:0}
+}
+@media (width <= 800px){
+ .directory-page .overview-basic-scroll .overview-table th,.directory-page .overview-basic-scroll .overview-table td{padding:8px 6px}
+ .directory-page .character-overview-table .overview-person{gap:4px;min-height:26px}
+ .directory-page .character-overview-table .overview-person img{width:22px;height:24px}
+ .character-overview-table .overview-meta-with-icon{margin-left:26px}
+ .directory-page .overview-basic-scroll .overview-table td .entity-token{font-size:13px;gap:4px;min-height:25px}
+ .directory-page .overview-basic-scroll .overview-table td .entity-token-icon{width:20px!important;height:20px!important}
+ .directory-page .overview-name-meta{font-size:11px}
+ .class-mobile-certification .class-list-ranks{grid-template-columns:48px minmax(0,1fr);gap:4px}
+ .class-mobile-certification .class-list-unlock{grid-template-columns:36px minmax(0,1fr);gap:4px}
+ .class-mobile-certification .class-list-ranks>small{font-size:11px}
+ .class-mobile-certification .class-proficiency{font-size:12px}
+}
+
+/* Classification columns share one viewport transition. */
+@media (width <= 800px){
+ .directory-page .character-overview-table thead th:first-child{width:30%}
+ .directory-page .character-overview-table thead th:nth-child(2),.directory-page .character-overview-table .overview-faction{display:none}
+ .directory-page .character-overview-table thead th:nth-child(3){width:34%}
+ .directory-page .character-overview-table thead th:nth-child(4){width:36%}
+ .directory-page .character-overview-table .overview-mobile-meta{display:block}
+ .directory-page .mount-overview-table thead th:first-child{width:44%}
+ .directory-page .mount-overview-table thead th:nth-child(2),.mount-overview-table .overview-kind{display:none}
+ .directory-page .mount-overview-table thead th:nth-child(3){width:56%}
+ .mount-overview-table .overview-mobile-meta{display:block}
+}
+
+/* Full columns stay stable while the sidebar opens or closes. */
+@media (width > 800px){
+ .directory-page .overview-basic-scroll .class-overview-table{min-width:760px}
+ .class-overview-table .overview-name{position:sticky;left:0;z-index:1;background:var(--panel)}
+ .class-overview-table thead th:first-child{position:sticky;left:0;z-index:2;background:var(--panel2)}
+}

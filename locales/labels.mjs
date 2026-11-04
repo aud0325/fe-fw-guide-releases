@@ -1,10 +1,11 @@
 // Shared labels and presentation taxonomies. IDs remain language-independent.
-export const types={calculator:['성장률 계산기','Growth calculator'],skill:['스킬','Skills'],'combat-art':['전투 기술','Combat arts'],spell:['마법','Magic'],growth:['성장률 비교','Growth comparison'],all:['전체 기록','All entries'],character:['캐릭터','Characters'],item:['아이템','Items'],mount:['탈것','Mounts'],battalion:['군단병','Battalions'],gambit:['계략','Gambits'],map:['지도','Atlas'],location:['위치','Locations'],class:['병종','Classes'],paralogue:['외전','Paralogues'],quest:['의뢰 보상 참고','Quest reward notes'],tip:['공략·팁','Tips'],sources:['출처 안내','Sources']};
+export const types={reconstruction:['(3부)복구 필요재화 계산기','Restoration materials calculator (Part III)'],calculator:['성장률 계산기','Growth calculator'],skill:['스킬','Skills'],'combat-art':['전투 기술','Combat arts'],spell:['마법','Magic'],growth:['성장률 비교','Growth comparison'],all:['홈','Home'],character:['캐릭터','Characters'],item:['아이템','Items'],mount:['탈것','Mounts'],battalion:['군단병','Battalions'],gambit:['계략','Gambits'],map:['지도','Atlas'],location:['위치','Locations'],class:['병종','Classes'],paralogue:['외전','Paralogues'],quest:['의뢰 보상 참고','Quest reward notes'],tip:['공략·팁','Tips'],sources:['출처 안내','Sources']};
 export const roleNames={playable:['동료','Playable'],guest:['게스트','Guest'],boss:['보스','Boss'],npc:['NPC','NPC'],background:['배경 인물','Background']};
 export const statLabels=[['hp','HP','HP'],['str','힘','Str'],['mag','마력','Mag'],['spd','속도','Spd'],['dex','기술','Dex'],['def','수비','Def'],['res','마방','Res'],['lck','행운','Lck'],['cha','매력','Cha']];
 export const navigationGroups=[
- {id:'compendium',label:{ko:'인게임 도감',en:'Game compendium'},types:['character','class','skill','combat-art','spell','item','mount','battalion','gambit','map','location']},
- {id:'guides',label:{ko:'종합 가이드',en:'Guides'},types:['growth','calculator','paralogue','tip']}
+ {id:'training',label:{ko:'캐릭터·육성',en:'Characters & training'},types:['character','class','mount','calculator']},
+ {id:'battle',label:{ko:'전투·장비',en:'Battle & equipment'},types:['item','skill','combat-art','spell','battalion','gambit']},
+ {id:'exploration',label:{ko:'탐색·일정',en:'Exploration & schedules'},types:['map','location','paralogue','reconstruction']}
 ];
 export const itemMajors={equipment:{ko:'장비',en:'Equipment'},materials:{ko:'소재',en:'Materials'}};
 export const itemMinors={

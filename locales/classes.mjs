@@ -1,4 +1,5 @@
 export default {
+ 'class.identity-conditions':{ko:'병종 · 전직 조건',en:'Class / Requirements'},
  'class.scroll-table':{ko:'표 가로 이동',en:'Scroll table'},
  'class.scroll-left':{ko:'표를 왼쪽으로 이동',en:'Scroll table left'},
  'class.scroll-right':{ko:'표를 오른쪽으로 이동',en:'Scroll table right'},
@@ -18,6 +19,7 @@ export default {
  'class.renown':{ko:'명성 {level}',en:'Renown {level}'},
  'class.restrictions':{ko:'사용 제한',en:'Restrictions'},
  'class.female':{ko:'여성 전용',en:'Female units only'},
+ 'class.list-concurrent':{ko:'동시에 {count}명 제한',en:'Limit: {count} unit at a time'},
  'class.concurrent':{ko:'동시에 {count}명',en:'{count} unit at a time'},
  'class.unlock':{ko:'해금',en:'Unlock'},
  'class.route':{ko:'{route}편에서 해금',en:'Unlocked in {route}’s route'},

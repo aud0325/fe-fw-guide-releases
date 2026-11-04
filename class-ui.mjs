@@ -46,10 +46,10 @@ export function classListCertification(e,{t,base='/'}){
  const p=classReference[e.id];
  const rankGroup=(list,label,choice)=>!list.length?'':`<div class="class-list-ranks" data-rank-rule="${choice?'one-of':'all'}"><small>${t(label)}</small><ul class="class-rank-values">${list.map((r,i)=>`<li>${classProficiency(r.id,r.rank,{lang:t.locale,base})}${i<list.length-1?`<span class="sr-only">${t(choice?'class.or':'class.and')}</span>`:''}</li>`).join('')}</ul></div>`;
  const groups=[rankGroup(p.required,'class.required',false),rankGroup(p.oneOf,'class.one-of',true)].filter(Boolean);
- const restrictions=[p.female?t('class.female'):'',p.concurrentLimit?t('class.concurrent',{count:p.concurrentLimit}):''].filter(Boolean);
- if(restrictions.length)groups.push(`<p class="class-list-meta">${esc(restrictions.join(' · '))}</p>`);
+ if(p.female)groups.push(`<p class="class-list-meta">${esc(t('class.female'))}</p>`);
  const unlock=p.routes.length?p.routes.map(r=>t(r.chapter?'class.route-chapter-short':'class.route-short',{route:entries.find(e=>e.id===r.id).name[t.locale],chapter:r.chapter})).join(' / '):p.part?t('class.part-short',{part:t.locale==='en'?['','I','II','III'][p.part]:p.part}):'';
  if(unlock)groups.push(`<p class="class-list-unlock"><small>${t('class.unlock')}</small><span>${esc(unlock)}</span></p>`);
+ if(p.concurrentLimit)groups.push(`<p class="class-list-meta class-list-limit">${esc(t('class.list-concurrent',{count:p.concurrentLimit}))}</p>`);
  return `<div class="class-list-certification">${groups.join('')||t('class.base')}</div>`;
 }
 export function classAbilityTable(list,{t,base='/'}){

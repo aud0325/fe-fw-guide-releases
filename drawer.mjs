@@ -1,3 +1,4 @@
+import {viewportQueries} from './responsive.mjs';
 /** One navigation tree shared by the desktop sidebar and native mobile dialog. */
 export function setupNavigationDrawer(){
  const drawer=document.getElementById('mobile-menu');
@@ -5,7 +6,7 @@ export function setupNavigationDrawer(){
  const shell=document.querySelector('.shell');
  const trigger=document.getElementById('menu-toggle');
  const closeButton=document.getElementById('menu-close');
- const mobile=window.matchMedia('(max-width:960px)');
+ const mobile=window.matchMedia(viewportQueries.navigation);
  const close=()=>{if(drawer.open)drawer.close()};
  trigger.addEventListener('click',()=>{
   if(!mobile.matches||drawer.open)return;

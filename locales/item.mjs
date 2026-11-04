@@ -1,5 +1,8 @@
 // UI messages. Keep keys stable when editing translations.
 export default {
+ 'item.acquisition.place':{ko:'장소·경로',en:'Place / source'},
+ 'item.acquisition.conditions':{ko:'획득 방법·조건',en:'Method / conditions'},
+ 'item.acquisition.map-link':{ko:'{place} 지도에서 보기',en:'Show {place} on map'},
  'item.type.fertilizer':{ko:'비료',en:'Fertilizer'},
  'mount.capture.title':{ko:'포획 가능한 탈것',en:'Capturable mounts'},
  'mount.capture.mount':{ko:'탈것',en:'Mount'},
@@ -28,8 +31,13 @@ export default {
  'gathering.rate':{ko:'일반 {percent}%',en:'Normal {percent}%'},
  'gathering.first-guaranteed':{ko:'첫 채집 확정',en:'Guaranteed first gather'},
  'gathering.quest-first':{ko:'의뢰 수락 후 첫 채집',en:'First gather after accepting the quest'},
+ 'gathering.sculptor-quest':{ko:'전설의 조각가의 유산',en:'Legacy of a Legendary Sculptor'},
  'gathering.dungeon-ore':{ko:'던전 광석',en:'Dungeon ore'},
  'gathering.parts':{ko:'{parts}부',en:'Parts {parts}'},
+ 'gathering.method-gather':{ko:'채집',en:'Gathering'},
+ 'gathering.method-fish':{ko:'낚시',en:'Fishing'},
+ 'gathering.method-search':{ko:'탐색',en:'Searching'},
+ 'gathering.method-mine':{ko:'채광',en:'Mining'},
  'supply.item':{ko:'아이템',en:'Item'},
  'supply.gathering':{ko:'수집품',en:'Gatherable items'},
  'supply.gathering-condition':{ko:'수집 조건',en:'Gathering conditions'},

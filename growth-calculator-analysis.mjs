@@ -2,6 +2,7 @@ import {calculatorKeys as keys} from './growth-calculator-state.mjs';
 import {calculateBuild} from './growth-calculator-model.mjs';
 import {activeBuild,integerStat} from './growth-calculator-plans.mjs';
 import {recordCharacterId,recordLevel,statComparison} from './growth-calculator-records.mjs';
+import {radarScale} from './growth-calculator-scale.mjs';
 // Independent per-stat rolls. Whole hundreds are guaranteed gains; only the remainder is random.
 export function statGrowthDistribution(segments,key){
  let minimum=0,probabilities=[1],mean=0,variance=0;
@@ -41,8 +42,9 @@ function endpoint(data,state){
 export function analyzeGrowth(data,left,right){
  const compared=statComparison(left,right),numbers=key=>{const row=compared.rows.find(r=>r.key===key);return {value:row.right,expected:row.left,difference:row.difference};};
  const totals={value:compared.rightTotal,expected:compared.leftTotal,difference:compared.difference};
- let maximumValues={},graphMaximum=null;
- const empty=reason=>({reason,rows:keys.map(key=>({key,score:null,status:'missing',...numbers(key),maximumValue:maximumValues[key]??null})),average:null,overall:null,totals,graphMaximum});
+ const levels=[left,right].map(recordLevel).filter(n=>Number.isInteger(n)&&n>=1&&n<=99),graphLevel=levels.length?Math.max(...levels):null,graphScales=radarScale(graphLevel);
+ let maximumValues={};
+ const empty=reason=>({reason,rows:keys.map(key=>({key,score:null,status:'missing',...numbers(key),maximumValue:maximumValues[key]??null})),average:null,overall:null,totals,graphScales,graphLevel});
  if(!left?.state||left.kind==='manual')return empty('baseline');
  if(data.presets&&[left,right].some(record=>record?.state&&!data.presets.some(p=>p.id===record.state.builds?.[0]?.presetId&&p.characterId===record.state.characterId)))return empty('outdated');
  const state=left.state,ends=endpoint(data,state);if(!ends)return empty('baseline');
@@ -51,15 +53,14 @@ export function analyzeGrowth(data,left,right){
  const startIntrinsic=Object.fromEntries(keys.map(k=>[k,ends.build.stats[k]-ends.start.modifiers[k]-ends.build.startBonus[k]]));
  const distributions=keys.map(key=>statGrowthDistribution(model.segments,key));
  maximumValues=Object.fromEntries(keys.map((key,i)=>[key,startIntrinsic[key]+distributions[i].maximum+ends.end.modifiers[key]+ends.build.endBonus[key]]));
- graphMaximum=Math.max(...Object.values(maximumValues));
  if(!right)return empty('values');
  if(recordCharacterId(left)!==recordCharacterId(right)||recordLevel(left)!==recordLevel(right))return empty('mismatch');
  if(model.levelUps===0)return empty('noLevels');
  const actualEnds=right.state?endpoint(data,right.state):ends;if(!actualEnds)return empty('baseline');
  const actualIntrinsic=Object.fromEntries(keys.map(k=>[k,numbers(k).value===null?null:numbers(k).value-actualEnds.end.modifiers[k]-actualEnds.build.endBonus[k]]));
  const rows=keys.map((key,i)=>{const distribution=distributions[i],gain=actualIntrinsic[key]===null?null:actualIntrinsic[key]-startIntrinsic[key];return {key,...numbers(key),maximumValue:maximumValues[key],...growthPercentile(distribution,gain),gain,expectedGain:distribution.mean,minimum:distribution.minimum,maximum:distribution.maximum};});
- if(!keys.every(k=>actualIntrinsic[k]!==null))return {reason:'values',rows,totals,graphMaximum,average:null,overall:null};
+ if(!keys.every(k=>actualIntrinsic[k]!==null))return {reason:'values',rows,totals,graphScales,graphLevel,average:null,overall:null};
  const gain=sum(actualIntrinsic)-sum(startIntrinsic),expectedGain=sum(model.intrinsic)-sum(startIntrinsic);
  const overall=growthPercentile(combinedGrowthDistribution(distributions),gain);
- return {reason:'',rows,totals,graphMaximum,overall:{...overall,top:overall.score===null?null:100-overall.score},average:gain<0?null:{gain,expectedGain,levels:model.levelUps,value:gain/model.levelUps,expected:expectedGain/model.levelUps},startLevel:ends.build.level,target:state.target};
+ return {reason:'',rows,totals,graphScales,graphLevel,overall:{...overall,top:overall.score===null?null:100-overall.score},average:gain<0?null:{gain,expectedGain,levels:model.levelUps,value:gain/model.levelUps,expected:expectedGain/model.levelUps},startLevel:ends.build.level,target:state.target};
 }

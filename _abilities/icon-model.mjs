@@ -6,7 +6,16 @@ import {yuphasAbilityIcons} from './yuphas-icons.generated.mjs';
 // Fire/Heal assets when a spelling variant has no per-row icon mapping.
 const spellIcons={black:media.abilities['spell-9bd345189ecf'],white:media.abilities['spell-cc1a89815538']};
 export function abilityIcon(row){
- if(row.kind==='skill')return yuphasAbilityIcons[row.id]||(row.category==='personal'&&row.relations.some(r=>(r.routes||[r]).some(r=>r.method==='overblaze'))?yuphasAbilityIcons[row.family]:null)||null;
+ if(row.kind==='skill'){
+  const exact=yuphasAbilityIcons[row.id]||(row.category==='personal'&&row.relations.some(r=>(r.routes||[r]).some(r=>r.method==='overblaze'))?yuphasAbilityIcons[row.family]:null);
+  if(exact)return exact;
+  // A category glyph fills missing mount-skill art; it does not claim a per-skill match.
+  if(row.relations?.some(r=>r.type==='mount')){
+   const category=row.family==='skill-2f21c5adfe24'?'flying':'cavalry';
+   return {...proficiencyIcon(category),categoryFallback:category};
+  }
+  return null;
+ }
  const direct=media.abilities[row.id];
  if(direct)return media.assets[direct];
  if(row.kind==='combat-art')return media.assets[media.groups[row.category]]||null;

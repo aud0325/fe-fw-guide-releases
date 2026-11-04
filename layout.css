@@ -1,0 +1,6 @@
+/* One stable frame. Page gutters interpolate rather than jumping at desktop widths. */
+body>.shell{grid-template-columns:234px minmax(0,1fr)}
+body>.shell>main#main{max-width:none;min-width:0;padding:12px clamp(10px,1.5vw,24px) 24px}
+header .brand-logo{width:172px}
+#content h1{font-size:clamp(24px,2vw,28px)}
+@media (width <= 960px){header .searchbox kbd{display:none}}
