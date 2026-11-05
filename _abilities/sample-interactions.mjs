@@ -14,7 +14,7 @@ function update(){
  }
  if(!region)return;
  const table=region.querySelector('table'),head=table.querySelector('thead'),rect=region.getBoundingClientRect();
- const occupied=[document.querySelector('header'),document.querySelector('.detail-heading')].filter(Boolean).map(el=>{
+ const occupied=[document.querySelector('header'),document.querySelector('.detail-heading'),document.querySelector('.character-sections')].filter(Boolean).map(el=>{
   const style=getComputedStyle(el),box=el.getBoundingClientRect();
   return ['sticky','fixed'].includes(style.position)&&box.top<=parseFloat(style.top||'0')+1?Math.max(0,box.bottom):0;
  });

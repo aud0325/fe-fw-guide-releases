@@ -604,7 +604,7 @@ export const displayTerms={
   },
   "별받이 고개": {
     "ko": "별받이 고개",
-    "en": "Starwatch Pass"
+    "en": "Sunlit Pass"
   },
   "옥 강철": {
     "ko": "옥 강철",

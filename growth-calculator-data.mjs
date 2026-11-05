@@ -24,7 +24,7 @@ export function initialCalculatorState(characterId='esmeralda',route=''){
  const a=first?buildFromPreset(first):{mode:'manual',route:'cai',presetId:'',level:1,classId:'class-commoner',stats:Object.fromEntries(keys.map(k=>[k,''])),startBonus:zeroStats(),endBonus:zeroStats(),stages:[{level:1,classId:'class-commoner',mountId:'',bond:5,skill:characterId==='mu'}]};
  const late=p.find(p=>p.route===a.route&&p.chapter===9&&p.level>a.level);
  const b=late?buildFromPreset(late):JSON.parse(JSON.stringify(a));
- return {v:1,battalionAdded:false,battalionId:'',weapon:'none',recruitmentRoute:route,characterId,target:Math.max(40,a.level,b.level),compare:false,comparison:{purpose:'evaluation',context:null,valueBasis:'total',mode:'manual',savedId:'',leftMode:'current',leftSavedId:'',manualName:null,manualCharacterId:'',manualLevel:'',manualLocked:false,manualSavedId:'',stats:Object.fromEntries(keys.map(k=>[k,'']))},builds:[a,b]};
+ return {v:1,battalionAdded:false,battalionId:'',weapon:'none',recruitmentRoute:route,characterId,target:Math.max(40,a.level,b.level),compare:false,comparison:{recordLines:null,recordOrder:null,recordIds:null,includeOtherRecords:false,recordDraft:null,purpose:'evaluation',context:null,valueBasis:'total',mode:'manual',savedId:'',leftMode:'current',leftSavedId:'',manualName:null,manualCharacterId:'',manualLevel:'',manualLocked:false,manualSavedId:'',stats:Object.fromEntries(keys.map(k=>[k,'']))},builds:[a,b]};
 }
 export function resolveCalculatorState(input,characterId){
  const clean=cleanCalculatorState(input),valid=clean&&calculatorCharacters.some(c=>c.id===clean.characterId);

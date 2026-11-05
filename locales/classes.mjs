@@ -1,4 +1,7 @@
 export default {
+ 'class.base-values':{ko:'기초값',en:'Base'},
+ 'class.certification-base':{ko:'전직 시험 기초 능력치',en:'Certification exam base stats'},
+ 'class.certification-base-note':{ko:'전직 시험의 기초 정보에서 확인한 수치이며, —는 미확인입니다.',en:'Base values reported from the basic information shown in certification exams. A dash means unconfirmed.'},
  'class.identity-conditions':{ko:'병종 · 전직 조건',en:'Class / Requirements'},
  'class.scroll-table':{ko:'표 가로 이동',en:'Scroll table'},
  'class.scroll-left':{ko:'표를 왼쪽으로 이동',en:'Scroll table left'},

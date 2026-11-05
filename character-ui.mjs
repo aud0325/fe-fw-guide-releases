@@ -1,4 +1,4 @@
-import {characterGrowthContext,characterGrowthSummary} from './growth-rates.mjs';
+import {characterGrowthContext,characterGrowthSummary,characterGrowthValues} from './growth-rates.mjs';
 import {growthCellStyle} from './growth-comparison.mjs';
 import {pagePath,stateQuery} from './routing.mjs';
 import {statLabels} from './locales/labels.mjs';
@@ -13,7 +13,7 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
  if(e.type!=='character')return '';
  if(!e.roles?.includes('playable')&&!e.recruitment&&!e.growthRates&&!e.gifts?.length&&!e.supports?.length)return ''; 
  const text=x=>displayText(x,t,entries);
- const skillApplied=!!(e.modifiedGrowthRates&&growthSkill),context=characterGrowthContext(entries,skillApplied);
+ const rates=characterGrowthValues(e,growthSkill),skillApplied=!!(e.modifiedGrowthRates&&rates===e.modifiedGrowthRates.values),context=characterGrowthContext(entries,growthSkill);
  const summary=context=>{
   const {total,ranking}=characterGrowthSummary(e,context);
   if(!Number.isFinite(total))return '';
@@ -29,7 +29,7 @@ export function characterDetails(e,{t,tx,name,href,entries,base='/',growthSkill=
  };
  let out='';
  out+=`<div class="character-growth-heading"><h2>${t('character.personal-growth-rates')}</h2><a class="character-calculator-link" href="${base}${t.locale}/tools/growth-calculator/?unit=${esc(e.id)}">${t('calculator.link')}</a>${e.growthRates?summary(context):''}</div>`;
- if(e.growthRates){out+=`<div class="character-growth-options"><p class="result-label">${t('growth.unitCharacter')}</p>${e.modifiedGrowthRates?`<label title="${esc(tx(e.modifiedGrowthRates.condition))}"><input id="character-growth-skill" type="checkbox" data-character-growth-skill disabled${skillApplied?' checked':''}><span>${t(e.id==='mu'?'character.signs-of-growth-toggle':'growth.compactSkill')}</span></label>`:''}</div>`;const row=skillApplied?{...e.modifiedGrowthRates,label:t('growth.corrected')}:{...e.growthRates,label:t('character.personal-base')};out+=grid([row])+`<p class="character-growth-legend" title="${esc(t('character.growth-help'))}"><span>${t('growth.low')}</span><span class="legend-scale" aria-hidden="true"></span><span>${t('growth.high')}</span></p>`;
+ if(e.growthRates){out+=`<div class="character-growth-options"><p class="result-label">${t('growth.unitCharacter')}</p>${e.id==='mu'&&skillApplied?`<span class="character-growth-skill-note">${t('growth.signsIncluded')}</span>`:e.modifiedGrowthRates?`<label title="${esc(tx(e.modifiedGrowthRates.condition))}"><input id="character-growth-skill" type="checkbox" data-character-growth-skill disabled${skillApplied?' checked':''}><span>${t(e.id==='mu'?'character.signs-of-growth-toggle':'growth.compactSkill')}</span></label>`:''}</div>`;const row=skillApplied?{...e.modifiedGrowthRates,label:t(e.id==='mu'?'growth.signsIncluded':'growth.corrected')}:{...e.growthRates,label:t('character.personal-base')};out+=grid([row])+`<p class="character-growth-legend" title="${esc(t('character.growth-help'))}"><span>${t('growth.low')}</span><span class="legend-scale" aria-hidden="true"></span><span>${t('growth.high')}</span></p>`;
  }else out+=`<p class="result-label">${t('character.personal-growth-rates-not-documented')}</p>`;
  const growth=out;out='';
  const growthHtml=`<section id="section-training" tabindex="-1">${growth}</section>`,supportHtml=supportConditions(e,{t,name,entries,base}),activityHtml=characterActivityPreferences(e,{t,base}),socialHtml=characterGiftPreferences(e,{t,name,entries,base})+characterBirdDialogue(e,{t}),otherHtml=supportHtml+activityHtml+socialHtml;

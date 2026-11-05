@@ -185,6 +185,7 @@ export const englishTerms=Object.fromEntries(`
 블랑 평원|Blang Plains
 올렌스 도시|Orles City
 볕받이 고개|Sunlit Pass
+별받이 고개|Sunlit Pass
 파로의 숲|Paro Forest
 갈라 멀린|Gala Marlin
 검은 잉어|Black Carp

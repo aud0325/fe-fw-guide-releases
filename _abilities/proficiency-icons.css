@@ -13,6 +13,9 @@
 .sample-rank-matrix .matrix-proficiency.information-hint{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;margin:0;padding:8px;border:0;border-radius:0;background:none;color:inherit;vertical-align:middle}
 .sample-rank-matrix .matrix-proficiency.information-hint:hover,.sample-rank-matrix .matrix-proficiency.information-hint[aria-expanded=true]{background:none}
 .sample-rank-matrix .matrix-proficiency:focus-visible{outline-offset:-3px}
+.sample-abilities .sample-rank-matrix tr.matrix-unavailable>td,.sample-abilities .sample-rank-matrix tr.matrix-unavailable>th:first-child{background:#eeeae3;color:#817b76}
+.sample-rank-matrix .matrix-unavailable .proficiency-glyph{filter:grayscale(1);opacity:.45}
+.sample-rank-matrix .matrix-unavailable-value{display:block;text-align:center}
 @media(width <= 640px){.proficiency-overview>div{align-items:center}.proficiency-affinity{padding:3px 6px}}
 
 /* Square game glyphs have a single source of size, unaffected by generic image rules. */

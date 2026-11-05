@@ -17,7 +17,7 @@ export default {
  'calculator.remove':{ko:'삭제',en:'Delete'},
  'calculator.add':{ko:'병종 경로 추가',en:'Add class stage'},
  'calculator.level':{ko:'레벨',en:'Level'},
- 'calculator.rounding':{ko:'평균을 정수로 반올림한 값입니다. 본체+병종 기준이며, 탈것 성장률은 친밀도 최대 기준으로 반영합니다.',en:'Means rounded to whole numbers. Includes intrinsic and class stats, with mount growths at maximum bond.'},
+ 'calculator.rounding':{ko:'예상 능력치는 성장률로 계산한 평균에 고정 보정을 반영한 값이며, 소수점은 반올림합니다. 탈것 성장률은 친밀도 최대 기준입니다.',en:'Expected stats combine mean growth and fixed stat modifiers, rounded to whole numbers. Mount growths use maximum bond.'},
  'calculator.roundingShort':{ko:'소수점은 반올림됨',en:'Rounded to whole numbers'},
  'calculator.bonusNote':{ko:'탈것·원천·기술·장비의 고정 보너스, 최소 상승·전직 최저치·상한은 제외합니다.',en:'Excludes fixed mount, core, skill and equipment bonuses, minimum gains, promotion floors and caps.'},
  'calculator.saveResult':{ko:'현재 계산된 결과 저장',en:'Save current result'},

@@ -17,6 +17,27 @@ export function cleanSavedCalculations(value){
 export function readSavedCalculations(storage){try{const raw=storage.getItem(calculatorSavesKey);return raw&&raw.length<=500000?cleanSavedCalculations(JSON.parse(raw)):[];}catch{return [];}}
 export function writeSavedCalculations(storage,saves){storage.setItem(calculatorSavesKey,JSON.stringify(cleanSavedCalculations(saves)));}
 
+// Move between visible neighbours without disturbing records hidden by a filter.
+export function movedRecordIds(ids,id,direction,visible=ids){
+ if(!['up','down'].includes(direction))return null;
+ const shown=ids.filter(key=>visible.includes(key)),index=shown.indexOf(id),other=shown[index+(direction==='up'?-1:1)];
+ if(index<0||!other)return null;
+ const next=[...ids],a=next.indexOf(id),b=next.indexOf(other);[next[a],next[b]]=[next[b],next[a]];return next;
+}
+export function droppedRecordIds(ids,id,target,placement,visible=ids){
+ if(id===target||!['before','after'].includes(placement))return null;
+ const shown=ids.filter(key=>visible.includes(key));if(!shown.includes(id)||!shown.includes(target))return null;
+ const next=shown.filter(key=>key!==id);next.splice(next.indexOf(target)+(placement==='after'?1:0),0,id);
+ if(next.every((key,i)=>key===shown[i]))return null;
+ let index=0;return ids.map(key=>visible.includes(key)?next[index++]:key);
+}
+export function orderedSavedCalculations(saves,ids){
+ return ids.map(id=>saves.find(s=>s.id===id)).filter(Boolean).concat(saves.filter(s=>!ids.includes(s.id)));
+}
+export function savedCalculationsWithRecord(saves,record){
+ return saves.some(s=>s.id===record.id)?saves.map(s=>s.id===record.id?record:s):[...saves,record];
+}
+
 export function renamedSavedCalculations(saves,id,name){
  const record=saves.find(s=>s.id===id);if(!record||typeof name!=='string')return null;
  const value=name.trim();if(!value||value.length>(record.kind==='manual'?160:768))return null;

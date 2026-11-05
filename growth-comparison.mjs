@@ -42,7 +42,7 @@ export function growthRows(entries,{mode='growth'}={}){
  }
  return rows;
 }
-export const growthValues=(row,state)=>row.type!=='character'&&state.growthMode==='stats'?row.statModifiers||{}:row.type==='character'&&state.growthSkill&&row.modified?row.modified:row.values;
+export const growthValues=(row,state)=>row.type!=='character'&&state.growthMode==='stats'?row.statModifiers||{}:row.type==='character'&&(row.id==='mu'||state.growthSkill)&&row.modified?row.modified:row.values;
 export function growthTotal(row,state){const values=growthValues(row,state);return growthKeys.every(k=>Number.isFinite(values[k]))?growthKeys.reduce((sum,k)=>sum+values[k],0):null;}
 export function growthRank(row,rows,state){
  const total=growthTotal(row,state),totals=rows.map(r=>growthTotal(r,state)).filter(Number.isFinite);

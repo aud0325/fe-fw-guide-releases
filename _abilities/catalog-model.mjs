@@ -4,6 +4,7 @@ import {proficiencySupplement} from './integration-data.mjs';
 import {observedNonSpecialties} from './proficiency-observations.mjs';
 import {groupFamilies} from './scale-model.mjs';
 import {characters,entities} from './catalog-context.mjs';
+import {proficiencyRestriction} from './proficiency-restrictions.mjs';
 export const proficiencyOrder=['sword','spear','axe','bow','gauntlet','black-magic','white-magic','authority','infantry','armor','cavalry','flying'];
 export const categoryLabels={character:['캐릭터 스킬','Character skills'],training:['기술능력','Proficiencies'],class:['병종','Classes'],mount:['탈것','Mounts']};
 export const characterOrder=characters.map(x=>x.id);
@@ -46,7 +47,7 @@ export function acquisitionLevel(row,id){
 }
 export function characterMatrix(rows,id){
  const preferred=specialties(id),nonPreferred=nonSpecialties(id),learned=rows.filter(r=>r.relations.some(x=>x.type==='character'&&x.id===id));
- const matrix=proficiencyOrder.map(proficiency=>({id:proficiency,preferred:preferred.includes(proficiency),nonPreferred:nonPreferred.includes(proficiency),cells:Object.fromEntries(learningRanks.map(rank=>[rank,[]]))}));
+ const matrix=proficiencyOrder.map(proficiency=>({id:proficiency,preferred:preferred.includes(proficiency),nonPreferred:nonPreferred.includes(proficiency),restriction:proficiencyRestriction(id,proficiency),cells:Object.fromEntries(learningRanks.map(rank=>[rank,[]]))}));
  const initial=[],unranked=[],exclusive=[];
  for(const row of learned){
   const routes=row.relations.filter(x=>x.type==='character'&&x.id===id).flatMap(x=>x.routes||[x]);

@@ -1,3 +1,4 @@
+import {characterOriginMedia} from './character-origin-media.generated.mjs';
 import {defaultState} from './routing.mjs';
 import {homePage} from './home-ui.mjs';
 import {retiredTipState} from './tip-retirement.mjs';
@@ -133,7 +134,7 @@ function detail(e){
  if(outgoing.length)body+=`<h2>${t('app.follow-the-trail')}</h2><div class="relations">${outgoing.map(relation).join('')}</div>`;
  if(incoming.length)body+=`<details class="backlinks"><summary>${t('app.linked-from')} (${incoming.length})</summary><div class="relations">${incoming.map(x=>relation({to:x.id,label:{ko:label(x.type),en:label(x.type)}})).join('')}</div></details>`;
  const abilitySources=abilityReferences(e,lang);
- body+=references([e,abilitySources,...(e.type==='class'?[classReference[e.id]]:[]),{sourceIds:itemUses(e,entries).sourceIds}],[...(e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait]),...abilitySources.imageCredits])+'</article>';
+ body+=references([e,abilitySources,...(e.type==='class'?[classReference[e.id]]:[]),{sourceIds:itemUses(e,entries).sourceIds}],[...(e.type==='item'?[itemMedia[classifyItem(e).icon]]:[entryIconMedia(e)||media[e.id]||e.portrait]),...abilitySources.imageCredits,...(characterOriginMedia[e.id]?[characterOriginMedia[e.id]]:[])])+'</article>';
  return body;
 }
 const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,images});

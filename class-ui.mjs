@@ -58,10 +58,11 @@ export function classAbilityTable(list,{t,base='/'}){
 }
 export function classStatTables(e,{t,base='/'}){
  const p=classReference[e.id],keys=statLabels,heading=()=>keys.map(([,ko,en])=>`<th scope="col">${esc(t(ko,en))}</th>`).join('');
- const values=(r,mode)=>keys.map(([k])=>{const v=r.values[k],style=v?growthCellStyle(v,k,{}, {growthTab:'class',growthMode:mode,growthHeat:'on'}):'';return `<td data-stat="${k}"${style?` style="${style}"`:''}>${v==null?'—':`${v>0?'+':''}${esc(v)}${mode==='growth'?'%':''}`}</td>`;}).join('');
+ const values=(r,mode)=>keys.map(([k])=>{const v=r.values[k],style=v&&mode!=='base'?growthCellStyle(v,k,{}, {growthTab:'class',growthMode:mode,growthHeat:'on'}):'';return `<td data-stat="${k}"${style?` style="${style}"`:''}>${v==null?'—':`${v>0&&mode!=='base'?'+':''}${esc(v)}${mode==='growth'?'%':''}`}</td>`;}).join('');
  const table=(caption,rows,mode)=>`<div class="class-stat-scroll" role="region" tabindex="0" aria-label="${esc(caption)}"><table class="class-stat-table"><caption>${esc(caption)}</caption><thead><tr><th scope="col">${t('class.context')}</th>${heading()}</tr></thead><tbody>${rows.map(r=>`<tr><th scope="row">${esc(r.label)}</th>${values(r,mode)}</tr>`).join('')}</tbody></table></div>`;
  const growths=p.growth.map(r=>({...r,label:r.level?'Lv.'+r.level:t('class.growth')}));
- return table(t('class.growth'),growths,'growth')+table(t('class.modifiers'),[{values:p.modifiers,label:t('class.modifiers')}],'stats')+`<p class="class-stat-key">${t('class.stat-key')}</p>`;
+ const certification=e.classStats?.certificationBase;
+ return table(t('class.growth'),growths,'growth')+table(t('class.modifiers'),[{values:p.modifiers,label:t('class.modifiers')}],'stats')+`<p class="class-stat-key">${t('class.stat-key')}</p>`+(certification?table(t('class.certification-base'),[{values:certification.values,label:t('class.base-values')}],'base')+`<p class="class-stat-key">${t('class.certification-base-note')}</p>`:'');
 }
 export function classDetails(e,{t,base='/',compact=false}){
  const p=classReference[e.id];if(!p)return '';

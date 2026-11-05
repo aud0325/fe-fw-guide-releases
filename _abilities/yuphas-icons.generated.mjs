@@ -5744,5 +5744,380 @@ export const yuphasAbilityIcons = {
       "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
       "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
     }
+  },
+  "skill-c9fc265035d6": {
+    "src": "./assets/yuphas/pass-judgment-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/pass-judgment-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Pass Judgment",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-6d1ff2d96b5f": {
+    "src": "./assets/yuphas/vulgar-conduct-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/vulgar-conduct-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Vulgar Conduct",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-0a1d78121a27": {
+    "src": "./assets/yuphas/vanguard-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/vanguard-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Vanguard+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-c986e1e38824": {
+    "src": "./assets/yuphas/cavalry-move-plus-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/cavalry-move-plus-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Cavalry Move+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-f11c85c2e6fc": {
+    "src": "./assets/yuphas/airfighter-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/airfighter-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Airfighter+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-bbcb23ef52b3": {
+    "src": "./assets/yuphas/infantry-canto.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/infantry-canto.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Infantry Canto",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-ad6c0ddf83a0": {
+    "src": "./assets/yuphas/counterflurry.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counterflurry.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counterflurry",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-51bd4c00e052": {
+    "src": "./assets/yuphas/strength-fend.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/strength-fend.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Strength Fend",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-49eaecdbbe22": {
+    "src": "./assets/yuphas/dexterity-fend.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/dexterity-fend.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Dexterity Fend",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-bc326b1c5a62": {
+    "src": "./assets/yuphas/defense-fend.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/defense-fend.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Defense Fend",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-5df97a8cfe9b": {
+    "src": "./assets/yuphas/luck-fend.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/luck-fend.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Luck Fend",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-fef188cde905": {
+    "src": "./assets/yuphas/counter-snipers-plus-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counter-snipers-plus-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counter Snipers+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-444d3b1e9365": {
+    "src": "./assets/yuphas/counter-mages-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counter-mages-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counter Mages+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-7dffee0e980d": {
+    "src": "./assets/yuphas/counter-cavalry-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counter-cavalry-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counter Cavalry+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-3738f682f723": {
+    "src": "./assets/yuphas/counter-fliers.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counter-fliers.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counter Fliers",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-13f3c1a66539": {
+    "src": "./assets/yuphas/counter-fliers-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/counter-fliers-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Counter Fliers+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-6516c6bb5d0e": {
+    "src": "./assets/yuphas/sniper-evasion-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/sniper-evasion-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Sniper Evasion+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-6150118347b1": {
+    "src": "./assets/yuphas/bowblock-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/bowblock-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Bowblock+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-8cd587356b17": {
+    "src": "./assets/yuphas/armored-combat-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/armored-combat-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Armored Combat+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-d48a51d577d3": {
+    "src": "./assets/yuphas/magic-fend.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/magic-fend.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Magic Fend",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-55b3a3338ac4": {
+    "src": "./assets/yuphas/armored-leap-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/armored-leap-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Armored Leap+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-8b67499d9c42": {
+    "src": "./assets/yuphas/resistant-armor-plus.png",
+    "width": 30,
+    "height": 30,
+    "originalUrl": "https://yuphastemple.com/images/abilities/resistant-armor-plus.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Resistant Armor+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-1cf7f05dc301": {
+    "src": "./assets/yuphas/build-plus-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/build-plus-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Build+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-d4e175129b7a": {
+    "src": "./assets/yuphas/requiem-style-plus-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/requiem-style-plus-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Requiem Style+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
+  },
+  "skill-4cef33c3f9c0": {
+    "src": "./assets/yuphas/solid-and-sturdy-plus-v2.png",
+    "width": 40,
+    "height": 40,
+    "originalUrl": "https://yuphastemple.com/images/abilities/solid-and-sturdy-plus-v2.png",
+    "sourceUrl": "https://yuphastemple.com/abilities/",
+    "sourceLabel": "Solid and Sturdy+",
+    "credit": "Yu Phas’ Temple · Nintendo / INTELLIGENT SYSTEMS",
+    "checkedAt": "2026-11-05",
+    "rights": "Game artwork; no open redistribution licence verified.",
+    "sourceNote": {
+      "ko": "게임 이미지 © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple",
+      "en": "Game artwork © Nintendo / INTELLIGENT SYSTEMS · Yu Phas’ Temple"
+    }
   }
 };

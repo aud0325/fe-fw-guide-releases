@@ -14,7 +14,7 @@ export function publicSourceRecord(id,source){
  if(local){
   delete record.url;
   record.provider={ko:'제공된 게임 화면·플레이 정보',en:'Provided gameplay materials'};
-  if(['administrator-recruitment-equipment-20261029','administrator-character-origins-20261104'].includes(id))record.provider={ko:'관리자',en:'Administrator'};
+  if(['administrator-recruitment-equipment-20261029','administrator-character-origins-20261104','administrator-name-correction-20261105'].includes(id))record.provider={ko:'관리자',en:'Administrator'};
   const topics={
    'user-item-names-20260926':['한국어 명칭','Korean names'],
    'user-weapon-labels-20260929':['무기 명칭','Weapon names'],

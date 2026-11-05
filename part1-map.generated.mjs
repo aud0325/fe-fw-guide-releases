@@ -512,7 +512,7 @@ export const mapNodes=[
  },
  {
   "id": "collection-dragon-cape",
-  "ko": "용을 부르는 곶",
+  "ko": "용을 부르는 곳",
   "en": "Bau-Caller's Cape",
   "province": "idyia",
   "kind": "gathering",
@@ -530,6 +530,7 @@ export const mapNodes=[
   },
   "aliases": [
    "용을 부르는 곶",
+   "용을 부르는 곳",
    "Bau-Caller's Cape"
   ],
   "u": 0.7200795228628232,
@@ -934,7 +935,7 @@ export const mapNodes=[
  },
  {
   "id": "map-mintaka-rock-gate",
-  "ko": "민타카의 바위 문",
+  "ko": "민티카의 바위 문",
   "en": "Mintaka Rockway",
   "province": "solidus",
   "kind": "gathering",
@@ -952,6 +953,7 @@ export const mapNodes=[
   },
   "aliases": [
    "민타카의 바위 문",
+   "민티카의 바위 문",
    "Mintaka Rockway"
   ],
   "u": 0.19045725646123263,
@@ -11076,7 +11078,7 @@ export const mapNodes=[
  },
  {
   "id": "video-starwatch-mount-pass",
-  "ko": "볕받이 고개",
+  "ko": "별받이 고개",
   "en": "Sunlit Pass",
   "province": "amalthea",
   "kind": "gathering",
@@ -12469,7 +12471,7 @@ export const mapNodes=[
  },
  {
   "id": "map-wire-forest",
-  "ko": "위레 숲",
+  "ko": "워레 숲",
   "en": "Walle's Woodlands",
   "province": "braxithea",
   "kind": "gathering",
@@ -12490,6 +12492,7 @@ export const mapNodes=[
    "Walle’s Woodlands",
    "ウォレの森",
    "왈레 숲(ウォレの森)",
+   "워레 숲",
    "Walle's Woodlands"
   ],
   "u": 0.2715705765407555,

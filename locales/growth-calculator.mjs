@@ -44,7 +44,7 @@ export default {
  'calculator.difference':{ko:'B − A',en:'B − A'},
  'calculator.stat':{ko:'능력치',en:'Stat'},
  'calculator.details':{ko:'성장률 내역',en:'Growth breakdown'},
- 'calculator.levels':{ko:'레벨별 기대값',en:'Expected stats by level'},
+ 'calculator.levels':{ko:'레벨별 예상 능력치',en:'Expected stats by level'},
  'calculator.personal':{ko:'개인',en:'Personal'},
  'calculator.total':{ko:'합산',en:'Combined'},
  'calculator.bonuses':{ko:'고정 보너스 조정',en:'Adjust fixed stat bonuses'},

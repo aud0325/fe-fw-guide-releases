@@ -1,4 +1,5 @@
 export default {
+ "growth.signsIncluded":{"ko":"성장의 징조 포함","en":"Signs of Growth included"},
  "growth.title": {
   "ko": "성장률 비교",
   "en": "Compare growth rates"
@@ -135,8 +136,8 @@ export default {
   "en": "Per-stat colors use each column’s mean and standard deviation across the full character roster. The mean is neutral; color saturates at ±2 standard deviations. Blue is below mean; red is above mean."
  },
  "growth.stableMethod": {
-  "ko": "개인 기술 적용 조건을 바꾸면 평균과 색 기준을 다시 계산합니다. 미기재값은 제외하고, 모두 같은 수치인 열은 중립색으로 표시합니다.",
-  "en": "Changing personal-skill context recalculates the baseline. Missing values are excluded; constant columns are neutral."
+  "ko": "이름 검색으로 표를 좁혀도 평균과 색 기준은 전체 목록을 유지합니다. 미기재값은 제외하고, 모두 같은 수치인 열은 중립색으로 표시합니다.",
+  "en": "The baseline stays based on the full roster when filtering. Missing values are excluded; constant columns are neutral."
  },
  "growth.modifierMethod": {
   "ko": "병종·탈것은 능력치마다 같은 −30~+30%p 절대 척도를 사용합니다. 음수는 파랑, 0은 흰색, 양수는 빨강입니다.",
@@ -147,8 +148,8 @@ export default {
   "en": "Totals are simple sums of the nine rates, not unit rankings or a stat-gain probability. Growth modifiers are separate from immediate stat bonuses."
  },
  "growth.skillMethod": {
-  "ko": "개인 기술 보정 포함은 기존 데이터에 적용 후 수치가 있는 대상만 바꿉니다. 무우는 적용 전과 Signs of Growth 적용 후를 구분하며, 한 번만 집계합니다.",
-  "en": "The skill option uses documented modified values only. Mu’s base rates and Signs of Growth rates stay separate, and Mu is counted once."
+  "ko": "무우는 성장의 징조를 항상 포함한 성장률로 한 번만 집계합니다.",
+  "en": "Mu is counted once, always including Signs of Growth."
  },
  "growth.mountSourceNote": {
   "ko": "갤러리 원문을 출처로 연결합니다. 수치는 원문을 옮긴 정리표 기준이며, 원문에서 생략한 능력치의 0도 정리표의 기입값입니다. 친밀도 기준은 미기재입니다.",

@@ -2,6 +2,13 @@
 import {classTierName} from '../class-tiers.mjs';
 const tierLabel=tier=>({ko:classTierName(tier,'ko',{compact:true}),en:classTierName(tier,'en',{compact:true})});
 export default {
+ "character.proficiency-unavailable":{"ko":"사용 불가","en":"Unavailable"},
+ "character.tahonia-magic-unavailable":{"ko":"전직 제한으로 흑마술·백마술을 사용할 수 없습니다.","en":"Class restrictions prevent the use of black and white magic."},
+ "character.growth-radar-high":{"ko":"평균보다 크게 높음","en":"Well above mean"},
+ "character.growth-radar-very-high":{"ko":"평균보다 매우 높음","en":"Far above mean"},
+ "character.personal-growth-chart":{"ko":"개인 성장률 그래프","en":"Personal growth chart"},
+ "character.growth-radar-range":{"ko":"스탯별 최고 성장률 기준","en":"Scaled to each stat’s base maximum"},
+ "character.growth-radar-maximum":{"ko":"기본 성장률 최고 {value}%","en":"Base maximum {value}%"},
  "character.origin":{"ko":"원천","en":"Origin"},
  "character.training-growth": {"ko":"캐릭터 + 병종 성장률 비교","en":"Compare character + class growth"},
  "character.training-growth-basis": {"ko":"개인 성장률에 병종 보정을 더한 값입니다. 탈것 보정은 제외했습니다.","en":"Personal growth rates plus class growth modifiers, excluding mounts."},

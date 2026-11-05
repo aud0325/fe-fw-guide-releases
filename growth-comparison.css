@@ -26,3 +26,5 @@
 .growth-comparison .growth-workspace{flex-wrap:wrap}.growth-comparison .growth-toolbar{flex-wrap:wrap;min-width:0;gap:8px 16px}.growth-comparison .growth-toolbar .growth-name-search{min-width:0}.growth-comparison .growth-toolbar .growth-name-search input[type=search]{height:36px;min-height:36px;width:220px;max-width:100%;padding:6px 10px;font-size:13px;cursor:text;appearance:auto}.class-numeric-comparison .growth-toolbar .growth-name-search input[type=search]{width:100%}@media (width <= 640px){.growth-comparison .growth-toolbar .growth-name-search{flex-basis:100%;width:100%}.growth-comparison .growth-toolbar .growth-name-search input[type=search]{width:100%}}
 
 .growth-scroll .growth-level-range{display:block;font-size:11px;line-height:1.5;font-weight:400;color:var(--muted)}
+
+.character-growth-skill-note{font-size:11px;color:var(--muted)}

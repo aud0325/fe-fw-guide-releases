@@ -16,6 +16,7 @@ import {calculatorStorageKey,parseCalculatorState,restorePrivateCalculatorName,r
 import {bindGrowthControls,bindCharacterGrowthControls,revealGrowthFocus} from './growth-controls.mjs';
 import {navigationHtml,shellFilters,renderKey,hydrateContent,homeCategoriesHtml} from './shell-renderer.mjs';
 import {revealAnchor} from './anchors.mjs';
+import {bindCharacterSections} from './character-sections.mjs';
 import {isNoindexState} from './indexing-policy.mjs';
 import {trackPage} from './analytics.mjs';
 import {setupUpdateCheck} from './update-check.mjs';
@@ -43,6 +44,7 @@ let visibleLimit=36;
 let state=initialRoute?.state||defaultState();
 let t=createTranslator(lang);
 let headingObserver;
+let characterSectionsCleanup;
 let searchUI;
 let mapControls;
 let forgingControls;
@@ -72,6 +74,7 @@ function renderFilters(){
  $('filter-toggle').textContent=t('app.filters')+(controls.tips&&!state.includeTips?t('app.no-tips'):'');
 }
 function render(){
+ characterSectionsCleanup?.();characterSectionsCleanup=null;
  entityLinks.beforeNavigate();
  mapControls?.destroy();mapControls=null;
  updates.schedule();
@@ -118,6 +121,7 @@ function render(){
  const growthViewport=$('content').querySelector('.growth-scroll'),savedGrowth=history.state?.growthViewport;
  if(growthViewport&&savedGrowth){growthViewport.scrollLeft=savedGrowth.x;growthViewport.scrollTop=savedGrowth.y;}
  syncDetailHeading();
+ characterSectionsCleanup=bindCharacterSections($('content'));
  updateMetadata(page);
  trackPage();
  document.querySelectorAll('a[href^="#"]').forEach(a=>{if(a.classList.contains('skip')){a.href=location.pathname+location.search+'#main';return;}const next=rewriteLinks(a.outerHTML,lang,basePath);if(next!==a.outerHTML){const holder=document.createElement('template');holder.innerHTML=next;a.href=holder.content.firstElementChild.getAttribute('href');}});
