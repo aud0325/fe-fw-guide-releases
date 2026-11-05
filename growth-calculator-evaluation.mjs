@@ -18,6 +18,13 @@ export function standardGrowthRecord(characterId,level){
  if(!result.values)return null;
  const record={state,kind:'calculated',values:result.values,benchmarkVersion};cache.set(key,record);return structuredClone(record);
 }
+function referenceGrowthRecord(state,record){
+ const characterId=recordCharacterId(record)||state.characterId,level=recordLevel(record)||state.target;
+ const source=characterId===state.characterId?state:record?.state;
+ if(!source)return standardGrowthRecord(characterId,level);
+ const build=activeBuild(source.builds[0],level),referenceState={...source,target:level,builds:[build]},result=calculateBuild(calculatorData,characterId,build,level);
+ return result.values?{state:referenceState,kind:'calculated',values:result.values}:null;
+}
 function numericAnalysis(left,right){
  const compared=statComparison(left,right),level=Math.max(...[left,right].map(recordLevel).filter(v=>Number.isInteger(v)&&v>=1&&v<=99));
  return {reason:'',rows:compared.rows.map(r=>({key:r.key,value:r.right,expected:r.left,difference:r.difference,score:null,status:'missing'})),totals:{value:compared.rightTotal,expected:compared.leftTotal,difference:compared.difference},graphLevel:level,graphScales:radarScale(level),average:null,overall:null};
@@ -25,7 +32,7 @@ function numericAnalysis(left,right){
 export function comparisonView(state,result,saves){
  const sides=comparisonSides(state,result,saves);
  if(state.comparison.purpose==='records')return {...sides,analysis:numericAnalysis(sides.left,sides.right),evaluation:false};
- const right=sides.right,characterId=recordCharacterId(right)||state.characterId,level=recordLevel(right)||state.target,standard=standardGrowthRecord(characterId,level);
+ const right=sides.right,characterId=recordCharacterId(right)||state.characterId,level=recordLevel(right)||state.target,standard=referenceGrowthRecord(state,right);
  if(!standard)return {left:null,right,analysis:{...numericAnalysis(null,right),reason:'standard'},evaluation:true};
  const model=calculateBuild(calculatorData,characterId,standard.state.builds[0],level),details=recordStatBreakdowns(right);
  const context=right?.state?currentEquipment(right.state):right?.context;
@@ -36,17 +43,17 @@ export function comparisonView(state,result,saves){
  if(right?.state&&right.kind!=='calculated'){
   const current=calculateBuild(calculatorData,characterId,activeBuild(right.state.builds[0],level),level);
   const expected=current.values?recordDisplayValues({state:right.state,values:current.values}):null,actual=recordDisplayValues(right);
-  if(!expected||keys.some(k=>!unknownBonusKeys.includes(k)&&expected[k]!==actual[k]))return {left,right,analysis:{...numeric,reason:'outdated'},evaluation:true};
+  if(!expected||keys.some(k=>!unknownBonusKeys.includes(k)&&expected[k]!==actual[k]))return {left,right,analysis:{...numeric,reason:'outdated'},evaluation:true,referenceState:standard.state};
  }
 
  const standardClass=calculatorData.classes.find(c=>c.id===standard.state.builds[0].stages.at(-1).classId);
  const normalized={kind:'manual',characterId,level,values:Object.fromEntries(keys.map(k=>[k,details.rows[k].body===null?null:details.rows[k].body+standardClass.modifiers[k]]))};
  const analysis=analyzeGrowth(calculatorData,standard,normalized);
- // Compare visible totals, but score intrinsic growth against the immutable reference distribution.
+ // Compare visible totals and score intrinsic growth against the selected training path.
  analysis.rows=analysis.rows.map(row=>({...row,...numeric.rows.find(r=>r.key===row.key),score:row.score,status:row.status,bonusUnknown:unknownBonusKeys.includes(row.key)}));
  analysis.unknownBonusKeys=unknownBonusKeys;
  if(unknownBonusKeys.length)analysis.reason='partialContext';
  if(analysis.rows.some(row=>row.status==='outside')){analysis.overall=null;analysis.reason='outsideValues';}
  analysis.totals=numeric.totals;analysis.graphScales=numeric.graphScales;analysis.graphLevel=numeric.graphLevel;
- return {left,right,analysis,evaluation:true};
+ return {left,right,analysis,evaluation:true,referenceState:standard.state};
 }
