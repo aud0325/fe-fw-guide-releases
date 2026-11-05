@@ -116,6 +116,8 @@ export default {
  'calculator.weapon.gauntlet':{ko:'권갑',en:'Gauntlets'},
  'calculator.analysis.outsideValues':{ko:'모델 범위 밖인 수치가 있어 종합 평가는 표시하지 않습니다.',en:'Overall assessment is unavailable because a stat is outside the model range.'},
  'calculator.analysis.context':{ko:'보정 조건을 확인하면 예상 대비 평가를 표시합니다.',en:'Confirm stat modifiers to evaluate against expected stats.'},
+ 'calculator.analysis.partialContext':{ko:'{stats} 보정값이 미확인이어서 종합 평가와 평균을 계산할 수 없습니다. 확인된 능력치는 개별 평가합니다.',en:'Unknown {stats} modifiers prevent the overall assessment and average. Known stats are assessed individually.'},
+ 'calculator.bonusUnknown':{ko:'보정 미확인',en:'Unknown modifier'},
  'calculator.analysis.standard':{ko:'이 레벨에는 기준 예상 능력치가 없습니다.',en:'Reference expected stats are unavailable at this level.'},
  'calculator.currentStats':{ko:'현재 능력치',en:'Current stats'},
  'calculator.growthChartTitle':{ko:'능력치별 평가',en:'Stat assessment'},

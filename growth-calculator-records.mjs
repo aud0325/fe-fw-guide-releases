@@ -56,7 +56,7 @@ export function manualInputError(state){
  if(bad)return {key:'calculator.fillAllStats',field:'#calc-comp-'+bad};
  if(!manualMetadata(state).name.trim())return {key:'calculator.nameRequired',field:'#calc-manual-name'};
  const meta=manualMetadata(state);if(!calculatorCharacters.some(c=>c.id===meta.characterId)||!Number.isInteger(meta.level)||meta.level<1||meta.level>99)return {key:'calculator.invalidMetadata'};
- if(c.valueBasis!=='total'||!calculatorClasses.some(cls=>cls.id===manualEquipmentContext(state)?.classId))return {key:'calculator.analysis.context',field:'#calc-context-class'};
+ if(c.valueBasis!=='total'||!calculatorClasses.some(cls=>cls.id===manualEquipmentContext(state)?.classId))return {key:'calculator.analysis.context',field:'#calc-right-status'};
  return null;
 }
 export function matchingManualRecord(state,saves,lang='ko'){

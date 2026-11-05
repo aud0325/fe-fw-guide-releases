@@ -28,23 +28,24 @@ export function comparisonView(state,result,saves){
  const right=sides.right,characterId=recordCharacterId(right)||state.characterId,level=recordLevel(right)||state.target,standard=standardGrowthRecord(characterId,level);
  if(!standard)return {left:null,right,analysis:{...numericAnalysis(null,right),reason:'standard'},evaluation:true};
  const model=calculateBuild(calculatorData,characterId,standard.state.builds[0],level),details=recordStatBreakdowns(right);
- const known=!!details.className&&keys.every(k=>Number.isFinite(details.rows[k].job)&&Number.isFinite(details.rows[k].extraKnown)&&details.rows[k].extraComplete);
- const context=known?(right.state?currentEquipment(right.state):right.context):currentEquipment(standard.state);
- const referenceValues=Object.fromEntries(keys.map(k=>[k,integerStat(model.intrinsic[k]+(known?details.rows[k].job:calculatorData.classes.find(c=>c.id===context?.classId)?.modifiers[k]||0)+(known?details.rows[k].extraKnown:0))]));
+ const context=right?.state?currentEquipment(right.state):right?.context;
+ const unknownBonusKeys=keys.filter(k=>!Number.isFinite(details.rows[k].job)||!details.rows[k].extraComplete);
+ const referenceValues=Object.fromEntries(keys.map(k=>[k,unknownBonusKeys.includes(k)?null:integerStat(model.intrinsic[k]+details.rows[k].job+details.rows[k].extraKnown)]));
  const left={kind:'manual',characterId,level,values:referenceValues,basis:'total',context,benchmarkVersion};
  const numeric=numericAnalysis(left,right);
  if(right?.state&&right.kind!=='calculated'){
   const current=calculateBuild(calculatorData,characterId,activeBuild(right.state.builds[0],level),level);
   const expected=current.values?recordDisplayValues({state:right.state,values:current.values}):null,actual=recordDisplayValues(right);
-  if(!expected||keys.some(k=>expected[k]!==actual[k]))return {left,right,analysis:{...numeric,reason:'outdated'},evaluation:true};
+  if(!expected||keys.some(k=>!unknownBonusKeys.includes(k)&&expected[k]!==actual[k]))return {left,right,analysis:{...numeric,reason:'outdated'},evaluation:true};
  }
 
- if(!known)return {left,right,analysis:{...numeric,reason:'context'},evaluation:true};
  const standardClass=calculatorData.classes.find(c=>c.id===standard.state.builds[0].stages.at(-1).classId);
  const normalized={kind:'manual',characterId,level,values:Object.fromEntries(keys.map(k=>[k,details.rows[k].body===null?null:details.rows[k].body+standardClass.modifiers[k]]))};
  const analysis=analyzeGrowth(calculatorData,standard,normalized);
  // Compare visible totals, but score intrinsic growth against the immutable reference distribution.
- analysis.rows=analysis.rows.map(row=>({...row,...numeric.rows.find(r=>r.key===row.key),score:row.score,status:row.status}));
+ analysis.rows=analysis.rows.map(row=>({...row,...numeric.rows.find(r=>r.key===row.key),score:row.score,status:row.status,bonusUnknown:unknownBonusKeys.includes(row.key)}));
+ analysis.unknownBonusKeys=unknownBonusKeys;
+ if(unknownBonusKeys.length)analysis.reason='partialContext';
  if(analysis.rows.some(row=>row.status==='outside')){analysis.overall=null;analysis.reason='outsideValues';}
  analysis.totals=numeric.totals;analysis.graphScales=numeric.graphScales;analysis.graphLevel=numeric.graphLevel;
  return {left,right,analysis,evaluation:true};

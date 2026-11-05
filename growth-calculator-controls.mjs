@@ -12,7 +12,6 @@ import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,compariso
 import {comparisonView} from './growth-calculator-evaluation.mjs';
 import {recordDisplayValues} from './growth-calculator-equipment.mjs';
 import {multiRecordModel,validRecordDraft,copiedRecordDraft} from './growth-calculator-multi-model.mjs';
-import {contextMountOptions} from './growth-calculator-context-ui.mjs';
 import {bindStatBreakdowns} from './growth-calculator-stat-ui.mjs';
 import {bindStageGrowthTips} from './growth-calculator-stage-ui.mjs';
 import {bindRecordReordering} from './growth-calculator-record-drag.mjs';
@@ -111,22 +110,10 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   });
 
  });
- const applyContext=()=>{
-  const next=clone(),before=next.comparison,meta=manualMetadata(state),classId=host.querySelector('#calc-context-class')?.value;
-  if(!classId)return;
-  const mountId=host.querySelector('#calc-context-mount')?.value||'',weapon=host.querySelector('#calc-context-weapon')?.value||'none';
-  const battalionId=host.querySelector('#calc-context-battalion')?.value||'';
-  const context={...(battalionId?{battalionId}:{}),classId,mountId:compatibleMounts(meta.characterId,classId).some(m=>m.id===mountId)?mountId:'',bond:5,weapon};
-  if(before.valueBasis!=='total')before.stats=recordDisplayValues({kind:'manual',...meta,values:before.stats,context});
-  before.context=context;before.valueBasis='total';commitInput(next);
-  for(const key of keys){const field=host.querySelector('#calc-comp-'+key);if(field)field.value=next.comparison.stats[key];}
-  const mount=host.querySelector('#calc-context-mount');if(mount)mount.innerHTML=contextMountOptions(context,meta.characterId,{t,lang});
- };
  host.addEventListener('change',event=>{
   if(event.target.hasAttribute('data-calc-record-check')){toggleRecord(event.target.dataset.calcRecordCheck,event.target.checked);return;}
   if(event.target.hasAttribute('data-calc-record-others')){const next=clone();next.comparison.recordIds=multiRecordModel(state,result(),saves).ids;next.comparison.includeOtherRecords=event.target.checked;commitInput(next);return;}
   if(event.target.id==='calc-mu-weapon'){const next=clone();next.weapon=event.target.value;commit(next,'#calc-mu-weapon',false);return;}
-  if(event.target.hasAttribute('data-calc-context'))applyContext();
  });
  const saveRecord=manual=>{
   const out=result(),meta=manualMetadata(state,lang),values=manual?state.comparison.stats:out.values,message=host.querySelector(manual?'#calc-right-status':'#calc-status');
@@ -190,7 +177,6 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   if(button.dataset.calcPurpose){const next=clone();next.comparison.purpose=button.dataset.calcPurpose;commit(next,'#calc-purpose-'+button.dataset.calcPurpose,false);return;}
   if(button.hasAttribute('data-calc-add-battalion')){const next=clone();next.battalionAdded=true;commit(next,'#calc-battalion',false);root.querySelector('#calc-battalion')?.click();return;}
   if(button.hasAttribute('data-calc-clear-battalion')){const next=clone();next.battalionId='';next.battalionAdded=false;commit(next,'[data-calc-add-battalion]',false);return;}
-  if(button.hasAttribute('data-calc-confirm-context')){applyContext();return;}
   if(button.dataset.calcRename){editingId=button.dataset.calcRename;refreshSaves();const field=host.querySelector('#calc-rename-'+editingId);field?.focus();field?.select();return;}
   if(button.dataset.calcRenameCancel){cancelRename();return;}
   if(button.dataset.calcTab){const [side,mode]=button.dataset.calcTab.split(':');setSource(side,mode);return;}
