@@ -83,6 +83,7 @@ export default {
  'calculator.quickSave':{ko:'기록으로 저장',en:'Save record'},
  'calculator.quickHint':{ko:'능력치 9개를 입력하면 그래프에 바로 표시합니다.',en:'Enter all nine stats to add the draft to the graph.'},
  'calculator.recordsMode':{ko:'기록끼리 비교',en:'Compare records'},
+ 'calculator.resetManual':{ko:'내 육성정보 초기화',en:'Reset my training'},
  'calculator.standardPath':{ko:'성장 루트',en:'Growth path'},
  'calculator.standardStats':{ko:'기준 예상 능력치',en:'Reference expected stats'},
  'calculator.standardRules':{ko:'기준 예상 능력치와 백분위는 선택한 시작 레벨·육성 경로의 성장 분포로 계산합니다. 경로를 바꾸면 기준 수치와 평가도 함께 갱신됩니다. 병종·탈것·원천·기술·군단병의 고정 보정을 제외한 본체 능력치를 평가하며, 표시 수치는 비교 대상과 같은 보정 조건을 적용합니다. 최소 상승·전직 최저치·상한은 반영하지 않습니다.',en:'Reference expected stats and percentiles use the selected starting level and training path. Changing the path updates both the reference values and assessment. Intrinsic stats are assessed after removing fixed class, mount, core, ability and battalion bonuses; displayed values use the target record’s modifiers. Minimum gains, promotion floors and caps are excluded.'},

@@ -31,6 +31,9 @@ export function comparisonSides(state,result,saves){
  const meta=manualMetadata(state);
  return {left:c.leftMode==='saved'?saves.find(s=>s.id===c.leftSavedId):current,right:c.mode==='saved'?saves.find(s=>s.id===c.savedId):{kind:'manual',...meta,values:c.stats,basis:c.valueBasis,context:c.valueBasis==='total'?manualEquipmentContext(state):null}};
 }
+export function resetManualComparison(state){
+ return {...state.comparison,mode:'manual',savedId:'',manualName:null,manualCharacterId:'',manualLevel:'',manualLocked:false,manualSavedId:'',context:null,valueBasis:'total',stats:Object.fromEntries(keys.map(k=>[k,'']))};
+}
 export function copiedExpectedComparison(state,source){
  if(!source?.values||!keys.every(k=>Number.isFinite(source.values[k])))return null;
  const c=state.comparison,meta=manualMetadata(state),id=recordCharacterId(source),level=recordLevel(source);

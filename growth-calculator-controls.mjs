@@ -8,7 +8,7 @@ import {calculateBuild} from './growth-calculator-model.mjs';
 import {bindCalculatorPickers} from './growth-calculator-picker.mjs';
 import {readSavedCalculations,writeSavedCalculations,calculatorSaveLimit,renamedSavedCalculations,movedRecordIds,droppedRecordIds,orderedSavedCalculations,savedCalculationsWithRecord} from './growth-calculator-saves.mjs';
 import {savedCalculationsHtml,comparisonHtml,refreshComparisonMetrics} from './growth-calculator-comparison-ui.mjs';
-import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,manualEquipmentContext,copiedExpectedComparison} from './growth-calculator-records.mjs';
+import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,manualEquipmentContext,copiedExpectedComparison,resetManualComparison} from './growth-calculator-records.mjs';
 import {comparisonView} from './growth-calculator-evaluation.mjs';
 import {recordDisplayValues} from './growth-calculator-equipment.mjs';
 import {multiRecordModel,validRecordDraft,copiedRecordDraft} from './growth-calculator-multi-model.mjs';
@@ -182,6 +182,7 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   if(button.dataset.calcTab){const [side,mode]=button.dataset.calcTab.split(':');setSource(side,mode);return;}
   if(button.hasAttribute('data-calc-open-records')){openRecords(button.dataset.calcOpenRecords);return;}
   if(button.hasAttribute('data-calc-save-current')){saveRecord(false);return;}
+  if(button.hasAttribute('data-calc-reset-manual')){const next=clone();next.comparison=resetManualComparison(state);commit(next,'#calc-comp-hp',false);return;}
   if(button.hasAttribute('data-calc-save-manual')){saveRecord(true);return;}
   if(button.dataset.calcEditRecord){const saved=saves.find(s=>s.id===button.dataset.calcEditRecord&&s.kind==='manual');if(!saved)return;const next=clone();Object.assign(next.comparison,{mode:'manual',stats:{...saved.values},manualName:saved.name,manualCharacterId:saved.characterId,manualLevel:saved.level,manualSavedId:saved.id,manualLocked:false,context:saved.context||null,valueBasis:saved.basis==='total'?'total':'base'});commit(next,'#calc-manual-name',false);return;}
   if(button.hasAttribute('data-calc-fill-expected')){const comparison=copiedExpectedComparison(state,comparisonView(state,result(),saves).left);if(!comparison)return;const next=clone();next.comparison=comparison;commit(next,'#calc-comp-hp',false);return;}

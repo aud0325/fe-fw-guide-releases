@@ -15,7 +15,7 @@ const sheetOrder=['hp','str','def','mag','res','spd','lck','dex','cha'];
 const label=(key,lang)=>statLabels.find(s=>s[0]===key)[lang==='en'?2:1];
 const name=(entry,lang)=>entry?.name?.[lang]||entry?.name?.en||'—';
 const charName=(id,lang)=>name(calculatorCharacters.find(c=>c.id===id),lang);
-const icons={fill:'M4 12h16m-6-6 6 6-6 6',save:'M5 3h12l4 4v14H3V3h2Zm2 0v7h10V3M7 21v-8h10v8',edit:'m4 16-1 5 5-1L21 7l-4-4L4 16Zm11-11 4 4',check:'m4 12 5 5L20 6',folder:'M3 6h7l2 2h9v12H3V6Z'};
+const icons={clear:'m6 6 12 12M6 18 18 6',fill:'M4 12h16m-6-6 6 6-6 6',save:'M5 3h12l4 4v14H3V3h2Zm2 0v7h10V3M7 21v-8h10v8',edit:'m4 16-1 5 5-1L21 7l-4-4L4 16Zm11-11 4 4',check:'m4 12 5 5L20 6',folder:'M3 6h7l2 2h9v12H3V6Z'};
 export const calculatorIconButton=(icon,title,attrs='',caption='')=>`<button type="button" class="calc-card-icon${caption?' calc-copy-button':''}" aria-label="${esc(title)}" title="${esc(title)}" ${attrs}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${icons[icon]}"></path></svg>${caption?`<span>${esc(caption)}</span>`:''}</button>`;
 export function savedCalculationsHtml(saves,{t,lang,characterId,highlightId='',editingId=''}){
  const help=`<p id="calc-drag-help-saved" class="sr-only">${t('calculator.dragHelp')}</p>`;
@@ -37,7 +37,8 @@ export function savedRecordsDialog({t}){
 const number=v=>v===null||!Number.isFinite(v)?'—':String(v);
 const delta=v=>v===null?'—':(v>0?'+':'')+v;
 export function manualSaveAction(state,saves,{t,lang}){
- return matchingManualRecord(state,saves,lang)?`<span class="calc-card-saved" aria-label="${t('calculator.savedLabel')}" title="${t('calculator.savedLabel')}">✓</span>`:calculatorIconButton('save',t('calculator.save'),`data-calc-save-manual${manualInputError(state)?' disabled':''}`);
+ const save=matchingManualRecord(state,saves,lang)?`<span class="calc-card-saved" aria-label="${t('calculator.savedLabel')}" title="${t('calculator.savedLabel')}">✓</span>`:calculatorIconButton('save',t('calculator.save'),`data-calc-save-manual${manualInputError(state)?' disabled':''}`);
+ return save+calculatorIconButton('clear',t('calculator.resetManual'),'data-calc-reset-manual');
 }
 export function comparisonHtml(state,result,saves,{t,lang,recordEditingId=''}){
  const {left,right,analysis,evaluation,referenceState}=comparisonView(state,result,saves),comparison=statComparison(left,right),labels=comparisonStatLabels(state,{t}),c=state.comparison,purpose=state.comparison.purpose||'evaluation',matched=matchingCalculation(state,result,saves),manualMatch=matchingManualRecord(state,saves,lang);
