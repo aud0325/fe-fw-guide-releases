@@ -62,6 +62,8 @@ export default {
  'economy.unlimited':{ko:'무제한',en:'Unlimited'},
  'economy.restored':{ko:'복구 후',en:'After restoration'},
  'economy.possible-contents':{ko:'나올 수 있는 아이템',en:'Possible contents'},
+ 'economy.chance-label':{ko:'개봉 확률',en:'Opening chance'},
+ 'economy.opening-chance':{ko:'개봉 확률 {chance}',en:'Opening chance {chance}'},
  'economy.content-summary':{ko:'개봉 시 획득 가능: {items} 등',en:'Possible rewards include {items}'},
  'item.trade-materials':{ko:'교환 재료',en:'Trade materials'},
  'item.all-items':{ko:'전체 아이템',en:'All items'},

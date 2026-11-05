@@ -1,6 +1,7 @@
 import {escapeHtml as esc} from './core.mjs';
 import {routes} from './locales/labels.mjs';
 import {itemVariantSuffix} from './item-variants.mjs';
+export const crateChance=row=>row.probability==null?'':Number((row.probability*100).toFixed(2))+'%';
 export function tradeUses(item,entries){
  return entries.filter(e=>e.type==='item').flatMap(e=>(e.acquisition||[]).filter(r=>(r.supplier==='vandal-company'||/trade|exchange/i.test(r.method?.en||''))&&r.materials?.some(m=>m.itemId===item.id)).map(row=>({item:e,row}))).sort((a,b)=>(a.row.fromChapter??a.row.chapter??Infinity)-(b.row.fromChapter??b.row.chapter??Infinity)||a.item.id.localeCompare(b.item.id));
 }
@@ -19,5 +20,5 @@ export function tradeUsageDetails(e,ctx){
 }
 export function crateContentsDetails(e,{t,entries,name,href}){
  if(!e.crateContents?.length)return '';
- return `<section class="item-crate-contents" id="section-crate-contents"><h2>${t('economy.possible-contents')}</h2>${e.cratePoolCondition?`<p>${esc(t(e.cratePoolCondition.ko,e.cratePoolCondition.en))}</p>`:''}<ul class="economy-contents">${e.crateContents.map(row=>{const item=entries.find(e=>e.id===row.itemId),variant=esc(itemVariantSuffix(row,t));return `<li>${item?`<a href="${esc(href(item.id))}">${esc(name(item))}${variant}</a>`:`<span lang="en">${esc(row.name.en)}${variant}</span>`}</li>`;}).join('')}</ul></section>`;
+ return `<section class="item-crate-contents" id="section-crate-contents"><h2>${t('economy.possible-contents')}</h2>${e.cratePoolCondition?`<p>${esc(t(e.cratePoolCondition.ko,e.cratePoolCondition.en))}</p>`:''}<ul class="economy-contents">${e.crateContents.map(row=>{const item=entries.find(e=>e.id===row.itemId),variant=esc(itemVariantSuffix(row,t)),chance=crateChance(row);return `<li${chance?' class="economy-content-with-chance"':''}>${item?`<a href="${esc(href(item.id))}">${esc(name(item))}${variant}</a>`:`<span lang="en">${esc(row.name.en)}${variant}</span>`}${chance?`<span class="economy-probability"><span class="sr-only">${t('economy.chance-label')} </span>${chance}</span>`:''}</li>`;}).join('')}</ul></section>`;
 }

@@ -15,6 +15,7 @@ export default {
  'equipment.close':{ko:'닫기',en:'Close'},
  'equipment.chapter-condition':{ko:'특정 진영 {chapter}장부터',en:'From Chapter {chapter} on the applicable path'},
  'equipment.minimum':{ko:'Lv{level} 이상에 영입',en:'Recruit at Lv{level} or higher'},
+ 'equipment.before-level':{ko:'Lv{level} 이전에 영입 시 획득 가능',en:'Can be obtained when recruited before Lv{level}'},
  'equipment.renown':{ko:'명성 {renown} 이하에 영입',en:'Recruit at renown {renown} or lower'},
  'equipment.route-chapter':{ko:'{route}편 {chapter}장부터',en:'{route}’s path, from Chapter {chapter}'},
  'equipment.chapter-level':{ko:'{route} {chapter}장 · Lv{level}',en:'{route} Ch. {chapter} · Lv{level}'},

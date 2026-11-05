@@ -472,3 +472,15 @@
 /* Group shortcuts stay above the scrolling options, like the character route chips. */
 .growth-calculator .calc-picker-tiers button:hover:not(:disabled),.growth-calculator .calc-picker-tiers button:focus-visible{border-color:var(--accent);background:var(--panel2)}
 @container(width <= 640px){.calc-picker-tiers{gap:4px}.growth-calculator .calc-picker-tiers button{padding:5px 8px;font-size:11px}}
+
+/* Named actions remain readable beside the target and in stacked comparisons. */
+.calc-setup-actions{display:flex;gap:6px;flex-shrink:0}
+.growth-calculator .calc-card-icon.calc-copy-button{width:auto;min-width:0;gap:5px;padding-inline:9px;white-space:nowrap}
+@container(width > 720px){.growth-calculator [data-calc-reset]{box-sizing:border-box;height:36px;min-height:36px}}
+@container(width <= 720px){.calc-copy-button svg{display:none}}
+@container(width <= 640px){
+ .calc-target-group{display:contents}
+ .calc-target-group>.calc-field{max-width:none}
+ .calc-setup-actions{grid-column:1/-1}
+ .calc-setup-actions button{flex:1;min-height:44px}
+}

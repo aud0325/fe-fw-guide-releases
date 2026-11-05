@@ -13,7 +13,8 @@ import {pagePath,stateQuery,defaultState} from './routing.mjs';
 import {informationHint} from './presentation.mjs';
 import {icon} from './icons.mjs';
 import {acquisitionPlaces,uncoveredAcquisitionRecords} from './acquisition-map.mjs';
-import {tradeMaterials} from './item-economy-ui.mjs';
+import {tradeMaterials,crateChance} from './item-economy-ui.mjs';
+import {recruitmentCarriers} from './recruitment-equipment-ui.mjs';
 import {renderEntityText} from './entity-text.mjs';
 import {defaultHiddenMapKinds} from './map-visibility.mjs';
 export const mapName=(n,t)=>n.ko==='???'?t('map.unknown-name'):t(n.ko,n.en||n.ko);
@@ -44,6 +45,7 @@ function recordConditions(r,{t,routes}){
  if(r.fromChapter!=null)values.push(t('economy.from-chapter',{chapter:r.fromChapter}));
  if(r.fromChapter!=null&&r.stock!=null)values.push(t('economy.stock',{stock:r.stock==='unlimited'?t('economy.unlimited'):r.stock}));
  if((r.containerId||r.dungeonChest||r.supplyRecord)&&r.upgrade)values.push('+'+r.upgrade);
+ if(r.containerId&&r.probability!=null)values.push(t('economy.opening-chance',{chance:crateChance(r)}));
  if(r.dungeonChest&&r.chestCount>1)values.push(t('dungeon.multiple-chests',{count:r.chestCount}));
  return values.filter(Boolean).join(' · ');
 }
@@ -207,7 +209,8 @@ export function entryMapLinks(entry,ctx){
  }
  if(entry.type==='mount')return mountPlaces(entry,ctx);
  if(entry.type!=='item')return '';
- const places=acquisitionPlaces(entry,entries).map(place=>({...place,records:uncoveredAcquisitionRecords(entry,place.records)})).filter(place=>place.records.length);if(!places.length)return '';
+ const carriers=recruitmentCarriers(entry,ctx,{heading:3});
+ const places=acquisitionPlaces(entry,entries).map(place=>({...place,records:uncoveredAcquisitionRecords(entry,place.records)})).filter(place=>place.records.length);if(!places.length&&!carriers)return '';
  const mapped=places.filter(p=>p.point),unmapped=places.filter(p=>!p.point&&p.context!=='method'),methods=places.filter(p=>!p.point&&p.context==='method'),openUnmapped=unmapped.some(p=>p.records.some(r=>r.gatheringScopes?.some(s=>s.firstGatherGuaranteed)));
- return `<section class="entry-acquisition" data-item-acquisition id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${mapped.length?`<div class="entry-acquisition-layout item-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx)}${placeRows(mapped,entry,ctx,{table:true})}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"${openUnmapped?' open':''}><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx,{table:true})}</details>`:placeRows(unmapped,entry,ctx,{table:true}):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx,{table:true})}`:''}</section>`;
+ return `<section class="entry-acquisition" data-item-acquisition id="entry-acquisition"><h2>${t('map.where-to-find')}</h2>${mapped.length?`<div class="entry-acquisition-layout item-acquisition-layout">${inlineMap(mapped.map(p=>p.point),entry,ctx)}${placeRows(mapped,entry,ctx,{table:true})}</div>`:''}${unmapped.length?mapped.length?`<details class="entry-unmapped-places"${openUnmapped?' open':''}><summary>${t('map.unmapped-places',{count:unmapped.length})}</summary>${placeRows(unmapped,entry,ctx,{table:true})}</details>`:placeRows(unmapped,entry,ctx,{table:true}):''}${methods.length?`<h3>${t('map.other-methods')}</h3>${placeRows(methods,entry,ctx,{table:true})}`:''}${carriers}</section>`;
 }

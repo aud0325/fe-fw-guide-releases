@@ -1,6 +1,6 @@
 import {writeCalculatorDraft,calculatorKeys as keys} from './growth-calculator-state.mjs';
 import {stateQuery} from './routing.mjs';
-import {calculatorData,calculatorCharacters,calculatorClasses,startsFor,buildFromPreset,initialCalculatorState,resolveCalculatorState} from './growth-calculator-data.mjs';
+import {calculatorData,calculatorCharacters,calculatorClasses,startsFor,buildFromPreset,initialCalculatorState,resetCalculatorState,resolveCalculatorState} from './growth-calculator-data.mjs';
 import {recommendedStages,compatibleMounts,sortStages,activeBuild,integerStat} from './growth-calculator-plans.mjs';
 import {calculatorResultsHtml,calculatorLevelRows,calculatorTargetValid,canAddCalculatorStage} from './growth-calculator-ui.mjs';
 import {finalClassBonusHtml,finalEffectHtml,warriorBloodTitle,warriorBloodLevel,warriorBloodThresholds,battalionConditionText} from './growth-calculator-final-ui.mjs';
@@ -8,9 +8,9 @@ import {calculateBuild} from './growth-calculator-model.mjs';
 import {bindCalculatorPickers} from './growth-calculator-picker.mjs';
 import {readSavedCalculations,writeSavedCalculations,calculatorSaveLimit,renamedSavedCalculations,movedRecordIds,droppedRecordIds,orderedSavedCalculations,savedCalculationsWithRecord} from './growth-calculator-saves.mjs';
 import {savedCalculationsHtml,comparisonHtml,refreshComparisonMetrics} from './growth-calculator-comparison-ui.mjs';
-import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,recordLevel,manualEquipmentContext} from './growth-calculator-records.mjs';
+import {makeSavedRecord,recordTitle,manualMetadata,matchingCalculation,comparisonSides,recordCharacterId,manualEquipmentContext,copiedExpectedComparison} from './growth-calculator-records.mjs';
 import {comparisonView} from './growth-calculator-evaluation.mjs';
-import {recordDisplayValues,currentEquipment} from './growth-calculator-equipment.mjs';
+import {recordDisplayValues} from './growth-calculator-equipment.mjs';
 import {multiRecordModel,validRecordDraft,copiedRecordDraft} from './growth-calculator-multi-model.mjs';
 import {contextMountOptions} from './growth-calculator-context-ui.mjs';
 import {bindStatBreakdowns} from './growth-calculator-stat-ui.mjs';
@@ -50,7 +50,7 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   host.querySelector('[data-calc-other-records]')?.removeAttribute('open');refreshSaves();if(!dialog.open)dialog.showModal();host.querySelector('.calc-dialog-body').scrollTop=0;host.querySelector('[data-calc-dialog-close]').focus();if(highlightId)host.querySelector(`[data-calc-record="${highlightId}"]`)?.scrollIntoView({block:'nearest'});
  };
  const closeRecords=()=>dialog.close();
- const commitRecords=(next,focus)=>{Object.assign(state,next);const out=result();state.comparison.recordLines=multiRecordModel(state,out,saves).lineSlots;change(next,null,{replace:true,render:false});writeCalculatorDraft(session,next);showComparison(out);if(focus)host.querySelector(focus)?.focus({preventScroll:true});};
+ const commitRecords=(next,focus)=>{Object.assign(state,next);const out=result();state.comparison.recordLines=multiRecordModel(state,out,saves).lineSlots;change(next,null,{replace:true,render:false});writeCalculatorDraft(session,next);showComparison(out);if(focus){const target=host.querySelector(focus);(target?.closest('[hidden]')?host.querySelector('[data-calc-record-add]'):target)?.focus({preventScroll:true});}};
  const toggleRecord=(id,checked)=>{const next=clone(),model=multiRecordModel(state,result(),saves);next.comparison.recordIds=[...new Set(checked?[...model.ids,id]:model.ids.filter(key=>key!==id))];commitInput(next);};
  const reorderRecord=(id,scope,{direction,target,placement}={})=>{
   const popup=scope==='saved',latest=readSavedCalculations(storage),model=multiRecordModel(state,result(),latest),ids=model.rows.map(r=>r.key),move=(order,visible)=>target?droppedRecordIds(order,id,target,placement,visible):movedRecordIds(order,id,direction,visible);let order,nextSaves;
@@ -90,6 +90,9 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
  });
  host.querySelector('[data-calc-autofill]').addEventListener('click',()=>{
   const next=clone();next.builds[0].stages=recommendedStages(next.characterId,next.builds[0],next.target);commit(next,'[data-calc-autofill]',false,'calculator.autofilled');
+ });
+ host.querySelector('[data-calc-reset]').addEventListener('click',()=>{
+  commit(resetCalculatorState(state),'[data-calc-reset]',false,'calculator.resetDone');
  });
  host.querySelector('[data-calc-add]').addEventListener('click',()=>{
   const next=clone(),b=next.builds[0];if(!Number.isInteger(next.target)||next.target>99||b.stages.length>=12)return;
@@ -138,7 +141,7 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   const id=existing?.id||'save-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),item=makeSavedRecord(state,values,{title,manual,id,created:existing?.created||Date.now()});
   const order=multiRecordModel(state,out,saves).rows.map(r=>r.key);
   try{writeSavedCalculations(storage,savedCalculationsWithRecord(saves,item));saves=readSavedCalculations(storage);
-   const ordered=clone();ordered.comparison.recordOrder=existing?order:[...order,id];commitInput(ordered);
+   const ordered=clone();ordered.comparison.recordOrder=existing?order:[...order,id];ordered.comparison.recordIds=multiRecordModel(state,out,saves).ids;commitInput(ordered);
    if(manual){const next=clone();Object.assign(next.comparison,{manualLocked:false,manualSavedId:id,manualName:title,manualCharacterId:meta.characterId,manualLevel:meta.level});commitInput(next);openRecords('manage','calculator.resultSaved',id);}
    else openRecords('manage','calculator.resultSaved',id);
   }catch{message.textContent=t('calculator.storageFailed');}
@@ -195,7 +198,7 @@ export function bindGrowthCalculator(root,{state:input,t,change}){
   if(button.hasAttribute('data-calc-save-current')){saveRecord(false);return;}
   if(button.hasAttribute('data-calc-save-manual')){saveRecord(true);return;}
   if(button.dataset.calcEditRecord){const saved=saves.find(s=>s.id===button.dataset.calcEditRecord&&s.kind==='manual');if(!saved)return;const next=clone();Object.assign(next.comparison,{mode:'manual',stats:{...saved.values},manualName:saved.name,manualCharacterId:saved.characterId,manualLevel:saved.level,manualSavedId:saved.id,manualLocked:false,context:saved.context||null,valueBasis:saved.basis==='total'?'total':'base'});commit(next,'#calc-manual-name',false);return;}
-  if(button.hasAttribute('data-calc-fill-expected')){const source=comparisonView(state,result(),saves).left;if(!source?.values||!keys.every(k=>Number.isFinite(source.values[k])))return;const next=clone(),id=recordCharacterId(source),level=recordLevel(source);if(manualMetadata(state).characterId!==id||manualMetadata(state).level!==level)next.comparison.manualSavedId='';Object.assign(next.comparison,{stats:recordDisplayValues(source),manualCharacterId:id,manualLevel:level,context:source.state?currentEquipment(source.state):source.context,valueBasis:'total'});commit(next,'#calc-comp-hp',false);return;}
+  if(button.hasAttribute('data-calc-fill-expected')){const comparison=copiedExpectedComparison(state,comparisonView(state,result(),saves).left);if(!comparison)return;const next=clone();next.comparison=comparison;commit(next,'#calc-comp-hp',false);return;}
   if(button.dataset.calcChoose){const [side,id]=button.dataset.calcChoose.split(':'),next=clone();if(side==='left'){next.comparison.purpose='records';next.comparison.leftMode='saved';next.comparison.leftSavedId=id;next.comparison.recordIds=[...new Set([...multiRecordModel(state,result(),saves).ids,id])];if(recordCharacterId(saves.find(s=>s.id===id))!==state.characterId)next.comparison.includeOtherRecords=true;}else{next.comparison.purpose='evaluation';next.comparison.mode='saved';next.comparison.savedId=id;}closeRecords();commit(next,side==='left'?`[data-calc-record-check="${id}"]`:'#calc-right-tab-saved',false);root.querySelector('#calc-comparison-title')?.scrollIntoView({block:'start'});return;}
   if(button.dataset.calcLoad){const saved=saves.find(s=>s.id===button.dataset.calcLoad);if(!saved||saved.kind==='manual')return;closeRecords();commit(resolveCalculatorState(saved.state),'#calc-character',false,'calculator.loaded');root.querySelector('.growth-calculator')?.scrollIntoView({block:'start'});return;}
   if(button.dataset.calcDelete){try{const id=button.dataset.calcDelete,record=saves.find(s=>s.id===id);writeSavedCalculations(storage,saves.filter(s=>s.id!==id));saves=readSavedCalculations(storage);if(state.comparison.manualSavedId===id||state.comparison.recordIds?.includes(id)){const next=clone();if(next.comparison.manualSavedId===id){next.comparison.manualName??=record?.name;next.comparison.manualSavedId='';}if(next.comparison.recordIds)next.comparison.recordIds=next.comparison.recordIds.filter(key=>key!==id);commitInput(next);}if(editingId===id)editingId='';refreshSaves();host.querySelector('#calc-records-status').textContent=t('calculator.deleted');host.querySelector('[data-calc-dialog-close]').focus();}catch{host.querySelector('#calc-records-status').textContent=t('calculator.storageFailed');}}

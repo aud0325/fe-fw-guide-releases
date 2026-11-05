@@ -12,7 +12,7 @@ export default {
  'calculator.example':{ko:'영입 시점 비교 예시',en:'Recruitment timing example'},
  'calculator.showResult':{ko:'결과 보기',en:'View results'},
  'calculator.compare':{ko:'경로 B 비교',en:'Compare path B'},
- 'calculator.copy':{ko:'A에서 복사',en:'Copy from A'},
+ 'calculator.copy':{ko:'복사',en:'Copy'},
  'calculator.path':{ko:'경로 {path}',en:'Path {path}'},
  'calculator.route':{ko:'루트',en:'Route'},
  'calculator.recruit':{ko:'영입 시점',en:'Recruitment timing'},

@@ -31,6 +31,12 @@ export function comparisonSides(state,result,saves){
  const meta=manualMetadata(state);
  return {left:c.leftMode==='saved'?saves.find(s=>s.id===c.leftSavedId):current,right:c.mode==='saved'?saves.find(s=>s.id===c.savedId):{kind:'manual',...meta,values:c.stats,basis:c.valueBasis,context:c.valueBasis==='total'?manualEquipmentContext(state):null}};
 }
+export function copiedExpectedComparison(state,source){
+ if(!source?.values||!keys.every(k=>Number.isFinite(source.values[k])))return null;
+ const c=state.comparison,meta=manualMetadata(state),id=recordCharacterId(source),level=recordLevel(source);
+ // An empty manual level follows the target; copying stats must retain that link.
+ return {...c,stats:recordDisplayValues(source),manualCharacterId:id,manualLevel:c.manualLevel===''?'':level,manualSavedId:meta.characterId===id&&meta.level===level?c.manualSavedId:'',context:source.state?currentEquipment(source.state):source.context,valueBasis:'total'};
+}
 export function matchingCalculation(state,result,saves){
  if(!result.values)return null;
  const signature=s=>{const b=s.builds[0];return JSON.stringify([s.characterId,s.target,s.weapon,s.battalionId||'',b.presetId,b.level,b.classId,keys.map(k=>b.stats[k]),b.stages.map(p=>[p.level,p.classId,p.mountId,p.bond,p.skill]),keys.map(k=>b.startBonus[k]),keys.map(k=>b.endBonus[k])]);};

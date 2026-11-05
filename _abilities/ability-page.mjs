@@ -1,6 +1,9 @@
 import {reviewedClassAbility} from '../class-ability-view.mjs';
 import {abilityToken} from './token-links.mjs';
-import {isCombatArtUpgrade} from './combat-art-upgrades.mjs';
+import {isCombatArtUpgrade,combatArtVariants} from './combat-art-upgrades.mjs';
+import {abilitySourceLinks,abilitySourceImages} from './ability-sources.mjs';
+import {referenceSection,localized} from '../presentation.mjs';
+import {createTranslator} from '../locales/index.mjs';
 import {abilityVariantComparison} from './ability-variants-ui.mjs';
 import {entityToken} from '../entity-token.mjs';
 import {rewriteLinks} from '../routing.mjs';
@@ -47,7 +50,17 @@ function routeCondition(r){
 }
 function condition(r){const routes=abilityConditionRoutes(r);return [...new Set(routes.map(routeCondition))].map(x=>`<span class="condition-line">${x}</span>`).join('');}
 function metrics(r){if(r.kind==='skill'||(r.kind==='combat-art'&&r.purpose==='support'))return '';const fields=r.kind==='spell'?[['might','위력','Mt'],['hit','명중','Hit'],['range','사거리','Rng'],['uses','기본 횟수','Base uses']]:[['might','위력 보정','Mt bonus'],['hit','명중 보정','Hit bonus'],['range','사거리','Rng']];return `<div class="metrics">${fields.filter(([k])=>r.stats[k]!=null).map(([k,ko,en])=>`<span>${txt(ko,en)}<b>${esc(r.stats[k])}</b></span>`).join('')}</div>`;}
-function sourceBox(r){const isMagic=(r?.kind||state.kind)==='spell';return `<details class="source-box"><summary>${txt('출처','Sources')}</summary>${[...(r?.englishNameSources||[]),...(r?.reviewedSources||[])].map(source=>source.url?`<p><a href="${esc(source.url)}" target="_blank" rel="noreferrer">${esc(source.title)}</a></p>`:`<p>${esc(source.title)}</p>`).join('')}${r?.relations.some(x=>x.id==='saramis-war-elephant')?`<p><a href="https://gall.dcinside.com/mgallery/board/view/?id=fireemblem&no=769933" target="_blank" rel="noreferrer">${txt('살라미스 전투 코끼리 · 게임 화면','Saramis War Elephant · game screenshots')}</a></p>`:''}${r?itemConnections.filter(x=>x.abilityId===r.id).map(x=>!x.url?`<p>${txt('제공된 게임 화면 · 마법 습득 아이템','Provided gameplay captures · Spell-learning items')}</p>`:`<p><a href="${esc(x.url)}" target="_blank" rel="noreferrer">${x.relation==='equipment-granted'?txt('장비 전투 기술 대응표','Equipment combat art correspondence'):x.status==='game-capture'?txt('마법 습득 아이템 · 게임 화면','Spell-learning items · gameplay captures'):x.status==='guide-correspondence'?txt('마법 습득 아이템 · 공략 자료','Spell-learning items · guides'):txt('마법 습득 제보','Spell acquisition report')}</a></p>`).join(''):''}<p><a href="https://game8.jp/fe-banshisenko/${isMagic?'817283':(r?.kind||state.kind)==='combat-art'?'817286':'818786'}" target="_blank" rel="noreferrer">Game8</a><a href="https://gamewith.jp/fefw/${isMagic?'574424':(r?.kind||state.kind)==='combat-art'?'573032':'574420'}" target="_blank" rel="noreferrer">GameWith</a><a href="https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit" target="_blank" rel="noreferrer">${txt('커뮤니티 습득표','Community learnsets')}</a></p><p class="image-credit">${txt('이미지: 스킬 문양은 Yu Phas’ Temple, 병종 아이콘은 Game8·Yu Phas’ Temple, 전투 기술·마법 문양은 Game8, 기술능력 문양은 Yu Phas’ Temple 원본입니다. 캐릭터 얼굴은 Yu Phas’ Temple의 초상화에서 추출했습니다.','Images: Skill glyphs from Yu Phas’ Temple; class icons from Game8 and Yu Phas’ Temple; combat art and spell symbols from Game8; proficiency glyphs from Yu Phas’ Temple. Character faces are cropped from Yu Phas’ Temple portraits.')} <a href="https://yuphastemple.com/" target="_blank" rel="noreferrer">Yu Phas’ Temple</a></p><p class="scope">© Nintendo / INTELLIGENT SYSTEMS</p></details>`;}
+function sourceBox(r){
+ const variants=r?combatArtVariants(r,rows):rows.filter(row=>row.kind===state.kind&&!isCombatArtUpgrade(row)&&(state.kind==='skill'?normalizeSection('skill',row.category):categoryOf(row))===state.section);
+ const references=variants.flatMap(row=>abilitySourceLinks(row)),externalGuides=references.filter(s=>s.url),abilitySourceNotes=references.filter(s=>!s.url).map(s=>localized(s.title,state.lang));
+ if(r?.relations.some(x=>x.id==='saramis-war-elephant'))externalGuides.push({url:'https://gall.dcinside.com/mgallery/board/view/?id=fireemblem&no=769933',title:txt('살라미스 전투 코끼리 · 게임 화면','Saramis War Elephant · game screenshots')});
+ for(const link of itemConnections.filter(x=>variants.some(row=>row.id===x.abilityId))){
+  if(link.url)externalGuides.push({url:link.url,title:link.relation==='equipment-granted'?txt('장비 전투 기술 대응표','Equipment combat art correspondence'):txt('마법 습득 아이템','Spell-learning items')});
+  else abilitySourceNotes.push(txt('제공된 게임 화면 · 마법 습득 아이템','Provided gameplay captures · Spell-learning items'));
+ }
+ const t=createTranslator(state.lang);
+ return referenceSection([{externalGuides,abilitySourceNotes}],{sources:{},t,tx:value=>localized(value,state.lang),images:variants.flatMap(abilitySourceImages)});
+}
 const weaponNames={sword:['검','Sword'],spear:['창','Spear'],axe:['도끼','Axe'],bow:['활','Bow'],gauntlet:['격투','Gauntlet'],general:['공용·지원','General & support']};
 const rankOrder=['D','D+','C','C+','B','B+','A','A+','S','S+'];
 function entityLink(x){

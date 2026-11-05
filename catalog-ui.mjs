@@ -26,7 +26,7 @@ import {communityDetails} from './community-ui.mjs';
 import {entries,routes,coverage,sources} from './data.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {recruitmentDetails} from './recruitment-ui.mjs';
-import {recruitmentEquipment,recruitmentCarriers} from './recruitment-equipment-ui.mjs';
+import {recruitmentEquipment} from './recruitment-equipment-ui.mjs';
 import {uncoveredAcquisitionRecords} from './acquisition-map.mjs';
 import {promotionItemDetails} from './promotion-items-ui.mjs';
 import {forgingDetails,forgingMaterialDetails} from './forging-ui.mjs';
@@ -119,7 +119,7 @@ export function catalogDetails(e,{t,tx,name,href,route='all',portraitHtml='',acq
   if(biography.length)out+=`<section id="section-biography" tabindex="-1"><h2>${t('character.biography')}</h2>${table(biography,'',false)}</section>`;
   out+=social;
  }else if(e.type==='mount')out+=basicHtml+mountBonusDetails(e,{t,tx})+mountSkillDetails(e,{t,tx})+acquisitionHtml;
- else out+=basicHtml+equipmentVariantDetails(e,{t,entries,base})+forgingDetails(e,{t,name,entries,base,forgeSelection})+(e.forging?'':sampleItemAbilities(e,t.locale,base))+(e.type==='item'?promotionItemDetails(e,{t,name,href,entries,base}):'')+recruitmentCarriers(e,{t,name,href,entries,routes,route,base})+crateContentsDetails(e,{t,name,href,entries})+acquisitionHtml+materialReconstruction(e,{t,name,entries,base})+forgingMaterialDetails(e,{t,name,entries,base})+tradeUsageDetails(e,{t,name,href,entries})+itemUsageDetails(e,{t,name,href,entries,base});
+ else out+=basicHtml+equipmentVariantDetails(e,{t,entries,base})+forgingDetails(e,{t,name,entries,base,forgeSelection})+(e.forging?'':sampleItemAbilities(e,t.locale,base))+(e.type==='item'?promotionItemDetails(e,{t,name,href,entries,base}):'')+crateContentsDetails(e,{t,name,href,entries})+acquisitionHtml+materialReconstruction(e,{t,name,entries,base})+forgingMaterialDetails(e,{t,name,entries,base})+tradeUsageDetails(e,{t,name,href,entries})+itemUsageDetails(e,{t,name,href,entries,base});
  if(e.type!=='character'&&(story.length||e.lateJoin&&!e.lateRecruitment&&!e.recruitmentAvailability))out+=`<details class="coverage"><summary>${t(e.lateRecruitment?'recruitment.earlier-spoilers':'catalog.appearances-later-recruitment-spoilers')}</summary>${story.length?table(story):''}${e.lateJoin&&!e.lateRecruitment&&!e.recruitmentAvailability?`<p>${esc(tx(e.lateJoin))}</p>`:''}</details>`;
 
  const otherAcquisition=uncoveredAcquisitionRecords(e);

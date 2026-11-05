@@ -3,6 +3,8 @@ import {proficiencyMedia} from './proficiency-media.mjs';
 import {abilityToken} from './token-links.mjs';
 import {proficiencyGlyph} from './proficiency-ui.mjs';
 import {abilityIcon} from './icon-model.mjs';
+import {abilitySourceLinks} from './ability-sources.mjs';
+import {reviewedClassAbility} from '../class-ability-view.mjs';
 import {rows} from './full-data.mjs';
 import {abilityDetailHref} from './ability-identities.mjs';
 import {uniqueAvailability,itemConnections,legacySpellEntries} from './integration-data.mjs';
@@ -10,6 +12,7 @@ import {characterMatrix,learningRanks,specialties,nonSpecialties,abilityTarget,a
 import {groupFamilies,skillGroups} from './scale-model.mjs';
 import {createTranslator} from '../locales/index.mjs';
 export const sampleCharacters=orderedCharacters(rows).map(c=>c.id);
+const referenceRows=rows.map(reviewedClassAbility);
 const names={...proficiencyNames,...skillGroups,'combat-art':['전투 기술','Combat arts'],spell:['마법','Magic'],skill:['장비 스킬','Equipable skills']};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function abilityHref(r,lang){return characterSkillHref(r,lang)||abilityDetailHref(r.id,lang);}
@@ -53,16 +56,13 @@ export function sampleItemAbilities(e,lang,base='/'){
 
 export function abilityReferences(e,lang){
  const text=(ko,en)=>lang==='ko'?ko:en,externalGuides=[],abilitySourceNotes=[];
- const relatedRows=rows.filter(row=>row.relations.some(relation=>relation.id===e.id));
- for(const row of relatedRows)for(const source of [...(row.englishNameSources||[]),...(row.reviewedSources||[])]){
-  if(!externalGuides.some(guide=>guide.url===source.url))externalGuides.push(source);
+ const relatedRows=referenceRows.filter(row=>row.relations.some(relation=>relation.id===e.id));
+ for(const row of relatedRows)for(const source of abilitySourceLinks(row,{ownerId:e.id})){
+  if(!source.url){const note=typeof source.title==='object'?source.title[lang]:source.title;if(!abilitySourceNotes.includes(note))abilitySourceNotes.push(note);}
+  else if(!externalGuides.some(guide=>guide.url===source.url))externalGuides.push(source);
  }
  if(e.forging)abilitySourceNotes.push(text('기술능력 아이콘: Yu Phas’ Temple 원본. © Nintendo / INTELLIGENT SYSTEMS','Proficiency icons: original assets from Yu Phas’ Temple. © Nintendo / INTELLIGENT SYSTEMS'));
  if(sampleCharacters.includes(e.id)){
-  externalGuides.push(
-   {url:'https://docs.google.com/spreadsheets/d/1YW5AdvPUbLPr1RAGlnotcRaNTFCQPTKiIgshwrcdUtE/edit',title:text('커뮤니티 기술·숙련도 표','Community ability and proficiency tables')},
-   {url:'https://game8.jp/fe-banshisenko/818786',title:'Game8 · '+text('스킬','Skills')},
-   {url:'https://gamewith.jp/fefw/574420',title:'GameWith · '+text('스킬','Skills')});
   abilitySourceNotes.push(text('기술능력 12종 아이콘: Yu Phas’ Temple 원본. © Nintendo / INTELLIGENT SYSTEMS','Twelve proficiency icons: original assets from Yu Phas’ Temple. © Nintendo / INTELLIGENT SYSTEMS'));
   const availability=uniqueAvailability[e.id];
   if(availability?.sources.length){
@@ -71,6 +71,7 @@ export function abilityReferences(e,lang){
  }
  for(const link of itemConnections.filter(x=>x.itemId===e.id&&x.url))externalGuides.push({url:link.url,title:link.relation==='equipment-granted'?text('장비 전투 기술 대응표','Equipment combat art correspondence'):link.status==='guide-correspondence'?text('마법 습득 아이템 · 공략 자료','Spell-learning items · guides'):text('마법 습득 제보','Spell acquisition report')});
  if(legacySpellEntries.some(x=>x.itemId===e.id))externalGuides.push({url:'https://game8.jp/fe-banshisenko/817283',title:'Game8 · '+text('마법','Magic')});
- const reviewedImage=relatedRows.map(abilityIcon).find(image=>image?.src.startsWith('./assets/yuphas/'));
- return {externalGuides,abilitySourceNotes,imageCredits:[...(reviewedImage?[reviewedImage]:[]),...(e.forging||sampleCharacters.includes(e.id)?[proficiencyMedia.armor]:[])]};
+ const itemAbilityIds=new Set(itemConnections.filter(link=>link.itemId===e.id).map(link=>link.abilityId));
+ const images=[...relatedRows,...rows.filter(row=>itemAbilityIds.has(row.id))].map(abilityIcon).filter(Boolean);
+ return {externalGuides,abilitySourceNotes,imageCredits:[...images,...(e.forging||sampleCharacters.includes(e.id)?[proficiencyMedia.armor]:[])]};
 }

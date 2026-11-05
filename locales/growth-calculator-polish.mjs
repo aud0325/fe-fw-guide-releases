@@ -64,7 +64,7 @@ export default {
  'calculator.statDifferenceDescription':{ko:'{reference} 대비 {difference}',en:'{difference} from {reference}'},
  'calculator.radarTitle':{ko:'9개 결과 능력치 그래프',en:'Nine result stats radar'},
  'calculator.purposeTitle':{ko:'비교 방식',en:'Comparison mode'},
- 'calculator.evaluationMode':{ko:'예상 대비 평가',en:'Evaluate against expected stats'},
+ 'calculator.evaluationMode':{ko:'내 능력치 평가',en:'Evaluate my stats'},
  'calculator.includeOtherRecords':{ko:'다른 캐릭터 기록도 보기',en:'Include other characters'},
  'calculator.noCharacterRecords':{ko:'선택한 캐릭터의 저장 기록이 없습니다.',en:'No saved records for this character.'},
  'calculator.manageRecords':{ko:'기록 관리',en:'Manage records'},

@@ -4,6 +4,8 @@ export default {
  'calculator.character':{ko:'캐릭터',en:'Character'},
  'calculator.result':{ko:'Lv{level}의 예상 능력치',en:'Expected stats at Lv{level}'},
  'calculator.autofill':{ko:'자동채우기',en:'Autofill'},
+ 'calculator.reset':{ko:'초기화',en:'Reset'},
+ 'calculator.resetDone':{ko:'육성 경로와 능력치 비교를 초기화했습니다.',en:'Training path and stat comparison reset.'},
  'calculator.autofilled':{ko:'추천 육성 경로를 채웠습니다.',en:'Recommended training path filled.'},
  'calculator.autofillHelp':{ko:'추천 육성 기준으로 Lv20·35·45의 병종을 채웁니다. 탈것과 전직 조건은 직접 확인하세요.',en:'Fills recommended classes at Lv20, 35 and 45. Choose mounts and check certification requirements.'},
  'calculator.minimum':{ko:'{routes} 최소',en:'{routes} minimum'},

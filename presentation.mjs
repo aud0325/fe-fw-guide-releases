@@ -1,4 +1,6 @@
 import {isPublicSource,publicSourceRecord} from './source-visibility.mjs';
+import {currentReferenceIds} from './detail-source-policy.mjs';
+import {sourceLinkKey,sourceProviderName,sourceProviderOrder,sourceTitle} from './source-links.mjs';
 import {skillTerms,factLabels} from './locales/labels.mjs';
 import {icon} from './icons.mjs';
 import {displayTerms} from './display-terms.mjs';
@@ -25,6 +27,7 @@ export function referenceSite(url) {
  try {const host=new URL(url).hostname.replace(/^www\./,'');
   if(host==='gall.dcinside.com'||host==='m.dcinside.com')return 'dcinside.com';
   if(host==='game8.co'||host==='game8.jp')return 'game8';
+  if(host==='namu.moe'||host.endsWith('.namu.moe'))return 'namu.wiki';
   return host;
  }catch{return 'local';}
 }
@@ -37,38 +40,45 @@ export function informationHint(tooltip,label,symbol='i',className=''){
 }
 export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  const records=new Map();
- for(const e of list)for(const id of collectReferences(e)){
+ const referenceValues=[...list,{sourceIds:images.map(image=>image?.sourceId).filter(Boolean)}];
+ const selected=new Set(referenceValues.flatMap(currentReferenceIds));
+ for(const e of referenceValues)for(const id of currentReferenceIds(e)){
   if(!isPublicSource(id,sources[id]))continue;
   const source=publicSourceRecord(id,sources[id]);
-  const key=source.url||'source:'+id;
+  // Profile fields were indexed under a shared category record; link the actual
+  // character document already stored on this entry instead of that index.
+  const profile=e.namuProfile?.sourceId===id&&(e.externalGuides||[]).find(g=>g.url?.startsWith('https://namu.wiki/w/'));
+  if(profile){source.url=profile.url;source.title=profile.title;}
+  const key=source.url?sourceLinkKey(source.url):'source:'+id;
   if(!records.has(key))records.set(key,{...source,anchorIds:[]});
   const record=records.get(key);if(!record.anchorIds.includes(id))record.anchorIds.push(id);
-  for(const original of source.originals||[])if(!records.has(original.url))records.set(original.url,{...original,anchorIds:[]});
+  for(const original of source.originals||[])if(!records.has(sourceLinkKey(original.url)))records.set(sourceLinkKey(original.url),{...original,anchorIds:[]});
  }
 
  const extra=new Map();
  for(const e of list){
-  if(e.referenceUrl&&!records.has(e.referenceUrl))extra.set(e.referenceUrl,{title:t('presentation.reference-entry')+' · '+tx(e.name)});
-  for(const g of e.externalGuides||[])if(!records.has(g.url))extra.set(g.url,{title:g.title});
+  if(e.referenceUrl&&!records.has(sourceLinkKey(e.referenceUrl)))extra.set(e.referenceUrl,{title:t('presentation.reference-entry')+' · '+tx(e.name)});
+  for(const g of e.externalGuides||[])if(!records.has(sourceLinkKey(g.url)))extra.set(g.url,{title:g.title});
  }
  for(const m of images)if(m?.sourceUrl){
   extra.set(m.sourceUrl,{title:t('presentation.image-credit')+' · '+tx(m.credit),imageNote:m.sourceNote});
-  if(records.has(m.sourceUrl)&&m.sourceNote)records.get(m.sourceUrl).imageNote=m.sourceNote;
+  if(records.has(sourceLinkKey(m.sourceUrl))&&m.sourceNote)records.get(sourceLinkKey(m.sourceUrl)).imageNote=m.sourceNote;
  }
- for(const [url,s]of extra)if(!records.has(url))records.set(url,{...s,url});
+ for(const [url,s]of extra)if(!records.has(sourceLinkKey(url)))records.set(sourceLinkKey(url),{...s,url});
  const groups=new Map();
  for(const s of records.values())if(s.url){const site=referenceSite(s.url);if(!groups.has(site))groups.set(site,[]);groups.get(site).push(s);}
- const links=[...groups].map(([site,items])=>{
-  const title=site==='local'?t('presentation.gameplay-recordings'):site==='game8'?'Game8':site;
-  const originals=items.map(s=>`<li>${(s.anchorIds||[]).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')}<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(tx(s.title))} ${icon('external')}</a>${s.checked&&!s.hideChecked?`<small>${t('common.checked')} ${esc(s.checked)}</small>`:''}${s.note?`<p>${esc(tx(s.note))}</p>`:''}${s.imageNote?`<p>${esc(tx(s.imageNote))}</p>`:''}</li>`).join('');
+ const links=[...groups].sort(([a],[b])=>sourceProviderOrder(a)-sourceProviderOrder(b)||a.localeCompare(b)).map(([site,items])=>{
+  const title=site==='local'?t('presentation.gameplay-recordings'):tx(sourceProviderName(site));
+  const originals=items.map(s=>`<li>${(s.anchorIds||[]).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')}<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(sourceTitle(tx(s.title)))} ${icon('external')}</a>${s.imageNote?`<p>${esc(tx(s.imageNote))}</p>`:''}</li>`).join('');
   return `<li class="reference-site"><strong>${esc(title)}</strong><details class="reference-originals"><summary>${t('presentation.original-sources')} (${items.length})</summary><ul>${originals}</ul></details></li>`;
  });
  const notes=[...new Set(list.flatMap(e=>e.abilitySourceNotes||[]))].map(n=>`<p>${esc(n)}</p>`);
  const localRecords=[...records.values()].filter(s=>!s.url);
  const localNotes=localRecords.length?[localRecords.flatMap(s=>s.anchorIds).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')+'<p>'+[...new Set(localRecords.map(s=>tx(s.provider||s.title)))].map(esc).join(' · ')+'</p>']:[];
- const imageNotes=[...new Set(images.filter(m=>m?.credit&&!m.sourceUrl).map(m=>t('presentation.image-credit')+' · '+tx(m.credit)+(m.sourceNote?' · '+tx(m.sourceNote):'')))].map(note=>`<p>${esc(note)}</p>`);
- const count=groups.size+(localNotes.length||imageNotes.length?1:0);
- return links.length||localNotes.length||imageNotes.length?`<details class="page-references"><summary>${t('presentation.references')} (${count})</summary>${localNotes.join('')}${imageNotes.join('')}${notes.join('')}${links.length?`<ol>${links.join('')}</ol>`:''}</details>`:'';
+ const imageNotes=[...new Set(images.filter(m=>m?.credit&&(!m.sourceUrl||!m.sourceNote)).map(m=>t('presentation.image-credit')+' · '+tx(m.credit)+(m.sourceNote?' · '+tx(m.sourceNote):'')))].map(note=>`<p>${esc(note)}</p>`);
+ const count=groups.size+(localNotes.length||imageNotes.length||notes.length?1:0);
+ const retiredAnchors=collectReferences(list).filter(id=>!selected.has(id)&&isPublicSource(id,sources[id])).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('');
+ return links.length||localNotes.length||imageNotes.length||notes.length?`<details class="page-references"><summary>${t('presentation.references')} (${count})</summary>${retiredAnchors}${localNotes.join('')}${imageNotes.join('')}${notes.join('')}${links.length?`<ol>${links.join('')}</ol>`:''}</details>`:'';
 }
 
 const editorialDictionaries=new WeakMap();
