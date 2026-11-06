@@ -3,7 +3,7 @@ import {allRoute,paralogueOrders} from './locales/labels.mjs';
 import {icon} from './icons.mjs';
 import {displayText} from './presentation.mjs';
 import {entries,routes} from './data.mjs';
-import {scheduleRows} from './paralogues.mjs';
+import {scheduleRows} from './paralogue-schedule.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {isRetiredCharacterId} from './character-visibility.mjs';
 const character=id=>entries.find(e=>e.id===id);
