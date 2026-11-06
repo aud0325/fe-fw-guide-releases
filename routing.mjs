@@ -13,7 +13,7 @@ import {canonicalMountId} from './mount-review.mjs';
 import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',directoryLayout:'cards',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -25,6 +25,7 @@ export function pagePath(state,lang='ko',base='/'){
  if(!state.id&&state.type==='calculator')return base+lang+'/tools/growth-calculator/';
  if(!state.id&&state.type==='map'&&state.mapVariant==='cai')return base+lang+'/category/map/cai/';
  if(!state.id&&state.type==='character'&&state.directoryView==='scout')return base+lang+'/category/character/scout/';
+ if(!state.id&&['character','class','mount'].includes(state.type)&&state.directoryView==='skills')return base+lang+'/category/'+state.type+'/skills/';
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/'+(state.growthMode==='stats'?'stats/':''):'');
  return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(entrySlug(canonicalMountId(canonicalItemId(state.id)))))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
@@ -60,8 +61,9 @@ export function readRoute(url,base='/',fallback='ko'){
  const calculatorPath=parts.length===2&&parts[0]==='tools'&&parts[1]==='growth-calculator';
  const growthPath=parts[0]==='category'&&parts[1]==='growth'&&['class','mount'].includes(parts[2])&&(parts.length===3||parts.length===4&&parts[3]==='stats');
  const scoutPath=parts.join('/')==='category/character/scout';
+ const skillsPath=parts.length===3&&parts[0]==='category'&&['character','class','mount'].includes(parts[1])&&parts[2]==='skills';
  const caiMapPath=parts[0]==='category'&&parts[1]==='map'&&parts.length===3&&parts[2]==='cai';
- if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!scoutPath&&!caiMapPath&&!calculatorPath&&!reconstructionPath)return null;
+ if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!scoutPath&&!skillsPath&&!caiMapPath&&!calculatorPath&&!reconstructionPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
  if(reconstructionPath)state.type='reconstruction';
  if(calculatorPath){state.type='calculator';state.calculator=params.has('b')?parseCalculatorShare(params.get('b')):params.has('build')?parseCalculatorState(params.get('build')):null;state.calculatorInvalid=(params.has('b')||params.has('build'))&&!state.calculator;state.calculatorCharacter=params.get('unit')||'';}
@@ -82,6 +84,9 @@ export function readRoute(url,base='/',fallback='ko'){
  state.faction=state.type==='character'?params.get('faction')||'':'';
  state.scout=state.type==='character'&&!state.id&&routes.some(([id])=>id===params.get('scout'))?params.get('scout'):'all';
  if(scoutPath){state.directoryView='scout';if(state.scout==='all')state.scout='cai';}
+ if(skillsPath){state.directoryView='skills';state.scout='all';}
+ const legacySkills=!state.id&&['character','class','mount'].includes(state.type)&&state.directoryView==='overview'&&state.scout==='all'&&(params.get('skills')==='1'||params.get('layout')==='table');
+ if(legacySkills)state.directoryView='skills';
  state.route=routes.some(r=>r[0]===params.get('route'))?params.get('route'):'all';state.includeTips=params.get('tips')!=='0';
  state.order=['start','deadline','owner'].includes(params.get('sort'))?params.get('sort'):'start';
  Object.assign(state,normalizeItemFilters({itemMajor:params.get('main')||'',itemMinor:params.get('sub')||'',itemKind:params.get('kind')||''}));
@@ -102,7 +107,7 @@ export function readRoute(url,base='/',fallback='ko'){
   const kind=(params.get('kind')||params.get('group')||'').toLowerCase();
   if(params.get('sub')==='magic'||Object.hasOwn(groups,kind))Object.assign(state,{type:'spell',group:groups[kind]||'',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:''});
  }
- const retired=retiredTipState(state);return {state:retired?{...defaultState(),...retired}:state,lang,legacy};
+ const retired=retiredTipState(state);return {state:retired?{...defaultState(),...retired}:state,lang,legacy:legacy||legacySkills};
 }
 export function entryLanguageAnchor(target,current,base='/',lang='ko'){
  if(target.origin!==current.origin||target.hash||!current.hash)return '';

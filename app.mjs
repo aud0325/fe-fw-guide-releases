@@ -139,7 +139,12 @@ function render(){
   $('content').querySelector('#'+focus)?.focus({preventScroll:true});
  }});
  bindDirectoryTabs($('content'));
- bindDirectoryControls($('content'),{lang,change:query=>{state.catalogQuery=query;saveHash();updateMetadata(page);}});
+ const syncDirectoryLinks=()=>{
+  $('footer').querySelector('a:last-of-type')?.setAttribute('href',pagePath(state,lang==='ko'?'en':'ko',basePath)+stateQuery(state));
+  document.querySelector('.skip').href=pagePath(state,lang,basePath)+stateQuery(state)+'#main';
+  updateMetadata(page);
+ };
+ bindDirectoryControls($('content'),{lang,change:query=>{state.catalogQuery=query;saveHash();syncDirectoryLinks();}});
  bindCharacterGrowthControls($('content'),{change:checked=>{
   remember();state.growthSkill=checked;
   history.pushState({...history.state},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);render();

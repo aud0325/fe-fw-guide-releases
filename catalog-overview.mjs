@@ -1,4 +1,6 @@
 import {directoryShell,directoryView} from './directory-shell.mjs';
+import {directoryCards} from './directory-cards.mjs';
+import {guestSkillTokens} from './guest-character-ui.mjs';
 import {sortClasses} from './class-order.mjs';
 import {classTierSearchNames} from './class-tiers.mjs';
 import {classListCertification} from './class-ui.mjs';
@@ -20,7 +22,7 @@ import {characterIcon} from './_abilities/icon-model.mjs';
 import {entityToken} from './entity-token.mjs';
 import {entryIconMedia} from './entity-media.mjs';
 import {mountCategory} from './mount-ui.mjs';
-import {tierNames,proficiencyNames,classFact,certification,classSkills,characterSkills,mountSkills} from './catalog-overview-model.mjs';
+import {tierNames,proficiencyNames,classFact,certification,classSkills,characterSkills,mountSkills,guestSkillSearchNames} from './catalog-overview-model.mjs';
 const empty=()=>'<span class="overview-empty" aria-label="—">—</span>';
 export function classToken(e,lang,base='/',direct=false){const media=entryIconMedia(e);return entityToken({id:e.id,label:entryDisplayName(e,lang),kind:'class',direct,href:pagePath({id:e.id},lang,base),icon:media?{...media,src:base+media.src.slice(2)}:null});}
 function tokenList(abilities,lang,fallback='',base='/',stacked=false){return abilities.length?`<div class="entity-token-stack${stacked?' overview-stacked-skills':''}">${abilities.map(r=>abilityToken(r,lang,{base})).join(stacked?'':', ')}</div>`:fallback?`<span class="entity-token-static">${esc(fallback)}</span>`:empty();}
@@ -30,7 +32,7 @@ function personName(e,lang,base,route){const media=characterIcon(e.id);return `<
 export function directorySearchText(e){
  if(e.type==='class')return [e.name.ko,e.name.en,certification(e,'ko'),certification(e,'en'),...classTierSearchNames(e.category),...['class-mastery','class-active'].flatMap(method=>classSkills(e.id,method).flatMap(r=>Object.values(r.name)))].join(' ').toLocaleLowerCase();
  if(e.type==='mount')return [e.name.ko,e.name.en,...(e.aliases||[]),...['ko','en'].map(lang=>mountCategory(e,createTranslator(lang))),e.category,...mountSkills(e).flatMap(r=>Object.values(r.name)),...(e.mountSkills||[]).flatMap(r=>Object.values(r.name))].join(' ').toLocaleLowerCase();
- return [e.name.ko,e.name.en,...(e.aliases||[]),...(e.roles||[]).flatMap(role=>roleNames[role]||[]),...['ko','en'].map(lang=>characterFaction(e,createTranslator(lang),entries)),...specialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...nonSpecialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...['personal','unique'].flatMap(category=>characterSkills(e.id,category).flatMap(r=>Object.values(r.name)))].join(' ').toLocaleLowerCase();
+ return [e.name.ko,e.name.en,...(e.aliases||[]),...(e.roles||[]).flatMap(role=>roleNames[role]||[]),...['ko','en'].map(lang=>characterFaction(e,createTranslator(lang),entries)),...specialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...nonSpecialties(e.id).map(p=>proficiencyNames[p]?.join(' ')),...['personal','unique'].flatMap(category=>characterSkills(e.id,category).flatMap(r=>Object.values(r.name))),...guestSkillSearchNames(e)].join(' ').toLocaleLowerCase();
 }
 const matchesQuery=(entry,query)=>!query||directorySearchText(entry).includes(query.trim().toLocaleLowerCase());
 const rowStart=(entry,query)=>`<tr role="row" data-overview-id="${entry.id}"${matchesQuery(entry,query)?'':' hidden'} data-overview-search="${esc(directorySearchText(entry))}">`;
@@ -63,6 +65,12 @@ export function characterOverviewTable(list,{lang='ko',state={},route='all',capt
  const t=createTranslator(lang),scout=route!=='all',renownRows=scout?list.map(e=>({key:scoutRenownKey(e,route),visible:matchesQuery(e,query)})):[],boundaries=scoutRenownBoundaries(renownRows);
  return tableFrame({kind:scout?'scout':'character',caption:caption||t('overview.character-directory'),headings:scout?[t('overview.name'),t('catalog.renown'),t('directory.support-level'),t('catalog.requirement')]:[t('overview.name'),t('overview.faction'),t('overview.personal-skill'),t('overview.unique-skill')],body:list.map((e,i)=>{const row=characterRow(e,{lang,t,state,route,base,query});return scout?row.replace('<tr ',`<tr data-scout-renown="${renownRows[i].key}" data-renown-start="${boundaries[i]}" `):row;}).join('')});
 }
+function guestOverviewTable(list,{lang,t,base,query}){
+ return tableFrame({kind:'guest',caption:t('directory.guest-skills'),headings:[t('overview.name'),t('overview.faction'),t('directory.guest-skills')],body:list.map(e=>{
+  const faction=characterFaction(e,t,entries);
+  return rowStart(e,query)+`<th scope="row" role="rowheader" class="overview-name">${personName(e,lang,base,'all')}<small class="overview-name-meta overview-mobile-meta${characterIcon(e.id)?' overview-meta-with-icon':''}">${esc(faction)}</small></th>`+cell('faction',t('overview.faction'),esc(faction))+cell('skills',t('directory.guest-skills'),`<div class="entity-token-stack overview-stacked-skills">${guestSkillTokens(e,{t,base})}</div>` )+'</tr>';
+ }).join('')});
+}
 export function classOverviewTable(list,lang='ko',base='/',query=''){
  const t=createTranslator(lang);let previousTier=null;
  return tableFrame({kind:'class',caption:t('overview.class-directory'),headings:[{label:t('overview.class'),mobile:t('class.identity-conditions')},t('overview.tier'),t('overview.certification'),t('overview.mastery'),{label:t('overview.class-abilities'),mobile:t('directory.skills')}],body:list.map(e=>{
@@ -83,23 +91,26 @@ export function mountOverviewTable(list,lang='ko',base='/',query=''){
   return rowStart(e,query)+`<th scope="row" role="rowheader" class="overview-name">${name}<small class="overview-name-meta overview-mobile-meta${media?' overview-meta-with-icon':''}">${esc(mountCategory(e,t)||t('overview.unconfirmed'))}</small></th>`+cell('kind',t('directory.kind'),esc(mountCategory(e,t)||t('overview.unconfirmed')))+cell('skills',t('directory.skills'),tokenList(linked,lang,fallback,base,true))+'</tr>';
  }).join('')});
 }
-export function directoryPage(state,lang,base='/'){
- state={...state,route:state.type==='character'?'all':state.route};
+// Overview uses cards; the final skills tab exposes the retained comparison tables.
+export function directoryPage(state,lang,base='/',{legacyTable=false}={}){
+ state={...state,route:state.type==='character'?'all':state.route,...(state.directoryView==='skills'?{scout:'all'}:{})};
  const view=directoryView(state);if(view==='scout'&&scoutRoute(state)==='all')state.scout='cai';
  const t=createTranslator(lang),type=state.type,query=state.catalogQuery||'',route=scoutRoute(state),matches=searchEntries(entries.filter(isDiscoverable),listingState(state,entries));
  const list=type==='character'?sortScouts(matches,route):type==='class'?sortClasses(matches):matches;
  const queryPlaceholder=t(type==='character'?'overview.find-a-name-faction-or-ability':type==='class'?'overview.find-a-class-or-ability':'directory.find-mount');
- const allHref=pagePath({type},lang,base);
- const filters=`${type==='character'&&view==='scout'?scoutToolbar(state,t,{onlyRoutes:true}):''}<div class="overview-toolbar"><label class="overview-query"><span class="sr-only">${esc(queryPlaceholder)}</span><input type="search" data-overview-query value="${esc(query)}" placeholder="${esc(queryPlaceholder)}"></label>${state.group||state.faction?`<a class="overview-clear-filter" href="${allHref}">${t('overview.show-all')}</a>`:''}</div>`;
+ const allHref=pagePath({type,directoryView:view},lang,base);
+ const cards=view==='overview'&&!legacyTable;
+ const filters=`${type==='character'&&view==='scout'?scoutToolbar(state,t,{onlyRoutes:true}):''}<div class="overview-toolbar${cards?' directory-card-toolbar':''}"><label class="overview-query"><span class="sr-only">${esc(queryPlaceholder)}</span><input type="search" data-overview-query value="${esc(query)}" placeholder="${esc(queryPlaceholder)}"></label>${state.group||state.faction?`<a class="overview-clear-filter" href="${allHref}">${t('overview.show-all')}</a>`:''}</div>`;
  let body='';
- if(type==='class')body=classOverviewTable(list,lang,base,query);
+ if(cards)body=directoryCards(list,{type,lang,t,base,query,searchText:directorySearchText});
+ else if(type==='class')body=classOverviewTable(list,lang,base,query);
  else if(type==='mount')body=mountOverviewTable(list,lang,base,query);
  else if(route!=='all')body=characterOverviewTable(list,{lang,state,route,base,query});
  else{
   const groups=characterGroups(list),allies=groups.filter(g=>g.role==='playable').flatMap(g=>g.entries),guests=groups.filter(g=>g.role==='guest').flatMap(g=>g.entries),other=groups.filter(g=>!['playable','guest'].includes(g.role)).flatMap(g=>g.entries);
-  for(const [key,items] of [['overview.playable-characters',allies],['overview.guests',guests]])if(items.length)body+=`<section class="overview-group"${items.some(e=>matchesQuery(e,query))?'':' hidden'}><h2>${t(key)}<small>${items.filter(e=>matchesQuery(e,query)).length}</small></h2>${characterOverviewTable(items,{lang,state,base,query})}</section>`;
+  for(const [key,items] of [['overview.playable-characters',allies],['overview.guests',guests]])if(items.length)body+=`<section class="overview-group"${items.some(e=>matchesQuery(e,query))?'':' hidden'}><h2>${t(key)}<small>${items.filter(e=>matchesQuery(e,query)).length}</small></h2>${view==='skills'&&key==='overview.guests'?guestOverviewTable(items,{lang,t,base,query}):characterOverviewTable(items,{lang,state,base,query})}</section>`;
   if(other.length)body+=state.group||state.query?characterOverviewTable(other,{lang,state,base,query}):`<details class="overview-other"${other.some(e=>matchesQuery(e,query))?'':' hidden'}${query?' open data-query-open="1" data-was-open="false"':''}><summary>${t('overview.other-characters')} (${other.length})</summary>${characterOverviewTable(other,{lang,state,base,query})}</details>`;
  }
  const count=`<small data-overview-count role="status" aria-live="polite">${t(list.filter(e=>matchesQuery(e,query)).length===1?'browse.entry-one':'browse.entry-count',{count:list.filter(e=>matchesQuery(e,query)).length})}</small>`;
- return {html:directoryShell(state,`<div data-overview-directory>${filters}${body}<p class="overview-query-empty"${list.some(e=>matchesQuery(e,query))?' hidden':''}>${t('overview.no-matching-entries')}</p><p class="overview-note">${t('overview.undocumented')}</p></div>`,{t,lang,base,count})};
+ return {html:directoryShell(state,`<div data-overview-directory>${filters}${body}<p class="overview-query-empty"${list.some(e=>matchesQuery(e,query))?' hidden':''}>${t('overview.no-matching-entries')}</p>${cards?'':`<p class="overview-note">${t('overview.undocumented')}</p>`}</div>`,{t,lang,base,count})};
 }

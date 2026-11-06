@@ -1,0 +1,51 @@
+/* Full-width groups keep short categories from creating tall empty columns. */
+.directory-card-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.directory-card-toolbar{justify-content:flex-start;flex-wrap:nowrap}
+.directory-card-toolbar .overview-query{width:auto;min-width:0;flex:0 1 280px}
+.directory-card-toolbar .overview-query input{width:100%;min-width:0}
+.directory-card-list{display:flex;flex-direction:column;width:100%;gap:20px}
+.directory-card-list .directory-card-group{width:100%;min-width:0;margin:0;padding:0}
+.directory-card-list .directory-card-group>h2{display:flex;align-items:baseline;gap:7px;font-size:14px;line-height:1.5;margin:0 0 7px;padding:0 0 5px;border-bottom:1px solid var(--line)}
+.directory-card-list .directory-card-group>h2 small{font-size:11px;font-weight:400;color:var(--muted)}
+.directory-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));align-items:stretch;gap:10px;padding:0!important;margin:0!important;list-style:none!important}
+.directory-card-grid>li{min-width:0;padding:0;margin:0;list-style:none}
+.directory-card{height:100%;min-height:54px;background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.directory-card-head{height:100%;display:flex;align-items:center;gap:7px;padding:6px 8px;color:var(--text);text-decoration:none}
+.directory-card:hover{border-color:#ab899b;background:#fcf8f0}
+.directory-card-picture{display:flex;width:34px;height:38px;flex:0 0 34px;align-items:center;justify-content:center}
+.directory-card-picture img{display:block;width:100%;height:100%;object-fit:contain;object-position:center top}
+.directory-card-picture svg{width:26px;height:26px;color:var(--muted)}
+.directory-card-name{min-width:0;font-size:13px;line-height:1.4;font-weight:600;word-break:keep-all;overflow-wrap:anywhere}
+.directory-card-list-character .directory-card-head{flex-direction:column;align-items:stretch;gap:0;padding:0}
+.directory-card-list-character .directory-card-picture{width:100%;height:auto;aspect-ratio:1;flex:none;position:relative;overflow:hidden;background:var(--panel2)}
+.directory-card-list-character .directory-card-picture img{position:absolute;inset:0;object-fit:cover;object-position:center top}
+.directory-card-list-character .directory-card-name{padding:5px 6px 6px}
+/* Approved icon lists share spacing and hierarchy; character artwork keeps its cards. */
+.directory-icon-list{gap:30px}
+.directory-icon-list .directory-card-group>h2{font-size:15px;align-items:center;border-bottom:0;padding:0 0 0 10px;margin:0 0 12px;border-left:3px solid var(--group-ink,var(--accent));min-height:22px}
+.directory-card-list-class .directory-card-group:nth-child(1){--group-ink:#5b535a}
+.directory-card-list-class .directory-card-group:nth-child(2){--group-ink:#684a2a}
+.directory-card-list-class .directory-card-group:nth-child(3){--group-ink:#3e563b}
+.directory-card-list-class .directory-card-group:nth-child(4){--group-ink:#355569}
+.directory-card-list-class .directory-card-group:nth-child(5){--group-ink:#6a4270}
+.directory-card-list-class .directory-card-group:nth-child(6){--group-ink:#813f3c}
+.directory-icon-list .directory-card-grid{grid-template-columns:repeat(auto-fill,minmax(142px,1fr));gap:8px 16px}
+.directory-icon-list .directory-card{border:0;background:transparent;border-radius:4px;min-height:48px;overflow:visible}
+.directory-icon-list .directory-card-head{padding:6px 8px;gap:10px;border-radius:4px;min-height:48px}
+.directory-icon-list .directory-card-head:hover{background:#82536a0d}
+.directory-icon-list .directory-card-head:focus-visible{outline:2px solid var(--accent);outline-offset:0;background:#82536a0d}
+@media (width <= 480px){
+ .directory-card-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .directory-card{min-height:58px}
+ .directory-card-head{padding:5px;gap:4px}
+ .directory-card-toolbar{gap:8px}
+ .directory-card-toolbar .overview-query{flex:1}
+ .directory-card-picture{width:28px;height:32px;flex-basis:28px}
+ .directory-card-list-character .directory-card-picture{flex-basis:auto}
+ .directory-card-list-character .directory-card-name{padding:4px 5px 5px}
+}
+@media (width <= 480px){
+ .directory-icon-list{gap:24px}
+ .directory-icon-list .directory-card-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .directory-icon-list .directory-card-head{padding:5px 3px;gap:5px}
+}

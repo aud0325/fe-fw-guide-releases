@@ -1,5 +1,6 @@
 // Source-discovered images. See docs/IMAGES.md.
 import {yuphasImages} from './yuphas-images.generated.mjs';
+import {guestPortraits} from './guest-portraits.generated.mjs';
 export const media = {
   "part1-map-icon-clearing": {
     "src": "./assets/part1-map/icons/clearing.png",
@@ -1410,5 +1411,6 @@ export const media = {
     "originalWidth": 788,
     "originalHeight": 788
   },
-  ...Object.fromEntries(Object.entries(yuphasImages).filter(([,image])=>image.src.startsWith('./assets/portraits/')))
+  ...Object.fromEntries(Object.entries(yuphasImages).filter(([,image])=>image.src.startsWith('./assets/portraits/'))),
+  ...guestPortraits
 };

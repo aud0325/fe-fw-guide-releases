@@ -58,3 +58,14 @@
  .character-detail .support-rank{margin-bottom:6px}
  .character-detail .support-partner img{width:20px;height:22px}
 }
+.guest-participation th:first-child{width:70%}
+.guest-participation tbody th{font-weight:500}
+.guest-participation th small,.guest-paralogue{display:block;margin-top:4px;font-size:13px;font-weight:400}
+.guest-participation th small{color:var(--muted)}
+.guest-ability-list{margin:0}
+.guest-ability-group{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}
+.guest-ability-group dt{font-weight:600}
+.guest-ability-group dd{margin:0;min-width:0}
+.guest-ability-tokens{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.guest-ability-addition small{display:block;color:var(--muted);margin:8px 0 5px}
+.guest-source-name{overflow-wrap:anywhere}

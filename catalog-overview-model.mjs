@@ -14,6 +14,7 @@ export function certification(e,lang){
 }
 export function classSkills(id,method){const p=classReference[id];if(!p)return [];const ids=method==='class-mastery'?p.masteryIds:method==='class-active'?p.abilityIds:[];return ids.map(id=>rows.find(r=>r.id===id)).filter(Boolean);}
 export function characterSkills(id,category){return rows.filter(r=>r.kind==='skill'&&r.category===category&&r.relations.some(x=>x.id===id&&x.type==='character'));}
+export function guestSkillSearchNames(entry){return (entry.guestCombat?.appearances||[]).flatMap(appearance=>appearance.abilities?.skill||[]).flatMap(skill=>Object.values(skill.abilityId?rows.find(row=>row.id===skill.abilityId)?.name||{}:skill.name));}
 // List one name per declared mount skill, retaining its recorded order and canonical link.
 export function mountSkills(entry){
  const provided=rows.filter(r=>r.kind==='skill'&&r.relations.some(x=>x.type==='mount'&&x.id===entry.id));

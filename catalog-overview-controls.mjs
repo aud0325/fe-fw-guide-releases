@@ -3,7 +3,6 @@ import {createTranslator} from './locales/index.mjs';
 export function bindDirectoryControls(root,{lang,change}){
  const input=root.querySelector('[data-overview-query]');if(!input)return;
  const host=input.closest('[data-directory-page]')||input.closest('[data-overview-directory]'),t=createTranslator(lang);
-
  input.oninput=()=>{
   const query=input.value.trim().toLocaleLowerCase(),rows=[...host.querySelectorAll('[data-overview-id]')];
   rows.forEach(row=>{row.hidden=!!query&&!row.dataset.overviewSearch.includes(query);});

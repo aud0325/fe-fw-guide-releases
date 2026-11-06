@@ -11,6 +11,9 @@ https://fire-emblem-fortunes-weave.turam.dev/ko/category/growth/mount/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/growth/class/stats/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/growth/mount/stats/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/character/scout/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/character/skills/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/class/skills/
+https://fire-emblem-fortunes-weave.turam.dev/ko/category/mount/skills/
 https://fire-emblem-fortunes-weave.turam.dev/ko/category/map/cai/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/eshmel/
 https://fire-emblem-fortunes-weave.turam.dev/ko/entry/hong-hua/
@@ -212,6 +215,9 @@ https://fire-emblem-fortunes-weave.turam.dev/en/category/growth/mount/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/growth/class/stats/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/growth/mount/stats/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/character/scout/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/character/skills/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/class/skills/
+https://fire-emblem-fortunes-weave.turam.dev/en/category/mount/skills/
 https://fire-emblem-fortunes-weave.turam.dev/en/category/map/cai/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/eshmel/
 https://fire-emblem-fortunes-weave.turam.dev/en/entry/hong-hua/

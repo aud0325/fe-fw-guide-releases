@@ -10,8 +10,9 @@ import {growthCellStyle} from './growth-comparison.mjs';
 import {statLabels} from './locales/labels.mjs';
 import {pagePath} from './routing.mjs';
 import {escapeHtml as esc} from './core.mjs';
-export function classProficiency(id,value,{lang='ko',base='/'}={}){
+export function classProficiency(id,value,{lang='ko',base='/',iconOnly=false}={}){
  const label=proficiencyNames[id]?.[lang==='ko'?0:1];
+ if(iconOnly){const description=[label,value].filter(value=>value!=null).join(' ');return `<button type="button" class="class-proficiency class-proficiency-icon-only" data-proficiency-help="${esc(description)}" aria-label="${esc(description)}">${proficiencyGlyph(id,'normal',base)}<b aria-hidden="true">${esc(value)}</b></button>`;}
  return `<span class="class-proficiency">${proficiencyGlyph(id,'normal',base)}<span>${esc(label)}${value==null?'':` <b>${esc(value)}</b>`}</span></span>`;
 }
 export function classCertification(e,{t,base='/',compact=false}){
@@ -42,9 +43,9 @@ export function classUnlock(e,{t,base='/'}){
  if(p.routes.length)return p.routes.map(r=>esc(t(r.chapter?'class.route-chapter':'class.route',{route:entries.find(e=>e.id===r.id).name[t.locale],chapter:r.chapter}))).join(' / ');
  return p.part?t('class.part',{part:t.locale==='en'?['','I','II','III'][p.part]:p.part}):'';
 }
-export function classListCertification(e,{t,base='/'}){
+export function classListCertification(e,{t,base='/',iconOnly=false}){
  const p=classReference[e.id];
- const rankGroup=(list,label,choice)=>!list.length?'':`<div class="class-list-ranks" data-rank-rule="${choice?'one-of':'all'}"><small>${t(label)}</small><ul class="class-rank-values">${list.map((r,i)=>`<li>${classProficiency(r.id,r.rank,{lang:t.locale,base})}${i<list.length-1?`<span class="sr-only">${t(choice?'class.or':'class.and')}</span>`:''}</li>`).join('')}</ul></div>`;
+ const rankGroup=(list,label,choice)=>!list.length?'':`<div class="class-list-ranks" data-rank-rule="${choice?'one-of':'all'}"><small>${t(label)}</small><ul class="class-rank-values">${list.map((r,i)=>`<li>${classProficiency(r.id,r.rank,{lang:t.locale,base,iconOnly})}${i<list.length-1?`<span class="sr-only">${t(choice?'class.or':'class.and')}</span>`:''}</li>`).join('')}</ul></div>`;
  const groups=[rankGroup(p.required,'class.required',false),rankGroup(p.oneOf,'class.one-of',true)].filter(Boolean);
  if(p.female)groups.push(`<p class="class-list-meta">${esc(t('class.female'))}</p>`);
  const unlock=p.routes.length?p.routes.map(r=>t(r.chapter?'class.route-chapter-short':'class.route-short',{route:entries.find(e=>e.id===r.id).name[t.locale],chapter:r.chapter})).join(' / '):p.part?t('class.part-short',{part:t.locale==='en'?['','I','II','III'][p.part]:p.part}):'';

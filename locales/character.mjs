@@ -2,6 +2,19 @@
 import {classTierName} from '../class-tiers.mjs';
 const tierLabel=tier=>({ko:classTierName(tier,'ko',{compact:true}),en:classTierName(tier,'en',{compact:true})});
 export default {
+ "character.guest-participation":{"ko":"게스트 참전","en":"Guest appearances"},
+ "character.guest-timing":{"ko":"참전 시점","en":"When available"},
+ "character.guest-class":{"ko":"참전 병종","en":"Class"},
+ "character.guest-chapter":{"ko":"{part}부 {route}편 {chapter}장","en":"Part {part} · {route}'s path · Chapter {chapter}"},
+ "character.guest-part":{"ko":"{part}부 {route}편","en":"Part {part} · {route} paths"},
+ "character.guest-abilities":{"ko":"보유 기술","en":"Known abilities"},
+ "character.guest-loadout-scope":{"ko":"위에 표시한 게스트 참전 시점의 보유 기술입니다.","en":"Abilities held during the guest appearances listed above."},
+ "character.guest-unconfirmed":{"ko":"게스트 참전 시 보유 기술은 미확인입니다.","en":"The guest loadout is unconfirmed."},
+ "character.guest-skill":{"ko":"스킬","en":"Skills"},
+ "character.guest-combat-art":{"ko":"전투 기술","en":"Combat arts"},
+ "character.guest-spell":{"ko":"마법","en":"Magic"},
+ "character.guest-additional":{"ko":"추가","en":"Additional"},
+ "character.guest-none":{"ko":"없음","en":"None"},
  "character.proficiency-unavailable":{"ko":"사용 불가","en":"Unavailable"},
  "character.tahonia-magic-unavailable":{"ko":"전직 제한으로 흑마술·백마술을 사용할 수 없습니다.","en":"Class restrictions prevent the use of black and white magic."},
  "character.growth-radar-high":{"ko":"평균보다 크게 높음","en":"Well above mean"},

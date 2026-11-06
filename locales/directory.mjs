@@ -1,4 +1,11 @@
 export default {
+ "directory.abilities":{"ko":"기술","en":"Abilities"},
+ "directory.show-skills":{"ko":"기술 함께보기","en":"Show abilities"},
+ "directory.guest-skills":{"ko":"참전 시 스킬","en":"Guest skills"},
+ "directory.overview":{"ko":"한눈에 보기","en":"Overview"},
+ "directory.layout-label":{"ko":"표시 방식","en":"Display format"},
+ "directory.cards":{"ko":"카드","en":"Cards"},
+ "directory.table":{"ko":"기술·조건 표","en":"Skills and conditions"},
  "directory.views-label": {
   "ko": "목록 보기",
   "en": "List view"
