@@ -224,10 +224,10 @@ export const mapNodes=[
      "ko": "노어 열매",
      "itemId": "noa-fruit",
      "status": "inferred",
-     "sourceId": "game8-identity-817020",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "observedRoute": "theodora",
@@ -1514,10 +1514,10 @@ export const mapNodes=[
      "ko": "피레스국화",
      "itemId": "pyrethrum",
      "status": "inferred",
-     "sourceId": "game8-identity-817017",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "observedRoute": "theodora",
@@ -2551,10 +2551,10 @@ export const mapNodes=[
      "ko": "오리할콘",
      "itemId": "orichalcum",
      "status": "inferred",
-     "sourceId": "game8-identity-816986",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ]
   }
@@ -2598,10 +2598,10 @@ export const mapNodes=[
      "ko": "열소 광석",
      "itemId": "phlogiston",
      "status": "inferred",
-     "sourceId": "game8-identity-816996",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "observedRoute": "theodora",
@@ -9680,10 +9680,10 @@ export const mapNodes=[
      "ko": "조토곤",
      "itemId": "video-jotogon",
      "status": "inferred",
-     "sourceId": "game8-identity-817376",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ]
   }
@@ -10184,10 +10184,10 @@ export const mapNodes=[
      "ko": "갈라 멀린",
      "itemId": "observed-gala-marlin",
      "status": "inferred",
-     "sourceId": "game8-identity-817059",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {
@@ -10266,10 +10266,10 @@ export const mapNodes=[
      "ko": "금송어",
      "itemId": "golden-trout",
      "status": "inferred",
-     "sourceId": "game8-identity-817065",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {
@@ -10829,10 +10829,10 @@ export const mapNodes=[
      "ko": "갈라 멀린",
      "itemId": "observed-gala-marlin",
      "status": "inferred",
-     "sourceId": "game8-identity-817059",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {
@@ -11490,10 +11490,10 @@ export const mapNodes=[
      "ko": "니네이아카",
      "itemId": "ninokka",
      "status": "inferred",
-     "sourceId": "game8-identity-817023",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "observedRoute": "theodora",
@@ -11755,10 +11755,10 @@ export const mapNodes=[
      "ko": "오드 몽주",
      "itemId": "oda-monja",
      "status": "inferred",
-     "sourceId": "game8-identity-817021",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "observedRoute": "theodora",
@@ -12607,10 +12607,10 @@ export const mapNodes=[
      "ko": "금파초",
      "itemId": "jin-ba-jiao",
      "status": "inferred",
-     "sourceId": "game8-identity-817016",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ]
   }
@@ -13174,10 +13174,10 @@ export const mapNodes=[
      "ko": "유나메이",
      "itemId": "video-yunamei",
      "status": "inferred",
-     "sourceId": "game8-identity-817018",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {
@@ -13249,10 +13249,10 @@ export const mapNodes=[
      "ko": "빈하사",
      "itemId": "observed-binhassa",
      "status": "inferred",
-     "sourceId": "game8-identity-817015",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {
@@ -13312,10 +13312,10 @@ export const mapNodes=[
      "ko": "블루 스노르",
      "itemId": "blue-snoll",
      "status": "inferred",
-     "sourceId": "game8-identity-816991",
-     "checked": "2026-10-25",
+     "sourceId": "community-gathering-20261102",
+     "checked": "2026-11-02",
      "observedKo": "???",
-     "identificationMethod": "single-remaining-item-in-individual-guide"
+     "identificationMethod": "sheet-place-item-membership"
     }
    ],
    "access": {

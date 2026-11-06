@@ -77,7 +77,8 @@ export function referenceSection(list,{sources,t,tx,updated,images=[]}) {
  const localNotes=localRecords.length?[localRecords.flatMap(s=>s.anchorIds).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('')+'<p>'+[...new Set(localRecords.map(s=>tx(s.provider||s.title)))].map(esc).join(' · ')+'</p>']:[];
  const imageNotes=[...new Set(images.filter(m=>m?.credit&&(!m.sourceUrl||!m.sourceNote)).map(m=>t('presentation.image-credit')+' · '+tx(m.credit)+(m.sourceNote?' · '+tx(m.sourceNote):'')))].map(note=>`<p>${esc(note)}</p>`);
  const count=groups.size+(localNotes.length||imageNotes.length||notes.length?1:0);
- const retiredAnchors=collectReferences(list).filter(id=>!selected.has(id)&&isPublicSource(id,sources[id])).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('');
+ const legacyAnchors=new Set(list.flatMap(entry=>entry.retiredSourceAnchors||[]));
+ const retiredAnchors=[...new Set([...collectReferences(list),...legacyAnchors])].filter(id=>!selected.has(id)&&(legacyAnchors.has(id)||isPublicSource(id,sources[id]))).map(id=>`<span id="source-${esc(id)}" class="source-anchor" aria-hidden="true"></span>`).join('');
  return links.length||localNotes.length||imageNotes.length||notes.length?`<details class="page-references"><summary>${t('presentation.references')} (${count})</summary>${retiredAnchors}${localNotes.join('')}${imageNotes.join('')}${notes.join('')}${links.length?`<ol>${links.join('')}</ol>`:''}</details>`:'';
 }
 
@@ -111,5 +112,5 @@ export function localizedFacts(facts,t) {
  const korean=t('ko','en')==='ko';
  const counterpart={'personal-ko':'ability','ko-master_skill':'mastery','ko-class_skill_1':'skills','ko-class_skill_2':'skills','ko-class_skill_3':'skills','namu-likes':'likes','namu-hobby':'interests','namu-dislikes':'dislikes','namu-age':'age','namu-birthday':'birthday','namu-height':'height'};
  const preferred=new Set(korean?facts.filter(f=>counterpart[f.key]).map(f=>counterpart[f.key]):[]);
- return facts.filter(f=>!preferred.has(f.key)&&!(counterpart[f.key]&&!korean&&facts.some(other=>other.key===counterpart[f.key]))).map(f=>({...f,label:{ko:koreanGameplayValue(f.label.ko.replace(/ · (한국어|영어)/g,'')),en:factLabels[f.key]||f.label.en.replace(/ · (Korean|Japanese)/g,'')}}));
+ return facts.filter(f=>!preferred.has(f.key)&&!(counterpart[f.key]&&!korean&&facts.some(other=>other.key===counterpart[f.key]))&&!( !korean&&['namu-likes','namu-hobby'].includes(f.key)&&/[가-힣]/.test(f.value))).map(f=>({...f,label:{ko:koreanGameplayValue(f.label.ko.replace(/ · (한국어|영어)/g,'')),en:factLabels[f.key]||f.label.en.replace(/ · (Korean|Japanese)/g,'')}}));
 }

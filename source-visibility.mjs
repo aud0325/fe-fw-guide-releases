@@ -38,7 +38,6 @@ export function publicSourceRecord(id,source){
    'administrator-spell-items-20261026':['마법 습득 아이템','Spell-learning items']
   };
   if(topics[id])record.title={ko:'제공 자료 · '+topics[id][0],en:'Provided material · '+topics[id][1]};
-  if(id==='administrator-leda-map-20261013')record.originals=[{title:{ko:'Game8 · 리가네트',en:'Game8 · Liganet'},url:'https://game8.jp/fe-banshisenko/817014'}];
  }
  return record;
 }

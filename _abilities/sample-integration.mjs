@@ -70,7 +70,6 @@ export function abilityReferences(e,lang){
   }
  }
  for(const link of itemConnections.filter(x=>x.itemId===e.id&&x.url))externalGuides.push({url:link.url,title:link.relation==='equipment-granted'?text('장비 전투 기술 대응표','Equipment combat art correspondence'):link.status==='guide-correspondence'?text('마법 습득 아이템 · 공략 자료','Spell-learning items · guides'):text('마법 습득 제보','Spell acquisition report')});
- if(legacySpellEntries.some(x=>x.itemId===e.id))externalGuides.push({url:'https://game8.jp/fe-banshisenko/817283',title:'Game8 · '+text('마법','Magic')});
  const itemAbilityIds=new Set(itemConnections.filter(link=>link.itemId===e.id).map(link=>link.abilityId));
  const images=[...relatedRows,...rows.filter(row=>itemAbilityIds.has(row.id))].map(abilityIcon).filter(Boolean);
  return {externalGuides,abilitySourceNotes,imageCredits:[...images,...(e.forging||sampleCharacters.includes(e.id)?[proficiencyMedia.armor]:[])]};
