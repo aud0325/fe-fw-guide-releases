@@ -13,7 +13,7 @@ import {canonicalMountId} from './mount-review.mjs';
 import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',directoryLayout:'cards',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',directoryLayout:'cards',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',itemOrder:'name',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -39,7 +39,8 @@ export function stateQuery(state,{share=false}={}){
   for(const [key,value]of Object.entries({find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
   return p.size?'?'+p:'';
  }
- if(!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
+ if(!state.id&&['character','class','mount','battalion','gambit','item'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
+ if(state.type==='item'&&!state.id&&state.itemOrder==='flavor')p.set('item-sort','flavor');
  if(state.id&&state.growthSkill)p.set('skill','1');
  if(state.id)for(const [key,value]of [['forge-from',state.forgeFrom],['forge-to',state.forgeTo]])if(/^\d+$/.test(String(value??'')))p.set(key,String(value));
  if(state.type==='character'&&!state.id&&state.faction)p.set('faction',state.faction);
@@ -76,7 +77,8 @@ export function readRoute(url,base='/',fallback='ko'){
  }
  if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthMode:parts[3]==='stats'?'stats':params.get('mode'),growthQuery:params.get('find'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
  if(state.id){state.growthSkill=params.get('skill')==='1';for(const [key,param]of [['forgeFrom','forge-from'],['forgeTo','forge-to']])state[key]=/^\d+$/.test(params.get(param)||'')?params.get(param):'';}
- state.catalogQuery=!state.id&&['character','class','mount','battalion','gambit'].includes(state.type)?params.get('find')||'':'';
+ state.catalogQuery=!state.id&&['character','class','mount','battalion','gambit','item'].includes(state.type)?params.get('find')||'':'';
+ state.itemOrder=state.type==='item'&&params.get('item-sort')==='flavor'?'flavor':'name';
  state.query=params.get('q')||'';state.group=params.get('group')||'';
  if(state.type==='location'&&state.group==='Saveilon')state.group='사벨론주';
  if(state.type==='location'&&state.group==='Nation')state.group='';

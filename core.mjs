@@ -2,7 +2,7 @@ import {isRetiredCharacter} from './character-visibility.mjs';
 import {guidanceSearchProse} from './location-guidance-model.mjs';
 import {equipmentVariantSearchProse} from './equipment-variants-model.mjs';
 import {guideTopic} from './browse-topics.mjs';
-import {matchesItemFilters} from './item-types.mjs';
+import {matchesItemFilters,isNaturalAttackItem} from './item-types.mjs';
 import {koreanGameplayValue} from './locales/gameplay-terms.mjs';
 import {localized} from './locales/index.mjs';
 import {flavors} from './food.mjs';
@@ -14,7 +14,7 @@ export function normalize(value){return String(value).normalize('NFKC').toLocale
 export const matchesLocationGroup=(e,group)=>e.mapProvince?.ko===group||(!e.mapProvince&&(e.region||'Unverified')===group)||(group!=='Unverified'&&e.region===group);
 export function searchEntries(entries,{query='',type='all',route='all',includeTips=true,group='',faction='',itemMajor='',itemMinor='',itemKind='',itemFlavor=''}={}){
  const tokens=query.trim().split(/\s+/).map(normalize).filter(Boolean);
- return entries.filter(e=>e.type!=='tip'&&!isRetiredCharacter(e)&&(type!=='character'||!faction||(e.facts?.find(f=>f.key==='faction')?.value||e.group||'undocumented')===faction)&&(type!=='item'||matchesItemFilters(e,{itemMajor,itemMinor,itemKind,itemFlavor}))&&(type==='all'||e.type===type)&&(!group||e.category===group||(type==='tip'&&guideTopic(e).id===group)||(type==='location'&&matchesLocationGroup(e,group))||(type==='character'?['playable','guest','boss','npc','background'].find(role=>e.roles?.includes(role))===group:e.roles?.includes(group)))&&(includeTips||e.type!=='tip')&&(route==='all'||!e.routeIds||e.routeIds.includes(route))).map(e=>{
+ return entries.filter(e=>e.type!=='tip'&&!isRetiredCharacter(e)&&(type!=='character'||!faction||(e.facts?.find(f=>f.key==='faction')?.value||e.group||'undocumented')===faction)&&(type!=='item'||!isNaturalAttackItem(e)&&matchesItemFilters(e,{itemMajor,itemMinor,itemKind,itemFlavor}))&&(type==='all'||e.type===type)&&(!group||e.category===group||(type==='tip'&&guideTopic(e).id===group)||(type==='location'&&matchesLocationGroup(e,group))||(type==='character'?['playable','guest','boss','npc','background'].find(role=>e.roles?.includes(role))===group:e.roles?.includes(group)))&&(includeTips||e.type!=='tip')&&(route==='all'||!e.routeIds||e.routeIds.includes(route))).map(e=>{
   const names=[e.name.ko,e.name.en,localized(e.name,'en'),...e.aliases,...(e.playPreferenceRows||[]).flatMap(p=>[p.name.ko,p.name.en])].map(normalize);
   if(e.ingredientFlavor){const f=flavors[e.ingredientFlavor.flavor];names.push(normalize(f.ko),normalize(f.en));}
   const all=normalize([...names,e.summary.ko,e.summary.en,...publicSearchProse(e,entries),e.type,e.category||'',e.type==='location'?e.region||'':'',e.mapProvince?.ko||'',e.mapProvince?.en||'',...(e.facts||[]).filter(f=>!['joins','first-appearance'].includes(f.key)).flatMap(f=>[f.value,f.valueKo||'',koreanGameplayValue(f.value,f.literal?'':f.key)]),...(e.gifts||[]).flatMap(g=>[g.name,g.nameKo||'']),...(e.giftCategoryReports||[]).map(r=>r.text),...(e.gathering||[]).flatMap(r=>[r.region,r.where])].join(' '));

@@ -1,6 +1,7 @@
 import {abilityEntries,abilityKinds} from './_abilities/ability-navigation.mjs';
 import {navigationGroups,navigationContext,filterContext} from './navigation.mjs';
 import {isDiscoverable} from './editorial-view.mjs';
+import {isNaturalAttackItem} from './item-types.mjs';
 import {types} from './locales/labels.mjs';
 import {createTranslator,localized} from './locales/index.mjs';
 import {icon} from './icons.mjs';
@@ -10,7 +11,7 @@ import {defaultState,pagePath} from './routing.mjs';
 export const renderKey=(state,lang,limit=36,base='/')=>JSON.stringify([lang,base,limit,Object.entries(state).sort(([a],[b])=>a.localeCompare(b))]);
 export function navigationHtml(state,lang,base,entries,sources,expanded=new Map()){
  const current=navigationContext(state,entries);
- const link=key=>`<a href="${esc(pagePath({...defaultState(),type:key},lang,base))}" class="${current.type===key?'active':''}" ${current.type===key?`aria-current="${state.id?'location':'page'}"`:''}>${icon(['growth','calculator'].includes(key)?'class':key)}<span>${esc(types[key][lang==='ko'?0:1])}</span>${['all','reconstruction','growth','calculator','map','sources'].includes(key)?'':`<span class="count">${key==='all'?[...entries,...abilityEntries].filter(isDiscoverable).length:(abilityKinds.includes(key)?abilityEntries:entries).filter(e=>e.type===key&&isDiscoverable(e)).length}</span>`}</a>`;
+ const link=key=>`<a href="${esc(pagePath({...defaultState(),type:key},lang,base))}" class="${current.type===key?'active':''}" ${current.type===key?`aria-current="${state.id?'location':'page'}"`:''}>${icon(['growth','calculator'].includes(key)?'class':key)}<span>${esc(types[key][lang==='ko'?0:1])}</span>${['all','reconstruction','growth','calculator','map','sources'].includes(key)?'':`<span class="count">${key==='all'?[...entries,...abilityEntries].filter(isDiscoverable).length:(abilityKinds.includes(key)?abilityEntries:entries).filter(e=>e.type===key&&isDiscoverable(e)&&(key!=='item'||!isNaturalAttackItem(e))).length}</span>`}</a>`;
  return link('all')+navigationGroups.map(group=>`<details class="nav-group ${current.group===group.id?'current-group':''}" data-nav-group="${group.id}" ${current.group===group.id||(expanded.get(group.id)??true)?'open':''}><summary>${esc(localized(group.label,lang))}${icon('expand')}</summary><div class="nav-children">${group.types.map(link).join('')}</div></details>`).join('')+link('sources');
 }
 export function shellFilters(state,entries){

@@ -14,11 +14,12 @@ export function itemScopeLabel(state,{t}){
  const scope=category?t(category.ko,category.en):t('item.all-items');
  return state.itemFlavor?scope+' · '+t(flavors[state.itemFlavor].ko,flavors[state.itemFlavor].en):scope;
 }
-export function itemFilters(list,state,{t}){
+export function itemFilters(list,state,{t,availableKinds}){
  const count=filter=>list.filter(e=>matchesItemFilters(e,filter)).length;
  const button=(attribute,id,title,n,active,icon)=>`<button type="button" ${attribute}="${id}" aria-pressed="${active}"${icon?` class="item-filter-icon"`:''}>${icon?`<img src="${itemMedia[icon].src}" alt="" width="24" height="24">`:''}<span>${esc(title)}</span><small>${n}</small></button>`;
- let out=`<section class="item-filters" aria-label="${t('item.item-categories')}"><div class="item-filter-row" role="group" aria-label="${t('item.main-category')}">${button('data-item-major','',t('item.all'),list.length,!state.itemMajor)}${Object.entries(itemMajors).map(([id,l])=>button('data-item-major',id,t(l.ko,l.en),count({itemMajor:id}),state.itemMajor===id)).join('')}</div>`;
- if(state.itemMajor)out+=`<div class="item-filter-row item-filter-secondary" role="group" aria-label="${t('item.subcategory')}">${button('data-item-minor','',t('item.category-all',{category:t(itemMajors[state.itemMajor].ko,itemMajors[state.itemMajor].en)}),count({itemMajor:state.itemMajor}),!state.itemMinor)}${Object.entries(itemMinors).filter(([,m])=>!m.archived&&m.major===state.itemMajor).map(([id,m])=>button('data-item-minor',id,t(m.ko,m.en),count({itemMinor:id}),state.itemMinor===id,m.icon)).join('')}</div>`;
- out+='<div class="item-filter-controls">';
- return out+((state.itemMinor||state.itemKind||state.itemFlavor)?`<button type="button" class="item-filter-reset" data-item-reset>${t('item.reset-categories')}</button>`:'')+'</div></section>';
+ let out=`<section class="item-filters" aria-label="${t('item.item-categories')}"><div class="item-major-tabs" role="group" aria-label="${t('item.main-category')}">${button('data-item-major','',t('item.all'),list.length,!state.itemMajor)}${Object.entries(itemMajors).map(([id,l])=>button('data-item-major',id,t(l.ko,l.en),count({itemMajor:id}),state.itemMajor===id)).join('')}</div>`;
+ out+=`<div class="item-minor-filters" role="group" aria-label="${t('item.subcategory')}">${button('data-item-minor','',t('item.all'),count({itemMajor:state.itemMajor}),!state.itemMinor)}${Object.entries(itemMinors).filter(([,m])=>!m.archived&&(!state.itemMajor||m.major===state.itemMajor)).map(([id,m])=>button('data-item-minor',id,t(m.ko,m.en),count({itemMinor:id}),state.itemMinor===id)).join('')}</div>`;
+ const kinds=Object.entries(itemKinds).filter(([id,k])=>id!=='strike'&&k.minor===state.itemMinor&&(!availableKinds||availableKinds.has(id)||state.itemKind===id));
+ if(kinds.length>1)out+=`<div class="item-kind-filters" role="group" aria-label="${t('item.kind-filter')}">${button('data-item-kind','',t('item.all'),count({itemMinor:state.itemMinor}),!state.itemKind)}${kinds.map(([id,k])=>button('data-item-kind',id,t(k.ko,k.en),count({itemKind:id}),state.itemKind===id,k.icon)).join('')}</div>`;
+ return out+'</section>';
 }

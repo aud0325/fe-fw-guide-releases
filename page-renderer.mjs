@@ -28,6 +28,7 @@ import {createTranslator} from './locales/index.mjs';
 import {types} from './locales/labels.mjs';
 import {icon} from './icons.mjs';
 import {itemIcon,itemTypeLabel,itemFilters,itemScopeLabel} from './item-ui.mjs';
+import {itemDirectory} from './item-directory.mjs';
 import {classifyItem,normalizeItemFilters} from './item-types.mjs';
 import {itemMedia} from './item-media.mjs';
 import {navigationGroups,navigationContext,filterContext,listingState} from './navigation.mjs';
@@ -148,6 +149,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
   html=`<div class="section-head"><h2>${t('app.source-register')}</h2></div><section class="sources-index" aria-label="${t('browse.source-sites')}">${sourceOverview(groups,lang)}</section>`;
  }
  else if(state.type==='paralogue'){html=paralogueOverview(searchEntries(browseEntries,listingState(state,browseEntries)),state,{t,tx,name,href,lang,base});}
+ else if(state.type==='item'){html=`<div class="section-head"><h1>${label('item')}</h1></div>`+itemDirectory(browseEntries,state,{t,name,href,text});}
  else{
   const matches=searchEntries(browseEntries,listingState(state,browseEntries));const list=state.type==='character'?sortScouts(matches,scoutRoute(state)):matches;const home=state.type==='all'&&!state.query;
   const shortcuts=state.type==='all'?searchShortcuts(state.query):[];
@@ -187,7 +189,7 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  const metadata=e?entryMetadata(e,{t,tx,name,entries,sources}):null;
  const title=metadata?.title||(pageTitle?`${pageTitle} · ${t('app.fortune-s-weave-encyclopedia')}`:brandName);
  const description=(state.type==='growth'&&!state.id?t('growth.homeDescription'):'')||metadata?.description||(pageTitle?pageTitle+' · '+t('app.description'):t('app.description'));
- if(!state.id&&!isDirectory&&state.type!=='all')html=html.replace('<h2>','<h1>').replace('</h2>','</h1>');
+ if(!state.id&&!isDirectory&&!['all','item'].includes(state.type))html=html.replace('<h2>','<h1>').replace('</h2>','</h1>');
  if(e)html=html.replace(/href="#(section-[a-z]+|field-reference-[0-9]+|source-[a-zA-Z0-9_-]+)"/g,(_,id)=>`href="${esc(pagePath(state,lang,base)+stateQuery(state))}#${id}"`);
  return {html:linkContentKeywords(rewriteLinks(html,lang,base),{entryId:state.id,lang,base,onDecision:keywordAudit}),title,description,entryType:e?.type,entryName:e?name(e):null,missing:Boolean(state.id&&!e)};
 }

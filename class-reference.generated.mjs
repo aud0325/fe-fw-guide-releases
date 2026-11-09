@@ -2462,13 +2462,13 @@ export const classReference={
           "str": 20,
           "mag": -5,
           "spd": -10,
-          "dex": 35,
+          "dex": 30,
           "def": 25,
           "res": 5,
-          "lck": 10,
+          "lck": 5,
           "cha": 10
         },
-        "sourceId": "community-classes-20261029"
+        "sourceId": "community-class-growth-20261109"
       }
     ],
     "modifiers": {
@@ -2484,7 +2484,8 @@ export const classReference={
     },
     "sourceIds": [
       "community-classes-20261029",
-      "fe-classes"
+      "fe-classes",
+      "community-class-growth-20261109"
     ]
   },
   "class-forest-knight": {

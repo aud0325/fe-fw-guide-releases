@@ -9,6 +9,7 @@ import {entityToken} from '../entity-token.mjs';
 import {rewriteLinks} from '../routing.mjs';
 import {categoryLabels,normalizeSection,characterSkills,providerGroups,abilityTarget,acquisitionLevel,catalogEntryHref,characterSkillHref} from './catalog-model.mjs';
 import {rows as originalRows} from './full-data.mjs';
+import {entities} from './catalog-context.mjs';
 import {abilityConditionRoutes,visibleAbilityRelations} from './condition-model.mjs';
 import {canonicalAbilityId,abilitySlug} from './ability-identities.mjs';
 import {uniqueAvailability,itemConnections} from './integration-data.mjs';
@@ -64,6 +65,7 @@ function sourceBox(r){
 const weaponNames={sword:['검','Sword'],spear:['창','Spear'],axe:['도끼','Axe'],bow:['활','Bow'],gauntlet:['격투','Gauntlet'],general:['공용·지원','General & support']};
 const rankOrder=['D','D+','C','C+','B','B+','A','A+','S','S+'];
 function entityLink(x){
+ if(x.type==='item')x={...x,name:entities.find(e=>e.id===x.id)?.name||x.name};
  const href=catalogEntryHref(x,state.lang);
  if(x.type==='class'&&href)return entityToken({id:x.id,label:label(x.name),kind:'class',href:base==='/'?href:base.replace(/\/$/,'')+href,icon:x.icon?{...x.icon,src:x.icon.src.startsWith('./assets/classes/')?base+x.icon.src.slice(2):base+'_abilities/'+x.icon.src.replace(/^\.\//,'')}:null,className:'provider-link class-owner'});
  const content=x.type==='character'?`${portrait(x.id)}<span>${esc(label(x.name))}</span>`:esc(label(x.name));

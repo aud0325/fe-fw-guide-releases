@@ -4,6 +4,7 @@ import {reconstructionPlan} from './reconstruction-plan.generated.mjs';
 import {bindReconstructionPlan} from './reconstruction-controls.mjs';
 import {bindForgingControls} from './forging-controls.mjs';
 import {bindDirectoryTabs} from './directory-shell.mjs';
+import {itemFoodScope} from './item-directory.mjs';
 import {bindDirectoryControls} from './catalog-overview-controls.mjs';
 import {setupEntityLinks} from './entity-links-client.mjs';
 import './_abilities/sample-interactions.mjs';
@@ -180,9 +181,17 @@ function render(){
   if(center&&matchMedia(viewportQueries.navigation).matches)target?.scrollIntoView({block:'nearest'});
  }});
  $('content').querySelectorAll('[data-scout-route]').forEach(b=>b.addEventListener('click',()=>{remember();state.scout=b.dataset.scoutRoute;state.directoryView='scout';state.route='all';state.group='';state.faction='';visibleLimit=36;history.pushState({scroll:scrollY,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state));render();$('content').querySelector(`[data-scout-route="${state.scout}"]`)?.focus({preventScroll:true});}));
- const updateItems=(next,focusSelector)=>{Object.assign(state,normalizeItemFilters(next));state.itemFlavor=normalizeItemFlavor(next.itemFlavor??state.itemFlavor);if(state.itemMajor==='equipment'||(state.itemMinor&&state.itemMinor!=='ingredients')||(state.itemKind&&!foodKinds[state.itemKind]))state.itemFlavor='';state.group='';visibleLimit=36;saveHash();render();if(focusSelector)$('content').querySelector(focusSelector)?.focus({preventScroll:true});};
+ const updateItems=(next,focusSelector)=>{remember();Object.assign(state,normalizeItemFilters(next));state.itemFlavor=normalizeItemFlavor(next.itemFlavor??state.itemFlavor);if(state.itemMajor==='equipment'||(state.itemMinor&&state.itemMinor!=='ingredients')||(state.itemKind&&!foodKinds[state.itemKind]))state.itemFlavor='';state.itemOrder=next.itemOrder??state.itemOrder;if(!itemFoodScope(state))state.itemOrder='name';state.group='';visibleLimit=36;history.pushState({scroll:scrollY,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state));render();if(focusSelector)$('content').querySelector(focusSelector)?.focus({preventScroll:true});};
  $('content').querySelectorAll('[data-item-major]').forEach(b=>b.addEventListener('click',()=>updateItems({itemMajor:b.dataset.itemMajor,itemFlavor:''},`[data-item-major="${b.dataset.itemMajor}"]`)));
  $('content').querySelectorAll('[data-item-minor]').forEach(b=>b.addEventListener('click',()=>updateItems({itemMajor:state.itemMajor,itemMinor:b.dataset.itemMinor},`[data-item-minor="${b.dataset.itemMinor}"]`)));
+ $('content').querySelectorAll('[data-item-kind]').forEach(b=>b.addEventListener('click',()=>updateItems({...state,itemKind:b.dataset.itemKind},`[data-item-kind="${b.dataset.itemKind}"]`)));
+ $('content').querySelector('[data-item-flavor]')?.addEventListener('change',event=>updateItems({...state,itemFlavor:event.target.value},'[data-item-flavor]'));
+ $('content').querySelector('[data-item-order]')?.addEventListener('change',event=>updateItems({...state,itemOrder:event.target.value},'[data-item-order]'));
+ const itemQuery=$('content').querySelector('#item-query');
+ if(itemQuery){
+  const updateQuery=()=>{if(itemQuery.value===(state.catalogQuery||state.query))return;const selection=[itemQuery.selectionStart,itemQuery.selectionEnd],scroll=scrollY;state.catalogQuery=itemQuery.value;state.query='';saveHash();render();const input=$('content').querySelector('#item-query');input?.focus({preventScroll:true});input?.setSelectionRange(...selection);window.scrollTo(0,scroll);};
+  itemQuery.addEventListener('input',event=>{if(!event.isComposing)updateQuery();});itemQuery.addEventListener('compositionend',updateQuery);
+ }
  $('content').querySelector('[data-item-reset]')?.addEventListener('click',()=>updateItems({itemFlavor:''},'[data-item-major=""]'));
 
  $('content').querySelectorAll('[data-paralogue-route]').forEach(b=>b.addEventListener('click',()=>{state.route=b.dataset.paralogueRoute;saveHash();render();$('content').querySelector(`[data-paralogue-route="${state.route}"]`)?.focus({preventScroll:true})}));
@@ -267,7 +276,7 @@ function restoreScroll(){
 window.addEventListener('popstate',()=>{parseLocation();requestAnimationFrame(restoreScroll);});
 window.addEventListener('hashchange',()=>{if(/^#(?:(?:entry|category)\/|\?)/.test(location.hash))parseLocation();else revealAnchor(document,location.hash);});
 searchUI=setupSearch({input:$('search'),panel:$('search-panel'),clear:$('clear-search'),entries:[...entries,...abilityEntries],context:()=>({lang,base:basePath}),navigate:navigateTo});
- $('reset').addEventListener('click',()=>{state.route='all';state.includeTips=true;state.group='';state.faction='';Object.assign(state,normalizeItemFilters());state.itemFlavor='';state.order='start';state.catalogQuery='';visibleLimit=36;saveHash();render()});
+ $('reset').addEventListener('click',()=>{state.route='all';state.includeTips=true;state.group='';state.faction='';Object.assign(state,normalizeItemFilters());state.itemFlavor='';state.itemOrder='name';state.order='start';state.catalogQuery='';visibleLimit=36;saveHash();render()});
  $('language').addEventListener('click',()=>{const anchor=location.hash;remember();lang=lang==='ko'?'en':'ko';try{localStorage.setItem('fw-language',lang)}catch{}history.pushState({scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:history.state?.recruitmentDisclosures,growthViewport:history.state?.growthViewport,...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',pagePath(state,lang,basePath)+stateQuery(state)+anchor);render();revealAnchor(document,anchor);searchUI.close()});
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){event.preventDefault();$('search').focus()}});
 setupNavigationDrawer();

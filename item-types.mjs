@@ -18,12 +18,14 @@ export function classifyItem(entry){
  const icon=cursed&&['sword','spear','axe','bow'].includes(kind)?'cursed-'+kind:itemKinds[kind].icon;
  return {major,minor,kind,icon,cursed};
 }
+export const isNaturalAttackItem=entry=>entry.type==='item'&&classifyItem(entry).kind==='strike';
 export function normalizeItemFilters({itemMajor='',itemMinor='',itemKind='',group=''}={}){
  if(!itemMajors[itemMajor])itemMajor='';
  if(!itemMinors[itemMinor]||itemMinors[itemMinor].archived||(itemMajor&&itemMinors[itemMinor].major!==itemMajor))itemMinor='';
  if(!itemKinds[itemKind])itemKind=categories[group.toLowerCase()]||'';
  if(itemKind){const minor=itemKinds[itemKind].minor,major=itemMinors[minor].major;if(itemMinors[minor].archived||(itemMajor&&major!==itemMajor)||(itemMinor&&minor!==itemMinor))itemKind='';else{itemMinor=minor;itemMajor=major;}}
  if(itemMinor)itemMajor=itemMinors[itemMinor].major;
+ if(itemKind==='strike')itemKind='';
  return {itemMajor,itemMinor,itemKind};
 }
 export function matchesItemFilters(entry,{itemMajor='',itemMinor='',itemKind='',itemFlavor=''}={}){

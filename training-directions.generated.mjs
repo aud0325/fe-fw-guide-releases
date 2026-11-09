@@ -4740,55 +4740,65 @@ export const trainingDirections={
       {
         "tier": "Advanced",
         "classIds": [
-          "class-bardinger"
+          "class-caladrius"
         ]
       }
     ],
     "coRecommended": false,
     "role": {
-      "ko": "돌파·기동 기병",
-      "en": "Breakthrough cavalry"
+      "ko": "도끼·흑마법 기병",
+      "en": "Axe and black-magic cavalry"
     },
     "reason": {
-      "ko": "기병의 이동과 돌파 능력을 살리는 방향을 추천합니다. 지형 이동 비용 감소와 적 칸 통과를 활용하면 원하는 적에게 접근하거나 아군과 합류하기 좋습니다. 타조병부터 기마 숙련을 이어 바딩거를 준비하세요.",
-      "en": "Develop cavalry mobility and breakthrough. Reduced terrain costs and passing through enemies help reach targets or rejoin allies. Continue riding from Ornius Rider toward Bardinger."
+      "ko": "도끼와 흑마법을 함께 쓰는 기병으로 키우는 방향을 추천합니다. 카이편에서는 도끼·기마를 타조병·기갑 타조병에서 이어가며, 특기인 흑마술을 추가로 준비해 칼라드리우스로 옮기세요. 도끼를 유지하면서 강행 돌파·질주를 활용하고, 마력·속도 성장도 보완할 수 있습니다.",
+      "en": "Develop cavalry using both axes and black magic. On Cai’s route, continue axes and riding through Ornius Rider and Armored Ornius Rider, adding favored Black Magic for Caladrius. It keeps axes, Barge Through and At a Gallop while improving magic and speed growth."
     },
     "adjustment": {
-      "ko": "기동력보다 도끼 공격이 필요하면 브리건드·워리어가 대안입니다. 바딩거는 기병 기술과 마방 성장, 워리어는 힘 성장에 강점이 있습니다.",
-      "en": "Choose Brigand and Warrior when axe power matters more than mobility. Bardinger retains cavalry skills and resistance growth; Warrior favors strength growth."
+      "ko": "카이·세오도라편에서 비행이 필요하면 도끼·비행 특기를 살리는 드라군이 대안입니다. 강행 돌파·질주 대신 지형을 넘는 이동을 선택합니다. 바딩거는 전직에 도끼를 쓸 수 없어 검·창을 이미 준비한 경우에 권합니다. 준비가 부족하거나 해당 상급직을 쓸 수 없다면 기갑 타조병을 유지해도 됩니다.",
+      "en": "On Cai’s or Theodora’s route, Dragoon uses favored axes and flying when flight is needed, trading Barge Through and At a Gallop for terrain access. Recommend Bardinger when swords or lances are already trained: axes do not qualify for its certification. Keep Armored Ornius Rider if preparation or class access is lacking."
     },
     "futureNote": {
-      "ko": "기병은 오리할디어·더 캐벌리어, 도끼로 전환했다면 배틀 마스터·디 이터널을 준비하세요.",
-      "en": "Prepare Orichaldia and The Cavalier for cavalry, or Battlemaster and The Eternal after an axe switch."
+      "ko": "도끼·흑마법을 병행하면 칼라드리우스를 유지해도 됩니다. 마법·지원에 집중하려면 발키리움을 고려하되 도끼를 쓸 수 없고 회복·지원 주문은 백마술을 별도로 준비해야 합니다. 비행은 드래곤 마스터로 이어가고, 도끼 기병에 집중하려면 기마·도끼 숙련을 높여 더 캐벌리어를 준비하세요.",
+      "en": "Keep Caladrius for axes with black magic. Consider Valkyrium for magic and support, accounting for losing axes and separately training White Magic for healing and support spells. Continue flight into Bau Lord, or develop Riding and Axe ranks for The Cavalier when focusing on axe cavalry."
     },
     "growth": {
       "keys": [
         "str",
+        "mag",
         "spd",
         "dex",
-        "def",
-        "lck"
+        "def"
       ],
       "personalSkillApplied": false,
       "rows": [
         {
-          "classId": "class-bardinger",
+          "classId": "class-caladrius",
           "values": {
-            "str": 50,
-            "spd": 45,
-            "dex": 40,
-            "def": 35,
-            "lck": 40
+            "str": 40,
+            "mag": 40,
+            "spd": 55,
+            "dex": 45,
+            "def": 40
           }
         },
         {
-          "classId": "class-warrior",
+          "classId": "class-dragoon",
           "values": {
-            "str": 60,
+            "str": 45,
+            "mag": 30,
+            "spd": 50,
+            "dex": 40,
+            "def": 40
+          }
+        },
+        {
+          "classId": "class-bardinger",
+          "values": {
+            "str": 50,
+            "mag": 25,
             "spd": 45,
             "dex": 40,
-            "def": 35,
-            "lck": 35
+            "def": 35
           }
         }
       ]
@@ -4797,29 +4807,30 @@ export const trainingDirections={
       {
         "tier": "Master",
         "classIds": [
-          "class-orichalda",
-          "class-battlemaster"
+          "class-valkyrium",
+          "class-bau-lord"
         ]
       },
       {
         "tier": "Divine",
         "classIds": [
-          "class-the-cavalier",
-          "class-the-eternal"
+          "class-the-cavalier"
         ]
       }
     ],
     "referencedClassIds": [
       "class-ornius-rider",
       "class-armored-ornius-rider",
-      "class-bardinger",
+      "class-caladrius",
       "class-gladiator",
       "class-brigand",
       "class-warrior",
+      "class-dragoon",
+      "class-bardinger",
       "class-orichalda",
       "class-the-cavalier",
-      "class-battlemaster",
-      "class-the-eternal"
+      "class-valkyrium",
+      "class-bau-lord"
     ]
   },
   "io": {
