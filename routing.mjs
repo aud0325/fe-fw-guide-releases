@@ -33,6 +33,8 @@ export function pagePath(state,lang='ko',base='/'){
 export function stateQuery(state,{share=false}={}){
  const p=new URLSearchParams();
  if(!state.id&&state.type==='calculator'){
+  // Restoring a private/default draft must not turn the canonical landing into a variant.
+  if(state.calculatorLanding&&!share)return '';
   const encoded=share&&serializeCalculatorShare(state.calculator),characterId=state.calculator?.characterId||state.calculatorCharacter;if(encoded)p.set('b',encoded);else if(/^[a-z0-9-]+$/.test(characterId||''))p.set('unit',characterId);return p.size?'?'+p:'';
  }
  if(!state.id&&state.type==='growth'){
@@ -69,7 +71,7 @@ export function readRoute(url,base='/',fallback='ko'){
  if(parts.length&&!(parts.length===2&&['entry','category'].includes(parts[0]))&&!growthPath&&!scoutPath&&!skillsPath&&!caiMapPath&&!calculatorPath&&!reconstructionPath)return null;
  const state=defaultState(),params=new URLSearchParams(legacy?url.hash.split('?')[1]||'':url.search);
  if(reconstructionPath)state.type='reconstruction';
- if(calculatorPath){state.type='calculator';state.calculator=params.has('b')?parseCalculatorShare(params.get('b')):params.has('build')?parseCalculatorState(params.get('build')):null;state.calculatorInvalid=(params.has('b')||params.has('build'))&&!state.calculator;state.calculatorCharacter=params.get('unit')||'';}
+ if(calculatorPath){state.type='calculator';state.calculatorLanding=!['unit','b','build'].some(key=>params.has(key));state.calculator=params.has('b')?parseCalculatorShare(params.get('b')):params.has('build')?parseCalculatorState(params.get('build')):null;state.calculatorInvalid=(params.has('b')||params.has('build'))&&!state.calculator;state.calculatorCharacter=params.get('unit')||'';}
  if(parts[0]==='entry'){try{state.id=canonicalAbilityId(canonicalMountId(canonicalItemId(canonicalEntryId(decodeURIComponent(parts[1])))));}catch{return null;}}
  if(state.id&&isRetiredCharacterId(state.id))Object.assign(state,{type:'character',id:null});
  if(state.id&&locationRedirects[state.id])Object.assign(state,locationRedirects[state.id],{id:locationRedirects[state.id].id||null});
