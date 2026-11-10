@@ -12,8 +12,8 @@ export default {
   "en": "Capture · skills · modifiers"
  },
  "home.description-calculator": {
-  "ko": "육성 경로에 따른 능력치 계산",
-  "en": "Calculate stats along a training path"
+  "ko": "예상 능력치 계산 · 내 육성 결과 비교",
+  "en": "Expected stats · compare your training"
  },
  "home.description-item": {
   "ko": "효과 · 획득처 · 사용처",

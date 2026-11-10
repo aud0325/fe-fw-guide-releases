@@ -1,7 +1,7 @@
 export const learnsetViews=['all','combat','support'];
 export const normalizeLearnsetView=view=>learnsetViews.includes(view)?view:'all';
 const combatProficiencies=['sword','spear','axe','bow','gauntlet','black-magic','white-magic'];
-const supportProficiencies=['authority','infantry','armor'];
+const supportProficiencies=['authority','infantry','armor','cavalry','flying'];
 export function selectLearnsetView(lines,view,ranks){
  const selected=normalizeLearnsetView(view);
  if(selected==='all')return {lines,ranks};

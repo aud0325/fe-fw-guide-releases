@@ -363,8 +363,8 @@ export default {
   "en": "한국어"
  },
  "app.description": {
-  "ko": "파이어엠블렘 만자천홍 도감. 캐릭터, 영입 조건, 아이템 획득처, 병종과 외전 일정을 한곳에서 찾아보세요.",
-  "en": "Fire Emblem Fortune’s Weave Encyclopedia. Find characters, recruitment requirements, item locations, classes and paralogue schedules."
+  "ko": "파이어엠블렘 만자천홍 비공식 도감. 영입 조건과 아이템 획득처, 병종·탈것 성장률을 찾고 지도와 성장률 계산기로 육성을 준비하세요.",
+  "en": "An unofficial Fire Emblem Fortune’s Weave encyclopedia. Find recruitment requirements, item locations and class or mount growth rates, with maps and a stat calculator."
  },
  "app.javascript-required": {
   "ko": "검색과 정보 연결에는 JavaScript가 필요합니다. JavaScript를 활성화해 주세요.",
