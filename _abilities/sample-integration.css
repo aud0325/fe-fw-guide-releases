@@ -16,3 +16,10 @@
 .sample-matrix-scroll.can-scroll-right{box-shadow:inset -7px 0 7px -7px #4b3444}
 
 .sample-personal-table tr[id]{scroll-margin-top:160px}.sample-personal-table tr:target{outline:2px solid #82536a;outline-offset:-2px}.sample-personal-table .personal-name strong{font-weight:650}
+.sample-abilities .learnset-heading{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 16px;margin-bottom:8px}
+.learnset-tabs{display:flex;gap:20px;max-width:100%;margin-left:auto;border-bottom:1px solid var(--line)}
+.learnset-tabs [role=tab]{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--muted);font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap}
+.learnset-tabs [aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.learnset-tabs [role=tab]:hover{color:var(--accent)}
+.sample-learnset:is([data-learnset-view=combat],[data-learnset-view=support]) table.sample-rank-matrix{min-width:calc(44px + var(--matrix-rank-count)*130px)}
+@media (width <= 640px){.learnset-tabs{gap:16px}.learnset-tabs [role=tab]{font-size:12px}}

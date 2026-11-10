@@ -10,3 +10,4 @@
 .forging-effects-table p{margin:0 0 5px}.forging-effects-table p:last-child{margin-bottom:0}.forging-combat-art{margin:3px 0}.forging-art-condition{font-size:12px;color:var(--muted)}.forging-calculator>h3{margin-top:0}.forging-variant-name{display:block;font-size:11px;font-weight:400;white-space:normal;line-height:1.5}.forging-performance.forging-named-stages{min-width:740px}.forging-performance.forging-named-stages th:first-child{width:156px}
 
 .forging-section:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.forging-named-weapon :is(.forging-cost-table,.forging-effects-table) th:first-child{width:156px;white-space:normal}@media (width <= 640px){.forging-named-weapon :is(.forging-cost-table,.forging-effects-table) th:first-child{width:124px}}

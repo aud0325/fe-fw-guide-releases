@@ -2,6 +2,9 @@
 import {classTierName} from '../class-tiers.mjs';
 const tierLabel=tier=>({ko:classTierName(tier,'ko',{compact:true}),en:classTierName(tier,'en',{compact:true})});
 export default {
+ "character.learnset-all": {"ko":"전체보기","en":"All abilities"},
+ "character.learnset-combat": {"ko":"전투기술","en":"Combat arts"},
+ "character.learnset-support": {"ko":"보조기술","en":"Support skills"},
  "character.guest-participation":{"ko":"게스트 참전","en":"Guest appearances"},
  "character.guest-timing":{"ko":"참전 시점","en":"When available"},
  "character.guest-class":{"ko":"참전 병종","en":"Class"},

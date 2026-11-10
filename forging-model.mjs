@@ -1,5 +1,10 @@
 const integer=value=>typeof value==='number'?Number.isInteger(value)?value:null:/^\d+$/.test(String(value??''))?Number(value):null;
 
+export function forgingStageLabel(weapon,level,lang,baseLabel){
+ const stages=weapon.forging.stages,stage=stages.find(stage=>stage.level===level);
+ return stage?.variantName?.[lang]||(level===0?(stages.some(stage=>stage.variantName)?weapon.name[lang]:baseLabel):'+'+level);
+}
+
 export function normalizeForgeSelection(forging,fromValue,toValue){
  if(!forging?.stages||forging.stages.length<2)return null;
  const levels=forging.stages.map(stage=>stage.level),minimum=forging.forgeFromLevel||0,maximum=levels.at(-1);

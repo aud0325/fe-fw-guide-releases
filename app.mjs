@@ -8,6 +8,7 @@ import {itemFoodScope} from './item-directory.mjs';
 import {bindDirectoryControls} from './catalog-overview-controls.mjs';
 import {setupEntityLinks} from './entity-links-client.mjs';
 import './_abilities/sample-interactions.mjs';
+import {bindLearnsetTabs} from './_abilities/learnset-controls.mjs';
 import {abilityEntries,abilityEntry,characterAbilityTarget,legacyAbilityPath} from './_abilities/ability-navigation.mjs';
 import {bindAbilityControls} from './_abilities/ability-controls.mjs';
 import {resolveCalculatorState} from './growth-calculator-data.mjs';
@@ -121,6 +122,8 @@ function render(){
  restoreRecruitmentDisclosures($('content'),history.state?.recruitmentDisclosures);
  const growthViewport=$('content').querySelector('.growth-scroll'),savedGrowth=history.state?.growthViewport;
  if(growthViewport&&savedGrowth){growthViewport.scrollLeft=savedGrowth.x;growthViewport.scrollTop=savedGrowth.y;}
+ const matrixViewport=$('content').querySelector('.sample-matrix-scroll');
+ if(matrixViewport&&history.state?.matrixLeft)matrixViewport.scrollLeft=history.state.matrixLeft;
  syncDetailHeading();
  characterSectionsCleanup=bindCharacterSections($('content'));
  updateMetadata(page);
@@ -140,6 +143,12 @@ function render(){
   $('content').querySelector('#'+focus)?.focus({preventScroll:true});
  }});
  bindDirectoryTabs($('content'));
+ bindLearnsetTabs($('content'),{change:view=>{
+  const scroll=scrollY;remember();state.learnsetView=view;
+  history.pushState({scroll,limit:visibleLimit},'',pagePath(state,lang,basePath)+stateQuery(state)+location.hash);render();
+  window.scrollTo(0,scroll);
+  $('content').querySelector('[data-learnset-tab][aria-selected="true"]')?.focus({preventScroll:true});
+ }});
  const syncDirectoryLinks=()=>{
   $('footer').querySelector('a:last-of-type')?.setAttribute('href',pagePath(state,lang==='ko'?'en':'ko',basePath)+stateQuery(state));
   document.querySelector('.skip').href=pagePath(state,lang,basePath)+stateQuery(state)+'#main';
@@ -212,7 +221,7 @@ function updateMetadata(page){
  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link=>link.href=new URL(pagePath(state,link.hreflang==='en'?'en':'ko',basePath),origin||location.origin).href);
  document.querySelector('meta[name="robots"]')?.setAttribute('content',!origin||stateQuery(state)||page.missing||isNoindexState(state,entries)?'noindex,follow':'index,follow');
 }
-function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:recruitmentDisclosureState($('content')),...(state.type==='calculator'?{calculator:resolveCalculatorState(state.calculator,state.calculatorCharacter)}:{}),...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
+function remember(){const growth=$('content').querySelector('.growth-scroll');history.replaceState({...history.state,scroll:scrollY,limit:visibleLimit,recruitmentDisclosures:recruitmentDisclosureState($('content')),matrixLeft:$('content').querySelector('.sample-matrix-scroll')?.scrollLeft||0,...(state.type==='calculator'?{calculator:resolveCalculatorState(state.calculator,state.calculatorCharacter)}:{}),...(growth?{growthViewport:{x:growth.scrollLeft,y:growth.scrollTop}}:{}),...(mapControls?{mapViewport:mapControls.snapshot()}:{})},'',location.href);}
 function parseLocation(){
  const legacy=legacyAbilityPath(location.hash);if(legacy)history.replaceState(history.state,'',basePath+legacy.slice(1));
  const route=readRoute(new URL(location.href),basePath,lang);

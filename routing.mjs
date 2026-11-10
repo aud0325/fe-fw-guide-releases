@@ -1,4 +1,5 @@
 import {retiredTipState} from './tip-retirement.mjs';
+import {normalizeLearnsetView} from './_abilities/learnset-view.mjs';
 import {isRetiredCharacterId} from './character-visibility.mjs';
 import {locationRedirects} from './location-review.mjs';
 import {parseCalculatorState,serializeCalculatorShare,parseCalculatorShare} from './growth-calculator-state.mjs';
@@ -13,7 +14,7 @@ import {canonicalMountId} from './mount-review.mjs';
 import {canonicalEntryId,entrySlug} from './entry-identities.mjs';
 import {canonicalAbilityId,abilitySlug} from './_abilities/ability-identities.mjs';
 import {mapVariantNodes,caiMarkerKinds} from './map-variants.mjs';
-export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',route:'all',scout:'all',directoryView:'overview',directoryLayout:'cards',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',itemOrder:'name',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
+export const defaultState=()=>({type:'all',id:null,query:'',catalogQuery:'',forgeFrom:'',forgeTo:'',learnsetView:'all',route:'all',scout:'all',directoryView:'overview',directoryLayout:'cards',includeTips:true,group:'',faction:'',order:'start',itemMajor:'',itemMinor:'',itemKind:'',itemFlavor:'',itemOrder:'name',mapVariant:'all',mapPlace:'',mapItem:'',mapProvince:'',mapKind:'',mapQuery:'',...normalizeGrowthState()});
 export function preferredLanguage(saved,browserLanguage){
  if(saved==='ko'||saved==='en')return saved;
  return /^en(?:-|$)/i.test(browserLanguage||'')?'en':'ko';
@@ -42,6 +43,7 @@ export function stateQuery(state,{share=false}={}){
  if(!state.id&&['character','class','mount','battalion','gambit','item'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
  if(state.type==='item'&&!state.id&&state.itemOrder==='flavor')p.set('item-sort','flavor');
  if(state.id&&state.growthSkill)p.set('skill','1');
+ if(state.id&&normalizeLearnsetView(state.learnsetView)!=='all')p.set('learnset',normalizeLearnsetView(state.learnsetView));
  if(state.id)for(const [key,value]of [['forge-from',state.forgeFrom],['forge-to',state.forgeTo]])if(/^\d+$/.test(String(value??'')))p.set(key,String(value));
  if(state.type==='character'&&!state.id&&state.faction)p.set('faction',state.faction);
  if(state.type==='character'&&!state.id&&routes.some(([id])=>id===state.scout)&&!(state.directoryView==='scout'&&state.scout==='cai'))p.set('scout',state.scout);
@@ -77,6 +79,7 @@ export function readRoute(url,base='/',fallback='ko'){
  }
  if(state.type==='growth')Object.assign(state,normalizeGrowthState({growthTab:parts[2]||params.get('tab'),growthMode:parts[3]==='stats'?'stats':params.get('mode'),growthQuery:params.get('find'),growthHeat:params.get('heat'),growthSkill:params.get('skill')==='1',growthGroup:params.get('group'),growthSort:params.get('sort'),growthDirection:params.get('direction'),growthFocus:params.get('focus')||url.hash.match(/^#growth-row-([a-z0-9-]+)$/)?.[1]}));
  if(state.id){state.growthSkill=params.get('skill')==='1';for(const [key,param]of [['forgeFrom','forge-from'],['forgeTo','forge-to']])state[key]=/^\d+$/.test(params.get(param)||'')?params.get(param):'';}
+ if(state.id)state.learnsetView=normalizeLearnsetView(params.get('learnset'));
  state.catalogQuery=!state.id&&['character','class','mount','battalion','gambit','item'].includes(state.type)?params.get('find')||'':'';
  state.itemOrder=state.type==='item'&&params.get('item-sort')==='flavor'?'flavor':'name';
  state.query=params.get('q')||'';state.group=params.get('group')||'';

@@ -128,7 +128,7 @@ function detail(e){
  if(e.note&&!['mount','class'].includes(e.type)&&!consolidatedRecruitmentNote)body+=`<p class="notice">${prose(e.note)}</p>`;
  const mapHtml=entryMapLinks(e,mapContext),acquisitionBelowFacts=e.type==='item'||e.type==='mount';
  if(!acquisitionBelowFacts)body+=mapHtml;
- body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill,forgeSelection:{from:state.forgeFrom,to:state.forgeTo}});
+ body+=catalogDetails(e,{t,tx,name,href,route:state.route,portraitHtml,acquisitionHtml:acquisitionBelowFacts?mapHtml:'',base,growthSkill:state.growthSkill,learnsetState:state,forgeSelection:{from:state.forgeFrom,to:state.forgeTo}});
  body+=battalionDetails(e,{entries,lang,base})+placeBattalions(e,{entries,lang,base});
  body+=templeServicePreferences(e,{t,name,entries,base});
  if(e.type==='mount'&&!companionMountOwner&&!e.acquisition?.some(r=>r.mountSource)&&state.route!=='all'&&e.routeIds&&!e.routeIds.includes(state.route))body+=`<p class="notice">${t('app.this-capture-method-is-documented-for-cai-s-route')}</p>`;
