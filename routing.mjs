@@ -30,17 +30,19 @@ export function pagePath(state,lang='ko',base='/'){
  if(!state.id&&state.type==='growth')return base+lang+'/category/growth/'+(['class','mount'].includes(state.growthTab)?state.growthTab+'/'+(state.growthMode==='stats'?'stats/':''):'');
  return base+lang+'/'+(state.id?'entry/'+encodeURIComponent(abilitySlug(entrySlug(canonicalMountId(canonicalItemId(state.id)))))+'/':state.type==='all'?'':'category/'+encodeURIComponent(state.type)+'/');
 }
+// URLSearchParams.size is missing before Safari 17; the serialized text is always available.
+const queryString=params=>{const text=params.toString();return text?'?'+text:'';};
 export function stateQuery(state,{share=false}={}){
  const p=new URLSearchParams();
  if(!state.id&&state.type==='calculator'){
   // Restoring a private/default draft must not turn the canonical landing into a variant.
   if(state.calculatorLanding&&!share)return '';
-  const encoded=share&&serializeCalculatorShare(state.calculator),characterId=state.calculator?.characterId||state.calculatorCharacter;if(encoded)p.set('b',encoded);else if(/^[a-z0-9-]+$/.test(characterId||''))p.set('unit',characterId);return p.size?'?'+p:'';
+  const encoded=share&&serializeCalculatorShare(state.calculator),characterId=state.calculator?.characterId||state.calculatorCharacter;if(encoded)p.set('b',encoded);else if(/^[a-z0-9-]+$/.test(characterId||''))p.set('unit',characterId);return queryString(p);
  }
  if(!state.id&&state.type==='growth'){
   const next=normalizeGrowthState(state);
   for(const [key,value]of Object.entries({find:next.growthQuery,heat:next.growthHeat==='off'?'off':'',skill:next.growthSkill?'1':'',group:next.growthGroup,sort:next.growthSort==='default'?'':next.growthSort,direction:next.growthSort!=='default'&&next.growthDirection==='asc'?'asc':'',focus:next.growthFocus}))if(value)p.set(key,value);
-  return p.size?'?'+p:'';
+  return queryString(p);
  }
  if(!state.id&&['character','class','mount','battalion','gambit','item'].includes(state.type)&&state.catalogQuery)p.set('find',state.catalogQuery);
  if(state.type==='item'&&!state.id&&state.itemOrder==='flavor')p.set('item-sort','flavor');
@@ -54,7 +56,7 @@ export function stateQuery(state,{share=false}={}){
   for(const [key,value]of Object.entries({place:state.mapPlace,item:state.mapItem,province:state.mapProvince,'map-kind':state.mapKind,mq:state.mapQuery}))if(value)p.set(key,value);
  }
  for(const [key,value]of Object.entries({q:state.query,route:state.route==='all'?'':state.route,tips:state.includeTips?'':'0',group:state.group,sort:state.order==='start'?'':state.order,main:state.itemMajor,sub:state.itemMinor,kind:state.itemKind}))if(value)p.set(key,value);
- return p.size?'?'+p:'';
+ return queryString(p);
 }
 export function readRoute(url,base='/',fallback='ko'){
  const legacy=/^#(?:entry\/|category\/|\?)/.test(url.hash);

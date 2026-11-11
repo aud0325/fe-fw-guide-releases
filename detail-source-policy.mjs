@@ -1,5 +1,7 @@
 // A source union records how an entry was built. Detail citations follow the
 // current fields instead; originals and superseded reports stay in the catalog.
+import {isRetiredTipId} from './tip-retirement.mjs';
+import {isRetiredCharacterId} from './character-visibility.mjs';
 const privateKeys=new Set(['baseStats','giftCategoryReports','mealPreferences','mealPreferenceScope','playPreferenceRows','skillTrainingReview','farmingReports']);
 // These inputs also provide names and summary effects without per-field IDs.
 const entryLevelSources={character:['fe-characters'],class:['fe-classes'],item:['fe-weapons','wip-items-expansion-20261029','yuphas-items-expansion-20261029'],mount:['namu-animals']};
@@ -19,6 +21,8 @@ export function currentReferenceValue(value){
   if(entry&&key==='sourceIds')continue;
   if(key==='translationSourceId'&&(value.koreanNameEvidence?.sourceId||value.itemId&&value.preference))continue;
   if(entry&&value.beginnerGuide&&key==='trainingGuide')continue;
+  // Links to retired guides and hidden profiles are not shown, so they cite nothing on the page.
+  if(entry&&key==='links'&&Array.isArray(item)){result[key]=currentReferenceValue(item.filter(link=>!isRetiredTipId(link.to)&&!isRetiredCharacterId(link.to)));continue;}
   if(key==='activityPreferences'&&item){const {plays,...shown}=item;result[key]=currentReferenceValue(shown);continue;}
   if(entry&&key==='facts'){
    result[key]=currentReferenceValue(item.filter(f=>{

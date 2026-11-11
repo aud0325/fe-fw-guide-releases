@@ -23,7 +23,7 @@ import {itemUses} from './item-usage.mjs';
 import {part1Map,entryMapLinks,guideLocationMap} from './part1-map-ui.mjs';
 import {groupedBrowse} from './browse-groups.mjs';
 import {isDiscoverable,entryDisplayName,groupedRelations} from './editorial-view.mjs';
-import {entryMetadata} from './seo.mjs';
+import {entryMetadata,pageImage} from './seo.mjs';
 import {createTranslator} from './locales/index.mjs';
 import {types} from './locales/labels.mjs';
 import {icon} from './icons.mjs';
@@ -44,7 +44,12 @@ import {searchShortcuts} from './search-shortcuts.mjs';
 import {foodKinds,flavors,preferredMountFood,mountFoodReports} from './food.mjs';
 import {ingredientFlavorLabel} from './food-ui.mjs';
 import {scoutRoute,sortScouts,scoutConditions,scoutToolbar,scoutGroupedList} from './character-list.mjs';
-export function renderPage(state,lang='ko',visibleLimit=36,base='/',{keywordAudit,legacyDirectoryTable=false}={}){
+// Every page type reports the image used for sharing previews; only character entries have their own.
+export function renderPage(state,lang='ko',visibleLimit=36,base='/',options={}){
+ const page=renderPageContent(state,lang,visibleLimit,base,options);
+ return page&&!page.image?{...page,image:pageImage(null,'',lang)}:page;
+}
+function renderPageContent(state,lang='ko',visibleLimit=36,base='/',{keywordAudit,legacyDirectoryTable=false}={}){
  const retired=retiredTipState(state);if(retired)return renderPage({...defaultState(),...retired},lang,visibleLimit,base,{keywordAudit});
  if(isRetiredCharacterId(state.id))return renderPage({...state,type:'character',id:null},lang,visibleLimit,base,{keywordAudit});
  const abilityPage=renderAbilityPage(state,lang,base);if(abilityPage)return {...abilityPage,html:linkContentKeywords(abilityPage.html,{entryId:state.id,lang,base,onDecision:keywordAudit})};
@@ -191,5 +196,5 @@ const references=(list,images=[])=>referenceSection(list,{sources,t,tx,updated,i
  const description=(state.type==='growth'&&!state.id?t('growth.homeDescription'):'')||metadata?.description||(pageTitle?pageTitle+' · '+t('app.description'):t('app.description'));
  if(!state.id&&!isDirectory&&!['all','item'].includes(state.type))html=html.replace('<h2>','<h1>').replace('</h2>','</h1>');
  if(e)html=html.replace(/href="#(section-[a-z]+|field-reference-[0-9]+|source-[a-zA-Z0-9_-]+)"/g,(_,id)=>`href="${esc(pagePath(state,lang,base)+stateQuery(state))}#${id}"`);
- return {html:linkContentKeywords(rewriteLinks(html,lang,base),{entryId:state.id,lang,base,onDecision:keywordAudit}),title,description,entryType:e?.type,entryName:e?name(e):null,missing:Boolean(state.id&&!e)};
+ return {html:linkContentKeywords(rewriteLinks(html,lang,base),{entryId:state.id,lang,base,onDecision:keywordAudit}),title,description,entryType:e?.type,entryName:e?name(e):null,image:pageImage(e?.type==='character'?media[e.id]:null,e?name(e):'',lang),missing:Boolean(state.id&&!e)};
 }

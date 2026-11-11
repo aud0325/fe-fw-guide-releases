@@ -15,7 +15,8 @@ function windowsTable(e,route,t,overview=false){
 }
 function people(e,{t,tx,name,href}){
  const s=e.schedule,owner=character(s.owner),giver=character(s.giver);
- const giverLabel=esc(giver?name(giver):tx(s.giverName));
+ // The public catalog omits hidden profiles; the stored name is shown the same way as a full record.
+ const giverLabel=esc(name(giver||{id:s.giver,type:'character',name:s.giverName}));
  const giverHtml=giver&&!isRetiredCharacterId(giver.id)?`<a href="${href(giver.id)}">${giverLabel}</a>`:giverLabel;
  return `<p class="paralogue-people"><a href="${href(owner.id)}">${esc(name(owner))}</a> · ${esc(faction(owner,t))}</p><p class="paralogue-giver">${t('paralogue.accept-from')} ${giverHtml} · ${esc(displayText(s.place,t,entries))}</p>`;
 }

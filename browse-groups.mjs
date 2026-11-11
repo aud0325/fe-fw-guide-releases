@@ -2,7 +2,7 @@ import {automaticJoinOrder,automaticRank} from './character-list.mjs';
 import {escapeHtml as esc} from './core.mjs';
 import {characterFaction} from './presentation.mjs';
 import {displayText} from './presentation.mjs';
-import {classTierOrder} from './catalog-ui.mjs';
+import {classTierOrder} from './class-tiers.mjs';
 import {roleNames} from './locales/labels.mjs';
 import {itemMajors,itemMinors,itemKinds,classifyItem} from './item-types.mjs';
 import {defaultState,pagePath,stateQuery} from './routing.mjs';

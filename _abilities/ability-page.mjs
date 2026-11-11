@@ -7,6 +7,8 @@ import {createTranslator} from '../locales/index.mjs';
 import {abilityVariantComparison} from './ability-variants-ui.mjs';
 import {entityToken} from '../entity-token.mjs';
 import {rewriteLinks} from '../routing.mjs';
+import {feedbackLink} from '../feedback.mjs';
+import {pageImage} from '../seo.mjs';
 import {categoryLabels,normalizeSection,characterSkills,providerGroups,abilityTarget,acquisitionLevel,catalogEntryHref,characterSkillHref} from './catalog-model.mjs';
 import {rows as originalRows} from './full-data.mjs';
 import {entities} from './catalog-context.mjs';
@@ -98,7 +100,8 @@ function breadcrumbs(row=null){
  const kind=row?.kind||state.kind,section=row?abilityTarget(row).section:state.section;
  const category=kind==='skill'?categoryLabels[section]:kind==='spell'?spellGroups[section]:artGroups[section];
  const listHref=patch=>url({kind,view:'list',id:'',char:'',page:1,mode:'performance',...patch});
- return `<nav class="crumb" aria-label="${txt('현재 위치','Breadcrumb')}"><a href="${base}${state.lang}/">${txt('전체 기록','All records')}</a><span aria-hidden="true"> / </span>${row?`<a href="${listHref({section:''})}">${pair(kinds[kind])}</a>${category?`<span aria-hidden="true"> / </span><a href="${listHref({section})}">${pair(category)}</a>`:''}<span aria-hidden="true"> / </span><span aria-current="page">${esc(label(row.name))}</span>`:`<span aria-current="page">${pair(kinds[kind])}</span>`}</nav>`;
+ // Same breadcrumb row as the other catalog pages: home first, feedback link on the right.
+ return `<div class="breadcrumb-row page-breadcrumb-row"><div class="breadcrumbs" role="navigation" aria-label="${txt('현재 위치','Breadcrumb')}"><a href="${base}${state.lang}/">${txt('홈','Home')}</a> / ${row?`<a href="${listHref({section:''})}">${pair(kinds[kind])}</a>${category?` / <a href="${listHref({section})}">${pair(category)}</a>`:''} / <span aria-current="page">${esc(label(row.name))}</span>`:`<span aria-current="page">${pair(kinds[kind])}</span>`}</div>${feedbackLink(state.lang)}</div>`;
 }
 function list(){return `${breadcrumbs()}<h1 tabindex="-1">${pair(kinds[state.kind])}</h1><div class="catalog-controls"><div class="catalog-subnav">${scopeNav()}</div></div>${state.kind==='skill'?skillView():state.kind==='combat-art'?artView():magicPerformance()}${sourceBox()}`;}
 
@@ -125,6 +128,16 @@ function detail(){
  ${r.relatedItems.length?`<div class="related"><h3>${txt('마법을 배우는 아이템','Spell-learning item')}</h3>${r.relatedItems.map(x=>`<p><a href="${base}${state.lang}/entry/${esc(x.id)}/">${esc(label(x.name))}</a><br>${condition(x)}</p>`).join('')}</div>`:''}</section></div>${sourceBox(r)}`;
 }
 
+// Search snippets name the ability, its kind and who learns it; the effect alone is often a single short clause.
+function detailDescription(r){
+ const who=[...new Set(visibleAbilityRelations(r).map(x=>label(x.name)).filter(Boolean))],shown=who.slice(0,4).join(', ');
+ const learned=who.length?txt('습득·제공: ','Learned or granted by ')+shown+(who.length>4?txt(` 외 ${who.length-4}`,` and ${who.length-4} more`):''):'';
+ return [label(r.name),kindName(r),label(r.effect),learned].filter(Boolean).join(' · ');
+}
+function listDescription(){
+ const groups=(state.kind==='skill'?Object.entries(categoryLabels).map(([id,p])=>({label:p,rows:rows.filter(r=>r.kind==='skill'&&normalizeSection('skill',r.category)===id)})):availableGroups(rows,state.kind)).filter(g=>g.rows.length).map(g=>pair(g.label));
+ return pair(kinds[state.kind])+' · '+txt(groups.join('·')+' 분류별 효과와 습득 조건','effects and learning conditions by '+groups.join(', '));
+}
 export function renderAbilityPage(catalogState,lang='ko',basePath='/'){
  const row=rows.find(r=>r.id===canonicalAbilityId(catalogState.id));
  if(!row&&!['skill','combat-art','spell'].includes(catalogState.type))return null;
@@ -133,5 +146,5 @@ export function renderAbilityPage(catalogState,lang='ko',basePath='/'){
  if(row){state.section=abilityTarget(row).section;}
  else{state.section=normalizeSection(state.kind,state.section);state.section=state.kind==='skill'?(categoryLabels[state.section]?state.section:'character'):normalizeCategory(rows,state.kind,state.section);}
  const name=row?label(row.name):pair(kinds[state.kind]);
- return {html:rewriteLinks(`<article class="ability-catalog"${state.view==='list'?' data-entity-link-mode="direct"':''}>${row?detail():list()}</article>`,lang,basePath),title:name+txt(' · 만자천홍 도감',' · Fortune’s Weave Encyclopedia'),description:row?label(row.effect):name,entryType:row?.kind,entryName:row?name:null,missing:false};
+ return {html:rewriteLinks(`<article class="ability-catalog"${state.view==='list'?' data-entity-link-mode="direct"':''}>${row?detail():list()}</article>`,lang,basePath),title:name+txt(' · 만자천홍 도감',' · Fortune’s Weave Encyclopedia'),description:row?detailDescription(row):listDescription(),entryType:row?.kind,entryName:row?name:null,image:pageImage(null,'',lang),missing:false};
 }

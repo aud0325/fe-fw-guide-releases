@@ -4,6 +4,7 @@ import {types} from './locales/labels.mjs';
 import {displayText,localizedFacts} from './presentation.mjs';
 import {flavors} from './food.mjs';
 import {pagePath} from './routing.mjs';
+import {acquisitionSnippet} from './seo-acquisition-snippets.mjs';
 
 export const siteNames=Object.freeze({ko:'만자천홍 도감',en:"Fortune's Weave Encyclopedia"});
 export const siteIdentity=Object.freeze({name:siteNames.ko,alternateName:Object.freeze(['파이어엠블렘 만자천홍 도감',siteNames.en])});
@@ -12,7 +13,10 @@ export function entryMetadata(e,{t,tx,name,entries,sources}){
  const en=t.locale==='en',pick=(ko,enText)=>en?enText:ko;
  const category=types[e.type][en?1:0];
  const topics={character:e.recruitment?pick('영입 조건·프로필','recruitment & profile'):pick('캐릭터 프로필','character profile'),class:pick('병종·전직 정보','class & promotion'),item:pick('아이템 정보','item details'),mount:pick('탈것·포획 정보','mount & capture'),paralogue:pick('외전·수주 일정','paralogue & schedule')};
- const title=`${tx(e.name)} ${topics[e.type]||category} · ${t('app.fortune-s-weave-encyclopedia')}`;
+ const site=t('app.fortune-s-weave-encyclopedia'),full=`${tx(e.name)} ${topics[e.type]||category} · ${site}`;
+ // Search results cut long titles; drop the topic words when the name alone still identifies the page.
+ const unique=!entries.some(other=>other!==e&&tx(other.name)===tx(e.name));
+ const title=full.length>60&&unique?`${tx(e.name)} · ${site}`:full;
   let original=e.type==='item'?itemDescription(e,{t,tx,entries,sources,name}):e.beginnerGuide?tx(e.beginnerGuide.role):e.trainingGuide?tx(e.trainingGuide.summary):tx(e.summary);
  if(e.type==='mount'){
   const ownerId=e.links?.find(l=>l.label?.en==='Recruited with')?.to,owner=entries.find(e=>e.id===ownerId);
@@ -50,9 +54,22 @@ export function entryMetadata(e,{t,tx,name,entries,sources}){
  const summary=generic&&details.length?details.slice(0,3).join(' · '):original;
  const parts=[name(e),generic?summary:original];
  if(!generic)for(const detail of details){if(parts.join(' · ').length+detail.length<220)parts.push(detail);}
- return {title,summary,description:parts.filter(Boolean).join(' · ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ')};
+ let description=parts.filter(Boolean).join(' · ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ');
+ // A one-clause snippet says little in search results; add where an item comes from or what a place offers,
+ // using only the rows shown on the page and never reports marked unverified.
+ if(description.length<40){
+  const extra=['item','location'].includes(e.type)?acquisitionSnippet(e,description,{t,tx,entries,sources,name}):'';
+  if(extra)description+=' · '+extra;
+ }
+ return {title,summary,description};
 }
 
+const logos=Object.freeze({ko:{src:'./assets/encyclopedia-logo.png',width:500,height:208},en:{src:'./assets/encyclopedia-logo-en.png',width:500,height:207}});
+// Sharing previews show the page's own portrait when it has one, otherwise the site logo.
+export function pageImage(portrait,alt,lang){
+ const image=portrait?.src&&portrait.width>=200&&portrait.height>=200?portrait:logos[lang==='en'?'en':'ko'];
+ return {src:image.src,width:image.width,height:image.height,alt:image===portrait?alt:siteNames[lang==='en'?'en':'ko']};
+}
 export function pageStructuredData(page,state,lang,siteUrl){
  if(!siteUrl||page.missing)return [];
  const root=new URL(siteUrl),base=root.pathname;
@@ -61,7 +78,9 @@ export function pageStructuredData(page,state,lang,siteUrl){
  const crumbs=[{name:lang==='en'?'Fortune’s Weave Encyclopedia':'만자천홍 도감',path:`${base}${lang}/`}];
  if(page.entryType)crumbs.push({name:types[page.entryType][lang==='en'?1:0],path:pagePath({type:page.entryType},lang,base)});
  crumbs.push({name:page.entryName||types[state.type]?.[lang==='en'?1:0]||page.title,path:pagePath(state,lang,base)});
- return [{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs.map((crumb,i)=>({'@type':'ListItem',position:i+1,name:crumb.name,item:new URL(crumb.path,root).href}))}];
+ const pageUrl=new URL(pagePath(state,lang,base),root).href,image=page.image&&page.image.alt!==siteNames[lang==='en'?'en':'ko']?page.image:null;
+ return [{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs.map((crumb,i)=>({'@type':'ListItem',position:i+1,name:crumb.name,item:new URL(crumb.path,root).href}))},
+  {'@context':'https://schema.org','@type':'WebPage','@id':pageUrl,url:pageUrl,name:page.title,...page.description?{description:page.description}:{},inLanguage:lang,isPartOf:{'@id':new URL('#website',root).href},...image?{primaryImageOfPage:{'@type':'ImageObject',url:new URL(image.src,root).href,width:image.width,height:image.height}}:{}}];
 }
 
 export const serializeStructuredData=value=>JSON.stringify(value).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');

@@ -3,3 +3,7 @@
 
 /version.json
   Cache-Control: no-store
+
+/assets/runtime/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
