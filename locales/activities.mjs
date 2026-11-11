@@ -1,4 +1,5 @@
 export default {
+ 'activity.part-1':{ko:'1부',en:'Part I'},'activity.part-3':{ko:'3부',en:'Part III'},
  'activity.title':{ko:'신전 봉사 취향',en:'Temple service preferences'},'activity.nav':{ko:'신전 봉사',en:'Temple service'},
  'activity.temple':{ko:'신전 봉사',en:'Temple service'},'activity.theatre':{ko:'극장 관람',en:'Watching plays'},'activity.temple-column':{ko:'신전',en:'Temple'},'activity.play-column':{ko:'작품',en:'Play'},
  'activity.preference':{ko:'선호',en:'Preference'},'activity.people':{ko:'캐릭터',en:'Characters'},'activity.play-preferences':{ko:'작품별 관람 취향',en:'Viewing preferences by play'},
