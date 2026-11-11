@@ -1,2 +1,2 @@
 // Generated browser entry. Source: dist/app.mjs.
-import './assets/runtime/app-QUH6Y4OG.mjs';
+import './assets/runtime/app-BG6W5ARM.mjs';

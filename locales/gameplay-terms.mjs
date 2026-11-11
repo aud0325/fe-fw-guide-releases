@@ -17,7 +17,7 @@ export const generalTerms={
  'Restores (damage dealt / 2) HP to the user.':'가한 피해의 절반만큼 사용자의 HP를 회복한다.',
  'Ignores the effect of enemy Underworld Boon.':'적의 명부의 가호 효과를 무시한다.',
  'Grants +10 hit when using a combat art.':'전투 기술 사용 시 명중 +10.',
- 'Targets foe\'s defense. Effective against flying units.':'적의 수비를 기준으로 피해를 준다. 비행 유닛에게 특효.',
+ 'Targets foe\'s defense. Effective against flying units.':'적의 수비를 기준으로 피해를 준다. 비행 유닛에게 유효.',
  'Sword training, fishing':'검술 수련, 낚시','Writing fables, preaching, teaching':'우화 집필, 설교, 교육','Classroom study, archery training':'학과 공부, 궁술 수련',
  'Python Technique fighting, attending to Aswan':'비단뱀 권법 수련, 아스완 보좌',
  'The teachings of Seiros, fishing, his daughter, hardworking people':'세이로스의 가르침, 낚시, 딸, 근면한 사람',
@@ -62,8 +62,8 @@ export function koreanGameplayValue(value,key=''){
   .replace(/Chapter (\d+|x)/g,(_,chapter)=>chapter==='x'?'장 번호 미확인':chapter+'장')
   .replace("Friendly Match with Brigid's King",'브리기트 왕과의 친선전').replace('(Quest)','(퀘스트)');
  if(key==='effect')return source
-  .replace('Effective against cavalry units and armored units.','기병·중갑 유닛에게 특효.')
-  .replace(/Effective(\+)? against (flying|cavalry|armored|beast|undead) units\.?/g,(_,plus,type)=>({flying:'비행',cavalry:'기병',armored:'중갑',beast:'야수',undead:'언데드'}[type])+' 유닛에게 '+(plus?'강화 특효.':'특효.'))
+  .replace('Effective against cavalry units and armored units.','기병·중갑 유닛에게 유효.')
+  .replace(/Effective(\+)? against (flying|cavalry|armored|beast|undead) units\.?/g,(_,plus,type)=>({flying:'비행',cavalry:'기병',armored:'중갑',beast:'야수',undead:'언데드'}[type])+' 유닛에게 '+(plus?'특효.':'유효.'))
   .replace(/Grants access to the (.+?) combat art\./g,(_,art)=>'전투 기술 「'+(arts[art]||art)+'」 사용 가능.')
   .replace('Works as magic damage.','마법 피해로 적용된다.').replace('+3 avoid when initiating combat.','선제공격 시 회피 +3.');
  if(key==='capture-jp')return source.replace('(translated place names)','(지명 임시 번역)').replace('Recruit Alexandra','알렉산드라 영입').replaceAll('Oleance Plains','올레안스 평원');

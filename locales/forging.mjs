@@ -12,7 +12,7 @@ export default {
  'forge.all-stages':{ko:'모든 단계',en:'All stages'},
  'forge.only':{ko:'{name} 전용',en:'{name} only'},
  'forge.dragon':{ko:'용',en:'dragons'},'forge.beast':{ko:'마수',en:'beasts'},
- 'forge.effective':{ko:'{targets}에 특효',en:'Effective against {targets}'},
+ 'forge.effective':{ko:'{targets}에 유효',en:'Effective against {targets}'},
  'forge.cost-title':{ko:'필요한 재료·골드',en:'Required materials and gold'},
  'forge.from':{ko:'현재 단계',en:'Current stage'},'forge.to':{ko:'목표 단계',en:'Target stage'},
  'forge.unknown-materials':{ko:'재료 미확인',en:'Materials unknown'},
