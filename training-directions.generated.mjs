@@ -1672,20 +1672,20 @@ export const trainingDirections={
     ],
     "coRecommended": true,
     "role": {
-      "ko": "검 / 흑마법 공격",
-      "en": "Sword / black-magic offense"
+      "ko": "검·마법 공격 / 백마법 지원",
+      "en": "Sword and magic offense / white-magic support"
     },
     "reason": {
-      "ko": "흑마법과 검 중 파티에 필요한 공격 방식을 골라 키우는 방향을 추천합니다. 힘·마력 성장이 같고 속도·기술·행운도 좋아 두 경로에 모두 잘 맞습니다. 전투 후 회복 덕분에 연속으로 교전하기도 편합니다.",
-      "en": "Choose black magic or swords according to party needs. Equal strength and magic growth, with good speed, dexterity and luck, suit both. Post-combat healing helps sustain repeated engagements."
+      "ko": "검·흑마법 공격과 백마법 지원 중 파티에 필요한 역할부터 키우는 방향을 추천합니다. 힘·마력 성장이 같아 일반 검과 선더 소드를 함께 쓰기 좋고, 전투 후 회복은 연속 교전을 돕습니다. 후반에는 마법 권갑과 백마법을 함께 쓰는 선택도 가능합니다.",
+      "en": "Develop sword or black-magic offense, or white-magic support, according to party needs. Equal strength and magic growth suit both physical swords and Levin Sword, while post-combat healing helps sustain repeated engagements. Magic gauntlets with white magic are another late-game option."
     },
     "adjustment": {
-      "ko": "마법 공격이 부족하면 샤먼·바테스, 근접 추격이 필요하면 검사·사도를 추천합니다. 검 경로는 속도 성장, 마법 경로는 마력 성장과 원거리 공격이 강점입니다.",
-      "en": "Choose Shaman and Ovate for needed magic, or Myrmidon and Shido for melee follow-ups. Swords favor speed growth; magic favors magic growth and range."
+      "ko": "공격 마법은 샤먼·바테스, 빠른 검 공격은 검사·사도를 추천합니다. 회복·워프도 맡기려면 백마술을 계속 훈련하세요. 배틀 몽크·더 갓핸드를 목표로 한다면 검·백마술 특기와 달리 일반 숙련인 격투를 별도로 준비해야 합니다. 바테스에서 드루이드로 바꾸면 백마법은 쓸 수 없습니다.",
+      "en": "Choose Shaman and Ovate for offensive magic, or Myrmidon and Shido for fast sword attacks. Keep training white magic for healing and Warp. War Monk and The Godhand need separate gauntlet training: unlike his sword and white-magic boons, gauntlets are neutral. Moving from Ovate to Druid removes white-magic access."
     },
     "futureNote": {
-      "ko": "흑마법은 드루이드·디 아바타르, 검은 소드 마스터·더 블레이드로 이어가세요.",
-      "en": "Continue magic into Druid and The Avatar, or swords into Swordmaster and The Blade."
+      "ko": "격투와 백마법을 병행하려면 배틀 몽크→더 갓핸드를 추천합니다. 샐러맨더 같은 마법 권갑으로 공격하고, 권갑 장비 중의 병종 회피 보너스를 활용하세요. 갓핸드는 이미 배운 백마법의 사용 횟수가 3배가 되지만 검·흑마법은 쓸 수 없습니다. 공격 마법은 드루이드→디 아바타르, 검은 소드 마스터→더 블레이드를 비교하세요. 아바타르는 두 마법을 모두 쓰며, 신장직은 병종마다 동시 1명 제한이 있어 다른 동료와 배분해야 합니다.",
+      "en": "Choose War Monk → The Godhand for gauntlets with white magic. Attack with magic gauntlets such as Salamander and use the class avoidance bonus while gauntlets are equipped. The Godhand triples uses of white spells already learned, but cannot use swords or black magic. Compare Druid → The Avatar for offensive magic, or Swordmaster → The Blade for swords. The Avatar allows both schools; each divine class has a one-unit limit, so coordinate assignments across the party."
     },
     "growth": {
       "keys": [
@@ -1693,7 +1693,7 @@ export const trainingDirections={
         "mag",
         "spd",
         "dex",
-        "def"
+        "lck"
       ],
       "personalSkillApplied": false,
       "rows": [
@@ -1704,7 +1704,7 @@ export const trainingDirections={
             "mag": 60,
             "spd": 50,
             "dex": 65,
-            "def": 25
+            "lck": 60
           }
         },
         {
@@ -1714,7 +1714,47 @@ export const trainingDirections={
             "mag": 40,
             "spd": 60,
             "dex": 60,
-            "def": 35
+            "lck": 55
+          }
+        },
+        {
+          "classId": "class-druid",
+          "values": {
+            "str": 35,
+            "mag": 70,
+            "spd": 55,
+            "dex": 65,
+            "lck": 60
+          }
+        },
+        {
+          "classId": "class-war-monk",
+          "values": {
+            "str": 50,
+            "mag": 40,
+            "spd": 60,
+            "dex": 50,
+            "lck": 55
+          }
+        },
+        {
+          "classId": "class-the-avatar",
+          "values": {
+            "str": 35,
+            "mag": 70,
+            "spd": 55,
+            "dex": 55,
+            "lck": 70
+          }
+        },
+        {
+          "classId": "class-the-godhand",
+          "values": {
+            "str": 50,
+            "mag": 50,
+            "spd": 60,
+            "dex": 55,
+            "lck": 55
           }
         }
       ]
@@ -1724,14 +1764,16 @@ export const trainingDirections={
         "tier": "Master",
         "classIds": [
           "class-druid",
-          "class-swordmaster"
+          "class-swordmaster",
+          "class-war-monk"
         ]
       },
       {
         "tier": "Divine",
         "classIds": [
           "class-the-avatar",
-          "class-the-blade"
+          "class-the-blade",
+          "class-the-godhand"
         ]
       }
     ],
@@ -1743,7 +1785,9 @@ export const trainingDirections={
       "class-ovate",
       "class-shido",
       "class-druid",
+      "class-war-monk",
       "class-the-avatar",
+      "class-the-godhand",
       "class-swordmaster",
       "class-the-blade"
     ]
@@ -2422,27 +2466,27 @@ export const trainingDirections={
     ],
     "coRecommended": false,
     "role": {
-      "ko": "흑마법·약화 아츠",
-      "en": "Black magic and debuff arts"
+      "ko": "검·활 공격 / 마법·약화 지원",
+      "en": "Sword and bow offense / magic and debuff support"
     },
     "reason": {
-      "ko": "흑마법과 약화 아츠로 아군의 공격을 준비하는 방향을 추천합니다. 기술·행운이 높게 성장하고, 병기를 사용할 때는 명중 +30도 활용할 수 있습니다. 먼저 약화한 적을 다른 아군이 이어서 공격하도록 순서를 맞추세요.",
-      "en": "Use black magic and debuff arts to set up allied attacks. Good dexterity and luck growth help this role; artillery also gains Hit +30. Coordinate an allied attack after his debuff."
+      "ko": "검·활 공격형과 마법·약화 지원형을 파티 역할에 맞춰 고르는 방향을 추천합니다. 높은 기술·행운과 행운에 따라 발동하는 명중·회피 보너스를 활용할 수 있습니다. 어느 쪽에서도 약화 아츠를 먼저 쓰고 아군이 이어서 공격하도록 순서를 맞추세요.",
+      "en": "Choose sword-and-bow offense or magic and debuff support to fit the party. High dexterity and luck work with his luck-triggered hit and avoidance bonuses. Either role can use debuff arts before allies follow up."
     },
     "adjustment": {
-      "ko": "후반에는 현재 마법과 자주 쓰는 약화 아츠부터 준비하세요. 아츠를 여러 번 쓸 때는 HP를 채워 줄 회복 담당과 함께 움직이면 편합니다.",
-      "en": "Prioritize existing spells and frequent debuff arts. Pair him with a healer when using HP-costing arts repeatedly."
+      "ko": "공격형은 검 특기를 살려 섀도 시커→더 칼래미티를 준비하고, 선더 소드와 물리 검·활을 적에 맞춰 바꿔 쓰세요. 속도·행운을 키우는 대신 흑·백마법은 사용할 수 없습니다. 마법·지원형은 합류한 바테스에서 마법과 약화 아츠를 병행하고, 흑마법 화력·횟수가 더 필요하면 드루이드를 추천합니다. 아츠를 여러 번 쓸 때는 회복 담당과 함께 움직이면 편합니다.",
+      "en": "For offense, use his sword boon to prepare Shadow Seeker → The Calamity, switching between Levin Sword and physical swords or bows to suit the target. This favors speed and luck but loses both black and white spells. For magic and support, keep recruited Ovate for spells and debuff arts; choose Druid for more black-magic power and uses. Pair him with a healer when using HP-costing arts repeatedly."
     },
     "futureNote": {
-      "ko": "드루이드로 공격 마법을 이어가면서 약화 아츠 지원을 함께 맡기는 방향을 추천합니다.",
-      "en": "Continue offensive magic into Druid alongside debuff support."
+      "ko": "섀도 시커→더 칼래미티는 합류 후 검 숙련을 올릴 여유가 있을 때의 공격 경로입니다. 전직에는 검·활 중 한 숙련을 준비하면 되고, 칼래미티는 동시 1명 제한이 있어 다른 검·활 공격수와 배분하세요. 드루이드는 칼래미티보다 마력 성장이 높고 흑마법 사용 횟수가 2배입니다. 드루이드도 백마법을 못 쓰므로 회복 지원을 남기려면 바테스를 유지할 수 있습니다. 선더 소드는 드루이드에서도 쓸 수 있어, 활·속도·행운과 주문 유지 여부를 기준으로 고르세요.",
+      "en": "Shadow Seeker → The Calamity is an offensive route when there is time to raise swords after recruitment. Only one of swords or bows is needed for certification; The Calamity has a one-unit limit, so coordinate with other sword and bow attackers. Druid has higher magic growth than The Calamity and doubles black-magic uses. Druid also loses white magic, so keep Ovate if healing support matters. Druid can use Levin Sword too: choose based on bows, speed and luck versus keeping spells."
     },
     "growth": {
       "keys": [
+        "str",
         "mag",
         "spd",
         "dex",
-        "res",
         "lck"
       ],
       "personalSkillApplied": false,
@@ -2450,21 +2494,41 @@ export const trainingDirections={
         {
           "classId": "class-ovate",
           "values": {
+            "str": 35,
             "mag": 65,
             "spd": 45,
             "dex": 60,
-            "res": 55,
             "lck": 70
           }
         },
         {
           "classId": "class-druid",
           "values": {
+            "str": 35,
             "mag": 75,
             "spd": 50,
             "dex": 60,
-            "res": 60,
             "lck": 70
+          }
+        },
+        {
+          "classId": "class-shadow-seeker",
+          "values": {
+            "str": 45,
+            "mag": 45,
+            "spd": 65,
+            "dex": 60,
+            "lck": 75
+          }
+        },
+        {
+          "classId": "class-the-calamity",
+          "values": {
+            "str": 45,
+            "mag": 60,
+            "spd": 65,
+            "dex": 65,
+            "lck": 75
           }
         }
       ]
@@ -2473,13 +2537,22 @@ export const trainingDirections={
       {
         "tier": "Master",
         "classIds": [
-          "class-druid"
+          "class-druid",
+          "class-shadow-seeker"
+        ]
+      },
+      {
+        "tier": "Divine",
+        "classIds": [
+          "class-the-calamity"
         ]
       }
     ],
     "referencedClassIds": [
       "class-ovate",
-      "class-druid"
+      "class-druid",
+      "class-shadow-seeker",
+      "class-the-calamity"
     ]
   },
   "ursula": {
